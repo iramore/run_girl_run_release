@@ -1,0 +1,19 @@
+PODS:
+  - ActionSheetPicker-3.0 (2.0.5)
+  - CVCalendar (1.2.9)
+  - ElasticTransition (2.0.1)
+  - EZAlertController (0.3)
+
+DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 2.0.5)
+  - CVCalendar (~> 1.2.8)
+  - ElasticTransition (>= 2.0.1)
+  - EZAlertController (= 0.3)
+
+SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: 8312778b6815578e6a86d630fbcf31dc94c534e7
+  CVCalendar: 0799256e0bc3b43e83b7e86c0729ce9ff0624cb6
+  ElasticTransition: ec15f7f9283eb812852eabb60f4b9bd4e003c4eb
+  EZAlertController: 178808422e5281c3ffb20c28cb3eb555088bf07e
+
+COCOAPODS: 0.39.0
