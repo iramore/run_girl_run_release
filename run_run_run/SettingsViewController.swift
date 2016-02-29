@@ -16,7 +16,7 @@ class SettingsCell:UITableViewCell{
     @IBOutlet weak var stringPicker: UIButton!
 }
 
-class SettingsViewController: UIViewController, ElasticMenuTransitionDelegate {
+class SettingsViewController: UIViewController {//, ElasticMenuTransitionDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var objects: NSMutableArray! = NSMutableArray()
@@ -31,6 +31,8 @@ class SettingsViewController: UIViewController, ElasticMenuTransitionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         
         self.objects.addObject("3 days a week")
         self.objects.addObject("Mon Wed Fri")
@@ -39,6 +41,11 @@ class SettingsViewController: UIViewController, ElasticMenuTransitionDelegate {
 
     }
 
+   
+   
+    
+    //MARK: Settings processing
+    
     @IBAction func buttonPressed(sender: AnyObject) {
         ActionSheetMultipleStringPicker.showPickerWithTitle("Days of the week", rows: arrayForDayChooser, initialSelection: [0, 1, 2, 4, 5], doneBlock: {
             picker, values, indexes in
@@ -52,8 +59,8 @@ class SettingsViewController: UIViewController, ElasticMenuTransitionDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-   
+    
+    
     
     func daysOfWeekButtonPressed(sender: AnyObject){
         if(arrayForDayChooser.isEmpty){
@@ -62,7 +69,7 @@ class SettingsViewController: UIViewController, ElasticMenuTransitionDelegate {
             }
             
         }
-       
+        
     }
     
     func timesInWeekButtonPressed(sender: AnyObject) {
@@ -81,12 +88,16 @@ class SettingsViewController: UIViewController, ElasticMenuTransitionDelegate {
     }
     
     func changeNumberOfDaysPickerName(daysAWeek : String, var numberOfTheDay : Int){
-       // numperOfWeekButton.setTitle(daysAWeek, forState: .Normal)
+        // numperOfWeekButton.setTitle(daysAWeek, forState: .Normal)
         for _ in 0...numberOfTheDay {
             self.arrayForDayChooser.append(daysOfWeekArray)
         }
         
     }
+
+}
+
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -108,6 +119,5 @@ class SettingsViewController: UIViewController, ElasticMenuTransitionDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 72
     }
-
 }
 

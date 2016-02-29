@@ -14,7 +14,7 @@
 		D35F1CD31C7105390084A902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD21C7105390084A902 /* Assets.xcassets */; };
 		D35F1CD61C7105390084A902 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */; };
 		D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37E54271C7C8DDF0025509A /* CalViewController.swift */; };
-		D3DD4B441C82454800D600FD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DD4B431C82454800D600FD /* SettingsViewController.swift */; };
+		D3DD4B481C835D7D00D600FD /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 		D35F1CE01C7105390084A902 /* run_run_runTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = run_run_runTests.swift; sourceTree = "<group>"; };
 		D35F1CE21C7105390084A902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D37E54271C7C8DDF0025509A /* CalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalViewController.swift; sourceTree = "<group>"; };
-		D3DD4B431C82454800D600FD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.release.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.release.xcconfig"; sourceTree = "<group>"; };
 		F108FC8201A2D48916797CE5 /* Pods-run_run_run.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.debug.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,7 +89,7 @@
 				D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */,
 				D35F1CD71C7105390084A902 /* Info.plist */,
 				D37E54271C7C8DDF0025509A /* CalViewController.swift */,
-				D3DD4B431C82454800D600FD /* SettingsViewController.swift */,
+				D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */,
 			);
 			path = run_run_run;
 			sourceTree = "<group>";
@@ -236,8 +236,8 @@
 			files = (
 				D35F1CCE1C7105390084A902 /* ViewController.swift in Sources */,
 				D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */,
-				D3DD4B441C82454800D600FD /* SettingsViewController.swift in Sources */,
 				D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */,
+				D3DD4B481C835D7D00D600FD /* OptionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

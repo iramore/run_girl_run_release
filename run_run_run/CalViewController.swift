@@ -11,6 +11,27 @@ import CVCalendar
 import ActionSheetPicker_3_0
 import ElasticTransition
 
+import Foundation
+
+
+class ShareData {
+    class var sharedInstance: ShareData {
+        struct Static {
+            static var instance: ShareData?
+            static var token: dispatch_once_t = 0
+        }
+        
+        dispatch_once(&Static.token) {
+            Static.instance = ShareData()
+        }
+        
+        return Static.instance!
+    }
+    
+    
+    var selectedDays : [Int]! //Some String
+}
+
 class CalViewController: UIViewController {
 
     
@@ -21,8 +42,8 @@ class CalViewController: UIViewController {
     @IBOutlet weak var menuView: CVCalendarMenuView!
     
     var animationFinished = true
-    
-        
+    let shareData = ShareData.sharedInstance
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +52,10 @@ class CalViewController: UIViewController {
         transition.showShadow = true
         transition.panThreshold = 0.3
         transition.transformType = .TranslateMid
+        shareData.selectedDays = [1,3,5]
+        
+//        print("cal view cont view did load")
+//        print(selectedDays)
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,10 +63,12 @@ class CalViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        print("cal view cont view did load")
+        print(shareData.selectedDays)
         calendarView.commitCalendarViewUpdate()
         menuView.commitMenuViewUpdate()
-    }
+        calendarView.contentController.refreshPresentedMonth()
+        }
     
     @IBAction func settingsTouched(sender: AnyObject) {
         transition.edge = .Bottom
@@ -169,14 +196,14 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         return newView
     }
     
-//    func supplementaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
-//        if (selectedDays.contains( dayView.weekdayIndex) ) {
-//            print(dayView.weekdayIndex)
-//            return true
-//        }
-//        
-//        return false
-//    }
+    func supplementaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
+        if (shareData.selectedDays.contains( dayView.weekdayIndex) ) {
+            //print(dayView.weekdayIndex)
+            return true
+        }
+        
+        return false
+    }
 
 }
  // MARK: Date comporasion
