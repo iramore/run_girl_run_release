@@ -35,7 +35,7 @@ class ShareData {
 class CalViewController: UIViewController {
 
     
-    var transition = ElasticTransition()
+    var transition:ElasticTransition!
 
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarView: CVCalendarView!
@@ -53,9 +53,6 @@ class CalViewController: UIViewController {
         transition.panThreshold = 0.3
         transition.transformType = .TranslateMid
         shareData.selectedDays = [1,3,5]
-        
-//        print("cal view cont view did load")
-//        print(selectedDays)
     }
 
     override func didReceiveMemoryWarning() {

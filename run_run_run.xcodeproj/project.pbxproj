@@ -13,6 +13,7 @@
 		D35F1CD11C7105390084A902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CCF1C7105390084A902 /* Main.storyboard */; };
 		D35F1CD31C7105390084A902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD21C7105390084A902 /* Assets.xcassets */; };
 		D35F1CD61C7105390084A902 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */; };
+		D3669D531C84933A00250225 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3669D521C84933A00250225 /* InitialViewController.swift */; };
 		D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37E54271C7C8DDF0025509A /* CalViewController.swift */; };
 		D3DD4B481C835D7D00D600FD /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		D35F1CD71C7105390084A902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D35F1CE01C7105390084A902 /* run_run_runTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = run_run_runTests.swift; sourceTree = "<group>"; };
 		D35F1CE21C7105390084A902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3669D521C84933A00250225 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D37E54271C7C8DDF0025509A /* CalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalViewController.swift; sourceTree = "<group>"; };
 		D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.release.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.release.xcconfig"; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				D35F1CD71C7105390084A902 /* Info.plist */,
 				D37E54271C7C8DDF0025509A /* CalViewController.swift */,
 				D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */,
+				D3669D521C84933A00250225 /* InitialViewController.swift */,
 			);
 			path = run_run_run;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3669D531C84933A00250225 /* InitialViewController.swift in Sources */,
 				D35F1CCE1C7105390084A902 /* ViewController.swift in Sources */,
 				D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */,
 				D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */,

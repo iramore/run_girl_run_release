@@ -103,12 +103,12 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate {
                 for index_st in indexes as! [AnyObject]{
                     days += " "+(index_st as! String)
                 }
-                let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("calendarControl") as! CalViewController
-                
+                var selectedDays: [Int] = values as! [Int]
+                for var index = 0; index < values.count; ++index {
+                    selectedDays[index]++
+                    print(selectedDays[index])
+                }
                 self.shareData.selectedDays = values as! [Int]
-                //                viewController.selectedDays = values as! [Int]
-//                viewController.test = 7
-                //viewController.calendarView.contentController.refreshPresentedMonth()
                 self.menu[1] = .Button(name: days)
                 self.tableView.reloadData()
                 return
