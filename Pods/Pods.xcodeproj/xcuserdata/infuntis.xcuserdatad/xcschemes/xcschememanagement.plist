@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BMCustomTableView-BMCustomTableView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>BMCustomTableView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CVCalendar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,15 +39,35 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RandomColorSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>3F7A25ADDB1BCD3BB009B6FD664090B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>506B1FAEA1D4E17CE36F1016939FDBDE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>80D639EDDB5F6601E32F54E5991C1C7A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A83E51C69F5FB772C3EBFCCF2AA375E6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B6DC4437F0FFEE0055694E0D01AC13A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +82,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EF36F982F1BC9061207A9C0C1C9D5D0F</key>
+		<key>DBCBBCD111E2F72B2C5EBC696917430D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

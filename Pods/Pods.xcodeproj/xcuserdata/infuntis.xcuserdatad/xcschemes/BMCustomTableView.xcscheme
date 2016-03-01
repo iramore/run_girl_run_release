@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '415FC9191235B2E65BFEE5FA'
-               BlueprintName = 'CVCalendar'
+               BlueprintIdentifier = '06F6026A0D4B095E3184563C'
+               BlueprintName = 'BMCustomTableView'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'CVCalendar.framework'>
+               BuildableName = 'BMCustomTableView.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

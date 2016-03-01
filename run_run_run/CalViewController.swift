@@ -77,7 +77,11 @@ class CalViewController: UIViewController {
         vc.transitioningDelegate = transition
         vc.modalPresentationStyle = .Custom
         }
+    
    
+    @IBAction func closeButtonPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
 
 // MARK: - CVCalendarViewDelegate & CVCalendarMenuViewDelegate

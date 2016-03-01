@@ -85,13 +85,17 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-run_run_run/ActionSheetPicker_3_0.framework"
+  install_framework "Pods-run_run_run/BMCustomTableView.framework"
   install_framework "Pods-run_run_run/CVCalendar.framework"
   install_framework "Pods-run_run_run/EZAlertController.framework"
   install_framework "Pods-run_run_run/ElasticTransition.framework"
+  install_framework "Pods-run_run_run/RandomColorSwift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-run_run_run/ActionSheetPicker_3_0.framework"
+  install_framework "Pods-run_run_run/BMCustomTableView.framework"
   install_framework "Pods-run_run_run/CVCalendar.framework"
   install_framework "Pods-run_run_run/EZAlertController.framework"
   install_framework "Pods-run_run_run/ElasticTransition.framework"
+  install_framework "Pods-run_run_run/RandomColorSwift.framework"
 fi
