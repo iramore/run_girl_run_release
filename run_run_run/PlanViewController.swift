@@ -40,7 +40,7 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        colors = randomColorsCount(20, hue: .Random, luminosity: .Light)
+        colors = randomColorsCount(27, hue: .Pink, luminosity: .Light)
     }
     
     override func didReceiveMemoryWarning() {

@@ -9,16 +9,124 @@
 import UIKit
 
 class RunViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    var train: Train?
+    var timer = NSTimer()
+    var currentStage = 0
+    var counter: Float = 0
+    var index:Int = 0
+    var screenWidth:CGFloat = 0
+    var runningMan:[UIImage] = [UIImage(named: "anim_1")!, UIImage(named: "anim_2")!,UIImage(named: "anim_3")!, UIImage(named: "anim_4")!, UIImage(named: "anim_5")!,UIImage(named: "anim_6")!, UIImage(named: "anim_7")!,UIImage(named: "anim_8")!, UIImage(named: "anim_9")!,UIImage(named: "anim_10")!, UIImage(named: "anim_11")!, UIImage(named: "anim_12")!,UIImage(named: "anim_13")!, UIImage(named: "anim_14")! ]
+    var walkingMan:[UIImage] = [UIImage(named: "anim_1")!, UIImage(named: "anim_2")!,UIImage(named: "anim_3")!, UIImage(named: "anim_4")!, UIImage(named: "anim_5")!,UIImage(named: "anim_6")!, UIImage(named: "anim_7")!,UIImage(named: "anim_8")!, UIImage(named: "anim_9")!,UIImage(named: "anim_10")!, UIImage(named: "anim_11")!, UIImage(named: "anim_12")!,UIImage(named: "anim_13")!, UIImage(named: "anim_14")! ]
+    
+    func loadSampleTrain() {
+        train = Train(index: 16, trainMenu: [UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!, UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!, UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!], temp: [60,90,60,90,60,90,60,90,60,90,60,90,60,90,60,90])
+        counter = train!.temp[0]
     }
+    
+    @IBOutlet weak var timerLabel: UILabel!
     @IBAction func closeButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-
+    @IBOutlet weak var image: UIImageView!
+    
+    
+    @IBAction func startButtonPressed(sender: AnyObject) {
+        timer.invalidate()
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "timerAction", userInfo:nil , repeats: true)
+    }
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var imageView : UIImageView
+        imageView  = UIImageView(frame:CGRectMake(10, 50, 100, 300))
+        imageView.tintColor = UIColor.blueColor()
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        screenWidth = screenSize.width
+        loadSampleTrain()
+        image.image = self.getMixedImg(screenSize.width)
+        timerLabel.text = "\(counter)"
+        
+    }
+    
+    
+    func timerAction() {
+        --counter
+        if(counter < 0 && index < (train?.index)!-1){
+            ++index
+            counter =  train!.temp[index]
+            
+        }
+        if(counter < 0 && index == (train?.index)!-1){
+            timer.invalidate()
+            
+            timerLabel.text = "the train is over"
+        }
+        timerLabel.text = "\(counter)"
+        updateTrainControlImage()
+        
+    }
+    
+    func updateTrainControlImage(){
+        let size = CGSizeMake(screenWidth, 50)
+        var imgListArray: [UIImage]  = []
+        for var x = 0 ; x < runningMan.count; ++x {
+            UIGraphicsBeginImageContext(size)
+            var widthVid: CGFloat = 0
+            let percent: CGFloat = (CGFloat((train?.temp[index])!-counter))/CGFloat((train?.temp[index])!)
+            print(percent)
+            if(percent < 1){
+                let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train?.trainMenu[index])!, percent: percent)
+                croppedImage.drawInRect(CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
+                runningMan[x].drawInRect(CGRect(x: widthVid, y: 0, width: runningMan[x].size.width, height: runningMan[x].size.height))
+                widthVid+=croppedImage.size.width
+            }
+            for var i = self.index+1; i < train?.index; ++i {
+                if(widthVid + (train?.trainMenu[i].size.width)! < screenWidth){
+                    train?.trainMenu[i].drawInRect(CGRect(x: widthVid, y: 0, width: (train?.trainMenu[i].size.width)!, height: (train?.trainMenu[i].size.height)!))
+                    widthVid+=(train?.trainMenu[i].size.width)!
+                } else{
+                    train?.trainMenu[i].drawInRect(CGRect(x: widthVid, y: 0, width: (train?.trainMenu[i].size.width)!, height: (train?.trainMenu[i].size.height)!))
+                    break
+                }
+                
+            }
+            let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            imgListArray.append(finalImage)
+            //imgListArray[x] = finalImage
+        }
+        self.image.animationImages = imgListArray
+        self.image.animationDuration = 0.3
+        self.image.startAnimating()
+        //image.image = finalImage
+    }
+    
+    func getMixedImg(width: CGFloat) -> UIImage {
+        
+        let size = CGSizeMake(width, 50)
+        
+        UIGraphicsBeginImageContext(size)
+        var widthVid: CGFloat = 0
+        for im in (train?.trainMenu)!{
+            if(widthVid + im.size.width < width){
+                im.drawInRect(CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
+                widthVid+=im.size.width
+            } else{
+                im.drawInRect(CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
+                break
+            }
+        }
+        
+        let finalImage2 = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return finalImage2
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

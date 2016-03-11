@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '06F6026A0D4B095E3184563C'
+               BlueprintIdentifier = 'AE29EC65DF786B339FEC45C7'
                BlueprintName = 'BMCustomTableView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'BMCustomTableView.framework'>

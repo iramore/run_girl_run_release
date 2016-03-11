@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		74FF54CBB1BD86C3A5C8C31F /* Pods_run_run_run.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAFFDD0ED4961283238036D /* Pods_run_run_run.framework */; };
+		D3284B6C1C8DB46B006FB560 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6B1C8DB46B006FB560 /* Train.swift */; };
+		D3284B6E1C8EB959006FB560 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6D1C8EB959006FB560 /* ImageUtil.swift */; };
+		D3284B701C92ED19006FB560 /* Train_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6F1C92ED19006FB560 /* Train_data.swift */; };
 		D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F1CCB1C7105390084A902 /* AppDelegate.swift */; };
 		D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F1CCD1C7105390084A902 /* PlanViewController.swift */; };
 		D35F1CD11C7105390084A902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CCF1C7105390084A902 /* Main.storyboard */; };
@@ -15,6 +18,9 @@
 		D35F1CD61C7105390084A902 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */; };
 		D3669D531C84933A00250225 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3669D521C84933A00250225 /* InitialViewController.swift */; };
 		D3669D551C849BFE00250225 /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3669D541C849BFE00250225 /* RunViewController.swift */; };
+		D3669D7D1C8758B900250225 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3669D781C8758B900250225 /* Info.plist */; };
+		D3669D7E1C8758B900250225 /* FMProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3669D7A1C8758B900250225 /* FMProgressBarView.swift */; };
+		D3669D7F1C8758B900250225 /* FMProgressBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3669D7B1C8758B900250225 /* FMProgressBarView.xib */; };
 		D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37E54271C7C8DDF0025509A /* CalViewController.swift */; };
 		D3DD4B481C835D7D00D600FD /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +30,9 @@
 		1AAFFDD0ED4961283238036D /* Pods_run_run_run.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_run_run_run.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1AE98041C91F27240AF24 /* Pods-run_run_runTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_runTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_runTests/Pods-run_run_runTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BCF71EC4D85A23DE8C9F149A /* Pods_run_run_runTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_run_run_runTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3284B6B1C8DB46B006FB560 /* Train.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
+		D3284B6D1C8EB959006FB560 /* ImageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
+		D3284B6F1C92ED19006FB560 /* Train_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train_data.swift; sourceTree = "<group>"; };
 		D35F1CC81C7105390084A902 /* run_run_run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = run_run_run.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35F1CCB1C7105390084A902 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D35F1CCD1C7105390084A902 /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +44,10 @@
 		D35F1CE21C7105390084A902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3669D521C84933A00250225 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D3669D541C849BFE00250225 /* RunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
+		D3669D771C8758B900250225 /* FMProgressBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMProgressBarView.h; sourceTree = "<group>"; };
+		D3669D781C8758B900250225 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3669D7A1C8758B900250225 /* FMProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMProgressBarView.swift; path = "../../../../Downloads/FMProgressBarView-master/FMProgressBarView/FMProgressBarView.swift"; sourceTree = "<group>"; };
+		D3669D7B1C8758B900250225 /* FMProgressBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMProgressBarView.xib; path = "../../../../Downloads/FMProgressBarView-master/FMProgressBarView/FMProgressBarView.xib"; sourceTree = "<group>"; };
 		D37E54271C7C8DDF0025509A /* CalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalViewController.swift; sourceTree = "<group>"; };
 		D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.release.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.release.xcconfig"; sourceTree = "<group>"; };
@@ -67,6 +80,7 @@
 		D35F1CBF1C7105390084A902 = {
 			isa = PBXGroup;
 			children = (
+				D3669D7C1C8758B900250225 /* FMProgressBarView */,
 				D35F1CCA1C7105390084A902 /* run_run_run */,
 				D35F1CDF1C7105390084A902 /* run_run_runTests */,
 				D35F1CC91C7105390084A902 /* Products */,
@@ -86,6 +100,8 @@
 		D35F1CCA1C7105390084A902 /* run_run_run */ = {
 			isa = PBXGroup;
 			children = (
+				D3669D7B1C8758B900250225 /* FMProgressBarView.xib */,
+				D3669D7A1C8758B900250225 /* FMProgressBarView.swift */,
 				D35F1CCB1C7105390084A902 /* AppDelegate.swift */,
 				D35F1CCD1C7105390084A902 /* PlanViewController.swift */,
 				D35F1CCF1C7105390084A902 /* Main.storyboard */,
@@ -96,6 +112,9 @@
 				D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */,
 				D3669D521C84933A00250225 /* InitialViewController.swift */,
 				D3669D541C849BFE00250225 /* RunViewController.swift */,
+				D3284B6B1C8DB46B006FB560 /* Train.swift */,
+				D3284B6D1C8EB959006FB560 /* ImageUtil.swift */,
+				D3284B6F1C92ED19006FB560 /* Train_data.swift */,
 			);
 			path = run_run_run;
 			sourceTree = "<group>";
@@ -107,6 +126,24 @@
 				D35F1CE21C7105390084A902 /* Info.plist */,
 			);
 			path = run_run_runTests;
+			sourceTree = "<group>";
+		};
+		D3669D791C8758B900250225 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D3669D781C8758B900250225 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D3669D7C1C8758B900250225 /* FMProgressBarView */ = {
+			isa = PBXGroup;
+			children = (
+				D3669D771C8758B900250225 /* FMProgressBarView.h */,
+				D3669D791C8758B900250225 /* Supporting Files */,
+			);
+			name = FMProgressBarView;
+			path = "../../../Downloads/FMProgressBarView-master/FMProgressBarView";
 			sourceTree = "<group>";
 		};
 		DFEB5A34A7735182C49953EB /* Frameworks */ = {
@@ -179,9 +216,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3669D7D1C8758B900250225 /* Info.plist in Resources */,
 				D35F1CD61C7105390084A902 /* LaunchScreen.storyboard in Resources */,
 				D35F1CD31C7105390084A902 /* Assets.xcassets in Resources */,
 				D35F1CD11C7105390084A902 /* Main.storyboard in Resources */,
+				D3669D7F1C8758B900250225 /* FMProgressBarView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,12 +279,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3284B6E1C8EB959006FB560 /* ImageUtil.swift in Sources */,
 				D3669D531C84933A00250225 /* InitialViewController.swift in Sources */,
 				D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */,
 				D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */,
 				D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */,
+				D3284B6C1C8DB46B006FB560 /* Train.swift in Sources */,
+				D3284B701C92ED19006FB560 /* Train_data.swift in Sources */,
 				D3669D551C849BFE00250225 /* RunViewController.swift in Sources */,
 				D3DD4B481C835D7D00D600FD /* OptionsViewController.swift in Sources */,
+				D3669D7E1C8758B900250225 /* FMProgressBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
