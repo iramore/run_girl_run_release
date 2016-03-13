@@ -44,9 +44,24 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SAConfettiView-SAConfettiView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SAConfettiView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>10F6B8305AC8CA3BD04DF532979538F3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3F7A25ADDB1BCD3BB009B6FD664090B0</key>
 		<dict>
 			<key>primary</key>
@@ -57,12 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>77294EBA764CFC72589806E8A31BDCC0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>80D639EDDB5F6601E32F54E5991C1C7A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A83E51C69F5FB772C3EBFCCF2AA375E6</key>
+		<key>A7E59A9E06DC145F3B441294C61B7D36</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +102,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DBCBBCD111E2F72B2C5EBC696917430D</key>
+		<key>E47D844C12FBE2C057BDE735FFD704CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -2,6 +2,7 @@
 import UIKit
 import ElasticTransition
 import ActionSheetPicker_3_0
+import EZAlertController
 
 enum LeftMenuType{
     case Switch(name:String, on:Bool, onChange:(on:Bool)->Void)
@@ -63,31 +64,30 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        menu.append(.Button(name: "3 days a week"))
-       
-        menu.append(.Button(name: "Mon Wed Thu"))
+        menu.append(.Button(name: self.createNumberOfDaysButtonNameInitial()))
+        
+        menu.append(.Button(name: self.createDaysOfWeekButtonNameInitial()))
         
         for i in 0..<menu.count{
             contentLength += self.tableView(self.tableView, heightForRowAtIndexPath: NSIndexPath(forRow:i, inSection:0))
         }
-        self.changeNumberOfDaysPickerName(2)
+        self.changeNumberOfDaysPickerName((shareData.userData?.daysOfWeek.count)!-1)
         tableView.reloadData()
     }
     
     @IBAction func buttonPressed(sender: AnyObject) {
         switch sender.tag{
         case 0:
-            ActionSheetStringPicker.showPickerWithTitle("Trains per week", rows: ["1 day a week", "2 days a week", "3 days a week", "4 days a week", "5 days a week"], initialSelection: 2, doneBlock: {
+            ActionSheetStringPicker.showPickerWithTitle("Trains per week", rows: ["1 day a week", "2 days a week", "3 days a week", "4 days a week", "5 days a week"], initialSelection: (shareData.userData?.daysOfWeek.count)!-1, doneBlock: {
                 picker, value, index in
-                self.arrayForDayChooser.removeAll()
-                //self.selectedDays.removeAll()
-                self.view.reloadInputViews()
                 print("value = \(value)")
                 print("index = \(index)")
                 print("picker = \(picker)")
+                self.arrayForDayChooser.removeAll()
                 self.changeNumberOfDaysPickerName(value)
                 self.menu[0] = .Button(name: index as! String)
-                let secondButton = self.createSecondButtonTitle(value)
+                self.shareData.saveUserDataOption(Array(self.initialSelectectionForDays[0...value]))
+                let secondButton = self.createDaysOfWeekButtonNameInitial()
                 self.menu[1] = .Button(name: secondButton )
                 self.tableView.reloadData()
                 return
@@ -95,33 +95,46 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate {
         case 1:
             ActionSheetMultipleStringPicker.showPickerWithTitle("Days of the week", rows: arrayForDayChooser, initialSelection: initialSelectectionForDays, doneBlock: {
                 picker, values, indexes in
-                
                 print("values = \(values)")
                 print("indexes = \(indexes)")
                 print("picker = \(picker)")
-                var days = ""
-                for index_st in indexes as! [AnyObject]{
-                    days += " "+(index_st as! String)
+                let duplicates = Array(Set((values as! [Int]).filter({ (i: Int) in (values as! [Int]).filter({ $0 == i }).count > 1})))
+                if(duplicates.count > 0 ){
+                    let alertController = UIAlertController(title: "", message:
+                        "Choose different days, please", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
                 }
-                var selectedDays: [Int] = values as! [Int]
-                for var index = 0; index < values.count; ++index {
-                    selectedDays[index]++
-                    print(selectedDays[index])
+                else{
+                    self.shareData.saveUserDataOption(values as! [Int])
+                    self.menu[1] = .Button(name: self.createDaysOfWeekButtonNameInitial())
+                    self.tableView.reloadData()
                 }
-                self.shareData.selectedDays = values as! [Int]
-                self.menu[1] = .Button(name: days)
-                self.tableView.reloadData()
                 return
                 }, cancelBlock: { ActionMultipleStringCancelBlock in return }, origin: sender)
         default:
             break
         }
-        
+    }
+    func createNumberOfDaysButtonNameInitial() ->String{
+        switch (shareData.userData?.daysOfWeek.count)! {
+        case 1:
+            return "1 day a week"
+        default:
+            return "\((shareData.userData?.daysOfWeek.count)!) days a week"
+        }
     }
     func createSecondButtonTitle(dayIndex: Int) -> String{
         var result = ""
         for var index = 0; index <= dayIndex; ++index {
             result+=" "+daysOfWeekArray[initialSelectectionForDays[index]]
+        }
+        return result
+    }
+    func createDaysOfWeekButtonNameInitial() ->String{
+        var result: String = ""
+        for var i = 0; i<(shareData.userData?.daysOfWeek.count)!; ++i{
+            result += daysOfWeekArray[(shareData.userData?.daysOfWeek[i])!]+" "
         }
         return result
     }
@@ -135,7 +148,7 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
-  }
+}
 
 extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -169,7 +182,7 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
             sliderCell.slider.minimumValue = 0
             sliderCell.slider.value = value
             cell = sliderCell
-
+            
         case .Button(let name):
             let buttonCell  = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as! ButtonCell
             buttonCell.button.setTitle(name, forState: .Normal)

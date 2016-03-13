@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SAConfettiView
 
 class RunViewController: UIViewController {
     
     var train: Train?
     var timer = NSTimer()
+    let shareData = ShareData.sharedInstance
     var currentStage = 0
     var counter: Float = 0
     var index:Int = 0
@@ -19,8 +21,9 @@ class RunViewController: UIViewController {
     var runningMan:[UIImage] = [UIImage(named: "anim_1")!, UIImage(named: "anim_2")!,UIImage(named: "anim_3")!, UIImage(named: "anim_4")!, UIImage(named: "anim_5")!,UIImage(named: "anim_6")!, UIImage(named: "anim_7")!,UIImage(named: "anim_8")!, UIImage(named: "anim_9")!,UIImage(named: "anim_10")!, UIImage(named: "anim_11")!, UIImage(named: "anim_12")!,UIImage(named: "anim_13")!, UIImage(named: "anim_14")! ]
     var walkingMan:[UIImage] = [UIImage(named: "anim_1")!, UIImage(named: "anim_2")!,UIImage(named: "anim_3")!, UIImage(named: "anim_4")!, UIImage(named: "anim_5")!,UIImage(named: "anim_6")!, UIImage(named: "anim_7")!,UIImage(named: "anim_8")!, UIImage(named: "anim_9")!,UIImage(named: "anim_10")!, UIImage(named: "anim_11")!, UIImage(named: "anim_12")!,UIImage(named: "anim_13")!, UIImage(named: "anim_14")! ]
     
-    func loadSampleTrain() {
-        train = Train(index: 16, trainMenu: [UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!, UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!, UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!], temp: [60,90,60,90,60,90,60,90,60,90,60,90,60,90,60,90])
+    
+    func loadTrain() {
+        train = Train_data.trains[(shareData.userData?.trainNumber)!]
         counter = train!.temp[0]
     }
     
@@ -45,10 +48,19 @@ class RunViewController: UIViewController {
         imageView.tintColor = UIColor.blueColor()
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         screenWidth = screenSize.width
-        loadSampleTrain()
+        loadTrain()
         image.image = self.getMixedImg(screenSize.width)
         timerLabel.text = "\(counter)"
+//        let confettiView = SAConfettiView(frame: self.view.bounds)
+//        confettiView.type = .Triangle
+//        confettiView.colors = [UIColor.redColor(), UIColor.greenColor(), UIColor.blueColor()]
+//        self.view.addSubview(confettiView)
+//        
+//        confettiView.startConfetti()
         
+    }
+    @IBAction func cancelButtonPressed(sender: AnyObject) {
+         dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -61,14 +73,15 @@ class RunViewController: UIViewController {
         }
         if(counter < 0 && index == (train?.index)!-1){
             timer.invalidate()
-            
             timerLabel.text = "the train is over"
+            shareData.increseNumberOfTrains()
+            return
         }
         timerLabel.text = "\(counter)"
         updateTrainControlImage()
         
     }
-    
+
     func updateTrainControlImage(){
         let size = CGSizeMake(screenWidth, 50)
         var imgListArray: [UIImage]  = []

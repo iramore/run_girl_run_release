@@ -11,6 +11,7 @@ pod 'EZAlertController', '0.3'
 pod 'ElasticTransition' , '>= 2.0.1'
 pod 'BMCustomTableView'
 pod 'RandomColorSwift'
+pod 'SAConfettiView'
 
 end
 

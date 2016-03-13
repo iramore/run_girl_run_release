@@ -11,6 +11,7 @@
 		D3284B6C1C8DB46B006FB560 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6B1C8DB46B006FB560 /* Train.swift */; };
 		D3284B6E1C8EB959006FB560 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6D1C8EB959006FB560 /* ImageUtil.swift */; };
 		D3284B701C92ED19006FB560 /* Train_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6F1C92ED19006FB560 /* Train_data.swift */; };
+		D3284B721C92F688006FB560 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B711C92F688006FB560 /* UserData.swift */; };
 		D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F1CCB1C7105390084A902 /* AppDelegate.swift */; };
 		D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F1CCD1C7105390084A902 /* PlanViewController.swift */; };
 		D35F1CD11C7105390084A902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CCF1C7105390084A902 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		D3284B6B1C8DB46B006FB560 /* Train.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		D3284B6D1C8EB959006FB560 /* ImageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
 		D3284B6F1C92ED19006FB560 /* Train_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train_data.swift; sourceTree = "<group>"; };
+		D3284B711C92F688006FB560 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		D35F1CC81C7105390084A902 /* run_run_run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = run_run_run.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35F1CCB1C7105390084A902 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D35F1CCD1C7105390084A902 /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				D3284B6B1C8DB46B006FB560 /* Train.swift */,
 				D3284B6D1C8EB959006FB560 /* ImageUtil.swift */,
 				D3284B6F1C92ED19006FB560 /* Train_data.swift */,
+				D3284B711C92F688006FB560 /* UserData.swift */,
 			);
 			path = run_run_run;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */,
 				D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */,
 				D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */,
+				D3284B721C92F688006FB560 /* UserData.swift in Sources */,
 				D3284B6C1C8DB46B006FB560 /* Train.swift in Sources */,
 				D3284B701C92ED19006FB560 /* Train_data.swift in Sources */,
 				D3669D551C849BFE00250225 /* RunViewController.swift in Sources */,
