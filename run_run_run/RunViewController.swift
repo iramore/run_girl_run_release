@@ -48,6 +48,7 @@ class RunViewController: UIViewController {
         imageView.tintColor = UIColor.blueColor()
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         screenWidth = screenSize.width
+        print("screen width \(screenWidth)")
         loadTrain()
         image.image = self.getMixedImg(screenSize.width)
         timerLabel.text = "\(counter)"

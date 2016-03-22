@@ -56,7 +56,7 @@ extension NSDate
     init(dateString:String) {
         let dateStringFormatter = NSDateFormatter()
         dateStringFormatter.dateFormat = "yyyy-MM-dd"
-        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        //dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         let d = dateStringFormatter.dateFromString(dateString)!
         self.init(timeInterval:0, sinceDate:d)
     }
@@ -71,13 +71,13 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let userData = shareData.loadUserData() {
-           shareData.userData = userData
-        } else{
+//        if let userData = shareData.loadUserData() {
+//           shareData.userData = userData
+//        } else{
             shareData.userData = UserData(trainNumber: 1, daysOfWeek: [0,2,4], completedTrainsDates: [NSDate(dateString:"2016-03-06"),NSDate(dateString:"2016-03-08"),
-                NSDate(dateString:"2016-03-09"), NSDate(dateString:"2016-03-12")])
+                NSDate(dateString:"2016-03-09"), NSDate(dateString:"2016-03-12"),NSDate(dateString:"2016-03-13")])
             shareData.saveUserData()
-        }
+ //       }
         transition.sticky = true
         transition.showShadow = true
         transition.panThreshold = 0.3

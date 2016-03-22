@@ -29,6 +29,8 @@ class CustomTableViewCell: UITableViewCell {
 
 class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    let shareData = ShareData.sharedInstance
+    
     
     //MARK: Variables
     var colors: [UIColor]!
@@ -62,7 +64,11 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CustomTableViewCell
-        cell.backgroundColor = colors[indexPath.row]
+        if(indexPath.row >= (shareData.userData?.trainNumber)!-1){
+            cell.backgroundColor = colors[indexPath.row]
+        } else {
+            cell.backgroundColor = UIColor.blueColor()
+        }
         return cell
     }
     
