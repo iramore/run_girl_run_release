@@ -13,6 +13,9 @@ import RandomColorSwift
 
 class CustomTableViewCell: UITableViewCell {
     
+    
+    @IBOutlet weak var planImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -69,6 +72,7 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             cell.backgroundColor = UIColor.blueColor()
         }
+        cell.planImage.image = UIImage(named: "run-info")!
         return cell
     }
     

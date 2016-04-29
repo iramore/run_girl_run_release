@@ -33,8 +33,8 @@ class CalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         monthLabel.text = CVDate(date: NSDate()).globalDescription
-        print("completed train days")
-         print((shareData.userData)!.completedTrainsDates!)
+        //print("completed train days")
+         //print((shareData.userData)!.completedTrainsDates!)
         transition.sticky = true
         transition.showShadow = true
         transition.panThreshold = 0.3
@@ -230,8 +230,8 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         if let _ = (shareData.userData)!.completedTrainsDates {
             if let _ = dayView.date{
                 if(shareData.userData)!.completedTrainsDates!.contains(dayView.date.convertedDate()!){
-                    print("days in train before today \(trainDays)")
-                    print(dayView.date.convertedDate())
+                    //print("days in train before today \(trainDays)")
+                    //print(dayView.date.convertedDate())
                     ++trainDays
                     return true
                 }
@@ -241,8 +241,8 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         {
             if  let _ = dayView.date{
                 if(dayView.date.convertedDate() > NSDate()){
-                    print("days in train after today \(trainDays)")
-                    print(dayView.date.convertedDate())
+                   // print("days in train after today \(trainDays)")
+                    //print(dayView.date.convertedDate())
                     ++trainDays
                     return true
                 }

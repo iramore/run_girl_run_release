@@ -28,6 +28,9 @@ class RunViewController: UIViewController {
     }
     
     @IBOutlet weak var timerLabel: UILabel!
+    
+    
+    @IBOutlet weak var vxcv: UILabel!
     @IBAction func closeButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -56,8 +59,12 @@ class RunViewController: UIViewController {
 //        confettiView.type = .Triangle
 //        confettiView.colors = [UIColor.redColor(), UIColor.greenColor(), UIColor.blueColor()]
 //        self.view.addSubview(confettiView)
-//        
 //        confettiView.startConfetti()
+        let myImage = UIImage(named: "current_stage_background")
+        let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 160, height: 80))
+        myImageView.image = myImage
+        vxcv.addSubview(myImageView)
+        vxcv.text = "  Run 60 seconds"
         
     }
     @IBAction func cancelButtonPressed(sender: AnyObject) {

@@ -71,13 +71,8 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if let userData = shareData.loadUserData() {
-//           shareData.userData = userData
-//        } else{
-            shareData.userData = UserData(trainNumber: 1, daysOfWeek: [0,2,4], completedTrainsDates: [NSDate(dateString:"2016-03-06"),NSDate(dateString:"2016-03-08"),
-                NSDate(dateString:"2016-03-09"), NSDate(dateString:"2016-03-12"),NSDate(dateString:"2016-03-13")])
-            shareData.saveUserData()
- //       }
+        shareData.userData = UserData(trainNumber: 1, daysOfWeek: [0,2,4], completedTrainsDates: [NSDate(dateString:"2016-04-06"),NSDate(dateString:"2016-04-08"),NSDate(dateString:"2016-04-09"),NSDate(dateString:"2016-04-12"),NSDate(dateString:"2016-04-13")])
+        shareData.saveUserData()
         transition.sticky = true
         transition.showShadow = true
         transition.panThreshold = 0.3

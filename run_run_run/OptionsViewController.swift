@@ -7,8 +7,10 @@ import EZAlertController
 enum LeftMenuType{
     case Switch(name:String, on:Bool, onChange:(on:Bool)->Void)
     case Slider(name:String, value:Float, onChange:(value:Float)->Void)
-    case Segment(name:String, values:[Any], selected:Int, onChange:(value:Any)->Void)
+    case Segment(name:String, values:[Int], selected:Int, onChange:(value:Int)->Void)
     case Button(name:String)
+    case WeekSegment(name:String, values: [Int])
+    case NumericSegment(name:String)
 }
 
 class SwitchCell:UITableViewCell{
@@ -32,8 +34,8 @@ class SegmentCell:UITableViewCell{
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var segment: UISegmentedControl!
     
-    var values:[Any] = []
-    var onChange:((value:Any)->Void)?
+    var values:[Int] = []
+    var onChange:((value:Int)->Void)?
     
     @IBAction func segmentChanged(sender: UISegmentedControl) {
         onChange?(value: values[sender.selectedSegmentIndex])
@@ -44,7 +46,17 @@ class ButtonCell:UITableViewCell{
     @IBOutlet weak var button: UIButton!
 }
 
-class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate {
+class WeekSegmentCell:UITableViewCell{
+    @IBOutlet weak var weekSegment: MWSegmentedControl!
+    @IBOutlet weak var weekLabel: UILabel!
+    var values:[Int] = []
+}
+class NumericSegmentCell: UITableViewCell{
+    @IBOutlet weak var numericSegment: MWSegmentedControl!
+    @IBOutlet weak var numericLabel: UILabel!
+}
+
+class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MWSegmentedControlDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -56,22 +68,16 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate {
     var initialSelectectionForDays: [Int] = [0,2,4,5,6]
     
     var contentLength:CGFloat = 0
-    var dismissByBackgroundTouch = true
-    var dismissByBackgroundDrag = true
-    var dismissByForegroundDrag = true
-    
     var menu:[LeftMenuType] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        menu.append(.Button(name: self.createNumberOfDaysButtonNameInitial()))
-        
-        menu.append(.Button(name: self.createDaysOfWeekButtonNameInitial()))
+        menu.append(.NumericSegment(name: "Days"))
+        menu.append(.WeekSegment(name: "Days", values: (self.shareData.loadUserData()?.daysOfWeek)!))
         
         for i in 0..<menu.count{
             contentLength += self.tableView(self.tableView, heightForRowAtIndexPath: NSIndexPath(forRow:i, inSection:0))
         }
-        self.changeNumberOfDaysPickerName((shareData.userData?.daysOfWeek.count)!-1)
         tableView.reloadData()
     }
     
@@ -84,11 +90,11 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate {
                 print("index = \(index)")
                 print("picker = \(picker)")
                 self.arrayForDayChooser.removeAll()
-                self.changeNumberOfDaysPickerName(value)
+                //self.changeNumberOfDaysPickerName(value)
                 self.menu[0] = .Button(name: index as! String)
                 self.shareData.saveUserDataOption(Array(self.initialSelectectionForDays[0...value]))
-                let secondButton = self.createDaysOfWeekButtonNameInitial()
-                self.menu[1] = .Button(name: secondButton )
+                //let secondButton = self.createDaysOfWeekButtonNameInitial()
+                //self.menu[1] = .Button(name: secondButton )
                 self.tableView.reloadData()
                 return
                 }, cancelBlock: { ActionStringCancelBlock in return }, origin: sender)
@@ -107,7 +113,7 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate {
                 }
                 else{
                     self.shareData.saveUserDataOption(values as! [Int])
-                    self.menu[1] = .Button(name: self.createDaysOfWeekButtonNameInitial())
+                    //self.menu[1] = .Button(name: self.createDaysOfWeekButtonNameInitial())
                     self.tableView.reloadData()
                 }
                 return
@@ -116,38 +122,29 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate {
             break
         }
     }
-    func createNumberOfDaysButtonNameInitial() ->String{
-        switch (shareData.userData?.daysOfWeek.count)! {
-        case 1:
-            return "1 day a week"
-        default:
-            return "\((shareData.userData?.daysOfWeek.count)!) days a week"
-        }
-    }
-    func createSecondButtonTitle(dayIndex: Int) -> String{
-        var result = ""
-        for var index = 0; index <= dayIndex; ++index {
-            result+=" "+daysOfWeekArray[initialSelectectionForDays[index]]
-        }
-        return result
-    }
-    func createDaysOfWeekButtonNameInitial() ->String{
-        var result: String = ""
-        for var i = 0; i<(shareData.userData?.daysOfWeek.count)!; ++i{
-            result += daysOfWeekArray[(shareData.userData?.daysOfWeek[i])!]+" "
-        }
-        return result
-    }
-    func changeNumberOfDaysPickerName(numberOfTheDay : Int){
-        for _ in 0...numberOfTheDay {
-            self.arrayForDayChooser.append(daysOfWeekArray)
-        }
-    }
-    
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
+    
+    func segmentDidChange(control: MWSegmentedControl, value: Int) {
+        switch control.name{
+        case "Numeric":
+            print("Numeric")
+            let newSelected = Array(self.initialSelectectionForDays[0...value-1])
+            print(newSelected)
+            self.shareData.saveUserDataOption(newSelected)
+            self.menu[1] = .WeekSegment(name: "lala", values: newSelected)
+            //tableView.reloadData()
+            let indexPath = NSIndexPath(forRow: 1, inSection: 0)
+            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
+        case "Days":
+            print("Days")
+        default:
+            print("Default")
+        }
+    }
+
 }
 
 extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
@@ -182,12 +179,34 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
             sliderCell.slider.minimumValue = 0
             sliderCell.slider.value = value
             cell = sliderCell
-            
         case .Button(let name):
             let buttonCell  = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as! ButtonCell
             buttonCell.button.setTitle(name, forState: .Normal)
             buttonCell.button.tag = indexPath.row;
             cell = buttonCell
+        
+        case .WeekSegment(let name, let values):
+            let weekSegmentCell = tableView.dequeueReusableCellWithIdentifier("week_segment", forIndexPath: indexPath) as! WeekSegmentCell
+            weekSegmentCell.weekSegment.font = UIFont(name: "Avenir-Book", size: 30)
+            weekSegmentCell.weekSegment.name = "Days"
+            weekSegmentCell.weekSegment.buttonTitles = ["M", "Tu", "W", "Th", "F", "Sa","Su"]
+            weekSegmentCell.weekSegment.selectedIndexes = values
+            weekSegmentCell.weekSegment.allowMultipleSelection = true
+            weekSegmentCell.weekSegment.delegate = self
+            weekSegmentCell.weekLabel.text = name
+            cell = weekSegmentCell
+            
+        case .NumericSegment(let name):
+            let numericSegment = tableView.dequeueReusableCellWithIdentifier("numeric_segment", forIndexPath: indexPath) as! NumericSegmentCell
+            numericSegment.numericSegment.font = UIFont(name: "Avenir-Book", size: 30)
+            numericSegment.numericSegment.name = "Numeric"
+            numericSegment.numericSegment.buttonTitles = ["1", "2", "3", "4", "5"]
+            numericSegment.numericSegment.selectedIndexes = [(self.shareData.loadUserData()?.daysOfWeek.count)!]
+            numericSegment.numericSegment.allowMultipleSelection = false
+            numericSegment.numericSegment.delegate = self
+            numericSegment.numericLabel.text = name
+            cell = numericSegment
+
         }
         return cell
     }
@@ -200,6 +219,10 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
             return 54
         case .Slider:
             return 62
+        case .WeekSegment:
+            return 85
+        case .NumericSegment:
+            return 85
         default:
             return 72
         }
