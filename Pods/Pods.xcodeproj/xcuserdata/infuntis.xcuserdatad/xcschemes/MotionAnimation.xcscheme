@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'EB68E662F8CFFD2E1D6E3118'
-               BlueprintName = 'CVCalendar'
+               BlueprintIdentifier = '9BA12F78831AB5A29C9DBEAA'
+               BlueprintName = 'MotionAnimation'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'CVCalendar.framework'>
+               BuildableName = 'MotionAnimation.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MotionAnimation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-run_run_run.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,7 +62,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>10F6B8305AC8CA3BD04DF532979538F3</key>
+		<key>1C9674A8BF970C51C460F3C31A82CF1B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>20EE510C33B653D0D39E8015461CA777</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CD5683B957515FD8AA32EB549504EF8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3C22DB85A237A6C12FB7C022A15C62C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,22 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>506B1FAEA1D4E17CE36F1016939FDBDE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>77294EBA764CFC72589806E8A31BDCC0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>80D639EDDB5F6601E32F54E5991C1C7A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7E59A9E06DC145F3B441294C61B7D36</key>
+		<key>948565EBE91722F8BAFCE2AAC940ED73</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,7 +112,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E47D844C12FBE2C057BDE735FFD704CF</key>
+		<key>FD43EAE60085017FCC862BC5C08E4545</key>
 		<dict>
 			<key>primary</key>
 			<true/>

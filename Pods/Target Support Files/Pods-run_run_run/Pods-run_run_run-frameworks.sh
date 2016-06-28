@@ -89,6 +89,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-run_run_run/CVCalendar.framework"
   install_framework "Pods-run_run_run/EZAlertController.framework"
   install_framework "Pods-run_run_run/ElasticTransition.framework"
+  install_framework "Pods-run_run_run/MotionAnimation.framework"
   install_framework "Pods-run_run_run/RandomColorSwift.framework"
   install_framework "Pods-run_run_run/SAConfettiView.framework"
 fi
@@ -98,6 +99,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-run_run_run/CVCalendar.framework"
   install_framework "Pods-run_run_run/EZAlertController.framework"
   install_framework "Pods-run_run_run/ElasticTransition.framework"
+  install_framework "Pods-run_run_run/MotionAnimation.framework"
   install_framework "Pods-run_run_run/RandomColorSwift.framework"
   install_framework "Pods-run_run_run/SAConfettiView.framework"
 fi

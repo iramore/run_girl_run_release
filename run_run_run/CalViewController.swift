@@ -38,7 +38,7 @@ class CalViewController: UIViewController {
         transition.sticky = true
         transition.showShadow = true
         transition.panThreshold = 0.3
-        transition.transformType = .TranslateMid
+        transition.transformType = .Rotate
     }
     
     override func didReceiveMemoryWarning() {

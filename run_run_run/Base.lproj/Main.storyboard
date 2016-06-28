@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bF8-iv-92E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bF8-iv-92E">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -80,12 +80,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0mv-Vg-x2F" customClass="CVCalendarMenuView" customModule="CVCalendar">
-                                <rect key="frame" x="12" y="72" width="296" height="24"/>
-                                <connections>
-                                    <outlet property="menuViewDelegate" destination="etY-z9-AdL" id="rYx-tQ-7ff"/>
-                                </connections>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="January, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIH-5x-13C">
                                 <rect key="frame" x="92" y="28" width="136" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -126,6 +120,12 @@
                                     <action selector="closeButtonPressed:" destination="etY-z9-AdL" eventType="touchUpInside" id="hJa-Bc-dBl"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0mv-Vg-x2F" customClass="CVCalendarMenuView" customModule="CVCalendar">
+                                <rect key="frame" x="12" y="72" width="296" height="24"/>
+                                <connections>
+                                    <outlet property="menuViewDelegate" destination="etY-z9-AdL" id="rYx-tQ-7ff"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -282,45 +282,8 @@
                                             <outlet property="slider" destination="NF4-Dg-Wbk" id="iGC-1f-p6y"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="button" id="nfi-hY-s24" customClass="ButtonCell" customModule="run_run_run" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="234" width="320" height="67"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nfi-hY-s24" id="tt2-Yp-QSN">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="66.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BxJ-Wy-wIB">
-                                                    <rect key="frame" x="34" y="19" width="253" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="253" id="qOJ-s0-t4n"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="tintColor" red="0.94117647059999998" green="0.35294117650000001" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <connections>
-                                                        <action selector="buttonPressed:" destination="YGc-s2-ySE" eventType="touchUpInside" id="FAk-qi-whZ"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="BxJ-Wy-wIB" firstAttribute="centerX" secondItem="tt2-Yp-QSN" secondAttribute="centerX" id="S7f-Su-IBz"/>
-                                                <constraint firstItem="BxJ-Wy-wIB" firstAttribute="centerY" secondItem="tt2-Yp-QSN" secondAttribute="centerY" id="UJi-d2-mWa"/>
-                                                <constraint firstItem="BxJ-Wy-wIB" firstAttribute="leading" secondItem="tt2-Yp-QSN" secondAttribute="leadingMargin" constant="35" id="YQT-lP-PSl"/>
-                                                <constraint firstItem="BxJ-Wy-wIB" firstAttribute="top" secondItem="tt2-Yp-QSN" secondAttribute="topMargin" constant="11" id="oJL-un-8zh"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="YQT-lP-PSl"/>
-                                                    <exclude reference="oJL-un-8zh"/>
-                                                </mask>
-                                            </variation>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="button" destination="BxJ-Wy-wIB" id="MGN-sh-0IZ"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="week_segment" rowHeight="85" id="rL2-6R-Iwl" customClass="WeekSegmentCell" customModule="run_run_run" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="301" width="320" height="85"/>
+                                        <rect key="frame" x="0.0" y="234" width="320" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rL2-6R-Iwl" id="RRo-VP-dEt">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="84.5"/>
@@ -350,7 +313,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="numeric_segment" rowHeight="85" id="RF3-vv-gQu" customClass="NumericSegmentCell" customModule="run_run_run" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="386" width="320" height="85"/>
+                                        <rect key="frame" x="0.0" y="319" width="320" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RF3-vv-gQu" id="KC7-nw-Xkb">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="84.5"/>
