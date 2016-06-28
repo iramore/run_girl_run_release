@@ -12,6 +12,7 @@
 		D3284B6E1C8EB959006FB560 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6D1C8EB959006FB560 /* ImageUtil.swift */; };
 		D3284B701C92ED19006FB560 /* Train_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6F1C92ED19006FB560 /* Train_data.swift */; };
 		D3284B721C92F688006FB560 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B711C92F688006FB560 /* UserData.swift */; };
+		D352CBFE1D22B6F700E1FD08 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D352CBFD1D22B6F700E1FD08 /* OptionsViewController.swift */; };
 		D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F1CCB1C7105390084A902 /* AppDelegate.swift */; };
 		D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F1CCD1C7105390084A902 /* PlanViewController.swift */; };
 		D35F1CD11C7105390084A902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CCF1C7105390084A902 /* Main.storyboard */; };
@@ -24,7 +25,7 @@
 		D3669D7F1C8758B900250225 /* FMProgressBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3669D7B1C8758B900250225 /* FMProgressBarView.xib */; };
 		D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37E54271C7C8DDF0025509A /* CalViewController.swift */; };
 		D39041DF1CB13BF600EA1979 /* MWSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39041DE1CB13BF600EA1979 /* MWSegmentedControl.swift */; };
-		D3DD4B481C835D7D00D600FD /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */; };
+		D3DD4B481C835D7D00D600FD /* OptionsViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DD4B471C835D7D00D600FD /* OptionsViewController2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		D3284B6D1C8EB959006FB560 /* ImageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
 		D3284B6F1C92ED19006FB560 /* Train_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train_data.swift; sourceTree = "<group>"; };
 		D3284B711C92F688006FB560 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		D352CBFD1D22B6F700E1FD08 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		D35F1CC81C7105390084A902 /* run_run_run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = run_run_run.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35F1CCB1C7105390084A902 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D35F1CCD1C7105390084A902 /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
@@ -53,7 +55,7 @@
 		D3669D7B1C8758B900250225 /* FMProgressBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMProgressBarView.xib; path = "../../../../Downloads/FMProgressBarView-master/FMProgressBarView/FMProgressBarView.xib"; sourceTree = "<group>"; };
 		D37E54271C7C8DDF0025509A /* CalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalViewController.swift; sourceTree = "<group>"; };
 		D39041DE1CB13BF600EA1979 /* MWSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MWSegmentedControl.swift; path = "../../../../Downloads/MWSegmentedControl-master/MWSegmentedControl/MWSegmentedControl.swift"; sourceTree = "<group>"; };
-		D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		D3DD4B471C835D7D00D600FD /* OptionsViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController2.swift; sourceTree = "<group>"; };
 		D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.release.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.release.xcconfig"; sourceTree = "<group>"; };
 		F108FC8201A2D48916797CE5 /* Pods-run_run_run.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.debug.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,9 +114,10 @@
 				D35F1CCF1C7105390084A902 /* Main.storyboard */,
 				D35F1CD21C7105390084A902 /* Assets.xcassets */,
 				D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */,
+				D352CBFD1D22B6F700E1FD08 /* OptionsViewController.swift */,
 				D35F1CD71C7105390084A902 /* Info.plist */,
 				D37E54271C7C8DDF0025509A /* CalViewController.swift */,
-				D3DD4B471C835D7D00D600FD /* OptionsViewController.swift */,
+				D3DD4B471C835D7D00D600FD /* OptionsViewController2.swift */,
 				D3669D521C84933A00250225 /* InitialViewController.swift */,
 				D3669D541C849BFE00250225 /* RunViewController.swift */,
 				D3284B6B1C8DB46B006FB560 /* Train.swift */,
@@ -293,9 +296,10 @@
 				D3284B721C92F688006FB560 /* UserData.swift in Sources */,
 				D3284B6C1C8DB46B006FB560 /* Train.swift in Sources */,
 				D3284B701C92ED19006FB560 /* Train_data.swift in Sources */,
+				D352CBFE1D22B6F700E1FD08 /* OptionsViewController.swift in Sources */,
 				D39041DF1CB13BF600EA1979 /* MWSegmentedControl.swift in Sources */,
 				D3669D551C849BFE00250225 /* RunViewController.swift in Sources */,
-				D3DD4B481C835D7D00D600FD /* OptionsViewController.swift in Sources */,
+				D3DD4B481C835D7D00D600FD /* OptionsViewController2.swift in Sources */,
 				D3669D7E1C8758B900250225 /* FMProgressBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
