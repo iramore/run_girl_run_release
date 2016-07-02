@@ -1,11 +1,3 @@
-//
-//  OptionsViewController.swift
-//  ElasticTransitionExample
-//
-//  Created by Luke Zhao on 2015-12-08.
-//  Copyright © 2015 lkzhao. All rights reserved.
-//
-
 import UIKit
 import ElasticTransition
 
@@ -70,30 +62,6 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MW
   
   override func viewDidLoad() {
     super.viewDidLoad()
-//    let tm = self.transitioningDelegate as! ElasticTransition
-//    let va:[Any] = [ElasticTransitionBackgroundTransform.Subtle,ElasticTransitionBackgroundTransform.Rotate,ElasticTransitionBackgroundTransform.TranslateMid]
-//    menu = []
-//    menu.append(.Switch(name: "Sticky", on:tm.sticky, onChange: {on in
-//      tm.sticky = on
-//    }))
-//    menu.append(.Switch(name: "Shadow", on:tm.showShadow, onChange: {on in
-//      tm.showShadow = on
-//    }))
-//    menu.append(LeftMenuType.Segment(name: "Transform Type",values:va,selected:tm.transformType.rawValue, onChange: {value in
-//      tm.transformType = value as! ElasticTransitionBackgroundTransform
-//    }))
-//    menu.append(.Slider(name: "Damping", value:Float(tm.damping), onChange: {value in
-//      tm.damping = CGFloat(value)
-//    }))
-//    menu.append(.Slider(name: "Stiffness", value:Float(tm.stiffness), onChange: {value in
-//      tm.stiffness = CGFloat(value)
-//    }))
-//    menu.append(.Slider(name: "Radius Factor", value:Float(tm.radiusFactor)/0.5, onChange: {value in
-//      tm.radiusFactor = CGFloat(value) * CGFloat(0.5)
-//    }))
-//    menu.append(.Slider(name: "Pan Theashold", value:Float(tm.panThreshold), onChange: {value in
-//      tm.panThreshold = CGFloat(value)
-//    }))
     menu.append(.NumericSegment(name: "Trainings per week"))
     menu.append(.WeekSegment(name: "Days"))
     

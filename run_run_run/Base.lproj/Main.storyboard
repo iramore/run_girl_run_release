@@ -439,22 +439,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Rh-kd-hvX">
+                                <rect key="frame" x="6" y="18" width="25" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="ihO-lz-sCp"/>
+                                </constraints>
+                                <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="dismissButtonPressed:" destination="99m-eB-PQc" eventType="touchUpInside" id="qUd-Kx-ibG"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="68" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iuW-pb-saZ" customClass="BMCustomTableView" customModule="BMCustomTableView">
-                                <rect key="frame" x="0.0" y="50" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="67" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="1" green="0.64705882349999999" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="0.64705882349999999" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="68" id="cm7-oi-zMV" customClass="CustomTableViewCell" customModule="run_run_run" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="68"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="104" id="cm7-oi-zMV" customClass="CustomTableViewCell" customModule="run_run_run" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cm7-oi-zMV" id="wSB-Ii-IR6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="103.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0I4-rf-Esq">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -470,22 +480,12 @@
                                     <outlet property="delegate" destination="99m-eB-PQc" id="EKe-SZ-6k3"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Rh-kd-hvX">
-                                <rect key="frame" x="6" y="18" width="25" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="ihO-lz-sCp"/>
-                                </constraints>
-                                <state key="normal" image="close"/>
-                                <connections>
-                                    <action selector="dismissButtonPressed:" destination="99m-eB-PQc" eventType="touchUpInside" id="qUd-Kx-ibG"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.64705882349999999" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="w4O-Nb-zBS" firstAttribute="top" secondItem="iuW-pb-saZ" secondAttribute="bottom" constant="-30" id="51o-hp-b9X"/>
+                            <constraint firstItem="w4O-Nb-zBS" firstAttribute="top" secondItem="iuW-pb-saZ" secondAttribute="bottom" constant="-47" id="51o-hp-b9X"/>
                             <constraint firstItem="5Rh-kd-hvX" firstAttribute="leading" secondItem="Nlh-yM-xdw" secondAttribute="leadingMargin" constant="-14" id="9SD-ic-7mm"/>
-                            <constraint firstItem="iuW-pb-saZ" firstAttribute="top" secondItem="zWM-Dn-POf" secondAttribute="bottom" constant="30" id="QLb-YP-Xpe"/>
+                            <constraint firstItem="iuW-pb-saZ" firstAttribute="top" secondItem="zWM-Dn-POf" secondAttribute="bottom" constant="47" id="QLb-YP-Xpe"/>
                             <constraint firstAttribute="trailing" secondItem="iuW-pb-saZ" secondAttribute="trailing" id="cu5-1C-LmC"/>
                             <constraint firstItem="iuW-pb-saZ" firstAttribute="leading" secondItem="Nlh-yM-xdw" secondAttribute="leading" id="gF2-WI-8ns"/>
                             <constraint firstItem="5Rh-kd-hvX" firstAttribute="top" secondItem="zWM-Dn-POf" secondAttribute="bottom" constant="-2" id="yzg-Xe-F34"/>

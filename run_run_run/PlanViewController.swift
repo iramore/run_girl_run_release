@@ -72,7 +72,7 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             cell.backgroundColor = UIColor.blueColor()
         }
-        cell.planImage.image = UIImage(named: "run-info")!
+        cell.planImage.image = UIImage(named: "run-run-1")!
         return cell
     }
     
