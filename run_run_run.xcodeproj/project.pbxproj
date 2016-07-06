@@ -25,6 +25,7 @@
 		D3669D7F1C8758B900250225 /* FMProgressBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3669D7B1C8758B900250225 /* FMProgressBarView.xib */; };
 		D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37E54271C7C8DDF0025509A /* CalViewController.swift */; };
 		D39041DF1CB13BF600EA1979 /* MWSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39041DE1CB13BF600EA1979 /* MWSegmentedControl.swift */; };
+		D3B57E1C1D2BF6220014F8F2 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B57E1B1D2BF6220014F8F2 /* MenuButton.swift */; };
 		D3DD4B481C835D7D00D600FD /* OptionsViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DD4B471C835D7D00D600FD /* OptionsViewController2.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		D3669D7B1C8758B900250225 /* FMProgressBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FMProgressBarView.xib; path = "../../../../Downloads/FMProgressBarView-master/FMProgressBarView/FMProgressBarView.xib"; sourceTree = "<group>"; };
 		D37E54271C7C8DDF0025509A /* CalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalViewController.swift; sourceTree = "<group>"; };
 		D39041DE1CB13BF600EA1979 /* MWSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MWSegmentedControl.swift; path = "../../../../Downloads/MWSegmentedControl-master/MWSegmentedControl/MWSegmentedControl.swift"; sourceTree = "<group>"; };
+		D3B57E1B1D2BF6220014F8F2 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		D3DD4B471C835D7D00D600FD /* OptionsViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController2.swift; sourceTree = "<group>"; };
 		D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.release.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.release.xcconfig"; sourceTree = "<group>"; };
 		F108FC8201A2D48916797CE5 /* Pods-run_run_run.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.debug.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				D35F1CCD1C7105390084A902 /* PlanViewController.swift */,
 				D35F1CCF1C7105390084A902 /* Main.storyboard */,
 				D35F1CD21C7105390084A902 /* Assets.xcassets */,
+				D3B57E1B1D2BF6220014F8F2 /* MenuButton.swift */,
 				D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */,
 				D352CBFD1D22B6F700E1FD08 /* OptionsViewController.swift */,
 				D35F1CD71C7105390084A902 /* Info.plist */,
@@ -290,6 +293,7 @@
 			files = (
 				D3284B6E1C8EB959006FB560 /* ImageUtil.swift in Sources */,
 				D3669D531C84933A00250225 /* InitialViewController.swift in Sources */,
+				D3B57E1C1D2BF6220014F8F2 /* MenuButton.swift in Sources */,
 				D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */,
 				D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */,
 				D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */,
