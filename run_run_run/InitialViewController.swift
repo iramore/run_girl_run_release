@@ -81,7 +81,7 @@ class InitialViewController: UIViewController {
         
         let image1  = UIImage(named: "plan-but") as UIImage?
         
-        let frame1 = CGRectMake(self.view.bounds.width/2 - (image1?.size.width)! - 10,self.view.bounds.height*2/3 - (image1?.size.height)!, (image1?.size.width)! , (image1?.size.height)!)
+        let frame1 = CGRectMake(self.view.bounds.width/2 - (image1?.size.width)! - 7,self.view.bounds.height*2/3 - (image1?.size.height)!, (image1?.size.width)! , (image1?.size.height)!)
         
         
         let planButton = MenuButton(path: firstButtonBezier(), frame: frame1, image: "plan-but")
@@ -89,7 +89,7 @@ class InitialViewController: UIViewController {
         
         let image2  = UIImage(named: "r-b") as UIImage?
         
-        let frame2 = CGRectMake(self.view.bounds.width/2 + 10,self.view.bounds.height*2/3 - (image2?.size.height)!, (image2?.size.width)! , (image2?.size.height)!)
+        let frame2 = CGRectMake(self.view.bounds.width/2 + 7,self.view.bounds.height*2/3 - (image2?.size.height)!, (image2?.size.width)! , (image2?.size.height)!)
         
         
         let runButton = MenuButton(path: secondButtonBezier(), frame: frame2, image: "r-b")
