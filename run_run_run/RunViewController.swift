@@ -1,10 +1,4 @@
-//
-//  RunViewController.swift
-//  run_run_run
-//
-//  Created by infuntis on 29.02.16.
-//  Copyright © 2016 gala. All rights reserved.
-//
+
 
 import UIKit
 import SAConfettiView
@@ -18,7 +12,9 @@ class RunViewController: UIViewController {
     var counter: Float = 0
     var index:Int = 0
     var screenWidth:CGFloat = 0
-    var runningMan:[UIImage] = [UIImage(named: "anim_1")!, UIImage(named: "anim_2")!,UIImage(named: "anim_3")!, UIImage(named: "anim_4")!, UIImage(named: "anim_5")!,UIImage(named: "anim_6")!, UIImage(named: "anim_7")!,UIImage(named: "anim_8")!, UIImage(named: "anim_9")!,UIImage(named: "anim_10")!, UIImage(named: "anim_11")!, UIImage(named: "anim_12")!,UIImage(named: "anim_13")!, UIImage(named: "anim_14")! ]
+    var runningMan:[UIImage] = [ UIImage(named: "rrrr1")!, UIImage(named: "rrrr2")!]
+//        [UIImage(named: "anim_1")!, UIImage(named: "anim_2")!,UIImage(named: "anim_3")!, UIImage(named: "anim_4")!, UIImage(named: "anim_5")!,UIImage(named: "anim_6")!, UIImage(named: "anim_7")!,UIImage(named: "anim_8")!, UIImage(named: "anim_9")!,UIImage(named: "anim_10")!, UIImage(named: "anim_11")!, UIImage(named: "anim_12")!,UIImage(named: "anim_13")!, UIImage(named: "anim_14")! ]
+       // [UIImage(named: "tt")!, UIImage(named: "tt1")!]
     var walkingMan:[UIImage] = [UIImage(named: "anim_1")!, UIImage(named: "anim_2")!,UIImage(named: "anim_3")!, UIImage(named: "anim_4")!, UIImage(named: "anim_5")!,UIImage(named: "anim_6")!, UIImage(named: "anim_7")!,UIImage(named: "anim_8")!, UIImage(named: "anim_9")!,UIImage(named: "anim_10")!, UIImage(named: "anim_11")!, UIImage(named: "anim_12")!,UIImage(named: "anim_13")!, UIImage(named: "anim_14")! ]
     
     
@@ -27,6 +23,7 @@ class RunViewController: UIViewController {
         counter = train!.temp[0]
     }
     
+    @IBOutlet weak var runner: UIImageView!
     @IBOutlet weak var timerLabel: UILabel!
     
     
@@ -39,22 +36,22 @@ class RunViewController: UIViewController {
     
     @IBAction func startButtonPressed(sender: AnyObject) {
         timer.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "timerAction", userInfo:nil , repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(RunViewController.timerAction), userInfo:nil , repeats: true)
     }
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var imageView : UIImageView
-        imageView  = UIImageView(frame:CGRectMake(10, 50, 100, 300))
-        imageView.tintColor = UIColor.blueColor()
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         screenWidth = screenSize.width
         print("screen width \(screenWidth)")
         loadTrain()
-        image.image = self.getMixedImg(screenSize.width)
+        self.image.image = self.getMixedImg(screenSize.width)
         timerLabel.text = "\(counter)"
+        
+        let runController = RunCircles(frame: CGRectMake(30, 50, screenSize.width - 60, screenSize.width - 60))
+        self.view.addSubview(runController)
 //        let confettiView = SAConfettiView(frame: self.view.bounds)
 //        confettiView.type = .Triangle
 //        confettiView.colors = [UIColor.redColor(), UIColor.greenColor(), UIColor.blueColor()]
@@ -65,6 +62,11 @@ class RunViewController: UIViewController {
         myImageView.image = myImage
         vxcv.addSubview(myImageView)
         vxcv.text = "  Run 60 seconds"
+        
+        self.runner.contentMode = .ScaleAspectFit
+        self.runner.animationImages = runningMan
+        self.runner.animationDuration = 0.5
+        self.runner.startAnimating()
         
     }
     @IBAction func cancelButtonPressed(sender: AnyObject) {
@@ -91,20 +93,20 @@ class RunViewController: UIViewController {
     }
 
     func updateTrainControlImage(){
-        let size = CGSizeMake(screenWidth, 50)
+        let size = CGSizeMake(screenWidth, 70)
         var imgListArray: [UIImage]  = []
-        for var x = 0 ; x < runningMan.count; ++x {
+        for x in 0  ..< runningMan.count {
             UIGraphicsBeginImageContext(size)
             var widthVid: CGFloat = 0
             let percent: CGFloat = (CGFloat((train?.temp[index])!-counter))/CGFloat((train?.temp[index])!)
             print(percent)
             if(percent < 1){
                 let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train?.trainMenu[index])!, percent: percent)
-                croppedImage.drawInRect(CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
-                runningMan[x].drawInRect(CGRect(x: widthVid, y: 0, width: runningMan[x].size.width, height: runningMan[x].size.height))
+//                croppedImage.drawInRect(CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
+               // runningMan[0].drawInRect(CGRect(x: widthVid, y: 0, width: runningMan[0].size.width, height: runningMan[0].size.height))
                 widthVid+=croppedImage.size.width
             }
-            for var i = self.index+1; i < train?.index; ++i {
+            for var i = self.index+1; i < train?.index; i += 1 {
                 if(widthVid + (train?.trainMenu[i].size.width)! < screenWidth){
                     train?.trainMenu[i].drawInRect(CGRect(x: widthVid, y: 0, width: (train?.trainMenu[i].size.width)!, height: (train?.trainMenu[i].size.height)!))
                     widthVid+=(train?.trainMenu[i].size.width)!
@@ -117,12 +119,14 @@ class RunViewController: UIViewController {
             let finalImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             imgListArray.append(finalImage)
-            //imgListArray[x] = finalImage
+//            imgListArray[x] = finalImage
         }
-        self.image.animationImages = imgListArray
-        self.image.animationDuration = 0.3
-        self.image.startAnimating()
-        //image.image = finalImage
+//        self.image.contentMode = .ScaleAspectFit
+//        self.image.animationImages = imgListArray
+//        self.image.animationDuration = 0.5
+//        self.image.startAnimating()
+        
+//        self.image.image = finalImage
     }
     
     func getMixedImg(width: CGFloat) -> UIImage {

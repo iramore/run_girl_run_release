@@ -14,7 +14,10 @@ class MenuButton: UIButton {
         
         
         let image  = UIImage(named: image) as UIImage?
+        self.imageView!.contentMode = .ScaleAspectFit
+       // self.imageView!.image?.renderingMode = .AlwaysOriginal
         self.setImage(image, forState: .Normal)
+        
         //self.backgroundColor = UIColor.blackColor()
         bezierPath = path;
 

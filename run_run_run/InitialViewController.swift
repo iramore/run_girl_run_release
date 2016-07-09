@@ -79,28 +79,28 @@ class InitialViewController: UIViewController {
         transition.transformType = .TranslateMid
         
         
-        let image1  = UIImage(named: "plan-but") as UIImage?
+        let image1  = UIImage(named: "plan3") as UIImage?
         
         let frame1 = CGRectMake(self.view.bounds.width/2 - (image1?.size.width)! - 7,self.view.bounds.height*2/3 - (image1?.size.height)!, (image1?.size.width)! , (image1?.size.height)!)
         
         
-        let planButton = MenuButton(path: firstButtonBezier(), frame: frame1, image: "plan-but")
+        let planButton = MenuButton(path: firstButtonBezier(), frame: frame1, image: "plan3")
         planButton.addTarget(self, action: #selector(didPressTriangle) , forControlEvents: UIControlEvents.TouchUpInside)
         
-        let image2  = UIImage(named: "r-b") as UIImage?
+        let image2  = UIImage(named: "run-bb") as UIImage?
         
         let frame2 = CGRectMake(self.view.bounds.width/2 + 7,self.view.bounds.height*2/3 - (image2?.size.height)!, (image2?.size.width)! , (image2?.size.height)!)
         
         
-        let runButton = MenuButton(path: secondButtonBezier(), frame: frame2, image: "r-b")
+        let runButton = MenuButton(path: secondButtonBezier(), frame: frame2, image: "run-bb")
         runButton.addTarget(self, action: #selector(didPressSquare), forControlEvents: UIControlEvents.TouchUpInside)
         
-        let image3  = UIImage(named: "track-but") as UIImage?
+        let image3  = UIImage(named: "cal-but") as UIImage?
         
         let frame3 = CGRectMake(self.view.bounds.width/2 - (image3?.size.width)!/2 ,self.view.bounds.height*2/3 - (image3?.size.height)!/2 + 10, (image3?.size.width)! , (image3?.size.height)!)
         
         
-        let trackButton = MenuButton(path: thirdButtonBezier(), frame: frame3, image: "track-but")
+        let trackButton = MenuButton(path: thirdButtonBezier(), frame: frame3, image: "cal-but")
         trackButton.addTarget(self, action: #selector(didPressPentagon), forControlEvents: UIControlEvents.TouchUpInside)
         
         self.view.addSubview(planButton)
@@ -109,28 +109,6 @@ class InitialViewController: UIViewController {
         
     }
     
-    
-//    @IBAction func codeBtnTouched(sender: AnyObject) {
-//        transition.edge = .Left
-//        transition.startingPoint = sender.center
-//        performSegueWithIdentifier("plan", sender: self)
-//    }
-//    
-//    @IBAction func optionBtnTouched(sender: AnyObject) {
-//        transition.edge = .Bottom
-//        transition.startingPoint = sender.center
-//        performSegueWithIdentifier("option", sender: self)
-////        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("calendarControl") as! CalViewController
-////        presentViewController(modalViewController, animated: true, completion: nil)
-//    }
-//    
-//    @IBAction func aboutBtnTouched(sender: AnyObject) {
-//        transition.edge = .Right
-//        transition.startingPoint = sender.center
-//        performSegueWithIdentifier("run", sender: self)
-//    }
-    
-   
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
