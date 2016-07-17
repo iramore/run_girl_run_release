@@ -4,27 +4,13 @@ import UIKit
 import SAConfettiView
 
 class RunViewController: UIViewController {
-    
-    var train: Train?
-    var timer = NSTimer()
-    let shareData = ShareData.sharedInstance
-    var currentStage = 0
-    var counter: Float = 0
-    var index:Int = 0
-    var screenWidth:CGFloat = 0
-    var runningMan:[UIImage] = [ UIImage(named: "rrrr1")!, UIImage(named: "rrrr2")!]
-//        [UIImage(named: "anim_1")!, UIImage(named: "anim_2")!,UIImage(named: "anim_3")!, UIImage(named: "anim_4")!, UIImage(named: "anim_5")!,UIImage(named: "anim_6")!, UIImage(named: "anim_7")!,UIImage(named: "anim_8")!, UIImage(named: "anim_9")!,UIImage(named: "anim_10")!, UIImage(named: "anim_11")!, UIImage(named: "anim_12")!,UIImage(named: "anim_13")!, UIImage(named: "anim_14")! ]
-       // [UIImage(named: "tt")!, UIImage(named: "tt1")!]
-    var walkingMan:[UIImage] = [UIImage(named: "anim_1")!, UIImage(named: "anim_2")!,UIImage(named: "anim_3")!, UIImage(named: "anim_4")!, UIImage(named: "anim_5")!,UIImage(named: "anim_6")!, UIImage(named: "anim_7")!,UIImage(named: "anim_8")!, UIImage(named: "anim_9")!,UIImage(named: "anim_10")!, UIImage(named: "anim_11")!, UIImage(named: "anim_12")!,UIImage(named: "anim_13")!, UIImage(named: "anim_14")! ]
-    
-    
-    func loadTrain() {
-        train = Train_data.trains[(shareData.userData?.trainNumber)!]
-        counter = train!.temp[0]
-    }
+    @IBOutlet weak var smallCounterView: CounterView!
+    @IBOutlet weak var bigCounterView: CounterView!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var bigTimer: UILabel!
+    @IBOutlet weak var smallTimer: UILabel!
     
     @IBOutlet weak var runner: UIImageView!
-    @IBOutlet weak var timerLabel: UILabel!
     
     
     @IBOutlet weak var vxcv: UILabel!
@@ -34,9 +20,50 @@ class RunViewController: UIViewController {
     @IBOutlet weak var image: UIImageView!
     
     
+    var timerSmall = NSTimer()
+    var train: Train = Train_data.trains[(ShareData.sharedInstance.userData?.trainNumber)!]!
+    var currentStage = 0
+    var counter: Int = 0
+    var counterBig: Int = 0
+    var index:Int = 0
+    var screenWidth:CGFloat = 0
+    var runningMan:[UIImage] = [UIImage(named: "rrrr1")!, UIImage(named: "rrrr2")!]
+    var isStarted:Bool = false
+    var imagePos: CGFloat = 0
+    var isRunning: Bool = true
+    var sticker: UIImageView?
+    
+    
+    func loadTrain() {
+        counter = train.temp[0]
+        counter *= 100
+        let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
+        smallTimer.text = str as String
+        let str2 = NSString(format:"%0.2d:%0.2d", counterBig/60,counterBig%60)
+        bigTimer.text = str2 as String
+        smallCounterView.maxValue = counter
+        let value = train.temp.reduce(0, combine: +)
+        bigCounterView.maxValue = value
+        let firstImage: CGSize = train.trainMenu[0].size
+        imagePos = firstImage.width
+    }
+    
+    
     @IBAction func startButtonPressed(sender: AnyObject) {
-        timer.invalidate()
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(RunViewController.timerAction), userInfo:nil , repeats: true)
+        if(!isStarted){
+            timerSmall.invalidate()
+            timerSmall = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(RunViewController.timerActionSmall), userInfo:nil ,   repeats: true)
+            startButton.setTitle("PAUSE", forState: .Normal)
+            self.runner.animationImages = runningMan
+            self.runner.animationDuration = 0.5
+            self.runner.startAnimating()
+            isStarted = true
+        } else{
+            timerSmall.invalidate()
+            startButton.setTitle("START", forState: .Normal)
+            isStarted = false
+            self.runner.stopAnimating()
+        }
     }
     
     
@@ -45,97 +72,100 @@ class RunViewController: UIViewController {
         super.viewDidLoad()
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         screenWidth = screenSize.width
-        print("screen width \(screenWidth)")
         loadTrain()
         self.image.image = self.getMixedImg(screenSize.width)
-        timerLabel.text = "\(counter)"
-        
-        let runController = RunCircles(frame: CGRectMake(30, 50, screenSize.width - 60, screenSize.width - 60))
-        self.view.addSubview(runController)
-//        let confettiView = SAConfettiView(frame: self.view.bounds)
-//        confettiView.type = .Triangle
-//        confettiView.colors = [UIColor.redColor(), UIColor.greenColor(), UIColor.blueColor()]
-//        self.view.addSubview(confettiView)
-//        confettiView.startConfetti()
         let myImage = UIImage(named: "current_stage_background")
         let myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 160, height: 80))
         myImageView.image = myImage
         vxcv.addSubview(myImageView)
         vxcv.text = "  Run 60 seconds"
-        
         self.runner.contentMode = .ScaleAspectFit
-        self.runner.animationImages = runningMan
-        self.runner.animationDuration = 0.5
-        self.runner.startAnimating()
+        self.runner.image = UIImage(named: "rrrr1")!
         
     }
     @IBAction func cancelButtonPressed(sender: AnyObject) {
-         dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
-    func timerAction() {
-        --counter
-        if(counter < 0 && index < (train?.index)!-1){
-            ++index
-            counter =  train!.temp[index]
+    func timerActionSmall() {
+        counter-=5
+        if(counter%100 == 0){
+            counterBig+=1
+            bigCounterView.counter = counterBig
+            let str = NSString(format:"%0.2d:%0.2d", counterBig/60, counterBig%60)
+            bigTimer.text = str as String
+            updateTrainControlImage()
+        }
+        if(counter < 0){
+            if(index < (train.index)-1){
+                isRunning = !isRunning
+                index+=1
+                counter =  train.temp[index]*100
+                let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000, (counter/100)%60, counter%100)
+                smallTimer.text = str as String
+                smallCounterView.counter = 0
+                smallCounterView.maxValue = counter
+                return
+            }
+            if(index == (train.index)-1){
+                timerSmall.invalidate()
+                ShareData.sharedInstance.increseNumberOfTrains()
+                vxcv.text = " The training is over "
+                return
+            }
+        }
+        let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000, (counter/100)%60, counter%100)
+        smallTimer.text = str as String
+        smallCounterView.counter = train.temp[index]*100-counter
+        
+    }
+    
+    func updateTrainControlImage(){
+        let size = CGSizeMake(screenWidth, 50)
+        UIGraphicsBeginImageContext(size)
+        var widthVid: CGFloat = 0
+        let percent: CGFloat = (CGFloat((train.temp[index])*100-counter))/CGFloat((train.temp[index]*100))
+        if(percent < 1){
+            let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train.trainMenu[index]), percent: percent)
+            croppedImage.drawInRect(CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
+            widthVid+=croppedImage.size.width
+        }
+        let startedPositonForStiker = widthVid
+        for i in self.index+1 ..< train.index {
+            if(widthVid + train.trainMenu[i].size.width < screenWidth){
+                train.trainMenu[i].drawInRect(CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
+                widthVid+=train.trainMenu[i].size.width
+            } else{
+                train.trainMenu[i].drawInRect(CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
+                break
+            }
             
         }
-        if(counter < 0 && index == (train?.index)!-1){
-            timer.invalidate()
-            timerLabel.text = "the train is over"
-            shareData.increseNumberOfTrains()
-            return
+        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        if(index == (train.index)-1){
+            self.sticker!.image = UIImage(named: "white")!
         }
-        timerLabel.text = "\(counter)"
-        updateTrainControlImage()
-        
-    }
-
-    func updateTrainControlImage(){
-        let size = CGSizeMake(screenWidth, 70)
-        var imgListArray: [UIImage]  = []
-        for x in 0  ..< runningMan.count {
-            UIGraphicsBeginImageContext(size)
-            var widthVid: CGFloat = 0
-            let percent: CGFloat = (CGFloat((train?.temp[index])!-counter))/CGFloat((train?.temp[index])!)
-            print(percent)
-            if(percent < 1){
-                let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train?.trainMenu[index])!, percent: percent)
-//                croppedImage.drawInRect(CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
-               // runningMan[0].drawInRect(CGRect(x: widthVid, y: 0, width: runningMan[0].size.width, height: runningMan[0].size.height))
-                widthVid+=croppedImage.size.width
+        else{
+            if(isRunning){
+                self.sticker!.image = UIImage(named: "1.5walk")!
+            } else{
+                self.sticker!.image = UIImage(named: "1run")!
             }
-            for var i = self.index+1; i < train?.index; i += 1 {
-                if(widthVid + (train?.trainMenu[i].size.width)! < screenWidth){
-                    train?.trainMenu[i].drawInRect(CGRect(x: widthVid, y: 0, width: (train?.trainMenu[i].size.width)!, height: (train?.trainMenu[i].size.height)!))
-                    widthVid+=(train?.trainMenu[i].size.width)!
-                } else{
-                    train?.trainMenu[i].drawInRect(CGRect(x: widthVid, y: 0, width: (train?.trainMenu[i].size.width)!, height: (train?.trainMenu[i].size.height)!))
-                    break
-                }
-                
-            }
-            let finalImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            imgListArray.append(finalImage)
-//            imgListArray[x] = finalImage
         }
-//        self.image.contentMode = .ScaleAspectFit
-//        self.image.animationImages = imgListArray
-//        self.image.animationDuration = 0.5
-//        self.image.startAnimating()
+        self.image.image = finalImage
+        var frame:CGRect = self.sticker!.frame
+        frame.origin.x = startedPositonForStiker
+        self.sticker!.frame = frame
         
-//        self.image.image = finalImage
     }
     
     func getMixedImg(width: CGFloat) -> UIImage {
-        
         let size = CGSizeMake(width, 50)
-        
         UIGraphicsBeginImageContext(size)
         var widthVid: CGFloat = 0
-        for im in (train?.trainMenu)!{
+        for im in train.trainMenu {
             if(widthVid + im.size.width < width){
                 im.drawInRect(CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
                 widthVid+=im.size.width
@@ -147,6 +177,12 @@ class RunViewController: UIViewController {
         
         let finalImage2 = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        let imageName = "1.5walk"
+        let image = UIImage(named: imageName)
+        sticker = UIImageView(image: image!)
+        let y = self.image.frame.origin.y
+        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
+        self.view.addSubview(sticker!)
         return finalImage2
     }
     
@@ -154,7 +190,6 @@ class RunViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 }

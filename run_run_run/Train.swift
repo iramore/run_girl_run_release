@@ -12,9 +12,9 @@ class Train: NSObject {
     
     var trainMenu = [UIImage]()
     var index: Int = 0
-    var temp = [Float]()
+    var temp = [Int]()
     
-    init(index: Int, trainMenu: [UIImage]?, temp: [Float]) {
+    init(index: Int, trainMenu: [UIImage]?, temp: [Int]) {
         self.index = index
         self.trainMenu = trainMenu!
         self.temp = temp

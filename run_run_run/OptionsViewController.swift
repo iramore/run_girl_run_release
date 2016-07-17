@@ -52,11 +52,10 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MW
     let shareData = ShareData.sharedInstance
     
     var initialSelectectionForDays: [Int] = [0,2,4,5,6]
-  
-  var contentLength:CGFloat = 0
-  var dismissByBackgroundTouch = true
-  var dismissByBackgroundDrag = true
-  var dismissByForegroundDrag = true
+    var contentLength:CGFloat = 0
+    var dismissByBackgroundTouch = true
+    var dismissByBackgroundDrag = true
+    var dismissByForegroundDrag = true
   
   var menu:[LeftMenuType] = []
   

@@ -2,31 +2,31 @@ import UIKit
 
 import Foundation
 
-class RunCircles : UIView{
-    var counterColor: UIColor = UIColor.orangeColor()
+@IBDesignable class RunCircles : UIView{
+   
+    @IBInspectable var bigCircleColor: UIColor = UIColor.blueColor()
+    @IBInspectable var smallCircleColor: UIColor = UIColor.orangeColor()
+    
+    
    
     
     
     
     override func drawRect(rect: CGRect) {
+        super.drawRect(rect)
         
-        // 1
-        let center = CGPoint(x:bounds.width*(1/3), y: bounds.height*(2/3))
         
-        // 2
-        let radius: CGFloat = max(bounds.width, bounds.height)*(5/9)/2
+        self.backgroundColor = UIColor.whiteColor()
         
-        let arcWidth: CGFloat = 3
+    
+        let circlePath = UIBezierPath(ovalInRect: CGRectMake(0,  bounds.width - bounds.width*(5/6), bounds.width*(5/6), bounds.width*(5/6)))
+        bigCircleColor.setFill()
+        circlePath.fill()
         
-        var path = UIBezierPath(arcCenter: center,
-                                radius: radius,
-                                startAngle: CGFloat(0),
-                                endAngle: CGFloat(M_PI * 2),
-                                clockwise: true)
+        let circlePath2 = UIBezierPath(ovalInRect: CGRectMake(bounds.width*(1/2),  0, bounds.width*(1/2), bounds.width*(1/2)))
+        smallCircleColor.setFill()
+        circlePath2.fill()
         
-        // 6
-        path.lineWidth = arcWidth
-        counterColor.setStroke()
-        path.stroke()
+        
     }
 }

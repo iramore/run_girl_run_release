@@ -27,6 +27,7 @@
 		D39041DF1CB13BF600EA1979 /* MWSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39041DE1CB13BF600EA1979 /* MWSegmentedControl.swift */; };
 		D3B57E1C1D2BF6220014F8F2 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B57E1B1D2BF6220014F8F2 /* MenuButton.swift */; };
 		D3B57E1E1D3150D20014F8F2 /* RunCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B57E1D1D3150D20014F8F2 /* RunCircles.swift */; };
+		D3CED4751D33D6D600EBE97F /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CED4741D33D6D600EBE97F /* CounterView.swift */; };
 		D3DD4B481C835D7D00D600FD /* OptionsViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DD4B471C835D7D00D600FD /* OptionsViewController2.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		D39041DE1CB13BF600EA1979 /* MWSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MWSegmentedControl.swift; path = "../../../../Downloads/MWSegmentedControl-master/MWSegmentedControl/MWSegmentedControl.swift"; sourceTree = "<group>"; };
 		D3B57E1B1D2BF6220014F8F2 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		D3B57E1D1D3150D20014F8F2 /* RunCircles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunCircles.swift; sourceTree = "<group>"; };
+		D3CED4741D33D6D600EBE97F /* CounterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		D3DD4B471C835D7D00D600FD /* OptionsViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController2.swift; sourceTree = "<group>"; };
 		D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.release.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.release.xcconfig"; sourceTree = "<group>"; };
 		F108FC8201A2D48916797CE5 /* Pods-run_run_run.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.debug.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.debug.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				D35F1CCD1C7105390084A902 /* PlanViewController.swift */,
 				D35F1CCF1C7105390084A902 /* Main.storyboard */,
 				D35F1CD21C7105390084A902 /* Assets.xcassets */,
+				D3CED4741D33D6D600EBE97F /* CounterView.swift */,
 				D3B57E1B1D2BF6220014F8F2 /* MenuButton.swift */,
 				D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */,
 				D352CBFD1D22B6F700E1FD08 /* OptionsViewController.swift */,
@@ -301,6 +304,7 @@
 				D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */,
 				D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */,
 				D3284B721C92F688006FB560 /* UserData.swift in Sources */,
+				D3CED4751D33D6D600EBE97F /* CounterView.swift in Sources */,
 				D3284B6C1C8DB46B006FB560 /* Train.swift in Sources */,
 				D3284B701C92ED19006FB560 /* Train_data.swift in Sources */,
 				D352CBFE1D22B6F700E1FD08 /* OptionsViewController.swift in Sources */,
