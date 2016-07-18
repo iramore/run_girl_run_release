@@ -28,8 +28,8 @@ let π:CGFloat = CGFloat(M_PI)
     let radius: CGFloat = max(bounds.width, bounds.height)
     
     // 4
-    let startAngle: CGFloat = 3 * π / 4
-    let endAngle: CGFloat = π / 4
+    let startAngle: CGFloat = π / 2
+    let endAngle: CGFloat = π / 2
     
     
     
@@ -38,7 +38,7 @@ let π:CGFloat = CGFloat(M_PI)
       radius: radius/2 - arcWidth/2,
       startAngle: startAngle,
       endAngle: endAngle,
-      clockwise: true)
+      clockwise: false)
     
     // 6
     path.lineWidth = arcWidth
@@ -70,11 +70,12 @@ let π:CGFloat = CGFloat(M_PI)
       startAngle: outlineEndAngle,
       endAngle: startAngle,
       clockwise: false)
-    
-    //4 - close the path
+//
+//    //4 - close the path
     outlinePath.closePath()
     
     outlineColor.setStroke()
+    outlineColor.setFill()
     outlinePath.lineWidth = 5.0
     outlinePath.stroke()
   }
