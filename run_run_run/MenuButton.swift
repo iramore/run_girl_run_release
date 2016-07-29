@@ -26,7 +26,7 @@ class MenuButton: UIButton {
         mask.path = bezierPath.CGPath
         self.layer.mask = mask
         self.frame = frame
-        self.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addTarget(self, action: #selector(MenuButton.buttonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
     }
     

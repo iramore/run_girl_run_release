@@ -30,14 +30,17 @@ import Foundation
 
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        let circlePath = UIBezierPath(ovalInRect: CGRectMake(bounds.width - bounds.width*(5/6),  0, bounds.width*(5/6), bounds.width*(5/6)))
+        let circlePath = UIBezierPath(ovalInRect: CGRectMake(bounds.width - bounds.width*(5/6),  4, bounds.width*(5/6)-4, bounds.width*(5/6)))
+        //smallCircleColor.setStroke()
         bigCircleColor.setFill()
+        circlePath.lineWidth = 4
         circlePath.fill()
+        //circlePath.stroke()
         let startAngle: CGFloat = π / 2
         let endAngle: CGFloat = π / 2
         let angleDifference: CGFloat = 2 * π - startAngle + endAngle
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        let centerBig = CGPoint(x:bounds.width - bounds.width*5/12, y: bounds.height*5/12)
+        let centerBig = CGPoint(x:bounds.width - bounds.width*5/12, y: bounds.height*5/12+4)
 
         let arcLengthPerGlassBig = angleDifference / CGFloat(maxValueBig)
         
@@ -49,15 +52,15 @@ import Foundation
                                           endAngle: outlineEndAngleBig,
                                           clockwise: true)
         
-        outlinePathBig.addArcWithCenter(centerBig,
-                                        radius: bounds.width*5/12 - arcWidthBig + 2.5,
-                                        startAngle: outlineEndAngleBig,
-                                        endAngle: startAngle,
-                                        clockwise: false)
+//        outlinePathBig.addArcWithCenter(centerBig,
+//                                        radius: bounds.width*5/12 - arcWidthBig + 2.5,
+//                                        startAngle: outlineEndAngleBig,
+//                                        endAngle: startAngle,
+//                                        clockwise: false)
         
-        outlinePathBig.closePath()
+//        outlinePathBig.closePath()
         outlineColorBig.setStroke()
-        outlinePathBig.lineWidth = 5.0
+        outlinePathBig.lineWidth = 15.0
         outlinePathBig.stroke()
 
         
@@ -70,9 +73,7 @@ import Foundation
         
         //let radius: CGFloat = max(bounds.width/2, bounds.height/2)
         
-       
-        
-               let arcLengthPerGlass = angleDifference / CGFloat(maxValueSmall)
+        let arcLengthPerGlass = angleDifference / CGFloat(maxValueSmall)
         
        
         let outlineEndAngle = arcLengthPerGlass * CGFloat(counterSmall) + startAngle
@@ -84,16 +85,17 @@ import Foundation
                                        endAngle: outlineEndAngle,
                                        clockwise: true)
        
-        outlinePath.addArcWithCenter(center,
-                                     radius: bounds.width/4 - arcWidthSmall + 2.5,
-                                     startAngle: outlineEndAngle,
-                                     endAngle: startAngle,
-                                     clockwise: false)
-       
-        outlinePath.closePath()
+//        outlinePath.addArcWithCenter(center,
+//                                     radius: bounds.width/4 - arcWidthSmall + 2.5,
+//                                     startAngle: outlineEndAngle,
+//                                     endAngle: startAngle,
+//                                     clockwise: false)
+//       
+//        outlinePath.closePath()
+       // let trColor2 = outlineColorBig.colorWithAlphaComponent(0.7)
         
         outlineColorSmall.setStroke()
-        outlinePath.lineWidth = 5.0
+        outlinePath.lineWidth = 10.0
         outlinePath.stroke()
         
         

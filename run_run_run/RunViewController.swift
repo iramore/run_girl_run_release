@@ -81,6 +81,12 @@ class RunViewController: UIViewController {
         vxcv.text = "  Run 60 seconds"
         self.runner.contentMode = .ScaleAspectFit
         self.runner.image = UIImage(named: "rrrr1")!
+        let imageName = "1.5walk"
+        let image = UIImage(named: imageName)
+        sticker = UIImageView(image: image!)
+        let y = self.image.frame.origin.y
+        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
+        self.view.addSubview(sticker!)
         
     }
     @IBAction func cancelButtonPressed(sender: AnyObject) {
@@ -177,12 +183,7 @@ class RunViewController: UIViewController {
         
         let finalImage2 = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        let imageName = "1.5walk"
-        let image = UIImage(named: imageName)
-        sticker = UIImageView(image: image!)
-        let y = self.image.frame.origin.y
-        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
-        self.view.addSubview(sticker!)
+      
         return finalImage2
     }
     
