@@ -19,7 +19,6 @@
 		D35F1CD31C7105390084A902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD21C7105390084A902 /* Assets.xcassets */; };
 		D35F1CD61C7105390084A902 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */; };
 		D3669D531C84933A00250225 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3669D521C84933A00250225 /* InitialViewController.swift */; };
-		D3669D551C849BFE00250225 /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3669D541C849BFE00250225 /* RunViewController.swift */; };
 		D3669D7D1C8758B900250225 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3669D781C8758B900250225 /* Info.plist */; };
 		D3669D7E1C8758B900250225 /* FMProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3669D7A1C8758B900250225 /* FMProgressBarView.swift */; };
 		D3669D7F1C8758B900250225 /* FMProgressBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3669D7B1C8758B900250225 /* FMProgressBarView.xib */; };
@@ -30,7 +29,6 @@
 		D3B57E1C1D2BF6220014F8F2 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B57E1B1D2BF6220014F8F2 /* MenuButton.swift */; };
 		D3B57E1E1D3150D20014F8F2 /* RunCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B57E1D1D3150D20014F8F2 /* RunCircles.swift */; };
 		D3CED4751D33D6D600EBE97F /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CED4741D33D6D600EBE97F /* CounterView.swift */; };
-		D3DD4B481C835D7D00D600FD /* OptionsViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DD4B471C835D7D00D600FD /* OptionsViewController2.swift */; };
 		D3EB34C01D47C325007ECDBB /* pragmatica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3EB34BF1D47C325007ECDBB /* pragmatica.ttf */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +52,6 @@
 		D35F1CE01C7105390084A902 /* run_run_runTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = run_run_runTests.swift; sourceTree = "<group>"; };
 		D35F1CE21C7105390084A902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3669D521C84933A00250225 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
-		D3669D541C849BFE00250225 /* RunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
 		D3669D771C8758B900250225 /* FMProgressBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMProgressBarView.h; sourceTree = "<group>"; };
 		D3669D781C8758B900250225 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3669D7A1C8758B900250225 /* FMProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMProgressBarView.swift; path = "../../../../Downloads/FMProgressBarView-master/FMProgressBarView/FMProgressBarView.swift"; sourceTree = "<group>"; };
@@ -66,7 +63,6 @@
 		D3B57E1B1D2BF6220014F8F2 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		D3B57E1D1D3150D20014F8F2 /* RunCircles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunCircles.swift; sourceTree = "<group>"; };
 		D3CED4741D33D6D600EBE97F /* CounterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
-		D3DD4B471C835D7D00D600FD /* OptionsViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController2.swift; sourceTree = "<group>"; };
 		D3EB34BF1D47C325007ECDBB /* pragmatica.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pragmatica.ttf; sourceTree = "<group>"; };
 		D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.release.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.release.xcconfig"; sourceTree = "<group>"; };
 		F108FC8201A2D48916797CE5 /* Pods-run_run_run.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.debug.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.debug.xcconfig"; sourceTree = "<group>"; };
@@ -133,9 +129,7 @@
 				D352CBFD1D22B6F700E1FD08 /* OptionsViewController.swift */,
 				D35F1CD71C7105390084A902 /* Info.plist */,
 				D37E54271C7C8DDF0025509A /* CalViewController.swift */,
-				D3DD4B471C835D7D00D600FD /* OptionsViewController2.swift */,
 				D3669D521C84933A00250225 /* InitialViewController.swift */,
-				D3669D541C849BFE00250225 /* RunViewController.swift */,
 				D3284B6B1C8DB46B006FB560 /* Train.swift */,
 				D3284B6D1C8EB959006FB560 /* ImageUtil.swift */,
 				D3284B6F1C92ED19006FB560 /* Train_data.swift */,
@@ -320,8 +314,6 @@
 				D3284B701C92ED19006FB560 /* Train_data.swift in Sources */,
 				D352CBFE1D22B6F700E1FD08 /* OptionsViewController.swift in Sources */,
 				D39041DF1CB13BF600EA1979 /* MWSegmentedControl.swift in Sources */,
-				D3669D551C849BFE00250225 /* RunViewController.swift in Sources */,
-				D3DD4B481C835D7D00D600FD /* OptionsViewController2.swift in Sources */,
 				D3669D7E1C8758B900250225 /* FMProgressBarView.swift in Sources */,
 				D3B57E1E1D3150D20014F8F2 /* RunCircles.swift in Sources */,
 				D36EEFC21D3C0138009A772E /* RunController.swift in Sources */,

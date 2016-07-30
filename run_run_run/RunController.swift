@@ -32,7 +32,6 @@ class RunController: UIViewController {
     var imagePos: CGFloat = 0
     var isRunning: Bool = true
     var sticker: UIImageView?
-    var currentAnimation:[UIImage] = [UIImage(named: "rrrr1")!, UIImage(named: "rrrr2")!]
     
     
     func loadTrain() {
@@ -49,7 +48,8 @@ class RunController: UIViewController {
     @IBAction func startButtonPressed(sender: AnyObject) {
         if(!isStarted){
             timerSmall.invalidate()
-            timerSmall = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(RunViewController.timerActionSmall), userInfo:nil ,   repeats: true)
+            timerSmall = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(RunController.timerActionSmall), userInfo:nil ,   repeats: true)
+            self.startButton.setImage(UIImage(named: "pause"), forState: .Normal)
            // startButton.setTitle("PAUSE", forState: .Normal)
             self.runner.animationImages = runningMan
             self.runner.animationDuration = 0.5
@@ -57,6 +57,7 @@ class RunController: UIViewController {
             isStarted = true
         } else{
             timerSmall.invalidate()
+             self.startButton.setImage(UIImage(named: "start"), forState: .Normal)
            // startButton.setTitle("START", forState: .Normal)
             isStarted = false
             self.runner.stopAnimating()
@@ -73,8 +74,19 @@ class RunController: UIViewController {
         screenWidth = screenSize.width
         loadTrain()
         self.image.image = self.getMixedImg(screenSize.width)
-        let timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
-        stageLabel.text = "run \(timeStr) minutes"
+        var minWord: String
+        if(Float(train.temp[0])/60 == 1){
+            minWord = "minute"
+        } else{
+            minWord = "minutes"
+        }
+        var timeStr: NSString
+        if(Float(train.temp[0])%60 == 0){
+            timeStr = NSString(format:"%0.1d", (train.temp[0])/60)
+        } else{
+            timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
+        }
+        stageLabel.text = "run \(timeStr) \(minWord)"
         self.runner.contentMode = .ScaleAspectFit
         self.runner.image = UIImage(named: "rrrr1")!
         let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
@@ -115,7 +127,7 @@ class RunController: UIViewController {
         
         let y = self.view.bounds.height-110
         sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
-        self.view.addSubview(sticker!)
+        //self.view.addSubview(sticker!)
     }
     @IBAction func cancelButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -141,6 +153,7 @@ class RunController: UIViewController {
                     self.runner.animationImages = runningMan
                     self.runner.animationDuration = 0.5
                     self.runner.startAnimating()
+                    
                     runCircles.outlineColorSmall = UIColor(hex: "#E45875")
                     runCircles.smallCircleColor = UIColor(hex: "#FF7B7B")
                 } else {
@@ -153,8 +166,20 @@ class RunController: UIViewController {
                     
                 }
                 
-                let timeStr = NSString(format:"%.1f", (Float(train.temp[index]))/60)
-                stageLabel.text = "\(move) \(timeStr) minutes"
+                var minWord: String
+                if(Float(train.temp[index])/60 == 1){
+                    minWord = "minute"
+                } else{
+                    minWord = "minutes"
+                }
+                var timeStr: NSString
+                if(Float(train.temp[index])%60 == 0){
+                    timeStr = NSString(format:"%.1d", (train.temp[0])/60)
+                } else{
+                    timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
+                }
+                
+                stageLabel.text = "\(move) \(timeStr) \(minWord)"
                 counter =  train.temp[index]*100
                 let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000, (counter/100)%60, counter%100)
                 smallTimer!.text = str as String
@@ -205,13 +230,13 @@ class RunController: UIViewController {
             if(isRunning){
                 self.sticker!.image = UIImage(named: "1.5walk")!
             } else{
-                self.sticker!.image = UIImage(named: "1.5run")!
+                self.sticker!.image = UIImage(named: "1run")!
             }
         }
         self.image.image = finalImage
         var frame:CGRect = self.sticker!.frame
         frame.origin.x = startedPositonForStiker
-        self.sticker!.frame = frame
+        //self.sticker!.frame = frame
         
     }
     
@@ -242,20 +267,4 @@ class RunController: UIViewController {
     
 }
 
-extension UIColor {
-    convenience init(hex: String, alpha: CGFloat = 1) {
-        assert(hex[hex.startIndex] == "#", "Expected hex string of format #RRGGBB")
-        
-        let scanner = NSScanner(string: hex)
-        scanner.scanLocation = 1  // skip #
-        
-        var rgb: UInt32 = 0
-        scanner.scanHexInt(&rgb)
-        
-        self.init(
-            red:   CGFloat((rgb & 0xFF0000) >> 16)/255.0,
-            green: CGFloat((rgb &   0xFF00) >>  8)/255.0,
-            blue:  CGFloat((rgb &     0xFF)      )/255.0,
-            alpha: alpha)
-    }
-}
+

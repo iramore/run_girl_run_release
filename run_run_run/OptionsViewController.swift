@@ -127,7 +127,7 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
       cell = sliderCell
     case .WeekSegment(let name):
         let weekSegmentCell = tableView.dequeueReusableCellWithIdentifier("week_segment", forIndexPath: indexPath) as! WeekSegmentCell
-        weekSegmentCell.weekSegment.font = UIFont(name: "Avenir-Book", size: 33)
+        weekSegmentCell.weekSegment.font = UIFont(name: "Pragmatica", size: 24)
         weekSegmentCell.weekSegment.name = "Days"
         weekSegmentCell.weekSegment.buttonTitles = ["M", "Tu", "W", "Th", "F", "Sa","Su"]
         print("==========")
@@ -143,7 +143,7 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
         
     case .NumericSegment(let name):
         let numericSegment = tableView.dequeueReusableCellWithIdentifier("numeric_segment", forIndexPath: indexPath) as! NumericSegmentCell
-        numericSegment.numericSegment.font = UIFont(name: "Avenir-Book", size: 30)
+        numericSegment.numericSegment.font = UIFont(name: "Pragmatica", size: 24)
         numericSegment.numericSegment.name = "Numeric"
         numericSegment.numericSegment.buttonTitles = ["1", "2", "3", "4", "5"]
         numericSegment.numericSegment.selectedIndexes = [(self.shareData.loadUserData()?.daysOfWeek.count)!-1]
