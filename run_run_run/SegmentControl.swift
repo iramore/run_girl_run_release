@@ -16,7 +16,6 @@ import UIKit
 
 @IBDesignable class SegmentControl: UIView{
     var delegate: SegmentControlDelegate?
-    @IBInspectable var numberOfSegments = 7
     var buttonTitles = [String]()
     var borderColor = UIColor(hex: "#FF7B7B")
     var textColor = UIColor(hex: "#54504C")
@@ -29,9 +28,12 @@ import UIKit
     }
     var segmentButtons = [UIButton]()
     
-    var allowMultipleSelection = false
+    var maxSelected:Int = 1
     
     override func drawRect(rect: CGRect) {
+        super.drawRect(rect)
+        print("DRAW RECT \(selectedIndexes)")
+        
         self.layer.cornerRadius = 4
         self.layer.borderWidth = 2
         self.layer.borderColor = self.borderColor.CGColor
@@ -44,7 +46,7 @@ import UIKit
                 newButton.setTitle(button, forState: .Normal)
                 newButton.setTitleColor(self.textColor, forState: .Normal)
                 newButton.titleLabel?.font = self.font!
-                newButton.addTarget(self, action: "setSelected:", forControlEvents: .TouchUpInside)
+                newButton.addTarget(self, action: #selector(SegmentControl.setSelected(_:)), forControlEvents: .TouchUpInside)
                 newButton.layer.borderWidth = 1
                 newButton.layer.borderColor = self.borderColor.CGColor
                 newButton.tag = index
@@ -53,18 +55,29 @@ import UIKit
                 
                 for selected in selectedIndexes {
                     if selected == index {
-                        self.setSelected(newButton)
+                        newButton.backgroundColor = borderColor
+                        newButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                     }
                 }
             }
     }
     
     func setSelected(sender: UIButton) {
-        
-        sender.backgroundColor = borderColor
-        sender.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         let value = buttonTitles.indexOf(sender.titleLabel!.text!)
         self.delegate?.segmentChanged!(self, value: value!)
+
+//        if sender.backgroundColor == borderColor {
+//            sender.backgroundColor = UIColor.clearColor()
+//            sender.setTitleColor(textColor, forState: .Normal)
+//            let value = buttonTitles.indexOf(sender.titleLabel!.text!)
+//            self.delegate?.segmentChanged!(self, value: value!)
+//        
+//        } else{
+//            sender.backgroundColor = borderColor
+//            sender.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+//            let value = buttonTitles.indexOf(sender.titleLabel!.text!)
+//            self.delegate?.segmentChanged!(self, value: value!)
+//        }
         
     }
     

@@ -7,7 +7,7 @@ enum LeftMenuType{
   case Segment(name:String, values:[Any], selected:Int, onChange:(value:Any)->Void)
     case WeekSegment(name:String)
     case NumericSegment(name:String)
-    case MySegment(values: [String], selected: [Int], multipleSelection: Bool)
+    case MySegment(values: [String], selected: [Int], maxSelected: Int, name: String)
 }
 class SwitchCell:UITableViewCell{
   @IBOutlet weak var nameLabel: UILabel!
@@ -57,7 +57,7 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MW
     
     let shareData = ShareData.sharedInstance
     
-    var initialSelectectionForDays: [Int] = [0,2,4,5,6]
+    var initialSelectectionForDays: [Int] = [0,2,3,5,6]
     var contentLength:CGFloat = 0
     var dismissByBackgroundTouch = true
     var dismissByBackgroundDrag = true
@@ -67,10 +67,11 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MW
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    menu.append(.NumericSegment(name: "Trainings per week"))
-    menu.append(.WeekSegment(name: "Days"))
-    menu.append(.MySegment(values: ["1", "2", "3", "4", "5"],selected: [1,2,3],multipleSelection: false))
-    menu.append(.MySegment(values: ["M", "Tu", "W", "Th", "F", "Sa","Su"],selected: [1,2,3],multipleSelection: true))
+    print("loaded \((self.shareData.loadUserData()?.daysOfWeek)!)")
+//    menu.append(.NumericSegment(name: "Trainings per week"))
+//    menu.append(.WeekSegment(name: "Days"))
+    menu.append(.MySegment(values: ["1", "2", "3", "4", "5"],selected: [2],maxSelected: 1, name: "Number"))
+    menu.append(.MySegment(values: ["M", "Tu", "W", "Th", "F", "Sa","Su"],selected: (self.shareData.loadUserData()?.daysOfWeek)!, maxSelected: 3, name: "Days"))
     
     
     for i in 0..<menu.count{
@@ -82,32 +83,47 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MW
   override func preferredStatusBarStyle() -> UIStatusBarStyle {
     return .LightContent
   }
-    func segmentDidChange(control: MWSegmentedControl, value: Int) {
-        switch control.name{
-        case "Numeric":
-            print("Numeric")
-            let newSelected = Array(self.initialSelectectionForDays[0...value-1])
-            print(newSelected)
-            self.shareData.saveUserDataOption(newSelected)
-            //self.menu[1] = .WeekSegment(name: "lala")
-            //tableView.reloadData()
-            let indexPath = NSIndexPath(forRow: 1, inSection: 0)
-            let weekSegmentCell = tableView.dequeueReusableCellWithIdentifier("week_segment", forIndexPath: indexPath) as! WeekSegmentCell
-            weekSegmentCell.weekSegment.selectedIndexes = newSelected
-            weekSegmentCell.weekSegment.selectedSegments = ["M", "Tu", "W"]
-           
-         //   self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
-        //tableView.reloadData()
-        case "Days":
-            print("Days")
-        default:
-            print("Default")
-        }
-    }
+//    func segmentDidChange(control: MWSegmentedControl, value: Int) {
+//        switch control.name{
+//        case "Numeric":
+//            print("Numeric")
+//            let newSelected = Array(self.initialSelectectionForDays[0...value-1])
+//            print(newSelected)
+//            self.shareData.saveUserDataOption(newSelected)
+//            //self.menu[1] = .WeekSegment(name: "lala")
+//            //tableView.reloadData()
+//            let indexPath = NSIndexPath(forRow: 1, inSection: 0)
+//            let weekSegmentCell = tableView.dequeueReusableCellWithIdentifier("week_segment", forIndexPath: indexPath) as! WeekSegmentCell
+//            weekSegmentCell.weekSegment.selectedIndexes = newSelected
+//            weekSegmentCell.weekSegment.selectedSegments = ["M", "Tu", "W"]
+//           
+//         //   self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
+//        //tableView.reloadData()
+//        case "Days":
+//            print("Days")
+//        default:
+//            print("Default")
+//        }
+//    }
     
     func segmentChanged(control: SegmentControl, value: Int) {
-        
-        print("new delegate works \(value)")
+        switch control.name{
+            case "Number":
+                //print ("Number")
+                control.selectedIndexes = [value]
+//                let newSelected = Array(self.initialSelectectionForDays[0...value])
+//                print("loaded \((self.shareData.loadUserData()?.daysOfWeek)!)")
+//                //print(newSelected)
+//                self.shareData.saveUserDataOption(newSelected)
+//                let indexPath = NSIndexPath(forRow: 1, inSection: 0)
+//                let weekSegmentCell = tableView.dequeueReusableCellWithIdentifier("my_segment", forIndexPath: indexPath) as! MySegmentCell
+//                weekSegmentCell.segmentControl.selectedIndexes = newSelected
+//                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
+            case "Days":
+                print("Days")
+            default:
+                print("Default")
+        }
     }
 }
 
@@ -170,13 +186,13 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
         numericSegment.numericLabel.text = name
         cell = numericSegment
         
-    case .MySegment(let values, let selected, let multipleSelection):
-        
+    case .MySegment(let values, let selected, let maxSelected, let name):
         let mySegment = tableView.dequeueReusableCellWithIdentifier("my_segment", forIndexPath: indexPath) as! MySegmentCell
         mySegment.segmentControl.buttonTitles = values
         mySegment.segmentControl.delegate = self
         mySegment.segmentControl.selectedIndexes = selected
-        mySegment.segmentControl.allowMultipleSelection = multipleSelection
+        mySegment.segmentControl.maxSelected = maxSelected
+        mySegment.segmentControl.name = name
         cell = mySegment
     }
     return cell
