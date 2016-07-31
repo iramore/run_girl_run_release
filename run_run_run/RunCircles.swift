@@ -97,6 +97,20 @@ import Foundation
         outlineColorSmall.setStroke()
         outlinePath.lineWidth = 10.0
         outlinePath.stroke()
+//        let diceRoll = Int(arc4random_uniform(2))
+//        if(diceRoll == 0){
+//            let circlePath = UIBezierPath(ovalInRect: CGRectMake(bounds.width - 20,  bounds.width - 20, 20, 20))
+//            
+//            UIColor.greenColor().setFill()
+//            circlePath.fill()
+//        } else{
+//            let circlePath = UIBezierPath(ovalInRect: CGRectMake(0,  0, 20, 20))
+//            
+//            UIColor.blueColor().setFill()
+//            circlePath.fill()
+//        }
+//        
+//        print(diceRoll)
         
         
     }

@@ -14,7 +14,7 @@ import UIKit
     optional func segmentChanged(control: SegmentControl, value: Int)
 }
 
-@IBDesignable class SegmentControl: UIView{
+class SegmentControl: UIView{
     var delegate: SegmentControlDelegate?
     var buttonTitles = [String]()
     var borderColor = UIColor(hex: "#FF7B7B")
@@ -32,7 +32,8 @@ import UIKit
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        print("DRAW RECT \(selectedIndexes)")
+        print("DRAW RECT \(name)   \(selectedIndexes)")
+        self.removeAllSubviews()
         
         self.layer.cornerRadius = 4
         self.layer.borderWidth = 2
@@ -44,21 +45,26 @@ import UIKit
                 
                 let newButton = UIButton(frame: CGRectMake(CGFloat(index) * buttonWidth, 0, buttonWidth, buttonHeight))
                 newButton.setTitle(button, forState: .Normal)
-                newButton.setTitleColor(self.textColor, forState: .Normal)
+                
                 newButton.titleLabel?.font = self.font!
                 newButton.addTarget(self, action: #selector(SegmentControl.setSelected(_:)), forControlEvents: .TouchUpInside)
                 newButton.layer.borderWidth = 1
                 newButton.layer.borderColor = self.borderColor.CGColor
                 newButton.tag = index
                 newButton.showsTouchWhenHighlighted = true
-                self.addSubview(newButton)
-                
                 for selected in selectedIndexes {
                     if selected == index {
                         newButton.backgroundColor = borderColor
                         newButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                        break
+                    } else {
+                        newButton.setTitleColor(self.textColor, forState: .Normal)
+                        newButton.backgroundColor = UIColor.clearColor()
                     }
                 }
+                self.addSubview(newButton)
+                
+              
             }
     }
     

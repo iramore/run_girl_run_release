@@ -109,16 +109,14 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MW
     func segmentChanged(control: SegmentControl, value: Int) {
         switch control.name{
             case "Number":
-                //print ("Number")
                 control.selectedIndexes = [value]
-//                let newSelected = Array(self.initialSelectectionForDays[0...value])
-//                print("loaded \((self.shareData.loadUserData()?.daysOfWeek)!)")
-//                //print(newSelected)
-//                self.shareData.saveUserDataOption(newSelected)
-//                let indexPath = NSIndexPath(forRow: 1, inSection: 0)
-//                let weekSegmentCell = tableView.dequeueReusableCellWithIdentifier("my_segment", forIndexPath: indexPath) as! MySegmentCell
-//                weekSegmentCell.segmentControl.selectedIndexes = newSelected
-//                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
+                let newSelected = Array(self.initialSelectectionForDays[0...value])
+                self.shareData.saveUserDataOption(newSelected)
+                let indexPath = NSIndexPath(forRow: 1, inSection: 0)
+                let weekSegmentCell = tableView.cellForRowAtIndexPath(indexPath)  as! MySegmentCell
+
+                weekSegmentCell.segmentControl.selectedIndexes = newSelected
+
             case "Days":
                 print("Days")
             default:

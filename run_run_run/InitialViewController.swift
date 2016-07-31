@@ -71,7 +71,7 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shareData.userData = UserData(trainNumber: 1, daysOfWeek: [0,2,4], completedTrainsDates: [])
+        shareData.userData = UserData(trainNumber: 1, daysOfWeek: [0,2,5], completedTrainsDates: [])
         shareData.saveUserData()
         transition.sticky = true
         transition.showShadow = true
