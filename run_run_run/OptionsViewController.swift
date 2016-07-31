@@ -7,6 +7,7 @@ enum LeftMenuType{
   case Segment(name:String, values:[Any], selected:Int, onChange:(value:Any)->Void)
     case WeekSegment(name:String)
     case NumericSegment(name:String)
+    case MySegment(values: [String], selected: [Int], multipleSelection: Bool)
 }
 class SwitchCell:UITableViewCell{
   @IBOutlet weak var nameLabel: UILabel!
@@ -45,7 +46,12 @@ class NumericSegmentCell: UITableViewCell{
     @IBOutlet weak var numericSegment: MWSegmentedControl!
     @IBOutlet weak var numericLabel: UILabel!
 }
-class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MWSegmentedControlDelegate {
+
+class MySegmentCell: UITableViewCell {
+
+    @IBOutlet weak var segmentControl: SegmentControl!
+}
+class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MWSegmentedControlDelegate, SegmentControlDelegate {
   
   @IBOutlet weak var tableView: UITableView!
     
@@ -63,6 +69,9 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MW
     super.viewDidLoad()
     menu.append(.NumericSegment(name: "Trainings per week"))
     menu.append(.WeekSegment(name: "Days"))
+    menu.append(.MySegment(values: ["1", "2", "3", "4", "5"],selected: [1,2,3],multipleSelection: false))
+    menu.append(.MySegment(values: ["M", "Tu", "W", "Th", "F", "Sa","Su"],selected: [1,2,3],multipleSelection: true))
+    
     
     for i in 0..<menu.count{
       contentLength += self.tableView(self.tableView, heightForRowAtIndexPath: NSIndexPath(forRow:i, inSection:0))
@@ -83,13 +92,22 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, MW
             //self.menu[1] = .WeekSegment(name: "lala")
             //tableView.reloadData()
             let indexPath = NSIndexPath(forRow: 1, inSection: 0)
-            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
+            let weekSegmentCell = tableView.dequeueReusableCellWithIdentifier("week_segment", forIndexPath: indexPath) as! WeekSegmentCell
+            weekSegmentCell.weekSegment.selectedIndexes = newSelected
+            weekSegmentCell.weekSegment.selectedSegments = ["M", "Tu", "W"]
+           
+         //   self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Top)
         //tableView.reloadData()
         case "Days":
             print("Days")
         default:
             print("Default")
         }
+    }
+    
+    func segmentChanged(control: SegmentControl, value: Int) {
+        
+        print("new delegate works \(value)")
     }
 }
 
@@ -151,7 +169,15 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
         numericSegment.numericSegment.delegate = self
         numericSegment.numericLabel.text = name
         cell = numericSegment
-
+        
+    case .MySegment(let values, let selected, let multipleSelection):
+        
+        let mySegment = tableView.dequeueReusableCellWithIdentifier("my_segment", forIndexPath: indexPath) as! MySegmentCell
+        mySegment.segmentControl.buttonTitles = values
+        mySegment.segmentControl.delegate = self
+        mySegment.segmentControl.selectedIndexes = selected
+        mySegment.segmentControl.allowMultipleSelection = multipleSelection
+        cell = mySegment
     }
     return cell
   }

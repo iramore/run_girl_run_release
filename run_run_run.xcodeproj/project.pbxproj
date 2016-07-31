@@ -30,6 +30,7 @@
 		D3B57E1E1D3150D20014F8F2 /* RunCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B57E1D1D3150D20014F8F2 /* RunCircles.swift */; };
 		D3CED4751D33D6D600EBE97F /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CED4741D33D6D600EBE97F /* CounterView.swift */; };
 		D3EB34C01D47C325007ECDBB /* pragmatica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3EB34BF1D47C325007ECDBB /* pragmatica.ttf */; };
+		D3EB34C21D4D01E4007ECDBB /* SegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB34C11D4D01E4007ECDBB /* SegmentControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		D3B57E1D1D3150D20014F8F2 /* RunCircles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunCircles.swift; sourceTree = "<group>"; };
 		D3CED4741D33D6D600EBE97F /* CounterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		D3EB34BF1D47C325007ECDBB /* pragmatica.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pragmatica.ttf; sourceTree = "<group>"; };
+		D3EB34C11D4D01E4007ECDBB /* SegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentControl.swift; sourceTree = "<group>"; };
 		D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.release.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.release.xcconfig"; sourceTree = "<group>"; };
 		F108FC8201A2D48916797CE5 /* Pods-run_run_run.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.debug.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +138,7 @@
 				D3284B711C92F688006FB560 /* UserData.swift */,
 				D3B57E1D1D3150D20014F8F2 /* RunCircles.swift */,
 				D36EEFC11D3C0138009A772E /* RunController.swift */,
+				D3EB34C11D4D01E4007ECDBB /* SegmentControl.swift */,
 			);
 			path = run_run_run;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				D3284B6E1C8EB959006FB560 /* ImageUtil.swift in Sources */,
 				D3669D531C84933A00250225 /* InitialViewController.swift in Sources */,
 				D3B57E1C1D2BF6220014F8F2 /* MenuButton.swift in Sources */,
+				D3EB34C21D4D01E4007ECDBB /* SegmentControl.swift in Sources */,
 				D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */,
 				D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */,
 				D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */,

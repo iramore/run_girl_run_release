@@ -168,28 +168,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../Downloads/MWSegmentedControl-master/MWSegmentedControl/MWSegmentedControl.swift"
-            timestampString = "491577466.52889"
+            timestampString = "491580591.480014"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "changeSegment(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../../Downloads/MWSegmentedControl-master/MWSegmentedControl/MWSegmentedControl.swift"
-            timestampString = "491577466.52889"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "layoutSubviews()"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "drawRect(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -212,7 +196,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "run_run_run/RunCircles.swift"
@@ -223,6 +207,38 @@
             endingLineNumber = "5"
             landmarkName = "RunCircles"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "run_run_run.RunCircles.init (frame : __C.CGRect) -&gt; run_run_run.RunCircles"
+                  moduleName = "run_run_run"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/infuntis/Documents/xcode_repo/run_run_run/run_run_run/RunCircles.swift"
+                  timestampString = "491592139.687976"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "54">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "run_run_run.RunCircles.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;run_run_run.RunCircles&gt;"
+                  moduleName = "run_run_run"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/infuntis/Documents/xcode_repo/run_run_run/run_run_run/RunCircles.swift"
+                  timestampString = "491592139.688186"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -270,6 +286,22 @@
             startingLineNumber = "41"
             endingLineNumber = "41"
             landmarkName = "loadTrain()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "run_run_run/SegmentControl.swift"
+            timestampString = "491590246.999115"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "drawRect(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
