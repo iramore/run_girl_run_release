@@ -10,7 +10,7 @@ import UIKit
 import CVCalendar
 import ActionSheetPicker_3_0
 import ElasticTransition
-
+//import CVCalendarKit
 import Foundation
 
 
@@ -33,8 +33,6 @@ class CalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         monthLabel.text = CVDate(date: NSDate()).globalDescription
-        //print("completed train days")
-         //print((shareData.userData)!.completedTrainsDates!)
         transition.sticky = true
         transition.showShadow = true
         transition.panThreshold = 0.3
@@ -78,7 +76,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
     }
     
     /// Required method to implement!
-    func firstWeekday() -> Weekday {
+    func firstWeekday() -> CVCalendarWeekday {
         return .Monday
     }
     
@@ -151,7 +149,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
 //                trainedToday = true
 //            }
 //        }
-        if(dayView.date.convertedDate() > NSDate()){ // && !trainedToday){
+        if(dayView.date.convertedDate()! > NSDate()){
             let π = M_PI
             
             let ringSpacing: CGFloat = 3.0
@@ -230,26 +228,81 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         if let _ = (shareData.userData)!.completedTrainsDates {
             if let _ = dayView.date{
                 if(shareData.userData)!.completedTrainsDates!.contains(dayView.date.convertedDate()!){
-                    //print("days in train before today \(trainDays)")
-                    //print(dayView.date.convertedDate())
-                    ++trainDays
                     return true
                 }
             }
         }
-        if ((shareData.userData)!.daysOfWeek.contains(dayView.weekdayIndex-1))// && trainDays<27)
+        let today = NSDate()
+       
+        let val = 7 - ((shareData.userData)!.completedTrainsDates?.count)!
+        let weeks = val/(shareData.userData)!.daysOfWeek.count
+        var tail = val%(shareData.userData)!.daysOfWeek.count
+        
+        let endWeek = NSCalendar.currentCalendar()
+            .dateByAddingUnit(
+                .WeekOfMonth,
+                value: weeks,
+                toDate: today,
+                options: []
+        )
+        var day = NSCalendar.currentCalendar()
+            .dateByAddingUnit(
+                .Day,
+                value: 1,
+                toDate: endWeek!,
+                options: []
+        )
+        while(tail > 0){
+            let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Weekday, fromDate: day!)
+            if((shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday))){
+                tail -= 1
+            }
+            day = NSCalendar.currentCalendar()
+                .dateByAddingUnit(
+                    .Day,
+                    value: 1,
+                    toDate: day!,
+                    options: []
+            )
+            
+        }
+        if ((shareData.userData)!.daysOfWeek.contains(dayView.weekdayIndex-1))
         {
             if  let _ = dayView.date{
-                if(dayView.date.convertedDate() > NSDate()){
-                   // print("days in train after today \(trainDays)")
-                    //print(dayView.date.convertedDate())
-                    ++trainDays
+                if(dayView.date.convertedDate()! > NSDate() && dayView.date.convertedDate()! < day){
                     return true
                 }
             
             }
         }
         return false
+    }
+    
+    func toMondayWeekStart(weekDaySun: Int) -> Int{
+        if(weekDaySun>=2){
+            return weekDaySun - 2
+        } else{
+            return 6
+        }
+    }
+    
+    func getFirstTale(today: Int, total: Int) -> Int{
+        var lastIndex: Int = -1
+        print("today \(today)")
+        for index in (shareData.userData)!.daysOfWeek {
+            if(index > today)  {
+                lastIndex = index
+                break
+            }
+        }
+        return lastIndex == -1 ? 0 :(shareData.userData)!.daysOfWeek.count - (shareData.userData)!.daysOfWeek.indexOf(lastIndex)! + 1
+    }
+    
+    func getDayOfWeek(date: NSDate)->Int{
+        let myCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
+        let myComponents = myCalendar?.components(.NSWeekdayCalendarUnit, fromDate: date)
+        let weekDay = myComponents?.weekday
+        return weekDay!
     }
     
 }

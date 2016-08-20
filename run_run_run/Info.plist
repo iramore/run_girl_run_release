@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Lantinghei-SC-Extralight-stub.ttf</string>
 		<string>pragmatica.ttf</string>
 		<string>04B_19__.TTF</string>
 	</array>

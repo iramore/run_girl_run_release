@@ -71,12 +71,13 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shareData.userData = UserData(trainNumber: 1, daysOfWeek: [0,2,5], completedTrainsDates: [])
+        shareData.userData = UserData(trainNumber: 1, daysOfWeek: [0,2,4], completedTrainsDates: [NSDate(dateString:"2016-08-06"),NSDate(dateString:"2016-08-08"),NSDate(dateString:"2016-08-19"),NSDate(dateString:"2016-08-09"),NSDate(dateString:"2016-08-12")])
         shareData.saveUserData()
         transition.sticky = true
         transition.showShadow = true
         transition.panThreshold = 0.3
         transition.transformType = .TranslateMid
+        transition.stiffness = 0.6
         
         
         let image1  = UIImage(named: "plan3") as UIImage?

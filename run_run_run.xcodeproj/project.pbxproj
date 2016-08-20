@@ -15,7 +15,6 @@
 		D352CBFE1D22B6F700E1FD08 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D352CBFD1D22B6F700E1FD08 /* OptionsViewController.swift */; };
 		D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F1CCB1C7105390084A902 /* AppDelegate.swift */; };
 		D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F1CCD1C7105390084A902 /* PlanViewController.swift */; };
-		D35F1CD11C7105390084A902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CCF1C7105390084A902 /* Main.storyboard */; };
 		D35F1CD31C7105390084A902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD21C7105390084A902 /* Assets.xcassets */; };
 		D35F1CD61C7105390084A902 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */; };
 		D3669D531C84933A00250225 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3669D521C84933A00250225 /* InitialViewController.swift */; };
@@ -31,6 +30,7 @@
 		D3CED4751D33D6D600EBE97F /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CED4741D33D6D600EBE97F /* CounterView.swift */; };
 		D3EB34C01D47C325007ECDBB /* pragmatica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3EB34BF1D47C325007ECDBB /* pragmatica.ttf */; };
 		D3EB34C21D4D01E4007ECDBB /* SegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB34C11D4D01E4007ECDBB /* SegmentControl.swift */; };
+		D3F685781D682A4300DE5959 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F685761D682A4300DE5959 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,11 +42,11 @@
 		D3284B6D1C8EB959006FB560 /* ImageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
 		D3284B6F1C92ED19006FB560 /* Train_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train_data.swift; sourceTree = "<group>"; };
 		D3284B711C92F688006FB560 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		D33533B71D68216700532D08 /* Lantinghei-SC-Extralight-stub.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lantinghei-SC-Extralight-stub.ttf"; sourceTree = "<group>"; };
 		D352CBFD1D22B6F700E1FD08 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		D35F1CC81C7105390084A902 /* run_run_run.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = run_run_run.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35F1CCB1C7105390084A902 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D35F1CCD1C7105390084A902 /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
-		D35F1CD01C7105390084A902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D35F1CD21C7105390084A902 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D35F1CD51C7105390084A902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D35F1CD71C7105390084A902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +66,7 @@
 		D3CED4741D33D6D600EBE97F /* CounterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		D3EB34BF1D47C325007ECDBB /* pragmatica.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pragmatica.ttf; sourceTree = "<group>"; };
 		D3EB34C11D4D01E4007ECDBB /* SegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentControl.swift; sourceTree = "<group>"; };
+		D3F685771D682A4300DE5959 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.release.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.release.xcconfig"; sourceTree = "<group>"; };
 		F108FC8201A2D48916797CE5 /* Pods-run_run_run.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.debug.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,15 +118,16 @@
 			isa = PBXGroup;
 			children = (
 				D36EEFC31D475C62009A772E /* 04B_19__.TTF */,
+				D33533B71D68216700532D08 /* Lantinghei-SC-Extralight-stub.ttf */,
 				D3EB34BF1D47C325007ECDBB /* pragmatica.ttf */,
 				D3669D7B1C8758B900250225 /* FMProgressBarView.xib */,
 				D3669D7A1C8758B900250225 /* FMProgressBarView.swift */,
 				D35F1CCB1C7105390084A902 /* AppDelegate.swift */,
 				D39041DE1CB13BF600EA1979 /* MWSegmentedControl.swift */,
 				D35F1CCD1C7105390084A902 /* PlanViewController.swift */,
-				D35F1CCF1C7105390084A902 /* Main.storyboard */,
 				D35F1CD21C7105390084A902 /* Assets.xcassets */,
 				D3CED4741D33D6D600EBE97F /* CounterView.swift */,
+				D3F685761D682A4300DE5959 /* Main.storyboard */,
 				D3B57E1B1D2BF6220014F8F2 /* MenuButton.swift */,
 				D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */,
 				D352CBFD1D22B6F700E1FD08 /* OptionsViewController.swift */,
@@ -240,12 +242,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3F685781D682A4300DE5959 /* Main.storyboard in Resources */,
 				D3669D7D1C8758B900250225 /* Info.plist in Resources */,
 				D36EEFC41D475C62009A772E /* 04B_19__.TTF in Resources */,
 				D3EB34C01D47C325007ECDBB /* pragmatica.ttf in Resources */,
 				D35F1CD61C7105390084A902 /* LaunchScreen.storyboard in Resources */,
 				D35F1CD31C7105390084A902 /* Assets.xcassets in Resources */,
-				D35F1CD11C7105390084A902 /* Main.storyboard in Resources */,
 				D3669D7F1C8758B900250225 /* FMProgressBarView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,20 +329,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D35F1CCF1C7105390084A902 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D35F1CD01C7105390084A902 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D35F1CD51C7105390084A902 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D3F685761D682A4300DE5959 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3F685771D682A4300DE5959 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

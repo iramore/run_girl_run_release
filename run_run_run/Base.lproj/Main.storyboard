@@ -134,9 +134,30 @@
                                     <segue destination="9oU-WF-Kqf" kind="show" identifier="settings" id="reG-3Y-R0c"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Wr-rq-ePx" customClass="FMProgressBarView" customModule="run_run_run" customModuleProvider="target">
+                                <rect key="frame" x="12" y="438" width="296" height="24"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="ukd-QD-3oL"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageLoading" value="rrrr4"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.89411764709999997" green="0.25490196079999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="14"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageCompleted" value="10run"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2Wr-rq-ePx" firstAttribute="top" secondItem="x68-qj-xvb" secondAttribute="bottom" constant="23" id="3mb-qN-9BE"/>
                             <constraint firstItem="ed0-gW-gRT" firstAttribute="leading" secondItem="f9U-Xi-4mF" secondAttribute="leadingMargin" constant="-4" id="DQN-qC-2ha"/>
                             <constraint firstItem="0mv-Vg-x2F" firstAttribute="trailing" secondItem="f9U-Xi-4mF" secondAttribute="trailingMargin" constant="4" id="Eyf-bG-OqZ"/>
                             <constraint firstItem="rIH-5x-13C" firstAttribute="top" secondItem="C9H-V3-AyB" secondAttribute="bottom" constant="8" symbolic="YES" id="QMH-zG-xnt"/>
@@ -148,6 +169,8 @@
                             <constraint firstItem="ed0-gW-gRT" firstAttribute="top" secondItem="C9H-V3-AyB" secondAttribute="bottom" id="f4z-c8-fFi"/>
                             <constraint firstItem="rIH-5x-13C" firstAttribute="centerX" secondItem="0mv-Vg-x2F" secondAttribute="centerX" id="hA5-U2-AKk"/>
                             <constraint firstItem="x68-qj-xvb" firstAttribute="leading" secondItem="f9U-Xi-4mF" secondAttribute="leadingMargin" constant="-4" id="hB7-KJ-F3I"/>
+                            <constraint firstItem="2Wr-rq-ePx" firstAttribute="leading" secondItem="f9U-Xi-4mF" secondAttribute="leadingMargin" constant="-8" id="hyb-k9-DTZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2Wr-rq-ePx" secondAttribute="trailing" constant="-8" id="jGr-Lw-Avs"/>
                             <constraint firstItem="0mv-Vg-x2F" firstAttribute="top" secondItem="rIH-5x-13C" secondAttribute="bottom" constant="11" id="lrD-lW-N5G"/>
                             <constraint firstItem="x68-qj-xvb" firstAttribute="top" secondItem="0mv-Vg-x2F" secondAttribute="bottom" constant="19" id="sxx-dR-0bI"/>
                         </constraints>
@@ -642,8 +665,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="10run" width="467" height="50"/>
         <image name="close" width="49" height="50"/>
         <image name="current_stage_background" width="144" height="54"/>
+        <image name="rrrr4" width="94" height="110"/>
         <image name="settings" width="191" height="46"/>
         <image name="start" width="191" height="46"/>
     </resources>
