@@ -29,11 +29,9 @@ class SegmentControl: UIView{
     }
     var segmentButtons = [UIButton]()
     
-    var maxSelected:Int = 1
-    
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        print("DRAW RECT \(name)   \(selectedIndexes)")
+        //print("DRAW RECT \(name)   \(selectedIndexes)")
         self.removeAllSubviews()
         
         self.layer.cornerRadius = 4

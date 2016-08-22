@@ -6,11 +6,6 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="pragmatica.ttf">
-            <string>Pragmatica</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -141,7 +136,6 @@
                                     <constraint firstAttribute="height" constant="24" id="ukd-QD-3oL"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageLoading" value="rrrr1"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" red="1" green="0.4823529412" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
@@ -151,22 +145,31 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageCompleted" value="run-bb"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="useImages" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLoadingColor">
-                                        <color key="value" red="0.65098041299999998" green="0.78431379800000001" blue="0.91764712329999998" alpha="1" colorSpace="deviceRGB"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="useImages" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progressPercent">
+                                        <real key="value" value="0.5"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundCompletedColor">
-                                        <color key="value" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageLoading" value="calMenuRunner2"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageCompleted" value="whiteBack"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d34-eo-RjP">
+                                <rect key="frame" x="22.5" y="469" width="275" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="x1u-EV-U2e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2Wr-rq-ePx" firstAttribute="top" secondItem="x68-qj-xvb" secondAttribute="bottom" constant="23" id="3mb-qN-9BE"/>
                             <constraint firstItem="ed0-gW-gRT" firstAttribute="leading" secondItem="f9U-Xi-4mF" secondAttribute="leadingMargin" constant="-4" id="DQN-qC-2ha"/>
                             <constraint firstItem="0mv-Vg-x2F" firstAttribute="trailing" secondItem="f9U-Xi-4mF" secondAttribute="trailingMargin" constant="4" id="Eyf-bG-OqZ"/>
+                            <constraint firstItem="d34-eo-RjP" firstAttribute="top" secondItem="2Wr-rq-ePx" secondAttribute="bottom" constant="7" id="HO6-08-0h8"/>
+                            <constraint firstItem="d34-eo-RjP" firstAttribute="centerX" secondItem="f9U-Xi-4mF" secondAttribute="centerX" id="Hyw-1A-hnb"/>
                             <constraint firstItem="rIH-5x-13C" firstAttribute="top" secondItem="C9H-V3-AyB" secondAttribute="bottom" constant="8" symbolic="YES" id="QMH-zG-xnt"/>
                             <constraint firstItem="x68-qj-xvb" firstAttribute="top" secondItem="f9U-Xi-4mF" secondAttribute="top" constant="115" id="STe-aF-N1p"/>
                             <constraint firstItem="x68-qj-xvb" firstAttribute="trailing" secondItem="0mv-Vg-x2F" secondAttribute="trailing" id="Sqp-CF-j7n"/>
@@ -189,6 +192,7 @@
                         <outlet property="menuView" destination="0mv-Vg-x2F" id="rkU-5U-h4k"/>
                         <outlet property="monthLabel" destination="rIH-5x-13C" id="bAz-Kg-7aU"/>
                         <outlet property="pBar1" destination="2Wr-rq-ePx" id="8LD-Ac-a5I"/>
+                        <outlet property="progressLabel" destination="d34-eo-RjP" id="CTe-lK-0rc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g8h-Qe-QF7" sceneMemberID="firstResponder"/>
@@ -364,8 +368,8 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryV-Lk-6Vd">
-                                <rect key="frame" x="1" y="527" width="154" height="21"/>
-                                <fontDescription key="fontDescription" name="Pragmatica" family="Pragmatica" pointSize="15"/>
+                                <rect key="frame" x="1" y="532" width="154" height="21"/>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="18"/>
                                 <color key="textColor" red="0.32941176470588235" green="0.31372549019607843" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -392,7 +396,7 @@
                             <constraint firstItem="WMZ-ya-YJv" firstAttribute="top" secondItem="zCg-U2-mfS" secondAttribute="bottom" constant="60" id="Wdj-o0-Abx"/>
                             <constraint firstItem="xad-y7-0OE" firstAttribute="leading" secondItem="zCg-U2-mfS" secondAttribute="leading" constant="1" id="XSD-Da-S1F"/>
                             <constraint firstItem="xad-y7-0OE" firstAttribute="top" secondItem="zCg-U2-mfS" secondAttribute="top" id="Yih-Ef-4rn"/>
-                            <constraint firstAttribute="bottom" secondItem="ryV-Lk-6Vd" secondAttribute="bottom" constant="18" id="a5f-h9-2yx"/>
+                            <constraint firstAttribute="bottom" secondItem="ryV-Lk-6Vd" secondAttribute="bottom" constant="16" id="a5f-h9-2yx"/>
                             <constraint firstItem="xad-y7-0OE" firstAttribute="trailing" secondItem="efT-cS-yAW" secondAttribute="trailing" id="h6c-GK-2qL"/>
                             <constraint firstItem="fto-iS-PPD" firstAttribute="leading" secondItem="xad-y7-0OE" secondAttribute="leading" id="hlJ-bu-oEf"/>
                             <constraint firstItem="UXc-OF-I2G" firstAttribute="trailing" secondItem="EVr-V8-GA7" secondAttribute="trailing" id="hw9-vO-FdB"/>
@@ -673,12 +677,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="calMenuRunner2" width="378" height="55"/>
         <image name="close" width="49" height="50"/>
         <image name="current_stage_background" width="144" height="54"/>
-        <image name="rrrr1" width="94" height="110"/>
-        <image name="run-bb" width="128" height="191"/>
         <image name="settings" width="191" height="46"/>
         <image name="start" width="191" height="46"/>
+        <image name="whiteBack" width="63" height="55"/>
     </resources>
     <color key="tintColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
