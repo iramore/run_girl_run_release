@@ -141,17 +141,24 @@
                                     <constraint firstAttribute="height" constant="24" id="ukd-QD-3oL"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageLoading" value="rrrr4"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageLoading" value="rrrr1"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.89411764709999997" green="0.25490196079999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="1" green="0.4823529412" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="14"/>
+                                        <real key="value" value="11"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="4"/>
+                                        <real key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageCompleted" value="10run"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="backgroundImageCompleted" value="run-bb"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="useImages" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLoadingColor">
+                                        <color key="value" red="0.65098041299999998" green="0.78431379800000001" blue="0.91764712329999998" alpha="1" colorSpace="deviceRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundCompletedColor">
+                                        <color key="value" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -181,6 +188,7 @@
                         <outlet property="calendarView" destination="x68-qj-xvb" id="8xi-h3-FWm"/>
                         <outlet property="menuView" destination="0mv-Vg-x2F" id="rkU-5U-h4k"/>
                         <outlet property="monthLabel" destination="rIH-5x-13C" id="bAz-Kg-7aU"/>
+                        <outlet property="pBar1" destination="2Wr-rq-ePx" id="8LD-Ac-a5I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g8h-Qe-QF7" sceneMemberID="firstResponder"/>
@@ -665,10 +673,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="10run" width="467" height="50"/>
         <image name="close" width="49" height="50"/>
         <image name="current_stage_background" width="144" height="54"/>
-        <image name="rrrr4" width="94" height="110"/>
+        <image name="rrrr1" width="94" height="110"/>
+        <image name="run-bb" width="128" height="191"/>
         <image name="settings" width="191" height="46"/>
         <image name="start" width="191" height="46"/>
     </resources>

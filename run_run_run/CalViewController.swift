@@ -10,7 +10,6 @@ import UIKit
 import CVCalendar
 import ActionSheetPicker_3_0
 import ElasticTransition
-//import CVCalendarKit
 import Foundation
 
 
@@ -20,6 +19,7 @@ class CalViewController: UIViewController {
     
     
     var transition:ElasticTransition!
+    @IBOutlet weak var pBar1: FMProgressBarView!
     
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarView: CVCalendarView!
@@ -37,6 +37,7 @@ class CalViewController: UIViewController {
         transition.showShadow = true
         transition.panThreshold = 0.3
         transition.transformType = .Rotate
+        pBar1.progressPercent = CGFloat(Train_data.numberOfTrains) / CGFloat(((shareData.userData)!.completedTrainsDates?.count)!)
     }
     
     override func didReceiveMemoryWarning() {
@@ -138,17 +139,12 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
     
     func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
         let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
-        circleView.fillColor = .colorFromCode(0xCCCCCC)
+        circleView.fillColor = .colorFromCode(0x657ECA)
         return circleView
     }
     
     func supplementaryView(viewOnDayView dayView: DayView) -> UIView {
-//        var trainedToday: Bool = false
-//        if let _ = (shareData.userData)!.completedTrainsDates {
-//            if(shareData.userData)!.completedTrainsDates!.contains(dayView.date.convertedDate()!){
-//                trainedToday = true
-//            }
-//        }
+
         if(dayView.date.convertedDate()! > NSDate()){
             let π = M_PI
             
@@ -157,7 +153,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
             let ringVerticalOffset: CGFloat = 1.0
             var ringLayer: CAShapeLayer!
             let ringLineWidth: CGFloat = 4.0
-            let ringLineColour: UIColor = .blueColor()
+            let ringLineColour: UIColor = UIColor(hex: "#657ECA")
             
             let newView = UIView(frame: dayView.bounds)
             
@@ -193,7 +189,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
             let ringVerticalOffset: CGFloat = 1.0
             var ringLayer: CAShapeLayer!
             let ringLineWidth: CGFloat = 4.0
-            let ringLineColour: UIColor = .redColor()
+            let ringLineColour: UIColor =  UIColor(hex: "#FF7B7B")
             
             let newView = UIView(frame: dayView.bounds)
             
@@ -233,6 +229,11 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
             }
         }
         let today = NSDate()
+        let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Weekday, fromDate: today)
+        print(components.weekday)
+        print("======")
+        print(toMondayWeekStart(components.weekday))
+        print((shareData.userData)!.daysOfWeek)
        
         let val = 7 - ((shareData.userData)!.completedTrainsDates?.count)!
         let weeks = val/(shareData.userData)!.daysOfWeek.count
@@ -254,7 +255,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         )
         while(tail > 0){
             let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Weekday, fromDate: day!)
-            if((shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday))){
+                if((shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday))){
                 tail -= 1
             }
             day = NSCalendar.currentCalendar()
@@ -280,7 +281,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
     
     func toMondayWeekStart(weekDaySun: Int) -> Int{
         if(weekDaySun>=2){
-            return weekDaySun - 2
+            return weekDaySun - 1
         } else{
             return 6
         }

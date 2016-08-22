@@ -82,7 +82,7 @@ class InitialViewController: UIViewController {
         
         let image1  = UIImage(named: "plan3") as UIImage?
         
-        let frame1 = CGRectMake(self.view.bounds.width/2 - (image1?.size.width)! - 7,self.view.bounds.height*2/3 - (image1?.size.height)!, (image1?.size.width)! , (image1?.size.height)!)
+        let frame1 = CGRectMake(self.view.bounds.width/2 - (image1?.size.width)! - 5,self.view.bounds.height*2/3 - (image1?.size.height)!, (image1?.size.width)! , (image1?.size.height)!)
         
         
         let planButton = MenuButton(path: firstButtonBezier(), frame: frame1, image: "plan3")
@@ -90,7 +90,7 @@ class InitialViewController: UIViewController {
         
         let image2  = UIImage(named: "run-bb") as UIImage?
         
-        let frame2 = CGRectMake(self.view.bounds.width/2 + 7,self.view.bounds.height*2/3 - (image2?.size.height)!, (image2?.size.width)! , (image2?.size.height)!)
+        let frame2 = CGRectMake(self.view.bounds.width/2 + 5,self.view.bounds.height*2/3 - (image2?.size.height)!, (image2?.size.width)! , (image2?.size.height)!)
         
         
         let runButton = MenuButton(path: secondButtonBezier(), frame: frame2, image: "run-bb")
@@ -98,7 +98,7 @@ class InitialViewController: UIViewController {
         
         let image3  = UIImage(named: "cal-but") as UIImage?
         
-        let frame3 = CGRectMake(self.view.bounds.width/2 - (image3?.size.width)!/2 ,self.view.bounds.height*2/3 - (image3?.size.height)!/2 + 10, (image3?.size.width)! , (image3?.size.height)!)
+        let frame3 = CGRectMake(self.view.bounds.width/2 - (image3?.size.width)!/2 ,self.view.bounds.height*2/3 - (image3?.size.height)!/2 + 7, (image3?.size.width)! , (image3?.size.height)!)
         
         
         let trackButton = MenuButton(path: thirdButtonBezier(), frame: frame3, image: "cal-but")

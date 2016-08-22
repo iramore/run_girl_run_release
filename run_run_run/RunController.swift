@@ -202,7 +202,8 @@ class RunController: UIViewController {
     
     func updateTrainControlImage(){
         let size = CGSizeMake(screenWidth, 50)
-        UIGraphicsBeginImageContext(size)
+        let scale = UIScreen.mainScreen().scale
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
         var widthVid: CGFloat = 0
         let percent: CGFloat = (CGFloat((train.temp[index])*100-counter))/CGFloat((train.temp[index]*100))
         if(percent < 1){
@@ -242,7 +243,9 @@ class RunController: UIViewController {
     
     func getMixedImg(width: CGFloat) -> UIImage {
         let size = CGSizeMake(width, 50)
-        UIGraphicsBeginImageContext(size)
+        let scale = UIScreen.mainScreen().scale
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        //UIGraphicsBeginImageContext(size)
         var widthVid: CGFloat = 0
         for im in train.trainMenu {
             if(widthVid + im.size.width < width){

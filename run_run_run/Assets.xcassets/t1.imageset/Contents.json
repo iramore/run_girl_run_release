@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "r-r.png",
+      "filename" : "colours-sample.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "jjjj.png",
       "scale" : "2x"
     },
     {

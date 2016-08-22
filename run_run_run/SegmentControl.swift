@@ -18,6 +18,7 @@ class SegmentControl: UIView{
     var delegate: SegmentControlDelegate?
     var buttonTitles = [String]()
     var borderColor = UIColor(hex: "#FF7B7B")
+    //var borderColor = UIColor(hex: "#F26F7A")
     var textColor = UIColor(hex: "#54504C")
     var name: String = ""
     var font = UIFont(name: "Pragmatica", size: 24)

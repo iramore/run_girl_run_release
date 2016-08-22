@@ -67,12 +67,20 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CustomTableViewCell
-        if(indexPath.row >= (shareData.userData?.trainNumber)!-1){
-            cell.backgroundColor = colors[indexPath.row]
-        } else {
-            cell.backgroundColor = UIColor.blueColor()
-        }
-        cell.planImage.image = UIImage(named: "run-run-1")!
+        var result = UIImage(named: "run-run-1")
+       
+//        if(indexPath.row < (shareData.userData?.trainNumber)!-1){
+//            let backgroundImage = UIImage(named: "run-run-1")
+//            let watermarkImage = UIImage(named: "mask")
+//            
+//            UIGraphicsBeginImageContextWithOptions(backgroundImage!.size, false, 0.0)
+//            backgroundImage!.drawInRect(CGRect(x: 0.0, y: 0.0, width: backgroundImage!.size.width, height: backgroundImage!.size.height))
+//                    watermarkImage!.drawInRect(CGRect(x: 0.0, y: 0.0, width: backgroundImage!.size.width, height: backgroundImage!.size.height))
+//            //        watermarkImage!.drawInRect(CGRect(x: backgroundImage!.size.width - watermarkImage!.size.width, y: backgroundImage!.size.height - watermarkImage!.size.height, width: watermarkImage!.size.width, height: watermarkImage!.size.height))
+//            result = UIGraphicsGetImageFromCurrentImageContext()
+//            
+//        }
+        cell.planImage.image = result
         return cell
     }
     
