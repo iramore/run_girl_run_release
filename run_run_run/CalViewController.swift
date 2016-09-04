@@ -18,9 +18,10 @@ import Foundation
 class CalViewController: UIViewController {
     
     
+    @IBOutlet weak var runner: UIImageView!
     @IBOutlet weak var progressLabel: UILabel!
     var transition:ElasticTransition!
-    @IBOutlet weak var pBar1: FMProgressBarView!
+   // @IBOutlet weak var pBar1: FMProgressBarView!
     
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarView: CVCalendarView!
@@ -42,10 +43,14 @@ class CalViewController: UIViewController {
         transition.transformType = .Rotate
         
         let progressPercent = CGFloat(((shareData.userData)!.completedTrainsDates?.count)!) / CGFloat(Train_data.numberOfTrains)
-        let image = getMixedImg(pBar1.frame.width * progressPercent)
+        let image = getMixedImg(runner.frame.width * progressPercent)
+        runner.contentMode = .Left
+        runner.image = image
+        runner.layer.cornerRadius = 9
+        runner.layer.borderWidth = 3
+        runner.layer.borderColor = UIColor(hex: "#FF7B7B").CGColor
+        runner.layer.masksToBounds = true
         
-       // pBar1.backgroundImageLoading = image
-        pBar1.progressPercent = progressPercent
         progressLabel.text = "Completed trainings: \(((shareData.userData)!.completedTrainsDates?.count)!) / 27"
         
        setEndDate()
@@ -56,10 +61,12 @@ class CalViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        setEndDate()
+        print("end date \(endDate)")
         calendarView.contentController.refreshPresentedMonth()
         calendarView.commitCalendarViewUpdate()
         menuView.commitMenuViewUpdate()
-        setEndDate()
+        
         
     }
     
@@ -185,7 +192,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         if(weekDaySun>=2){
             return weekDaySun - 1
         } else{
-            return 6
+            return 7
         }
     }
     
@@ -212,11 +219,10 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         
         let today = NSDate()
         
-        let val = 11 - ((shareData.userData)!.completedTrainsDates?.count)!
+        let val = 27 - ((shareData.userData)!.completedTrainsDates?.count)!
         let weeks = val/(shareData.userData)!.daysOfWeek.count
         var tail = val%(shareData.userData)!.daysOfWeek.count
         let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Weekday, fromDate: today)
-        
         if( !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!
             && (shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday)-1)
             ){
@@ -240,7 +246,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
                     options: []
                 )!
             let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Weekday, fromDate: day)
-            if((shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday))){
+            if((shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday)-1)){
                 tail -= 1
             }
         }
@@ -248,7 +254,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
     }
     
     func getMixedImg(width: CGFloat) -> UIImage {
-        let size = CGSizeMake(width, 50)
+        let size = CGSizeMake(width, 24)
         let scale = UIScreen.mainScreen().scale
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         var widthVid: CGFloat = 0

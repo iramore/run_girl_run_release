@@ -20,7 +20,7 @@ class RunController: UIViewController {
     
     
     var timerSmall = NSTimer()
-    var train: Train = Train_data.trains[(ShareData.sharedInstance.userData?.trainNumber)!]!
+    var train: Train = Train_data.trains[((ShareData.sharedInstance.userData?.completedTrainsDates?.count)!+1)]!
     var currentStage = 0
     var counter: Int = 0
     var counterBig: Int = 0

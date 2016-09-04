@@ -46,6 +46,9 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         colors = randomColorsCount(27, hue: .Pink, luminosity: .Light)
+        print("screen size \(UIScreen.mainScreen().bounds.height)")
+        self.customTableView.contentInset = UIEdgeInsetsMake(0, 0, 25, 0)
+        //customTableView.frame = self.view.frame;
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,19 +70,15 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CustomTableViewCell
-        var result = UIImage(named: "run-run-1")
+        let ind = indexPath.row + 1
+        var result: UIImage
+        if(ind <= (ShareData.sharedInstance.userData?.completedTrainsDates?.count)!){
+            result = UIImage(named: "run-run-\(ind)wt")!
+        } else {
+            //result = UIImage(named: "Image")!
+            result = UIImage(named: "run-run-\(ind)")!
+        }
        
-//        if(indexPath.row < (shareData.userData?.trainNumber)!-1){
-//            let backgroundImage = UIImage(named: "run-run-1")
-//            let watermarkImage = UIImage(named: "mask")
-//            
-//            UIGraphicsBeginImageContextWithOptions(backgroundImage!.size, false, 0.0)
-//            backgroundImage!.drawInRect(CGRect(x: 0.0, y: 0.0, width: backgroundImage!.size.width, height: backgroundImage!.size.height))
-//                    watermarkImage!.drawInRect(CGRect(x: 0.0, y: 0.0, width: backgroundImage!.size.width, height: backgroundImage!.size.height))
-//            //        watermarkImage!.drawInRect(CGRect(x: backgroundImage!.size.width - watermarkImage!.size.width, y: backgroundImage!.size.height - watermarkImage!.size.height, width: watermarkImage!.size.width, height: watermarkImage!.size.height))
-//            result = UIGraphicsGetImageFromCurrentImageContext()
-//            
-//        }
         cell.planImage.image = result
         return cell
     }

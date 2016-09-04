@@ -8,7 +8,6 @@ target 'run_run_run' do
 pod 'CVCalendar', '~> 1.2.8'
 pod 'CVCalendarKit', '~> 0.1.5'
 pod 'ActionSheetPicker-3.0', '~> 2.0.5'
-pod 'EZAlertController', '0.3'
 pod 'ElasticTransition' , '> 2.0.1'
 pod 'BMCustomTableView'
 pod 'RandomColorSwift'
