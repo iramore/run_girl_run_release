@@ -21,57 +21,47 @@ let π:CGFloat = CGFloat(M_PI)
   
   override func drawRect(rect: CGRect) {
     
-    // 1
     let center = CGPoint(x:bounds.width/2, y: bounds.height/2)
     
-    // 2
+    
     let radius: CGFloat = max(bounds.width, bounds.height)
     
-    // 4
     let startAngle: CGFloat = π / 2
     let endAngle: CGFloat = π / 2
     
     
     
-    // 5
+    
     var path = UIBezierPath(arcCenter: center,
       radius: radius/2 - arcWidth/2,
       startAngle: startAngle,
       endAngle: endAngle,
       clockwise: false)
     
-    // 6
     path.lineWidth = arcWidth
     counterColor.setStroke()
     path.stroke()
     
-    //Draw the outline
     
-    //1 - first calculate the difference between the two angles
-    //ensuring it is positive
     let angleDifference: CGFloat = 2 * π - startAngle + endAngle
     
-    //then calculate the arc for each single glass
     let arcLengthPerGlass = angleDifference / CGFloat(maxValue)
     
-    //then multiply out by the actual glasses drunk
-    let outlineEndAngle = arcLengthPerGlass * CGFloat(counter) + startAngle
+       let outlineEndAngle = arcLengthPerGlass * CGFloat(counter) + startAngle
     
-    //2 - draw the outer arc
+   
     var outlinePath = UIBezierPath(arcCenter: center,
       radius: bounds.width/2 - 2.5,
       startAngle: startAngle,
       endAngle: outlineEndAngle,
       clockwise: true)
     
-    //3 - draw the inner arc
-    outlinePath.addArcWithCenter(center,
+        outlinePath.addArcWithCenter(center,
       radius: bounds.width/2 - arcWidth + 2.5,
       startAngle: outlineEndAngle,
       endAngle: startAngle,
       clockwise: false)
-//
-//    //4 - close the path
+
     outlinePath.closePath()
     
     outlineColor.setStroke()

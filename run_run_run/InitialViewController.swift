@@ -30,20 +30,20 @@ class ShareData {
     
     func saveUserDataOption(days: [Int]){
         if let _ = userData?.completedTrainsDates {
-            userData = UserData(trainNumber: (userData?.trainNumber)!, daysOfWeek: days,
+            userData = UserData(daysOfWeek: days,
                 completedTrainsDates: (userData?.completedTrainsDates)!)
         } else {
-        userData = UserData(trainNumber: (userData?.trainNumber)!, daysOfWeek: days)
+        userData = UserData(daysOfWeek: days)
         }
         saveUserData()
     }
     
     func increseNumberOfTrains(){
         if let _ = userData?.completedTrainsDates {
-            userData = UserData(trainNumber: ((userData?.trainNumber)!+1), daysOfWeek: (userData?.daysOfWeek)!,
+            userData = UserData(daysOfWeek: (userData?.daysOfWeek)!,
                 completedTrainsDates: (userData?.completedTrainsDates)!)
         } else {
-        userData = UserData(trainNumber: ((userData?.trainNumber)!+1), daysOfWeek: (userData?.daysOfWeek)!)
+        userData = UserData(daysOfWeek: (userData?.daysOfWeek)!)
         }
         saveUserData()
     }
@@ -71,7 +71,7 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shareData.userData = UserData(trainNumber: 1, daysOfWeek: [0,2,4], completedTrainsDates: [NSDate(dateString:"2016-08-06"),NSDate(dateString:"2016-08-08"),NSDate(dateString:"2016-08-19"),NSDate(dateString:"2016-08-09"),NSDate(dateString:"2016-08-22")])
+        shareData.userData = UserData(daysOfWeek: [0,2,4], completedTrainsDates: [NSDate(dateString:"2016-08-06"),NSDate(dateString:"2016-08-08"),NSDate(dateString:"2016-08-19"),NSDate(dateString:"2016-08-09"),NSDate(dateString:"2016-08-22"), NSDate(dateString:"2016-08-28")])
         shareData.saveUserData()
         transition.sticky = true
         transition.showShadow = true

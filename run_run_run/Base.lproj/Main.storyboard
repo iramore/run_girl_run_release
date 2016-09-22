@@ -369,6 +369,17 @@
                                 <color key="textColor" red="0.32941176470588235" green="0.31372549019607843" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfz-aU-Cdv">
+                                <rect key="frame" x="281" y="19" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="aQb-nO-XmZ"/>
+                                    <constraint firstAttribute="height" constant="25" id="khF-ZK-a5p"/>
+                                </constraints>
+                                <state key="normal" image="restart"/>
+                                <connections>
+                                    <action selector="restartButtonPressed:" destination="e0N-WI-7lT" eventType="touchUpInside" id="ggw-Fa-wpW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -393,12 +404,14 @@
                             <constraint firstItem="xad-y7-0OE" firstAttribute="leading" secondItem="zCg-U2-mfS" secondAttribute="leading" constant="1" id="XSD-Da-S1F"/>
                             <constraint firstItem="xad-y7-0OE" firstAttribute="top" secondItem="zCg-U2-mfS" secondAttribute="top" id="Yih-Ef-4rn"/>
                             <constraint firstAttribute="bottom" secondItem="ryV-Lk-6Vd" secondAttribute="bottom" constant="16" id="a5f-h9-2yx"/>
+                            <constraint firstItem="tfz-aU-Cdv" firstAttribute="top" secondItem="64A-Lz-aIM" secondAttribute="topMargin" constant="19" id="dVr-tp-VfD"/>
                             <constraint firstItem="xad-y7-0OE" firstAttribute="trailing" secondItem="efT-cS-yAW" secondAttribute="trailing" id="h6c-GK-2qL"/>
                             <constraint firstItem="fto-iS-PPD" firstAttribute="leading" secondItem="xad-y7-0OE" secondAttribute="leading" id="hlJ-bu-oEf"/>
                             <constraint firstItem="UXc-OF-I2G" firstAttribute="trailing" secondItem="EVr-V8-GA7" secondAttribute="trailing" id="hw9-vO-FdB"/>
                             <constraint firstItem="zCg-U2-mfS" firstAttribute="top" secondItem="EVr-V8-GA7" secondAttribute="bottom" constant="8" id="iVK-LB-ck8"/>
                             <constraint firstItem="zCg-U2-mfS" firstAttribute="top" secondItem="EVr-V8-GA7" secondAttribute="bottom" constant="8" symbolic="YES" id="k0a-iZ-6gC"/>
                             <constraint firstItem="efT-cS-yAW" firstAttribute="top" secondItem="64A-Lz-aIM" secondAttribute="topMargin" constant="20" id="k2E-6k-Nza"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tfz-aU-Cdv" secondAttribute="trailing" constant="-6" id="mLz-2M-8d7"/>
                             <constraint firstItem="fto-iS-PPD" firstAttribute="bottom" secondItem="WMZ-ya-YJv" secondAttribute="top" constant="-8" id="oBK-g9-bZL"/>
                             <constraint firstItem="zCg-U2-mfS" firstAttribute="top" secondItem="EVr-V8-GA7" secondAttribute="bottom" constant="8" id="tRm-aK-fb3"/>
                             <constraint firstItem="efT-cS-yAW" firstAttribute="leading" secondItem="64A-Lz-aIM" secondAttribute="leadingMargin" constant="-4" id="wdU-Yr-sBp"/>
@@ -436,7 +449,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E24-uX-Hxe" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2048" y="1083"/>
+            <point key="canvasLocation" x="2024" y="1116"/>
         </scene>
         <!--Options View Controller-->
         <scene sceneID="R1V-oc-Bz3">
@@ -675,6 +688,7 @@
     <resources>
         <image name="close" width="49" height="50"/>
         <image name="current_stage_background" width="144" height="54"/>
+        <image name="restart" width="64" height="64"/>
         <image name="settings" width="191" height="46"/>
         <image name="start" width="191" height="46"/>
     </resources>

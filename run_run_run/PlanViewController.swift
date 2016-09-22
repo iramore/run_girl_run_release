@@ -46,7 +46,6 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         colors = randomColorsCount(27, hue: .Pink, luminosity: .Light)
-        print("screen size \(UIScreen.mainScreen().bounds.height)")
         self.customTableView.contentInset = UIEdgeInsetsMake(0, 0, 25, 0)
         //customTableView.frame = self.view.frame;
     }

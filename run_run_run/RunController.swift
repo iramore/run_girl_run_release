@@ -8,6 +8,41 @@ class RunController: UIViewController {
     var smallTimer: UILabel?
     var bigTimer: UILabel?
     
+    @IBAction func restartButtonPressed(sender: AnyObject) {
+        loadTrain()
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        self.image.image = self.getMixedImg(screenSize.width)
+        var minWord: String
+        if(Float(train.temp[0])/60 == 1){
+            minWord = "minute"
+        } else{
+            minWord = "minutes"
+        }
+        var timeStr: NSString
+        if(Float(train.temp[0])%60 == 0){
+            timeStr = NSString(format:"%0.1d", (train.temp[0])/60)
+        } else{
+            timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
+        }
+        stageLabel.text = "run \(timeStr) \(minWord)"
+        self.runner.contentMode = .ScaleAspectFit
+        self.runner.image = UIImage(named: "rrrr1")!
+        let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
+        
+        
+        smallTimer!.text = str as String
+        
+        let str2 = NSString(format:"%0.2d:%0.2d", counterBig/60,counterBig%60)
+       
+        bigTimer!.text = str2 as String
+        
+        let imageName = "1.5walk"
+        let image = UIImage(named: imageName)
+        sticker = UIImageView(image: image!)
+        
+        let y = self.view.bounds.height-110
+        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
+    }
     @IBOutlet weak var stageLabel: UILabel!
     @IBOutlet weak var runner: UIImageView!
     
@@ -17,6 +52,7 @@ class RunController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBOutlet weak var image: UIImageView!
+    var confettiView: SAConfettiView!
     
     
     var timerSmall = NSTimer()
@@ -32,6 +68,7 @@ class RunController: UIViewController {
     var imagePos: CGFloat = 0
     var isRunning: Bool = true
     var sticker: UIImageView?
+    var firstStart: Bool = true
     
     
     func loadTrain() {
@@ -47,20 +84,43 @@ class RunController: UIViewController {
     
     @IBAction func startButtonPressed(sender: AnyObject) {
         if(!isStarted){
+            
+            if(firstStart){
+                firstStart = false
+                var timeStr: NSString
+                if(Float(train.temp[0])%60 == 0){
+                    timeStr = NSString(format:"%.1d", (train.temp[index])/60)
+                } else{
+                    timeStr = NSString(format:"%.1f", (Float(train.temp[index]))/60)
+                }
+                let audio = "run\(timeStr).mp3"
+                SKTAudio.sharedInstance().playSoundEffect(audio)
+            }
             timerSmall.invalidate()
             timerSmall = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(RunController.timerActionSmall), userInfo:nil ,   repeats: true)
             self.startButton.setImage(UIImage(named: "pause"), forState: .Normal)
            // startButton.setTitle("PAUSE", forState: .Normal)
+            if(isRunning){
             self.runner.animationImages = runningMan
+            } else{
+                self.runner.animationImages = walkingMan
+            }
             self.runner.animationDuration = 0.5
             self.runner.startAnimating()
             isStarted = true
+            
         } else{
             timerSmall.invalidate()
              self.startButton.setImage(UIImage(named: "start"), forState: .Normal)
-           // startButton.setTitle("START", forState: .Normal)
             isStarted = false
             self.runner.stopAnimating()
+            if(isRunning){
+                self.runner.image = UIImage(named: "rrrr1")!
+            } else{
+                self.runner.image = UIImage(named: "rrrr3")!
+            }
+            
+            
         }
     }
     
@@ -68,6 +128,9 @@ class RunController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        confettiView = SAConfettiView(frame: self.view.bounds)
+        confettiView.colors = [UIColor(hex: "#FF7B7B"), UIColor(hex: "#657ECA"), UIColor(hex: "#FFEC7B")]
+
         super.view.autoresizingMask = .FlexibleBottomMargin
         //self.view.backgroundColor = UIColor(hex: "#FFF8D7")
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -127,7 +190,8 @@ class RunController: UIViewController {
         
         let y = self.view.bounds.height-110
         sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
-        //self.view.addSubview(sticker!)
+        
+                //self.view.addSubview(sticker!)
     }
     @IBAction func cancelButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -174,9 +238,9 @@ class RunController: UIViewController {
                 }
                 var timeStr: NSString
                 if(Float(train.temp[index])%60 == 0){
-                    timeStr = NSString(format:"%.1d", (train.temp[0])/60)
+                    timeStr = NSString(format:"%.1d", (train.temp[index])/60)
                 } else{
-                    timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
+                    timeStr = NSString(format:"%.1f", (Float(train.temp[index]))/60)
                 }
                 
                 stageLabel.text = "\(move) \(timeStr) \(minWord)"
@@ -185,12 +249,16 @@ class RunController: UIViewController {
                 smallTimer!.text = str as String
                 //runCircles.counterSmall = 0
                 runCircles.counterSmall = counter
+                runCircles.maxValueSmall = counter
+                let audio = "\(move)\(timeStr).mp3"
+                SKTAudio.sharedInstance().playSoundEffect(audio)
                 return
             }
             if(index == (train.index)-1){
                 timerSmall.invalidate()
                 ShareData.sharedInstance.increseNumberOfTrains()
-                //vxcv.text = " The training is over "
+                self.view.addSubview(confettiView)
+                confettiView.startConfetti()
                 return
             }
         }
@@ -237,15 +305,12 @@ class RunController: UIViewController {
         self.image.image = finalImage
         var frame:CGRect = self.sticker!.frame
         frame.origin.x = startedPositonForStiker
-        //self.sticker!.frame = frame
-        
     }
     
     func getMixedImg(width: CGFloat) -> UIImage {
         let size = CGSizeMake(width, 50)
         let scale = UIScreen.mainScreen().scale
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        //UIGraphicsBeginImageContext(size)
         var widthVid: CGFloat = 0
         for im in train.trainMenu {
             if(widthVid + im.size.width < width){
