@@ -10,6 +10,13 @@ class RunController: UIViewController {
     
     @IBAction func restartButtonPressed(sender: AnyObject) {
         loadTrain()
+        firstStart = true
+        counterBig = 0
+        isStarted = false
+        runCircles.counterBig = counterBig
+        runCircles.counterSmall = 0
+        runCircles.outlineColorSmall = UIColor(hex: "#E45875")
+        runCircles.smallCircleColor = UIColor(hex: "#FF7B7B")
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         self.image.image = self.getMixedImg(screenSize.width)
         var minWord: String
@@ -25,23 +32,14 @@ class RunController: UIViewController {
             timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
         }
         stageLabel.text = "run \(timeStr) \(minWord)"
-        self.runner.contentMode = .ScaleAspectFit
+        self.runner.stopAnimating()
         self.runner.image = UIImage(named: "rrrr1")!
         let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
-        
-        
         smallTimer!.text = str as String
-        
         let str2 = NSString(format:"%0.2d:%0.2d", counterBig/60,counterBig%60)
-       
         bigTimer!.text = str2 as String
-        
-        let imageName = "1.5walk"
-        let image = UIImage(named: imageName)
-        sticker = UIImageView(image: image!)
-        
-        let y = self.view.bounds.height-110
-        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
+        timerSmall.invalidate()
+        self.startButton.setImage(UIImage(named: "start"), forState: .Normal)
     }
     @IBOutlet weak var stageLabel: UILabel!
     @IBOutlet weak var runner: UIImageView!

@@ -1,6 +1,0 @@
-framework module BMCustomTableView {
-  umbrella header "BMCustomTableView-umbrella.h"
-
-  export *
-  module * { export * }
-}

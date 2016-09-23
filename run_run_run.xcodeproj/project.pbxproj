@@ -224,6 +224,7 @@
 				TargetAttributes = {
 					D35F1CC71C7105390084A902 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 35LC74S563;
 					};
 				};
 			};
@@ -455,10 +456,12 @@
 			baseConfigurationReference = F108FC8201A2D48916797CE5 /* Pods-run_run_run.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = run_run_run/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gala.run-run-run";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -467,10 +470,12 @@
 			baseConfigurationReference = D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = run_run_run/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gala.run-run-run";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
