@@ -1,4 +1,4 @@
-# ElasticTransition
+# ElasticTransition (Swift 3)
 
 [![Version](https://img.shields.io/cocoapods/v/ElasticTransition.svg?style=flat)](http://cocoapods.org/pods/ElasticTransition)
 [![License](https://img.shields.io/cocoapods/l/ElasticTransition.svg?style=flat)](http://cocoapods.org/pods/ElasticTransition)
@@ -8,14 +8,15 @@ A UIKit custom modal transition that simulates an elastic drag. Written in Swift
 
 ![demo](https://github.com/lkzhao/ElasticTransition/blob/master/imgs/demo.gif?raw=true)
 
-###Special thanks to [@taglia3](https://github.com/taglia3) for developing the [Objective-C version] (https://github.com/taglia3/ElasticTransition-ObjC). Check it out!
+###Thanks to Matt Garnett (@c-o-l-o-r) for converting ElasticTransition to Swift 3
+
+###Also, special thanks to [@taglia3](https://github.com/taglia3) for developing the [Objective-C version] (https://github.com/taglia3/ElasticTransition-ObjC). Check it out!
 
 ## Requirements
 
-* Xcode 7 or higher
+* Xcode 8 or higher
 * iOS 8.0 or higher
-* ARC
-* Swift 2.0
+* Swift 3.0
 
 ## Installation
 
@@ -23,12 +24,9 @@ A UIKit custom modal transition that simulates an elastic drag. Written in Swift
 
 ```ruby
 use_frameworks!
-pod "ElasticTransition", "~> 3.0.0"
+pod "MotionAnimation", :git => 'https://github.com/lkzhao/MotionAnimation.git', :branch => 'swift3'
+pod "ElasticTransition", :git => 'https://github.com/lkzhao/ElasticTransition.git', :branch => 'swift3'
 ```
-
-####Manual
-
-[Download(v2.0.1)](https://github.com/lkzhao/ElasticTransition/archive/2.0.1.zip) and add ElasticTransition folder into your project.
 
 ## Usage
 

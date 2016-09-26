@@ -14,19 +14,19 @@ class MenuButton: UIButton {
         
         
         let image  = UIImage(named: image) as UIImage?
-        self.imageView!.contentMode = .ScaleAspectFit
+        self.imageView!.contentMode = .scaleAspectFit
        // self.imageView!.image?.renderingMode = .AlwaysOriginal
-        self.setImage(image, forState: .Normal)
+        self.setImage(image, for: UIControlState())
         
         //self.backgroundColor = UIColor.blackColor()
         bezierPath = path;
 
         let mask = CAShapeLayer()
         mask.frame = self.bounds
-        mask.path = bezierPath.CGPath
+        mask.path = bezierPath.cgPath
         self.layer.mask = mask
         self.frame = frame
-        self.addTarget(self, action: #selector(MenuButton.buttonAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.addTarget(self, action: #selector(MenuButton.buttonAction(_:)), for: UIControlEvents.touchUpInside)
         
     }
     
@@ -34,7 +34,7 @@ class MenuButton: UIButton {
         super.init(frame: frame)
     }
     
-    func buttonAction(sender: UIButton) {
+    func buttonAction(_ sender: UIButton) {
         action?(sender)
     }
     
@@ -42,10 +42,10 @@ class MenuButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
         //return super.hitTest(point, withEvent: event)
-        if bezierPath.containsPoint(point) {
+        if bezierPath.contains(point) {
             return self
         }
         return nil

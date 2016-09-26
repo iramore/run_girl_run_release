@@ -13,13 +13,13 @@ class UserData: NSObject,NSCoding {
     // MARK: Properties
     
     var daysOfWeek: [Int]
-    var completedTrainsDates: [NSDate]?
+    var completedTrainsDates: [Date]?
     
     
     // MARK: Archiving Paths
     
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains:.UserDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("run_user_data")
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in:.userDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("run_user_data")
     
     
     // MARK: Types
@@ -37,7 +37,7 @@ class UserData: NSObject,NSCoding {
         super.init()
     }
     
-    init?(daysOfWeek: [Int], completedTrainsDates: [NSDate]) {
+    init?(daysOfWeek: [Int], completedTrainsDates: [Date]) {
         // Initialize stored properties.
         self.daysOfWeek = daysOfWeek
         self.completedTrainsDates = completedTrainsDates
@@ -45,15 +45,15 @@ class UserData: NSObject,NSCoding {
     }
     
     // MARK: NSCoding
-    func encodeWithCoder(aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder) {
 
-        aCoder.encodeObject(daysOfWeek, forKey: PropertyKey.daysOfWeekKey)
-        aCoder.encodeObject(completedTrainsDates, forKey: PropertyKey.completedTrainsDatesKey)
+        aCoder.encode(daysOfWeek, forKey: PropertyKey.daysOfWeekKey)
+        aCoder.encode(completedTrainsDates, forKey: PropertyKey.completedTrainsDatesKey)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let daysOfWeek = aDecoder.decodeObjectForKey(PropertyKey.daysOfWeekKey) as! [Int]
-        if let completedTrainsDates = aDecoder.decodeObjectForKey(PropertyKey.completedTrainsDatesKey) as? [NSDate] {
+        let daysOfWeek = aDecoder.decodeObject(forKey: PropertyKey.daysOfWeekKey) as! [Int]
+        if let completedTrainsDates = aDecoder.decodeObject(forKey: PropertyKey.completedTrainsDatesKey) as? [Date] {
             self.init(daysOfWeek: daysOfWeek, completedTrainsDates: completedTrainsDates)
         } else {
             self.init(daysOfWeek: daysOfWeek)

@@ -8,7 +8,7 @@ class RunController: UIViewController {
     var smallTimer: UILabel?
     var bigTimer: UILabel?
     
-    @IBAction func restartButtonPressed(sender: AnyObject) {
+    @IBAction func restartButtonPressed(_ sender: AnyObject) {
         loadTrain()
         firstStart = true
         counterBig = 0
@@ -17,7 +17,7 @@ class RunController: UIViewController {
         runCircles.counterSmall = 0
         runCircles.outlineColorSmall = UIColor(hex: "#E45875")
         runCircles.smallCircleColor = UIColor(hex: "#FF7B7B")
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenSize: CGRect = UIScreen.main.bounds
         self.image.image = self.getMixedImg(screenSize.width)
         var minWord: String
         if(Float(train.temp[0])/60 == 1){
@@ -26,7 +26,7 @@ class RunController: UIViewController {
             minWord = "minutes"
         }
         var timeStr: NSString
-        if(Float(train.temp[0])%60 == 0){
+        if(Float(train.temp[0]).truncatingRemainder(dividingBy: 60) == 0){
             timeStr = NSString(format:"%0.1d", (train.temp[0])/60)
         } else{
             timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
@@ -39,21 +39,21 @@ class RunController: UIViewController {
         let str2 = NSString(format:"%0.2d:%0.2d", counterBig/60,counterBig%60)
         bigTimer!.text = str2 as String
         timerSmall.invalidate()
-        self.startButton.setImage(UIImage(named: "start"), forState: .Normal)
+        self.startButton.setImage(UIImage(named: "start"), for: UIControlState())
     }
     @IBOutlet weak var stageLabel: UILabel!
     @IBOutlet weak var runner: UIImageView!
     
     @IBOutlet weak var runCircles: RunCircles!
     
-    @IBAction func closeButtonPressed(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeButtonPressed(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
     @IBOutlet weak var image: UIImageView!
     var confettiView: SAConfettiView!
     
     
-    var timerSmall = NSTimer()
+    var timerSmall = Timer()
     var train: Train = Train_data.trains[((ShareData.sharedInstance.userData?.completedTrainsDates?.count)!+1)]!
     var currentStage = 0
     var counter: Int = 0
@@ -73,20 +73,20 @@ class RunController: UIViewController {
         counter = train.temp[0]
         counter *= 100
         runCircles.maxValueSmall = counter
-        let value = train.temp.reduce(0, combine: +)
+        let value = train.temp.reduce(0, +)
         runCircles.maxValueBig = value
         let firstImage: CGSize = train.trainMenu[0].size
         imagePos = firstImage.width
     }
     
     
-    @IBAction func startButtonPressed(sender: AnyObject) {
+    @IBAction func startButtonPressed(_ sender: AnyObject) {
         if(!isStarted){
             
             if(firstStart){
                 firstStart = false
                 var timeStr: NSString
-                if(Float(train.temp[0])%60 == 0){
+                if(Float(train.temp[0]).truncatingRemainder(dividingBy: 60) == 0){
                     timeStr = NSString(format:"%.1d", (train.temp[index])/60)
                 } else{
                     timeStr = NSString(format:"%.1f", (Float(train.temp[index]))/60)
@@ -95,8 +95,8 @@ class RunController: UIViewController {
                 SKTAudio.sharedInstance().playSoundEffect(audio)
             }
             timerSmall.invalidate()
-            timerSmall = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(RunController.timerActionSmall), userInfo:nil ,   repeats: true)
-            self.startButton.setImage(UIImage(named: "pause"), forState: .Normal)
+            timerSmall = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(RunController.timerActionSmall), userInfo:nil ,   repeats: true)
+            self.startButton.setImage(UIImage(named: "pause"), for: UIControlState())
            // startButton.setTitle("PAUSE", forState: .Normal)
             if(isRunning){
             self.runner.animationImages = runningMan
@@ -109,7 +109,7 @@ class RunController: UIViewController {
             
         } else{
             timerSmall.invalidate()
-             self.startButton.setImage(UIImage(named: "start"), forState: .Normal)
+             self.startButton.setImage(UIImage(named: "start"), for: UIControlState())
             isStarted = false
             self.runner.stopAnimating()
             if(isRunning){
@@ -129,9 +129,9 @@ class RunController: UIViewController {
         confettiView = SAConfettiView(frame: self.view.bounds)
         confettiView.colors = [UIColor(hex: "#FF7B7B"), UIColor(hex: "#657ECA"), UIColor(hex: "#FFEC7B")]
 
-        super.view.autoresizingMask = .FlexibleBottomMargin
+        super.view.autoresizingMask = .flexibleBottomMargin
         //self.view.backgroundColor = UIColor(hex: "#FFF8D7")
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenSize: CGRect = UIScreen.main.bounds
         screenWidth = screenSize.width
         loadTrain()
         self.image.image = self.getMixedImg(screenSize.width)
@@ -142,44 +142,44 @@ class RunController: UIViewController {
             minWord = "minutes"
         }
         var timeStr: NSString
-        if(Float(train.temp[0])%60 == 0){
+        if(Float(train.temp[0]).truncatingRemainder(dividingBy: 60) == 0){
             timeStr = NSString(format:"%0.1d", (train.temp[0])/60)
         } else{
             timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
         }
         stageLabel.text = "run \(timeStr) \(minWord)"
-        self.runner.contentMode = .ScaleAspectFit
+        self.runner.contentMode = .scaleAspectFit
         self.runner.image = UIImage(named: "rrrr1")!
         let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
         
-        smallTimer = UILabel(frame: CGRectMake(0, 0, 100, 10))
+        smallTimer = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 10))
         smallTimer!.translatesAutoresizingMaskIntoConstraints = false
         
-        smallTimer!.textAlignment = NSTextAlignment.Center
+        smallTimer!.textAlignment = NSTextAlignment.center
         smallTimer!.text = str as String
         smallTimer!.font = UIFont(name: "04b_19", size: 18.0)
         smallTimer!.textColor = UIColor(hex: "#54504C")
         self.runCircles.addSubview(smallTimer!)
         let str2 = NSString(format:"%0.2d:%0.2d", counterBig/60,counterBig%60)
-        bigTimer = UILabel(frame: CGRectMake(0, 0, 100, 10))
+        bigTimer = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 10))
         bigTimer!.translatesAutoresizingMaskIntoConstraints = false
-        bigTimer!.textAlignment = NSTextAlignment.Center
+        bigTimer!.textAlignment = NSTextAlignment.center
         bigTimer!.text = str2 as String
         
         bigTimer!.font = UIFont(name: "04b_19", size: 32.0)
         bigTimer!.textColor = UIColor(hex: "#54504C")
         self.runCircles.addSubview(bigTimer!)
         
-        let horizontalConstraint = NSLayoutConstraint(item: smallTimer!, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: runCircles, attribute: NSLayoutAttribute.CenterX, multiplier: 0.5, constant: 0)
+        let horizontalConstraint = NSLayoutConstraint(item: smallTimer!, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerX, multiplier: 0.5, constant: 0)
         runCircles.addConstraint(horizontalConstraint)
         
-        let verticalConstraint = NSLayoutConstraint(item: smallTimer!, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: runCircles, attribute: NSLayoutAttribute.CenterY, multiplier: 1.5, constant: 0)
+        let verticalConstraint = NSLayoutConstraint(item: smallTimer!, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerY, multiplier: 1.5, constant: 0)
         runCircles.addConstraint(verticalConstraint)
         
-        let horizontalConstraint2 = NSLayoutConstraint(item: bigTimer!, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: runCircles, attribute: NSLayoutAttribute.CenterX, multiplier: 7/6, constant: 0)
+        let horizontalConstraint2 = NSLayoutConstraint(item: bigTimer!, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerX, multiplier: 7/6, constant: 0)
         view.addConstraint(horizontalConstraint2)
         
-        let verticalConstraint2 = NSLayoutConstraint(item: bigTimer!, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: runCircles, attribute: NSLayoutAttribute.CenterY, multiplier: 5/6, constant: 0)
+        let verticalConstraint2 = NSLayoutConstraint(item: bigTimer!, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerY, multiplier: 5/6, constant: 0)
         view.addConstraint(verticalConstraint2)
         
         let imageName = "1.5walk"
@@ -191,8 +191,8 @@ class RunController: UIViewController {
         
                 //self.view.addSubview(sticker!)
     }
-    @IBAction func cancelButtonPressed(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func cancelButtonPressed(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -235,7 +235,7 @@ class RunController: UIViewController {
                     minWord = "minutes"
                 }
                 var timeStr: NSString
-                if(Float(train.temp[index])%60 == 0){
+                if(Float(train.temp[index]).truncatingRemainder(dividingBy: 60) == 0){
                     timeStr = NSString(format:"%.1d", (train.temp[index])/60)
                 } else{
                     timeStr = NSString(format:"%.1f", (Float(train.temp[index]))/60)
@@ -267,23 +267,23 @@ class RunController: UIViewController {
     }
     
     func updateTrainControlImage(){
-        let size = CGSizeMake(screenWidth, 50)
-        let scale = UIScreen.mainScreen().scale
+        let size = CGSize(width: screenWidth, height: 50)
+        let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         var widthVid: CGFloat = 0
         let percent: CGFloat = (CGFloat((train.temp[index])*100-counter))/CGFloat((train.temp[index]*100))
         if(percent < 1){
             let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train.trainMenu[index]), percent: percent)
-            croppedImage.drawInRect(CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
+            croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
             widthVid+=croppedImage.size.width
         }
         let startedPositonForStiker = widthVid
         for i in self.index+1 ..< train.index {
             if(widthVid + train.trainMenu[i].size.width < screenWidth){
-                train.trainMenu[i].drawInRect(CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
+                train.trainMenu[i].draw(in: CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
                 widthVid+=train.trainMenu[i].size.width
             } else{
-                train.trainMenu[i].drawInRect(CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
+                train.trainMenu[i].draw(in: CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
                 break
             }
             
@@ -305,24 +305,24 @@ class RunController: UIViewController {
         frame.origin.x = startedPositonForStiker
     }
     
-    func getMixedImg(width: CGFloat) -> UIImage {
-        let size = CGSizeMake(width, 50)
-        let scale = UIScreen.mainScreen().scale
+    func getMixedImg(_ width: CGFloat) -> UIImage {
+        let size = CGSize(width: width, height: 50)
+        let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         var widthVid: CGFloat = 0
         for im in train.trainMenu {
             if(widthVid + im.size.width < width){
-                im.drawInRect(CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
+                im.draw(in: CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
                 widthVid+=im.size.width
             } else{
-                im.drawInRect(CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
+                im.draw(in: CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
                 break
             }
         }
         
         let finalImage2 = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return finalImage2
+        return finalImage2!
     }
     
     

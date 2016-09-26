@@ -15,11 +15,11 @@ let π:CGFloat = CGFloat(M_PI)
   }
     
     var maxValue:Int = 10
-  @IBInspectable var outlineColor: UIColor = UIColor.blueColor()
-  @IBInspectable var counterColor: UIColor = UIColor.orangeColor()
+  @IBInspectable var outlineColor: UIColor = UIColor.blue
+  @IBInspectable var counterColor: UIColor = UIColor.orange
     @IBInspectable var arcWidth: CGFloat = 45.0
   
-  override func drawRect(rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     
     let center = CGPoint(x:bounds.width/2, y: bounds.height/2)
     
@@ -32,7 +32,7 @@ let π:CGFloat = CGFloat(M_PI)
     
     
     
-    var path = UIBezierPath(arcCenter: center,
+    let path = UIBezierPath(arcCenter: center,
       radius: radius/2 - arcWidth/2,
       startAngle: startAngle,
       endAngle: endAngle,
@@ -50,19 +50,19 @@ let π:CGFloat = CGFloat(M_PI)
        let outlineEndAngle = arcLengthPerGlass * CGFloat(counter) + startAngle
     
    
-    var outlinePath = UIBezierPath(arcCenter: center,
+    let outlinePath = UIBezierPath(arcCenter: center,
       radius: bounds.width/2 - 2.5,
       startAngle: startAngle,
       endAngle: outlineEndAngle,
       clockwise: true)
     
-        outlinePath.addArcWithCenter(center,
+        outlinePath.addArc(withCenter: center,
       radius: bounds.width/2 - arcWidth + 2.5,
       startAngle: outlineEndAngle,
       endAngle: startAngle,
       clockwise: false)
 
-    outlinePath.closePath()
+    outlinePath.close()
     
     outlineColor.setStroke()
     outlineColor.setFill()

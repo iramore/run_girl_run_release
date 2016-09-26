@@ -5,9 +5,9 @@ platform :ios, ‘9.3’
  use_frameworks!
 
 target 'run_run_run' do
-pod 'CVCalendar', '= 1.2.9’
-pod 'ActionSheetPicker-3.0', '~> 2.0.5'
-pod 'ElasticTransition', '~> 3.0.0'
+pod 'CVCalendar', '~> 1.4.0’
+pod 'MotionAnimation', :git => 'https://github.com/lkzhao/MotionAnimation.git', :branch => 'swift3'
+pod 'ElasticTransition', :git => 'https://github.com/lkzhao/ElasticTransition.git', :branch => 'swift3'
 pod 'BMCustomTableView'
 pod 'SAConfettiView'
 

@@ -8,7 +8,6 @@
 
 import UIKit
 import CVCalendar
-import ActionSheetPicker_3_0
 import ElasticTransition
 import Foundation
 
@@ -30,25 +29,25 @@ class CalViewController: UIViewController {
     var animationFinished = true
     let shareData = ShareData.sharedInstance
     var trainDays = 0
-    var endDate: NSDate?
-    var convertedToday: NSDate?
+    var endDate: Date?
+    var convertedToday: Date?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        monthLabel.text = CVDate(date: NSDate()).globalDescription
+        monthLabel.text = CVDate(date: Date()).globalDescription
         transition.sticky = true
         transition.showShadow = true
         transition.panThreshold = 0.3
-        transition.transformType = .Rotate
+        transition.transformType = .rotate
         
         let progressPercent = CGFloat(((shareData.userData)!.completedTrainsDates?.count)!) / CGFloat(Train_data.numberOfTrains)
         let image = getMixedImg(runner.frame.width * progressPercent)
-        runner.contentMode = .Left
+        runner.contentMode = .left
         runner.image = image
         runner.layer.cornerRadius = 9
         runner.layer.borderWidth = 3
-        runner.layer.borderColor = UIColor(hex: "#FF7B7B").CGColor
+        runner.layer.borderColor = UIColor(hex: "#FF7B7B").cgColor
         runner.layer.masksToBounds = true
         
         progressLabel.text = "Completed trainings: \(((shareData.userData)!.completedTrainsDates?.count)!) / 27"
@@ -71,19 +70,19 @@ class CalViewController: UIViewController {
     }
     
     
-    @IBAction func settingsTouched(sender: AnyObject) {
-        transition.edge = .Bottom
+    @IBAction func settingsTouched(_ sender: AnyObject) {
+        transition.edge = .bottom
         transition.startingPoint = sender.center
-        performSegueWithIdentifier("settings", sender: self)
+        performSegue(withIdentifier: "settings", sender: self)
     }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let vc = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination
         vc.transitioningDelegate = transition
-        vc.modalPresentationStyle = .Custom
+        vc.modalPresentationStyle = .custom
     }
     
-    @IBAction func closeButtonPressed(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func closeButtonPressed(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -91,12 +90,12 @@ class CalViewController: UIViewController {
 extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     
     func presentationMode() -> CalendarMode {
-        return .MonthView
+        return .monthView
     }
     
-    func firstWeekday() -> CVCalendarWeekday {
-        return .Monday
-    }
+    //func firstWeekday() -> CVCalendarWeekday {
+    //    return .Monday
+    //}
     
     func shouldShowWeekdaysOut() -> Bool {
         return true
@@ -132,7 +131,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
             var ringLayer: CAShapeLayer!
             let ringLineWidth: CGFloat = 4.0
             var ringLineColour : UIColor
-            if(dayView.date.convertedDate()! > NSDate() || (dayView.date.convertedDate()! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!) ){
+            if(dayView.date.convertedDate()! > Date() || (dayView.date.convertedDate()! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!) ){
                 ringLineColour = UIColor(hex: "#657ECA") //blue
             } else{
                 ringLineColour =  UIColor(hex: "#FF7B7B") //brick
@@ -144,23 +143,23 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
             let diameter: CGFloat = (newView.bounds.width) - ringSpacing
             let radius: CGFloat = diameter / 2.0
             
-            let rect = CGRectMake(newView.frame.midX-radius, newView.frame.midY-radius-ringVerticalOffset, diameter, diameter)
+            let rect = CGRect(x: newView.frame.midX-radius, y: newView.frame.midY-radius-ringVerticalOffset, width: diameter, height: diameter)
             
             ringLayer = CAShapeLayer()
             newView.layer.addSublayer(ringLayer)
             
             ringLayer.fillColor = nil
             ringLayer.lineWidth = ringLineWidth
-            ringLayer.strokeColor = ringLineColour.CGColor
+            ringLayer.strokeColor = ringLineColour.cgColor
             
             let ringLineWidthInset: CGFloat = CGFloat(ringLineWidth/2.0) + ringInsetWidth
-            let ringRect: CGRect = CGRectInset(rect, ringLineWidthInset, ringLineWidthInset)
-            let centrePoint: CGPoint = CGPointMake(ringRect.midX, ringRect.midY)
+            let ringRect: CGRect = rect.insetBy(dx: ringLineWidthInset, dy: ringLineWidthInset)
+            let centrePoint: CGPoint = CGPoint(x: ringRect.midX, y: ringRect.midY)
             let startAngle: CGFloat = CGFloat(-π/2.0)
             let endAngle: CGFloat = CGFloat(π * 2.0) + startAngle
             let ringPath: UIBezierPath = UIBezierPath(arcCenter: centrePoint, radius: ringRect.width/2.0, startAngle: startAngle, endAngle: endAngle, clockwise: true)
             
-            ringLayer.path = ringPath.CGPath
+            ringLayer.path = ringPath.cgPath
             ringLayer.frame = newView.layer.bounds
             
             return newView
@@ -179,7 +178,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         if ((shareData.userData)!.daysOfWeek.contains(dayView.weekdayIndex-1))
         {
             if  let _ = dayView.date{
-                if(dayView.date.convertedDate()! > NSDate() && dayView.date.convertedDate()! < endDate! || (dayView.date.convertedDate()! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!)){
+                if(dayView.date.convertedDate()! > Date() && dayView.date.convertedDate()! < endDate! || (dayView.date.convertedDate()! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!)){
                     return true
                 }
             
@@ -188,7 +187,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         return false
     }
     
-    func toMondayWeekStart(weekDaySun: Int) -> Int{
+    func toMondayWeekStart(_ weekDaySun: Int) -> Int{
         if(weekDaySun>=2){
             return weekDaySun - 1
         } else{
@@ -197,111 +196,111 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
     }
     
     
-    func getDayOfWeek(date: NSDate)->Int{
-        let myCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
-        let myComponents = myCalendar?.components(.NSWeekdayCalendarUnit, fromDate: date)
+    func getDayOfWeek(_ date: Date)->Int{
+        let myCalendar = Calendar(identifier: NSGregorianCalendar)
+        let myComponents = (myCalendar as NSCalendar?)?.components(.NSWeekdayCalendarUnit, from: date)
         let weekDay = myComponents?.weekday
         return weekDay!
     }
     
     func setEndDate() {
-        let calendar = NSCalendar.currentCalendar()
-        let comps = Manager.componentsForDate(NSDate())
+        let calendar = Calendar.current
+        var comps = Manager.componentsForDate(Date())
         
         
-        comps.year = NSCalendar.currentCalendar().components(NSCalendarUnit.Year, fromDate: NSDate()).year
-        comps.month = NSCalendar.currentCalendar().components(NSCalendarUnit.Month, fromDate: NSDate()).month
-        comps.weekOfMonth = NSCalendar.currentCalendar().components(NSCalendarUnit.WeekOfMonth, fromDate: NSDate()).weekOfMonth
-        comps.day = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: NSDate()).day
+        comps.year = Calendar.currentCalendar().components(Calendar.Unit.Year, fromDate: Date()).year
+        comps.month = Calendar.currentCalendar().components(Calendar.Unit.Month, fromDate: Date()).month
+        comps.weekOfMonth = Calendar.currentCalendar().components(Calendar.Unit.WeekOfMonth, fromDate: Date()).weekOfMonth
+        comps.day = Calendar.currentCalendar().components(Calendar.Unit.Day, fromDate: Date()).day
         
         convertedToday = calendar.dateFromComponents(comps)
         
         
-        let today = NSDate()
+        let today = Date()
         
         let val = 27 - ((shareData.userData)!.completedTrainsDates?.count)!
         let weeks = val/(shareData.userData)!.daysOfWeek.count
         var tail = val%(shareData.userData)!.daysOfWeek.count
-        let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Weekday, fromDate: today)
+        let components = (Calendar.current as NSCalendar).components(Calendar.Unit.weekday, from: today)
         if( !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!
             && (shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday)-1)
             ){
             tail -= 1
         }
         
-        let endWeek = NSCalendar.currentCalendar()
-            .dateByAddingUnit(
-                .WeekOfMonth,
+        let endWeek = (Calendar.current as NSCalendar)
+            .date(
+                byAdding: .weekOfMonth,
                 value: weeks,
-                toDate: today,
+                to: today,
                 options: []
         )
-        var day : NSDate = endWeek!
+        var day : Date = endWeek!
         while(tail > 0){
-            day = NSCalendar.currentCalendar()
-                .dateByAddingUnit(
-                    .Day,
+            day = (Calendar.current as NSCalendar)
+                .date(
+                    byAdding: .day,
                     value: 1,
-                    toDate: day,
+                    to: day,
                     options: []
                 )!
-            let components = NSCalendar.currentCalendar().components(NSCalendarUnit.Weekday, fromDate: day)
-            if((shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday)-1)){
+            let components = (Calendar.current as NSCalendar).components(Calendar.Unit.weekday, from: day)
+            if((shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday!)-1)){
                 tail -= 1
             }
         }
         endDate = day
     }
     
-    func getMixedImg(width: CGFloat) -> UIImage {
-        let size = CGSizeMake(width, 24)
-        let scale = UIScreen.mainScreen().scale
+    func getMixedImg(_ width: CGFloat) -> UIImage {
+        let size = CGSize(width: width, height: 24)
+        let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         var widthVid: CGFloat = 0
         let im: UIImage = UIImage(named: "calMenuRunner")!
         while(widthVid < width){
-            im.drawInRect(CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
+            im.draw(in: CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
             widthVid+=im.size.width
         }
         
         
         let finalImage2 = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return finalImage2
+        return finalImage2!
     }
 
 
     
-    func presentedDateUpdated(date: CVDate) {
+    func presentedDateUpdated(_ date: CVDate) {
         if monthLabel.text != date.globalDescription && self.animationFinished {
             let updatedMonthLabel = UILabel()
             updatedMonthLabel.textColor = monthLabel.textColor
             updatedMonthLabel.font = monthLabel.font
-            updatedMonthLabel.textAlignment = .Center
+            updatedMonthLabel.textAlignment = .center
             updatedMonthLabel.text = date.globalDescription
             updatedMonthLabel.sizeToFit()
             updatedMonthLabel.alpha = 0
             updatedMonthLabel.center = self.monthLabel.center
             
             let offset = CGFloat(48)
-            updatedMonthLabel.transform = CGAffineTransformMakeTranslation(0, offset)
-            updatedMonthLabel.transform = CGAffineTransformMakeScale(1, 0.1)
+            updatedMonthLabel.transform = CGAffineTransform(translationX: 0, y: offset)
+            updatedMonthLabel.transform = CGAffineTransform(scaleX: 1, y: 0.1)
             
-            UIView.animateWithDuration(0.35, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+            UIView.animate(withDuration: 0.35, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
                 self.animationFinished = false
-                self.monthLabel.transform = CGAffineTransformMakeTranslation(0, -offset)
-                self.monthLabel.transform = CGAffineTransformMakeScale(1, 0.1)
+                self.monthLabel.transform = CGAffineTransform(translationX: 0, y: -offset)
+                self.monthLabel.transform = CGAffineTransform(scaleX: 1, y: 0.1)
                 self.monthLabel.alpha = 0
                 
                 updatedMonthLabel.alpha = 1
-                updatedMonthLabel.transform = CGAffineTransformIdentity
+                updatedMonthLabel.transform = CGAffineTransform.identity
                 
             }) { _ in
                 
                 self.animationFinished = true
                 self.monthLabel.frame = updatedMonthLabel.frame
                 self.monthLabel.text = updatedMonthLabel.text
-                self.monthLabel.transform = CGAffineTransformIdentity
+                self.monthLabel.transform = CGAffineTransform.identity
                 self.monthLabel.alpha = 1
                 updatedMonthLabel.removeFromSuperview()
             }
@@ -313,12 +312,12 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
     
 }
 // MARK: Date comporasion
-public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs === rhs || lhs.compare(rhs) == .OrderedSame
+public func ==(lhs: Date, rhs: Date) -> Bool {
+    return lhs === rhs || lhs.compare(rhs) == .orderedSame
 }
 
-public func <(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.compare(rhs) == .OrderedAscending
+public func <(lhs: Date, rhs: Date) -> Bool {
+    return lhs.compare(rhs) == .orderedAscending
 }
 
-extension NSDate: Comparable { }
+extension Date: Comparable { }

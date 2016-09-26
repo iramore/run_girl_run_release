@@ -4,10 +4,10 @@ import Foundation
 
 @IBDesignable class RunCircles : UIView{
    
-    @IBInspectable var bigCircleColor: UIColor = UIColor.blueColor()
-    @IBInspectable var smallCircleColor: UIColor = UIColor.orangeColor()
-    @IBInspectable var outlineColorSmall: UIColor = UIColor.blueColor()
-    @IBInspectable var outlineColorBig: UIColor = UIColor.blueColor()
+    @IBInspectable var bigCircleColor: UIColor = UIColor.blue
+    @IBInspectable var smallCircleColor: UIColor = UIColor.orange
+    @IBInspectable var outlineColorSmall: UIColor = UIColor.blue
+    @IBInspectable var outlineColorBig: UIColor = UIColor.blue
     var arcWidthSmall: CGFloat = 27.0
     var maxValueSmall:Int = 0
     var counterSmall: Int = 0 {
@@ -28,9 +28,9 @@ import Foundation
     }
 
 
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
-        let circlePath = UIBezierPath(ovalInRect: CGRectMake(bounds.width - bounds.width*(5/6)+3.75,  3.75, bounds.width*(5/6)-7.5, bounds.width*(5/6)-7.5))
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        let circlePath = UIBezierPath(ovalIn: CGRect(x: bounds.width - bounds.width*(5/6)+3.75,  y: 3.75, width: bounds.width*(5/6)-7.5, height: bounds.width*(5/6)-7.5))
        
         bigCircleColor.setFill()
         
@@ -57,8 +57,8 @@ import Foundation
         outlinePathBig.stroke()
 
         
-        let circlePath2 = UIBezierPath(ovalInRect: CGRectMake(2.5,  bounds.width*(1/2)+2.5, bounds.width*(1/2)-5, bounds.width*(1/2)-5))
-        let trColor = smallCircleColor.colorWithAlphaComponent(0.7)
+        let circlePath2 = UIBezierPath(ovalIn: CGRect(x: 2.5,  y: bounds.width*(1/2)+2.5, width: bounds.width*(1/2)-5, height: bounds.width*(1/2)-5))
+        let trColor = smallCircleColor.withAlphaComponent(0.7)
         trColor.setFill()
         circlePath2.fill()
         
