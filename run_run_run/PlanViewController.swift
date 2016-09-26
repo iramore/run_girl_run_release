@@ -9,7 +9,6 @@
 import UIKit
 import ElasticTransition
 import BMCustomTableView
-import RandomColorSwift
 
 class CustomTableViewCell: UITableViewCell {
     
@@ -36,7 +35,7 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     //MARK: Variables
-    var colors: [UIColor]!
+    //var colors: [UIColor]!
     
     //MARK: Outlets
     @IBOutlet weak var customTableView: BMCustomTableView!
@@ -45,7 +44,7 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        colors = randomColorsCount(27, hue: .Pink, luminosity: .Light)
+        //colors = randomColorsCount(27, hue: .Pink, luminosity: .Light)
         self.customTableView.contentInset = UIEdgeInsetsMake(0, 0, 25, 0)
         //customTableView.frame = self.view.frame;
     }
@@ -60,7 +59,7 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return colors.count
+        return 27
         
     }
     @IBAction func dismissButtonPressed(sender: AnyObject) {

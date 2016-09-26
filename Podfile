@@ -5,11 +5,19 @@ platform :ios, ‘9.3’
  use_frameworks!
 
 target 'run_run_run' do
-pod 'CVCalendar', '~> 1.4.0’
+pod 'CVCalendar', '= 1.2.9’
 pod 'ActionSheetPicker-3.0', '~> 2.0.5'
 pod 'ElasticTransition', '~> 3.0.0'
 pod 'BMCustomTableView'
 pod 'SAConfettiView'
 
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0'
+        end
+    end
 end
 

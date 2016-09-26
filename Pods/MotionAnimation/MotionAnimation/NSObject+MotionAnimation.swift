@@ -8,62 +8,20 @@
 
 import UIKit
 
-class MotionAnimationMultiValueObserver:NSObject, MotionAnimatorObserver{
-  var observedKeys:[NSObject:[String:MotionAnimationObserverKey]]!
-
-  var _updatedKeys:[NSObject:[String]] = [:]
-
-  var callback:((updatedObjectAndKeys:[NSObject:[String]])->Void)!
-  func object(object:NSObject, didUpdateKey key:String){
-    if observedKeys[object]?[key] != nil{
-      if _updatedKeys[object] == nil{
-        _updatedKeys[object] = []
-      }
-      _updatedKeys[object]!.append(key)
-    }
-  }
-  func cleanup(){
-    for (o, callbacks) in observedKeys{
-      for (key, observerKey) in callbacks{
-        o.m_removeCallback(key, observerKey: observerKey)
-      }
-    }
-  }
-  func animatorDidUpdate(animator: MotionAnimator, dt: CGFloat) {
-    callback(updatedObjectAndKeys:_updatedKeys)
-    _updatedKeys = [:]
-  }
-}
-
 public extension NSObject{
   private struct m_associatedKeys {
     static var m_propertyStates = "m_propertyStates_key"
-    static var m_multiValueObservers = "m_multiValueObservers_key"
   }
-  private var m_propertyStates:[String:MotionAnimationPropertyState]{
+  // use NSMutableDictionary since swift dictionary requires a O(n) dynamic cast even when using as!
+  private var m_propertyStates:NSMutableDictionary{
     get {
-      if let rtn = objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as? [String:MotionAnimationPropertyState]{
-        return rtn
+      // never use `as?` in this case. it is very expensive
+      let rtn = objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates)
+      if rtn != nil{
+        return rtn as! NSMutableDictionary
       }
-      self.m_propertyStates = [:]
-      return objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as! [String:MotionAnimationPropertyState]
-    }
-    set {
-      objc_setAssociatedObject(
-        self,
-        &m_associatedKeys.m_propertyStates,
-        newValue,
-        .OBJC_ASSOCIATION_RETAIN_NONATOMIC
-      )
-    }
-  }
-  private var m_multiValueObservers:[MotionAnimationObserverKey:MotionAnimationMultiValueObserver]{
-    get {
-      if let rtn = objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as? [MotionAnimationObserverKey:MotionAnimationMultiValueObserver]{
-        return rtn
-      }
-      self.m_propertyStates = [:]
-      return objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as! [MotionAnimationObserverKey:MotionAnimationMultiValueObserver]
+      self.m_propertyStates = NSMutableDictionary()
+      return objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as! NSMutableDictionary
     }
     set {
       objc_setAssociatedObject(
@@ -77,127 +35,79 @@ public extension NSObject{
   
   private func getPropertyState(key:String) -> MotionAnimationPropertyState{
     if m_propertyStates[key] == nil {
-      m_propertyStates[key] = MotionAnimationPropertyState(obj: self, keyPath: key)
+      if let animatable = self as? MotionAnimationAnimatable, (getter, setter) = animatable.defaultGetterAndSetterForKey(key){
+        m_propertyStates[key] = MotionAnimationPropertyState(getter: getter, setter: setter)
+      } else {
+        fatalError("\(key) is not animatable, you can define customAnimation property via m_defineCustomProperty or conform to MotionAnimationAnimatable")
+      }
     }
-    return m_propertyStates[key]!
+    return m_propertyStates[key] as! MotionAnimationPropertyState
   }
   
   // define custom animatable property
   func m_setValues(values:[CGFloat], forCustomProperty key:String){
     getPropertyState(key).setValues(values)
   }
-  func m_defineCustomProperty(key:String, initialValues:[CGFloat], valueUpdateCallback:CGFloatValuesSetterBlock){
+  func m_defineCustomProperty<T:MotionAnimatableProperty>(key:String, initialValues:T, valueUpdateCallback:(T)->Void){
     if m_propertyStates[key] != nil{
       return
     }
-    m_propertyStates[key] = MotionAnimationPropertyState(values: initialValues)
-    getPropertyState(key).addValueUpdateCallback(.CGFloatMultiObserver(valueUpdateCallback))
+    m_propertyStates[key] = MotionAnimationPropertyState(values: initialValues.CGFloatValues)
+    getPropertyState(key).addValueUpdateCallback({ values in
+      valueUpdateCallback(T.fromCGFloatValues(values))
+    })
+  }
+  func m_defineCustomProperty(key:String, getter:CGFloatValueBlock, setter:CGFloatValueBlock){
+    if m_propertyStates[key] != nil{
+      return
+    }
+    m_propertyStates[key] = MotionAnimationPropertyState(getter: getter, setter: setter)
+  }
+  func m_removeAnimationForKey(key:String){
+    getPropertyState(key).stop()
   }
   
   // add callbacks
-  func m_addValueUpdateCallback(key:String, valueUpdateCallback:MotionAnimationValueObserver) -> MotionAnimationObserverKey{
-    return getPropertyState(key).addValueUpdateCallback(valueUpdateCallback)
+  func m_addValueUpdateCallback<T:MotionAnimatableProperty>(key:String, valueUpdateCallback:(T)->Void) -> MotionAnimationObserverKey{
+    return getPropertyState(key).addValueUpdateCallback({ values in
+      valueUpdateCallback(T.fromCGFloatValues(values))
+    })
   }
-  func m_addVelocityUpdateCallback(key:String, velocityUpdateCallback:MotionAnimationValueObserver) -> MotionAnimationObserverKey{
-    return getPropertyState(key).addVelocityUpdateCallback(velocityUpdateCallback)
+  func m_addVelocityUpdateCallback<T:MotionAnimatableProperty>(key:String, velocityUpdateCallback:(T)->Void) -> MotionAnimationObserverKey{
+    return getPropertyState(key).addVelocityUpdateCallback({ values in
+      velocityUpdateCallback(T.fromCGFloatValues(values))
+    })
   }
-  static func m_addCallbackForAnyValueUpdated(objects:[NSObject:[String]], callback:(([NSObject:[String]]) ->Void) ) -> MotionAnimationObserverKey{
-    let multiValueOb = MotionAnimationMultiValueObserver()
-    multiValueOb.callback = callback
-    var observedKeys:[NSObject:[String:MotionAnimationObserverKey]] = [:]
-    for (o, keys) in objects{
-      var observedKeysForObject:[String:MotionAnimationObserverKey] = [:]
-      for key in keys{
-        observedKeysForObject[key] = o.getPropertyState(key).addValueUpdateCallback(.Observer({ _ in
-          multiValueOb.object(o, didUpdateKey: key)
-        }))
-      }
-      observedKeys[o] = observedKeysForObject
-    }
-    multiValueOb.observedKeys = observedKeys;
-    return MotionAnimator.sharedInstance.addUpdateObserver(multiValueOb)
-  }
-  static func m_removeMultiValueObserver(observerKey:MotionAnimationObserverKey){
-    if let multiValueOb = MotionAnimator.sharedInstance.observerWithKey(observerKey) as? MotionAnimationMultiValueObserver{
-      MotionAnimator.sharedInstance.removeUpdateObserverWithKey(observerKey)
-      multiValueOb.cleanup()
-    }
-  }
-  
   func m_removeCallback(key:String, observerKey:MotionAnimationObserverKey){
     getPropertyState(key).removeCallback(observerKey)
   }
   
-  // animation
-  func m_delay(time:NSTimeInterval, completion:(() -> Void)){
-    NSTimer.schedule(delay: time) { timer in
-      completion()
+  func m_isAnimating(key:String) -> Bool{
+    return getPropertyState(key).animation?.playing ?? false
+  }
+  
+  func m_animate<T:MotionAnimatableProperty>(
+    key:String,
+    to:T,
+    stiffness:CGFloat? = nil,
+    damping:CGFloat? = nil,
+    threshold:CGFloat? = nil,
+    valueUpdate:((T) -> Void)? = nil,
+    velocityUpdate:((T) -> Void)? = nil,
+    completion:(() -> Void)? = nil) {
+    let valueOb:MotionAnimationValueObserver? = valueUpdate == nil ? nil : { values in
+      valueUpdate!(T.fromCGFloatValues(values))
     }
-  }
-  func m_animate(
-    key:String,
-    to:UIColor,
-    stiffness:CGFloat? = nil,
-    damping:CGFloat? = nil,
-    threshold:CGFloat? = nil,
-    valueUpdate:MotionAnimationValueObserver? = nil,
-    velocityUpdate:MotionAnimationVelocityObserver? = nil,
-    completion:(() -> Void)? = nil) {
-      getPropertyState(key).animate(.UIColorValue(to), stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
-  }
-  func m_animate(
-    key:String,
-    to:CGFloat,
-    stiffness:CGFloat? = nil,
-    damping:CGFloat? = nil,
-    threshold:CGFloat? = nil,
-    valueUpdate:MotionAnimationValueObserver? = nil,
-    velocityUpdate:MotionAnimationVelocityObserver? = nil,
-    completion:(() -> Void)? = nil) {
-      getPropertyState(key).animate(.CGFloatValue(to), stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
-  }
-  func m_animate(
-    key:String,
-    to:[CGFloat],
-    stiffness:CGFloat? = nil,
-    damping:CGFloat? = nil,
-    threshold:CGFloat? = nil,
-    valueUpdate:MotionAnimationValueObserver? = nil,
-    velocityUpdate:MotionAnimationVelocityObserver? = nil,
-    completion:(() -> Void)? = nil) {
-      getPropertyState(key).animate(.CGFloatMultiValue(to), stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
-  }
-  func m_animate(
-    key:String,
-    to:CGRect,
-    stiffness:CGFloat? = nil,
-    damping:CGFloat? = nil,
-    threshold:CGFloat? = nil,
-    valueUpdate:MotionAnimationValueObserver? = nil,
-    velocityUpdate:MotionAnimationVelocityObserver? = nil,
-    completion:(() -> Void)? = nil) {
-      getPropertyState(key).animate(.CGRectValue(to), stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
-  }
-  func m_animate(
-    key:String,
-    to:CGPoint,
-    stiffness:CGFloat? = nil,
-    damping:CGFloat? = nil,
-    threshold:CGFloat? = nil,
-    valueUpdate:MotionAnimationValueObserver? = nil,
-    velocityUpdate:MotionAnimationVelocityObserver? = nil,
-    completion:(() -> Void)? = nil) {
-      getPropertyState(key).animate(.CGPointValue(to), stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
-  }
-  func m_animate(
-    key:String,
-    to:MotionAnimationValue,
-    stiffness:CGFloat? = nil,
-    damping:CGFloat? = nil,
-    threshold:CGFloat? = nil,
-    valueUpdate:MotionAnimationValueObserver? = nil,
-    velocityUpdate:MotionAnimationVelocityObserver? = nil,
-    completion:(() -> Void)? = nil) {
-      getPropertyState(key).animate(to, stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
+    let velocityOb:MotionAnimationValueObserver? = velocityUpdate == nil ? nil : { values in
+      velocityUpdate!(T.fromCGFloatValues(values))
+    }
+    getPropertyState(key)
+      .animate(to.CGFloatValues,
+               stiffness: stiffness,
+               damping: damping,
+               threshold: threshold,
+               valueUpdate:valueOb,
+               velocityUpdate:velocityOb,
+               completion: completion)
   }
 }

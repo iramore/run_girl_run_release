@@ -24,16 +24,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CVCalendarKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>EZAlertController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>ElasticTransition.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -45,11 +35,6 @@
 			<false/>
 		</dict>
 		<key>Pods-run_run_run.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>RandomColorSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -67,22 +52,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>13AD140CF9BC3551F476837208327878</key>
+		<key>053617A05C5A952CF2888B88D119FE01</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1C9674A8BF970C51C460F3C31A82CF1B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>20EE510C33B653D0D39E8015461CA777</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3ACC124D5CE9A60562EA18CA6AC148EC</key>
+		<key>175D899B08CBFE9A5CAE94FA61125F04</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,17 +67,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>48FB4B2EF72C2A6BA287A7309199C3AD</key>
+		<key>7CAAB4AEB098D0E3D8522D5B093FB6E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>80D639EDDB5F6601E32F54E5991C1C7A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9612AFB68DF4839495EB3E726A5DA46C</key>
+		<key>9266E78E15529853E49BA22CB3F6BA96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,12 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C79BAAF2BBA53FC9FDAAFEC528783EDA</key>
+		<key>E7EDA11AABA5D73B90BB30F979BAB9F9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CE0A701D8A271EFE0065667D13272921</key>
+		<key>F28D60B0CC50AC866DDCE4811140455A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

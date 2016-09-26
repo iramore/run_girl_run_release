@@ -14,8 +14,8 @@ public protocol MotionAnimatorObserver{
 
 public class MotionAnimator: NSObject {
   public static let sharedInstance = MotionAnimator()
-  var updateObservers:[MotionAnimationObserverKey:MotionAnimatorObserver] = [:]
-  
+  var updateObservers:[MotionAnimationObserverKey:Weak<MotionAnimatorObserver>] = [:]
+
   public var debugEnabled = false
   var displayLinkPaused:Bool{
     get{
@@ -28,21 +28,38 @@ public class MotionAnimator: NSObject {
   var animations:[MotionAnimation] = []
   var pendingStopAnimations:[MotionAnimation] = []
   var displayLink : CADisplayLink!
-  
+
   override init(){
     super.init()
   }
-  
+
   func update() {
+    _removeAllPendingStopAnimations()
+
     let duration = CGFloat(displayLink.duration)
     for b in animations{
+      b.willUpdate()
       if !b.update(duration){
+        b.animator = nil
         pendingStopAnimations.append(b)
       }
+      b.didUpdate()
       b.delegate?.animationDidPerformStep(b)
       b.onUpdate?(animation: b)
     }
-    
+
+    _removeAllPendingStopAnimations()
+
+    if animations.count == 0{
+      displayLinkPaused = true
+    }
+    for (_, o) in updateObservers{
+      o.value?.animatorDidUpdate(self, dt: duration)
+    }
+  }
+
+  // must be called in mutex
+  func _removeAllPendingStopAnimations(){
     for b in pendingStopAnimations{
       if let index = animations.indexOf(b){
         animations.removeAtIndex(index)
@@ -50,57 +67,54 @@ public class MotionAnimator: NSObject {
         b.onCompletion?(animation: b)
       }
     }
-
     pendingStopAnimations.removeAll()
-    if animations.count == 0{
-      displayLinkPaused = true
-    }
-    for (_, o) in updateObservers{
-      o.animatorDidUpdate(self, dt: duration)
-    }
   }
 
   public func addUpdateObserver(observer:MotionAnimatorObserver) -> MotionAnimationObserverKey {
     let key = NSUUID()
-    updateObservers[key] = observer
+    updateObservers[key] = Weak(value: observer)
     return key
   }
-  
+
   public func observerWithKey(observerKey:MotionAnimationObserverKey) -> MotionAnimatorObserver? {
-    return updateObservers[observerKey]
+    return updateObservers[observerKey]?.value
   }
-  
+
   public func removeUpdateObserverWithKey(observerKey:MotionAnimationObserverKey) {
     updateObservers.removeValueForKey(observerKey)
   }
 
   public func addAnimation(b:MotionAnimation){
+    if let index = pendingStopAnimations.indexOf(b){
+      pendingStopAnimations.removeAtIndex(index)
+    }
     if animations.indexOf(b) == nil {
       animations.append(b)
-      b.animator = self
       if displayLinkPaused {
         displayLinkPaused = false
       }
     }
+    b.animator = self
   }
   public func hasAnimation(b:MotionAnimation) -> Bool{
-    return animations.indexOf(b) != nil
+    return animations.indexOf(b) != nil && pendingStopAnimations.indexOf(b) == nil
   }
   public func removeAnimation(b:MotionAnimation){
     if animations.indexOf(b) != nil {
       pendingStopAnimations.append(b)
     }
+    b.animator = nil
   }
-  
+
   func start() {
     if !displayLinkPaused{
       return
     }
-    displayLink = CADisplayLink(target: self, selector: Selector("update"))
+    displayLink = CADisplayLink(target: self, selector: #selector(update))
     displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
     printDebugMsg("displayLink started")
   }
-  
+
   func stop() {
     if displayLinkPaused{
       return
@@ -110,7 +124,7 @@ public class MotionAnimator: NSObject {
     displayLink = nil
     printDebugMsg("displayLink ended")
   }
-  
+
   func printDebugMsg(str:String){
     if debugEnabled { print(str) }
   }
