@@ -20,7 +20,6 @@ class CalViewController: UIViewController {
     @IBOutlet weak var runner: UIImageView!
     @IBOutlet weak var progressLabel: UILabel!
     var transition:ElasticTransition!
-   // @IBOutlet weak var pBar1: FMProgressBarView!
     
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarView: CVCalendarView!
@@ -61,7 +60,6 @@ class CalViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setEndDate()
-        print("end date \(endDate)")
         calendarView.contentController.refreshPresentedMonth()
         calendarView.commitCalendarViewUpdate()
         menuView.commitMenuViewUpdate()
@@ -93,9 +91,9 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         return .monthView
     }
     
-    //func firstWeekday() -> CVCalendarWeekday {
-    //    return .Monday
-    //}
+    func firstWeekday() -> CVCalendarWeekday {
+        return .monday
+    }
     
     func shouldShowWeekdaysOut() -> Bool {
         return true
@@ -111,11 +109,11 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
     }
     
     func weekdaySymbolType() -> WeekdaySymbolType {
-        return .Short
+        return .short
     }
     
     func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
-        let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
+        let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.circle)
         circleView.fillColor = .colorFromCode(0xFFFFFF)
         return circleView
     }
@@ -197,59 +195,53 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
     
     
     func getDayOfWeek(_ date: Date)->Int{
-        let myCalendar = Calendar(identifier: NSGregorianCalendar)
-        let myComponents = (myCalendar as NSCalendar?)?.components(.NSWeekdayCalendarUnit, from: date)
-        let weekDay = myComponents?.weekday
-        return weekDay!
+            let myCalendar = Calendar(identifier: .gregorian)
+            let weekDay = myCalendar.component(.weekday, from: date)
+            return weekDay
+        
     }
     
     func setEndDate() {
+       
+        
+        let date = Date()
         let calendar = Calendar.current
-        var comps = Manager.componentsForDate(Date())
+        
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        let weekDay = calendar.component(.weekOfMonth, from: date)
         
         
-        comps.year = Calendar.currentCalendar().components(Calendar.Unit.Year, fromDate: Date()).year
-        comps.month = Calendar.currentCalendar().components(Calendar.Unit.Month, fromDate: Date()).month
-        comps.weekOfMonth = Calendar.currentCalendar().components(Calendar.Unit.WeekOfMonth, fromDate: Date()).weekOfMonth
-        comps.day = Calendar.currentCalendar().components(Calendar.Unit.Day, fromDate: Date()).day
-        
-        convertedToday = calendar.dateFromComponents(comps)
-        
+        var components = DateComponents()
+        components.setValue(month, for: .month)
+        components.setValue(year, for: .year)
+        components.setValue(day, for: .day)
+        components.setValue(weekDay, for: .weekOfMonth)
+        convertedToday = Calendar.current.date(from: components)
         
         let today = Date()
         
         let val = 27 - ((shareData.userData)!.completedTrainsDates?.count)!
         let weeks = val/(shareData.userData)!.daysOfWeek.count
         var tail = val%(shareData.userData)!.daysOfWeek.count
-        let components = (Calendar.current as NSCalendar).components(Calendar.Unit.weekday, from: today)
         if( !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!
-            && (shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday)-1)
+            && (shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(weekDay)-1)
             ){
             tail -= 1
         }
+        let endWeek  =  Calendar.current.date(byAdding: .weekOfMonth, value: weeks, to: today)
         
-        let endWeek = (Calendar.current as NSCalendar)
-            .date(
-                byAdding: .weekOfMonth,
-                value: weeks,
-                to: today,
-                options: []
-        )
-        var day : Date = endWeek!
+        
+        var dayCurrent : Date = endWeek!
         while(tail > 0){
-            day = (Calendar.current as NSCalendar)
-                .date(
-                    byAdding: .day,
-                    value: 1,
-                    to: day,
-                    options: []
-                )!
-            let components = (Calendar.current as NSCalendar).components(Calendar.Unit.weekday, from: day)
-            if((shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(components.weekday!)-1)){
+            dayCurrent = Calendar.current.date(byAdding: .day, value: 1, to: dayCurrent)!
+            let wd = calendar.component(.weekday, from: dayCurrent)
+            if((shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(wd)-1)){
                 tail -= 1
             }
         }
-        endDate = day
+        endDate = dayCurrent
     }
     
     func getMixedImg(_ width: CGFloat) -> UIImage {
@@ -311,13 +303,3 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
 
     
 }
-// MARK: Date comporasion
-public func ==(lhs: Date, rhs: Date) -> Bool {
-    return lhs === rhs || lhs.compare(rhs) == .orderedSame
-}
-
-public func <(lhs: Date, rhs: Date) -> Bool {
-    return lhs.compare(rhs) == .orderedAscending
-}
-
-extension Date: Comparable { }

@@ -2,19 +2,14 @@ import UIKit
 import ElasticTransition
 
 class ShareData {
-    fileprivate static var __once: () = {
-            Static.instance = ShareData()
-        }()
+    
     class var sharedInstance: ShareData {
         struct Static {
-            static var instance: ShareData?
-            static var token: Int = 0
+            static let instance: ShareData = ShareData()
         }
-        
-        _ = ShareData.__once
-        
-        return Static.instance!
+        return Static.instance
     }
+
     
     var userData: UserData?
     
@@ -57,9 +52,8 @@ extension Date
     init(dateString:String) {
         let dateStringFormatter = DateFormatter()
         dateStringFormatter.dateFormat = "yyyy-MM-dd"
-        //dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         let d = dateStringFormatter.date(from: dateString)!
-        (self as NSDate).init(timeInterval:0, since:d)
+        self.init(timeInterval:0, since:d)
     }
 }
 
