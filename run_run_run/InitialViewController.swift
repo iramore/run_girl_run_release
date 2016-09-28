@@ -66,6 +66,10 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let locale = Locale.current
+        let language = locale.languageCode
+        //let currencyCode = locale.currencyCode
+                
         shareData.userData = UserData(daysOfWeek: [0,2,4], completedTrainsDates: [Date(dateString:"2016-08-06")])
         shareData.saveUserData()
         transition.sticky = true

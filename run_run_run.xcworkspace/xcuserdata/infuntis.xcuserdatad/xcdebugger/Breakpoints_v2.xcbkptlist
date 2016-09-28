@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "run_run_run/CalViewController.swift"
-            timestampString = "496668716.462399"
+            timestampString = "496669150.199917"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "supplementaryView(shouldDisplayOnDayView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "run_run_run/CalViewController.swift"
-            timestampString = "496668716.462399"
+            timestampString = "496669150.199917"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "supplementaryView(shouldDisplayOnDayView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -48,7 +48,7 @@
             startingLineNumber = "67"
             endingLineNumber = "67"
             landmarkName = "dismissButtonPressed(_:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -264,12 +264,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "run_run_run/RunController.swift"
-            timestampString = "496312982.728619"
+            timestampString = "496760517.180295"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "loadTrain()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "run_run_run/SegmentControl.swift"
+            timestampString = "496668716.462399"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "SegmentControlDelegate"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -285,7 +301,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
             endingLineNumber = "14"
-            landmarkName = "drawRect(_:)"
+            landmarkName = "SegmentControlDelegate"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -301,23 +317,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
             endingLineNumber = "14"
-            landmarkName = "drawRect(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "run_run_run/SegmentControl.swift"
-            timestampString = "496668716.462399"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "drawRect(_:)"
+            landmarkName = "SegmentControlDelegate"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -328,11 +328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "run_run_run/CalViewController.swift"
-            timestampString = "496668716.462399"
+            timestampString = "496669150.199917"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "supplementaryView(shouldDisplayOnDayView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -366,7 +366,21 @@
             startingLineNumber = "220"
             endingLineNumber = "220"
             landmarkName = "timerActionSmall()"
-            landmarkType = "5">
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run-frameworks.sh"
+            timestampString = "496669389.834341"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

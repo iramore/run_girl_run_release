@@ -54,6 +54,7 @@ class RunController: UIViewController {
     
     
     var timerSmall = Timer()
+    var confTimer = Timer()
     var train: Train = Train_data.trains[((ShareData.sharedInstance.userData?.completedTrainsDates?.count)!+1)]!
     var currentStage = 0
     var counter: Int = 0
@@ -67,6 +68,7 @@ class RunController: UIViewController {
     var isRunning: Bool = true
     var sticker: UIImageView?
     var firstStart: Bool = true
+   // var confTimer: Int = 0
     
     
     func loadTrain() {
@@ -117,8 +119,6 @@ class RunController: UIViewController {
             } else{
                 self.runner.image = UIImage(named: "rrrr3")!
             }
-            
-            
         }
     }
     
@@ -257,6 +257,8 @@ class RunController: UIViewController {
                 ShareData.sharedInstance.increseNumberOfTrains()
                 self.view.addSubview(confettiView)
                 confettiView.startConfetti()
+                runner.stopAnimating()
+                confTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(RunController.confTimerAction), userInfo:nil ,   repeats: true)
                 return
             }
         }
@@ -264,6 +266,12 @@ class RunController: UIViewController {
         smallTimer!.text = str as String
         runCircles.counterSmall = train.temp[index]*100-counter
         
+    }
+    
+    func confTimerAction(){
+        confTimer.invalidate()
+        confettiView.stopConfetti()
+        confettiView.removeFromSuperview()
     }
     
     func updateTrainControlImage(){
@@ -277,17 +285,23 @@ class RunController: UIViewController {
             croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
             widthVid+=croppedImage.size.width
         }
-        let startedPositonForStiker = widthVid
-        for i in self.index+1 ..< train.index {
-            if(widthVid + train.trainMenu[i].size.width < screenWidth){
-                train.trainMenu[i].draw(in: CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
-                widthVid+=train.trainMenu[i].size.width
-            } else{
-                train.trainMenu[i].draw(in: CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
-                break
-            }
+        if(index == train.index-1){
+            #imageLiteral(resourceName: "finish").draw(in: CGRect(x: widthVid, y: 9, width: #imageLiteral(resourceName: "finish").size.width, height: #imageLiteral(resourceName: "finish").size.height))
             
         }
+        let startedPositonForStiker = widthVid
+        for i in self.index+1 ..< train.index {
+            train.trainMenu[i].draw(in: CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
+            widthVid+=train.trainMenu[i].size.width
+            if(i == train.index-1){
+                #imageLiteral(resourceName: "finish").draw(in: CGRect(x: widthVid, y: 9, width: #imageLiteral(resourceName: "finish").size.width, height: #imageLiteral(resourceName: "finish").size.height))
+                
+            }
+            if(widthVid > screenWidth){
+                break;
+            }
+        }
+        
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         if(index == (train.index)-1){
@@ -320,9 +334,9 @@ class RunController: UIViewController {
             }
         }
         
-        let finalImage2 = UIGraphicsGetImageFromCurrentImageContext()
+        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return finalImage2!
+        return finalImage!
     }
     
     

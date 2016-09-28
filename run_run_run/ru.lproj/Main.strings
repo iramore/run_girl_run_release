@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "Week days"; ObjectID = "64T-jX-9J5"; */
+"64T-jX-9J5.text" = "Week days";
+
+/* Class = "UISegmentedControl"; R9a-fr-WdD.segmentTitles[0] = "First"; ObjectID = "R9a-fr-WdD"; */
+"R9a-fr-WdD.segmentTitles[0]" = "First";
+
+/* Class = "UISegmentedControl"; R9a-fr-WdD.segmentTitles[1] = "Second"; ObjectID = "R9a-fr-WdD"; */
+"R9a-fr-WdD.segmentTitles[1]" = "Second";
+
+/* Class = "UILabel"; text = "Week days"; ObjectID = "ZUl-96-y3b"; */
+"ZUl-96-y3b.text" = "Week days";
+
+/* Class = "UILabel"; text = "Slider"; ObjectID = "cOa-Xt-5WC"; */
+"cOa-Xt-5WC.text" = "Slider";
+
+/* Class = "UILabel"; text = "Switch"; ObjectID = "nAM-iv-J3k"; */
+"nAM-iv-J3k.text" = "Switch";
+
+/* Class = "UILabel"; text = "January, 2015"; ObjectID = "rIH-5x-13C"; */
+"rIH-5x-13C.text" = "January, 2015";
+
+/* Class = "UILabel"; text = "Slider"; ObjectID = "rjc-73-Dgp"; */
+"rjc-73-Dgp.text" = "Slider";
