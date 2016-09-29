@@ -11,7 +11,9 @@ class RunController: UIViewController {
     @IBAction func restartButtonPressed(_ sender: AnyObject) {
         loadTrain()
         firstStart = true
+        isRunning = true
         counterBig = 0
+        index = 0
         isStarted = false
         runCircles.counterBig = counterBig
         runCircles.counterSmall = 0
@@ -69,6 +71,7 @@ class RunController: UIViewController {
     var sticker: UIImageView?
     var firstStart: Bool = true
    // var confTimer: Int = 0
+    var cropRunnerCounter = 1
     
     
     func loadTrain() {
@@ -84,7 +87,6 @@ class RunController: UIViewController {
     
     @IBAction func startButtonPressed(_ sender: AnyObject) {
         if(!isStarted){
-            
             if(firstStart){
                 firstStart = false
                 var timeStr: NSString
@@ -189,7 +191,7 @@ class RunController: UIViewController {
         let y = self.view.bounds.height-110
         sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
         
-                //self.view.addSubview(sticker!)
+        //self.view.addSubview(sticker!)
     }
     @IBAction func cancelButtonPressed(_ sender: AnyObject) {
         dismiss(animated: true, completion: nil)
@@ -245,7 +247,6 @@ class RunController: UIViewController {
                 counter =  train.temp[index]*100
                 let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000, (counter/100)%60, counter%100)
                 smallTimer!.text = str as String
-                //runCircles.counterSmall = 0
                 runCircles.counterSmall = counter
                 runCircles.maxValueSmall = counter
                 let audio = "\(move)\(timeStr).mp3"
@@ -258,7 +259,10 @@ class RunController: UIViewController {
                 self.view.addSubview(confettiView)
                 confettiView.startConfetti()
                 runner.stopAnimating()
+                runner.animationImages = [#imageLiteral(resourceName: "rrrr_finish1"),#imageLiteral(resourceName: "rrrr_finish2")]
+                runner.startAnimating()
                 confTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(RunController.confTimerAction), userInfo:nil ,   repeats: true)
+                
                 return
             }
         }
@@ -280,16 +284,26 @@ class RunController: UIViewController {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         var widthVid: CGFloat = 0
         let percent: CGFloat = (CGFloat((train.temp[index])*100-counter))/CGFloat((train.temp[index]*100))
-        if(percent < 1){
+        
+        if(percent < 1)
+        {
             let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train.trainMenu[index]), percent: percent)
-            croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
-            widthVid+=croppedImage.size.width
+            if(croppedImage.size.width > 40){
+                croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
+                widthVid+=croppedImage.size.width
+            } else{
+                let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train.trainMenu[index]), percent: CGFloat(40/train.trainMenu[index].size.width))
+                croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
+                widthVid+=40
+            }
+            
+            
         }
         if(index == train.index-1){
             #imageLiteral(resourceName: "finish").draw(in: CGRect(x: widthVid, y: 9, width: #imageLiteral(resourceName: "finish").size.width, height: #imageLiteral(resourceName: "finish").size.height))
             
         }
-        let startedPositonForStiker = widthVid
+        //let startedPositonForStiker = widthVid
         for i in self.index+1 ..< train.index {
             train.trainMenu[i].draw(in: CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
             widthVid+=train.trainMenu[i].size.width
@@ -298,25 +312,25 @@ class RunController: UIViewController {
                 
             }
             if(widthVid > screenWidth){
-                break;
+                break
             }
         }
         
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        if(index == (train.index)-1){
-            self.sticker!.image = UIImage(named: "white")!
-        }
-        else{
-            if(isRunning){
-                self.sticker!.image = UIImage(named: "1.5walk")!
-            } else{
-                self.sticker!.image = UIImage(named: "1run")!
-            }
-        }
+        //if(index == (train.index)-1){
+        //    self.sticker!.image = UIImage(named: "white")!
+        //}
+        //else{
+        //    if(isRunning){
+        //        self.sticker!.image = UIImage(named: "1.5walk")!
+        //    } else{
+        //        self.sticker!.image = UIImage(named: "1run")!
+        //    }
+        //}
         self.image.image = finalImage
-        var frame:CGRect = self.sticker!.frame
-        frame.origin.x = startedPositonForStiker
+        //var frame:CGRect = self.sticker!.frame
+        //frame.origin.x = startedPositonForStiker
     }
     
     func getMixedImg(_ width: CGFloat) -> UIImage {

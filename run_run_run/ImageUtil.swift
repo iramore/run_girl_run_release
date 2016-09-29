@@ -65,6 +65,26 @@ class ImageUtil: NSObject {
         
     }
     
+    static func cropFromRight(image originalImage: UIImage, percent: CGFloat) -> UIImage {
+        let contextImage: UIImage = UIImage(cgImage: originalImage.cgImage!)
+        let contextSize: CGSize = contextImage.size
+        
+        
+        let posX: CGFloat = 0
+        let posY: CGFloat = 0
+        let width: CGFloat = contextSize.width - (contextSize.width * percent)
+        let height: CGFloat = contextSize.height
+        
+        let rect: CGRect = CGRect(x: posX, y: posY, width: width, height: height)
+        // Create bitmap image from context using the rect
+        let imageRef: CGImage = (contextImage.cgImage)!.cropping(to: rect)!
+        
+        // Create a new image based on the imageRef and rotate back to the original orientation
+        let image: UIImage = UIImage(cgImage: imageRef, scale: originalImage.scale, orientation: originalImage.imageOrientation)
+        return image
+        
+    }
+    
 }
 
 extension UIColor {

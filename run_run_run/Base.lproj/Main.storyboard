@@ -690,7 +690,7 @@
     <resources>
         <image name="close" width="49" height="50"/>
         <image name="current_stage_background" width="144" height="54"/>
-        <image name="restart" width="64" height="64"/>
+        <image name="restart" width="32" height="32"/>
         <image name="settings" width="191" height="46"/>
         <image name="start" width="191" height="46"/>
     </resources>
