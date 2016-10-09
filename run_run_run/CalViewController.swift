@@ -205,39 +205,39 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
        
         
         let date = Date()
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.locale = Locale(identifier: Locale.current.languageCode!)
         
         let year = calendar.component(.year, from: date)
         let month = calendar.component(.month, from: date)
         let day = calendar.component(.day, from: date)
-        let weekDay = calendar.component(.weekOfMonth, from: date)
         
         
         var components = DateComponents()
         components.setValue(month, for: .month)
         components.setValue(year, for: .year)
         components.setValue(day, for: .day)
-        components.setValue(weekDay, for: .weekOfMonth)
         convertedToday = Calendar.current.date(from: components)
         
-        let today = Date()
         
+        let today = Date()
         let val = 27 - ((shareData.userData)!.completedTrainsDates?.count)!
         let weeks = val/(shareData.userData)!.daysOfWeek.count
         var tail = val%(shareData.userData)!.daysOfWeek.count
         if( !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!
-            && (shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(weekDay)-1)
+            && (shareData.userData)!.daysOfWeek.contains(DateUtil.dayOfWeekToCurrentLocale(date: today))
             ){
             tail -= 1
         }
+        
+        
         let endWeek  =  Calendar.current.date(byAdding: .weekOfMonth, value: weeks, to: today)
         
         
         var dayCurrent : Date = endWeek!
         while(tail > 0){
             dayCurrent = Calendar.current.date(byAdding: .day, value: 1, to: dayCurrent)!
-            let wd = calendar.component(.weekday, from: dayCurrent)
-            if((shareData.userData)!.daysOfWeek.contains(toMondayWeekStart(wd)-1)){
+            if((shareData.userData)!.daysOfWeek.contains(DateUtil.dayOfWeekToCurrentLocale(date: dayCurrent))){
                 tail -= 1
             }
         }

@@ -8,8 +8,14 @@
 /* Class = "UISegmentedControl"; R9a-fr-WdD.segmentTitles[1] = "Second"; ObjectID = "R9a-fr-WdD"; */
 "R9a-fr-WdD.segmentTitles[1]" = "Second";
 
+/* Class = "UILabel"; text = "Label"; ObjectID = "SUj-Ql-ZFS"; */
+"SUj-Ql-ZFS.text" = "Label";
+
 /* Class = "UILabel"; text = "Week days"; ObjectID = "ZUl-96-y3b"; */
 "ZUl-96-y3b.text" = "Week days";
+
+/* Class = "UIButton"; normalTitle = "Today"; ObjectID = "ZzM-0b-al5"; */
+"ZzM-0b-al5.normalTitle" = "Сегодня";
 
 /* Class = "UILabel"; text = "Slider"; ObjectID = "cOa-Xt-5WC"; */
 "cOa-Xt-5WC.text" = "Slider";

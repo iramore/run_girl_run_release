@@ -70,19 +70,6 @@ class SegmentControl: UIView{
     func setSelected(_ sender: UIButton) {
         let value = buttonTitles.index(of: sender.titleLabel!.text!)
         self.delegate?.segmentChanged!(self, value: value!)
-
-//        if sender.backgroundColor == borderColor {
-//            sender.backgroundColor = UIColor.clearColor()
-//            sender.setTitleColor(textColor, forState: .Normal)
-//            let value = buttonTitles.indexOf(sender.titleLabel!.text!)
-//            self.delegate?.segmentChanged!(self, value: value!)
-//        
-//        } else{
-//            sender.backgroundColor = borderColor
-//            sender.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-//            let value = buttonTitles.indexOf(sender.titleLabel!.text!)
-//            self.delegate?.segmentChanged!(self, value: value!)
-//        }
         
     }
     

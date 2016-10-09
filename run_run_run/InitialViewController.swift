@@ -70,7 +70,7 @@ class InitialViewController: UIViewController {
         let language = locale.languageCode
         //let currencyCode = locale.currencyCode
                 
-        shareData.userData = UserData(daysOfWeek: [0,2,4], completedTrainsDates: [Date(dateString:"2016-08-06")])
+        shareData.userData = UserData(daysOfWeek: [1,3,5], completedTrainsDates: [Date(dateString:"2016-08-06")])
         shareData.saveUserData()
         transition.sticky = true
         transition.showShadow = true

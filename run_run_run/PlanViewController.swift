@@ -15,6 +15,8 @@ class CustomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var planImage: UIImageView!
     
+    
+    @IBOutlet weak var date: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,6 +34,7 @@ class CustomTableViewCell: UITableViewCell {
 class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let shareData = ShareData.sharedInstance
+    var lastDateForTraining: Date?
     
     
     //MARK: Variables
@@ -68,15 +71,37 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
-        let ind = (indexPath as NSIndexPath).row + 1
+        let ind = (indexPath as NSIndexPath).row
         var result: UIImage
-        if(ind <= (ShareData.sharedInstance.userData?.completedTrainsDates?.count)!){
-            result = UIImage(named: "run-run-\(ind)wt")!
-        } else {
+        var data: Date
+        if(ind < (ShareData.sharedInstance.userData?.completedTrainsDates?.count)!){
+            result = UIImage(named: "run-run-\(ind+1)wt")!
+            data = (ShareData.sharedInstance.userData?.completedTrainsDates?[ind])!
+        } else if ind == (ShareData.sharedInstance.userData?.completedTrainsDates?.count)! {
+            lastDateForTraining = Date()
+            var dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: lastDateForTraining!)
+            while(!(ShareData.sharedInstance.userData?.daysOfWeek.contains(dayOfWeek))!){
+                lastDateForTraining = Calendar.current.date(byAdding: .day, value: 1, to: lastDateForTraining!)!
+                dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: lastDateForTraining!)
+            }
+            data = lastDateForTraining!
+            result = UIImage(named: "run-run-\(ind+1)")!
+            
+        }else {
             //result = UIImage(named: "Image")!
-            result = UIImage(named: "run-run-\(ind)")!
+            lastDateForTraining = Calendar.current.date(byAdding: .day, value: 1, to: lastDateForTraining!)!
+            var dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: lastDateForTraining!)
+            while(!(ShareData.sharedInstance.userData?.daysOfWeek.contains(dayOfWeek))!){
+                lastDateForTraining = Calendar.current.date(byAdding: .day, value: 1, to: lastDateForTraining!)!
+                dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: lastDateForTraining!)
+            }
+            data = lastDateForTraining!
+            result = UIImage(named: "run-run-\(ind+1)")!
         }
-       
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: Locale.current.languageCode!)
+        formatter.dateStyle = .medium
+        cell.date.text = formatter.string(from: data)
         cell.planImage.image = result
         return cell
     }
