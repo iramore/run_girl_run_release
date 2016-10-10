@@ -7,6 +7,7 @@ class RunController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     var smallTimer: UILabel?
     var bigTimer: UILabel?
+    var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     
     @IBAction func restartButtonPressed(_ sender: AnyObject) {
         loadTrain()
@@ -128,6 +129,7 @@ class RunController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         confettiView = SAConfettiView(frame: self.view.bounds)
         confettiView.colors = [UIColor(hex: "#FF7B7B"), UIColor(hex: "#657ECA"), UIColor(hex: "#FFEC7B")]
 

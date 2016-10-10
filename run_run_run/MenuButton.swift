@@ -15,10 +15,7 @@ class MenuButton: UIButton {
         
         let image  = UIImage(named: image) as UIImage?
         self.imageView!.contentMode = .scaleAspectFit
-       // self.imageView!.image?.renderingMode = .AlwaysOriginal
         self.setImage(image, for: UIControlState())
-        
-        //self.backgroundColor = UIColor.blackColor()
         bezierPath = path;
 
         let mask = CAShapeLayer()
@@ -43,8 +40,6 @@ class MenuButton: UIButton {
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        
-        //return super.hitTest(point, withEvent: event)
         if bezierPath.contains(point) {
             return self
         }
