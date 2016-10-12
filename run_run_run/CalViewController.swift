@@ -63,8 +63,6 @@ class CalViewController: UIViewController {
         calendarView.contentController.refreshPresentedMonth()
         calendarView.commitCalendarViewUpdate()
         menuView.commitMenuViewUpdate()
-        
-        
     }
     
     
@@ -92,7 +90,13 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
     }
     
     func firstWeekday() -> CVCalendarWeekday {
-        return .monday
+        var calendar = Calendar.current
+        calendar.locale = Locale(identifier: Locale.current.languageCode!)
+        if calendar.firstWeekday==2{
+            return .monday
+        } else{
+            return .sunday
+        }
     }
     
     func shouldShowWeekdaysOut() -> Bool {

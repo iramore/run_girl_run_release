@@ -26,9 +26,16 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, Se
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    print("loaded \((self.shareData.loadUserData()?.daysOfWeek)!)")
+    var calendar = Calendar.current
+    var days: [String]
+    calendar.locale = Locale(identifier: Locale.current.languageCode!)
+    if calendar.firstWeekday==2{
+        days = ["M", "Tu", "W", "Th", "F", "Sa","Su"]
+    } else{
+        days = ["Su","M", "Tu", "W", "Th", "F", "Sa"]
+    }
     menu.append(.mySegment(values: ["1", "2", "3", "4", "5"],selected: [(self.shareData.loadUserData()?.daysOfWeek.count)!-1], name: "Number"))
-    menu.append(.mySegment(values: ["M", "Tu", "W", "Th", "F", "Sa","Su"],selected: (self.shareData.loadUserData()?.daysOfWeek)!,  name: "Days"))
+    menu.append(.mySegment(values: days,selected: (self.shareData.loadUserData()?.daysOfWeek)!,  name: "Days"))
     
     
     for i in 0..<menu.count{

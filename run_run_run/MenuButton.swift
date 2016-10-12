@@ -7,8 +7,6 @@ class MenuButton: UIButton {
    
     var bezierPath: UIBezierPath = UIBezierPath()
     
-    var action: ((AnyObject?) -> ())? = nil
-    
     init(path: UIBezierPath,  frame: CGRect, image: String) {
         super.init(frame: frame)
         
@@ -23,16 +21,11 @@ class MenuButton: UIButton {
         mask.path = bezierPath.cgPath
         self.layer.mask = mask
         self.frame = frame
-        self.addTarget(self, action: #selector(MenuButton.buttonAction(_:)), for: UIControlEvents.touchUpInside)
         
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-    }
-    
-    func buttonAction(_ sender: UIButton) {
-        action?(sender)
     }
     
     required init(coder aDecoder: NSCoder) {
