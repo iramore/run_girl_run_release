@@ -31,7 +31,7 @@ class CustomTableViewCell: UITableViewCell {
 }
 
 
-class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PlanViewController: ElasticModalViewController, UITableViewDataSource, UITableViewDelegate {
     
     let shareData = ShareData.sharedInstance
     var lastDateForTraining: Date?

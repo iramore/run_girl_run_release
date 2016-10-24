@@ -223,7 +223,7 @@ public class ElasticTransition: EdgePanTransition, UIGestureRecognizerDelegate{
 
   var pushedControllers:[UIViewController] = []
   var backgroundExitPanGestureRecognizer = UIPanGestureRecognizer()
-  var foregroundExitPanGestureRecognizer = UIPanGestureRecognizer()
+  public var foregroundExitPanGestureRecognizer = UIPanGestureRecognizer()
 
   public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
     if transitioning{

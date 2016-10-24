@@ -9,7 +9,7 @@ class ShareData {
         }
         return Static.instance
     }
-
+    
     
     var userData: UserData?
     
@@ -27,9 +27,9 @@ class ShareData {
     func saveUserDataOption(_ days: [Int]){
         if let _ = userData?.completedTrainsDates {
             userData = UserData(daysOfWeek: days,
-                completedTrainsDates: (userData?.completedTrainsDates)!)
+                                completedTrainsDates: (userData?.completedTrainsDates)!)
         } else {
-        userData = UserData(daysOfWeek: days)
+            userData = UserData(daysOfWeek: days)
         }
         saveUserData()
     }
@@ -37,9 +37,9 @@ class ShareData {
     func increseNumberOfTrains(){
         if let _ = userData?.completedTrainsDates {
             userData = UserData(daysOfWeek: (userData?.daysOfWeek)!,
-                completedTrainsDates: (userData?.completedTrainsDates)!)
+                                completedTrainsDates: (userData?.completedTrainsDates)!)
         } else {
-        userData = UserData(daysOfWeek: (userData?.daysOfWeek)!)
+            userData = UserData(daysOfWeek: (userData?.daysOfWeek)!)
         }
         saveUserData()
     }
@@ -58,6 +58,7 @@ extension Date
 }
 
 class InitialViewController: UIViewController {
+    @IBOutlet weak var infoButton: UIButton!
     
     
     var transition = ElasticTransition()
@@ -69,14 +70,13 @@ class InitialViewController: UIViewController {
         let locale = Locale.current
         let language = locale.languageCode
         //let currencyCode = locale.currencyCode
-                
+        
         shareData.userData = UserData(daysOfWeek: [1,3,5], completedTrainsDates: [Date(dateString:"2016-08-06")])
         shareData.saveUserData()
         transition.sticky = true
         transition.showShadow = true
         transition.panThreshold = 0.3
         transition.transformType = .translateMid
-        transition.stiffness = 0.8
         
         
         let image1  = UIImage(named: "plan3") as UIImage?
@@ -103,6 +103,8 @@ class InitialViewController: UIViewController {
         let trackButton = MenuButton(path: thirdButtonBezier(), frame: frame3, image: "cal-but")
         trackButton.addTarget(self, action: #selector(didPressPentagon), for: UIControlEvents.touchUpInside)
         
+        infoButton.addTarget(self, action: #selector(didPressInfo), for: UIControlEvents.touchUpInside)
+        
         self.view.addSubview(planButton)
         self.view.addSubview(runButton)
         self.view.addSubview(trackButton)
@@ -111,24 +113,31 @@ class InitialViewController: UIViewController {
     
     
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination
-        vc.transitioningDelegate = transition
-        vc.modalPresentationStyle = .custom
-        if let vc = vc as? CalViewController{
-            vc.transition = transition
-        }
+        
+            let vc = segue.destination
+            vc.transitioningDelegate = transition
+            vc.modalPresentationStyle = .custom
+            if let vc = vc as? CalViewController{
+                vc.transition = transition
+            }
+        
     }
     
-    func buttonAction(_ sender: UIButton!) {
-        print("Button tapped")
+    func didPressInfo(_ sender: AnyObject?){
+        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "modalInfo") as! InfoModalViewController
+        modalViewController.modalTransition.edge = .top
+        present(modalViewController, animated: true, completion: nil)
     }
-    
     
     func didPressTriangle(_ sender: AnyObject?) {
-        transition.edge = .left
-        transition.startingPoint = sender!.center
-        performSegue(withIdentifier: "plan", sender: self)
+        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "planModal") as! PlanViewController
+        modalViewController.modalTransition.edge = .left
+        present(modalViewController, animated: true, completion: nil)
+//        transition.edge = .left
+//        transition.startingPoint = sender!.center
+//        performSegue(withIdentifier: "plan", sender: self)
     }
     
     func didPressSquare(_ sender: AnyObject?) {
@@ -141,11 +150,11 @@ class InitialViewController: UIViewController {
         transition.edge = .bottom
         transition.startingPoint = sender!.center
         performSegue(withIdentifier: "option", sender: self)
-//        transition.edge = .Bottom
-//        transition.startingPoint = sender!.center
-//        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("calendarControl") as! CalViewController
-//        modalViewController.transition = transition
-//        presentViewController(modalViewController, animated: true, completion: nil)
+        //        transition.edge = .Bottom
+        //        transition.startingPoint = sender!.center
+        //        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("calendarControl") as! CalViewController
+        //        modalViewController.transition = transition
+        //        presentViewController(modalViewController, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -156,7 +165,6 @@ class InitialViewController: UIViewController {
         let ovalPath = UIBezierPath(ovalIn: CGRect(x: 71, y: 38, width: 45, height: 41))
         UIColor.gray.setFill()
         ovalPath.fill()
-        //// Bezier Drawing
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 126.84, y: 126.82))
         bezierPath.addLine(to: CGPoint(x: 16.76, y: 189.82))
@@ -176,8 +184,6 @@ class InitialViewController: UIViewController {
     func secondButtonBezier() -> UIBezierPath {
         
         let fillColor = UIColor(red: 0.939, green: 0.847, blue: 0.502, alpha: 1.000)
-        
-        //// Bezier Drawing
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 0, y: 126.82))
         bezierPath.addLine(to: CGPoint(x: 0, y: -0.02))
@@ -218,6 +224,6 @@ class InitialViewController: UIViewController {
         
         return bezierPath
     }
-
+    
     
 }

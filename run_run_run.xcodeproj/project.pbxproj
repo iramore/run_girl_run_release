@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		74FF54CBB1BD86C3A5C8C31F /* Pods_run_run_run.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAFFDD0ED4961283238036D /* Pods_run_run_run.framework */; };
+		D30442931DBE223800E4887B /* InfoModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30442921DBE223800E4887B /* InfoModalViewController.swift */; };
+		D30442951DBE574C00E4887B /* ElasticModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30442941DBE574C00E4887B /* ElasticModalViewController.swift */; };
+		D30442981DBE5B1D00E4887B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30442961DBE5B1D00E4887B /* Main.storyboard */; };
 		D3284B6C1C8DB46B006FB560 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6B1C8DB46B006FB560 /* Train.swift */; };
 		D3284B6E1C8EB959006FB560 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6D1C8EB959006FB560 /* ImageUtil.swift */; };
 		D3284B701C92ED19006FB560 /* Train_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6F1C92ED19006FB560 /* Train_data.swift */; };
@@ -41,7 +44,6 @@
 		D3E368721D85853600ABAD1F /* walk3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3E368701D85853600ABAD1F /* walk3.mp3 */; };
 		D3E368731D85853600ABAD1F /* walk5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D3E368711D85853600ABAD1F /* walk5.mp3 */; };
 		D3EB34C21D4D01E4007ECDBB /* SegmentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EB34C11D4D01E4007ECDBB /* SegmentControl.swift */; };
-		D3F685781D682A4300DE5959 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F685761D682A4300DE5959 /* Main.storyboard */; };
 		D3FF066B1DA97A9D003D3E0F /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FF066A1DA97A9D003D3E0F /* DateUtil.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,9 @@
 		1AAFFDD0ED4961283238036D /* Pods_run_run_run.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_run_run_run.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE1AE98041C91F27240AF24 /* Pods-run_run_runTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_runTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_runTests/Pods-run_run_runTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BCF71EC4D85A23DE8C9F149A /* Pods_run_run_runTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_run_run_runTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D30442921DBE223800E4887B /* InfoModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoModalViewController.swift; sourceTree = "<group>"; };
+		D30442941DBE574C00E4887B /* ElasticModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElasticModalViewController.swift; sourceTree = "<group>"; };
+		D30442971DBE5B1D00E4887B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D3284B6B1C8DB46B006FB560 /* Train.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		D3284B6D1C8EB959006FB560 /* ImageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
 		D3284B6F1C92ED19006FB560 /* Train_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train_data.swift; sourceTree = "<group>"; };
@@ -85,8 +90,6 @@
 		D3E368701D85853600ABAD1F /* walk3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = walk3.mp3; sourceTree = "<group>"; };
 		D3E368711D85853600ABAD1F /* walk5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = walk5.mp3; sourceTree = "<group>"; };
 		D3EB34C11D4D01E4007ECDBB /* SegmentControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentControl.swift; sourceTree = "<group>"; };
-		D3F685771D682A4300DE5959 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D3FF06681DA96AB4003D3E0F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		D3FF06691DA96AB4003D3E0F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D3FF066A1DA97A9D003D3E0F /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		D7107938144D53712F5A58B1 /* Pods-run_run_run.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_run.release.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_run/Pods-run_run_run.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,7 +146,6 @@
 				D35F1CCD1C7105390084A902 /* PlanViewController.swift */,
 				D35F1CD21C7105390084A902 /* Assets.xcassets */,
 				D3CED4741D33D6D600EBE97F /* CounterView.swift */,
-				D3F685761D682A4300DE5959 /* Main.storyboard */,
 				D3E3684F1D8563D500ABAD1F /* SKTAudio.swift */,
 				D3B57E1B1D2BF6220014F8F2 /* MenuButton.swift */,
 				D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */,
@@ -151,6 +153,7 @@
 				D35F1CD71C7105390084A902 /* Info.plist */,
 				D37E54271C7C8DDF0025509A /* CalViewController.swift */,
 				D3669D521C84933A00250225 /* InitialViewController.swift */,
+				D30442961DBE5B1D00E4887B /* Main.storyboard */,
 				D3284B6B1C8DB46B006FB560 /* Train.swift */,
 				D3284B6D1C8EB959006FB560 /* ImageUtil.swift */,
 				D3284B6F1C92ED19006FB560 /* Train_data.swift */,
@@ -159,6 +162,8 @@
 				D36EEFC11D3C0138009A772E /* RunController.swift */,
 				D3EB34C11D4D01E4007ECDBB /* SegmentControl.swift */,
 				D3FF066A1DA97A9D003D3E0F /* DateUtil.swift */,
+				D30442921DBE223800E4887B /* InfoModalViewController.swift */,
+				D30442941DBE574C00E4887B /* ElasticModalViewController.swift */,
 			);
 			path = run_run_run;
 			sourceTree = "<group>";
@@ -260,7 +265,6 @@
 				D3E3685D1D85724B00ABAD1F /* walk2.mp3 in Resources */,
 				D3E368691D85852600ABAD1F /* run5.mp3 in Resources */,
 				D3E368571D856FCF00ABAD1F /* walk1.5.mp3 in Resources */,
-				D3F685781D682A4300DE5959 /* Main.storyboard in Resources */,
 				D3E3685F1D85730800ABAD1F /* walk2.5.mp3 in Resources */,
 				D36EEFC41D475C62009A772E /* 04B_19__.TTF in Resources */,
 				D3E3686E1D85852600ABAD1F /* run28.mp3 in Resources */,
@@ -275,6 +279,7 @@
 				D3E368551D856F5000ABAD1F /* run1.5.mp3 in Resources */,
 				D3E368591D85703B00ABAD1F /* run1.mp3 in Resources */,
 				D3E3686F1D85852600ABAD1F /* run30.mp3 in Resources */,
+				D30442981DBE5B1D00E4887B /* Main.storyboard in Resources */,
 				D3E3686A1D85852600ABAD1F /* run8.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,12 +341,14 @@
 			files = (
 				D3284B6E1C8EB959006FB560 /* ImageUtil.swift in Sources */,
 				D3669D531C84933A00250225 /* InitialViewController.swift in Sources */,
+				D30442951DBE574C00E4887B /* ElasticModalViewController.swift in Sources */,
 				D3B57E1C1D2BF6220014F8F2 /* MenuButton.swift in Sources */,
 				D3EB34C21D4D01E4007ECDBB /* SegmentControl.swift in Sources */,
 				D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */,
 				D3FF066B1DA97A9D003D3E0F /* DateUtil.swift in Sources */,
 				D37E54281C7C8DDF0025509A /* CalViewController.swift in Sources */,
 				D3E368501D8563D500ABAD1F /* SKTAudio.swift in Sources */,
+				D30442931DBE223800E4887B /* InfoModalViewController.swift in Sources */,
 				D35F1CCC1C7105390084A902 /* AppDelegate.swift in Sources */,
 				D3284B721C92F688006FB560 /* UserData.swift in Sources */,
 				D3CED4751D33D6D600EBE97F /* CounterView.swift in Sources */,
@@ -356,6 +363,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		D30442961DBE5B1D00E4887B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D30442971DBE5B1D00E4887B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -363,15 +378,6 @@
 				D3FF06691DA96AB4003D3E0F /* ru */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		D3F685761D682A4300DE5959 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D3F685771D682A4300DE5959 /* Base */,
-				D3FF06681DA96AB4003D3E0F /* ru */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
