@@ -8,9 +8,9 @@
 
 import QuartzCore
 
-open class BMCustomTableView : UITableView {
+public class BMCustomTableView : UITableView {
     
-    open func customizeCell(_ cell: UITableViewCell) {
+    public func customizeCell(cell: UITableViewCell) {
         
         var rotate: CATransform3D
         
@@ -21,21 +21,21 @@ open class BMCustomTableView : UITableView {
         rotate.m34 = 1.0 / -600
         
         cell.layer.shadowColor = UIColor.black.cgColor
-        cell.layer.shadowOffset = CGSize(width: 10, height: 10)
+        cell.layer.shadowOffset = CGSize(width: 10,height:  10)
         cell.alpha = 0
         
         cell.layer.transform = rotate
-        cell.layer.anchorPoint = CGPoint(x: 0, y: 0.5)
+        cell.layer.anchorPoint = CGPoint(x: 0,y: 0.5)
         
         if(cell.layer.position.x != 0){
-            cell.layer.position = CGPoint(x: 0, y: cell.layer.position.y);
+            cell.layer.position = CGPoint(x: 0,y: cell.layer.position.y);
         }
         
         UIView.beginAnimations("rotate", context: nil)
         UIView.setAnimationDuration(0.8)
         cell.layer.transform = CATransform3DIdentity
         cell.alpha = 1
-        cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.layer.shadowOffset = CGSize(width: 0,height:  0)
         UIView.commitAnimations()
         
     }

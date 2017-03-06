@@ -6,8 +6,8 @@ platform :ios, ‘9.3’
 
 target 'run_run_run' do
 pod 'CVCalendar', '~> 1.4.0’
-pod 'MotionAnimation', :git => 'https://github.com/lkzhao/MotionAnimation.git', :branch => 'swift3'
-pod 'ElasticTransition', :git => 'https://github.com/lkzhao/ElasticTransition.git', :branch => 'swift3'
+pod 'MotionAnimation'
+pod 'ElasticTransition'
 pod 'BMCustomTableView'
 pod 'SAConfettiView'
 

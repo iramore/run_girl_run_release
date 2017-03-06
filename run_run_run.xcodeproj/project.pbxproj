@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		74FF54CBB1BD86C3A5C8C31F /* Pods_run_run_run.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAFFDD0ED4961283238036D /* Pods_run_run_run.framework */; };
 		D30442931DBE223800E4887B /* InfoModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30442921DBE223800E4887B /* InfoModalViewController.swift */; };
-		D30442951DBE574C00E4887B /* ElasticModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30442941DBE574C00E4887B /* ElasticModalViewController.swift */; };
 		D30442981DBE5B1D00E4887B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30442961DBE5B1D00E4887B /* Main.storyboard */; };
 		D3284B6C1C8DB46B006FB560 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6B1C8DB46B006FB560 /* Train.swift */; };
 		D3284B6E1C8EB959006FB560 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3284B6D1C8EB959006FB560 /* ImageUtil.swift */; };
@@ -53,7 +52,6 @@
 		ADE1AE98041C91F27240AF24 /* Pods-run_run_runTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-run_run_runTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-run_run_runTests/Pods-run_run_runTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BCF71EC4D85A23DE8C9F149A /* Pods_run_run_runTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_run_run_runTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30442921DBE223800E4887B /* InfoModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoModalViewController.swift; sourceTree = "<group>"; };
-		D30442941DBE574C00E4887B /* ElasticModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElasticModalViewController.swift; sourceTree = "<group>"; };
 		D30442971DBE5B1D00E4887B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D3284B6B1C8DB46B006FB560 /* Train.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		D3284B6D1C8EB959006FB560 /* ImageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				D3EB34C11D4D01E4007ECDBB /* SegmentControl.swift */,
 				D3FF066A1DA97A9D003D3E0F /* DateUtil.swift */,
 				D30442921DBE223800E4887B /* InfoModalViewController.swift */,
-				D30442941DBE574C00E4887B /* ElasticModalViewController.swift */,
 			);
 			path = run_run_run;
 			sourceTree = "<group>";
@@ -341,7 +338,6 @@
 			files = (
 				D3284B6E1C8EB959006FB560 /* ImageUtil.swift in Sources */,
 				D3669D531C84933A00250225 /* InitialViewController.swift in Sources */,
-				D30442951DBE574C00E4887B /* ElasticModalViewController.swift in Sources */,
 				D3B57E1C1D2BF6220014F8F2 /* MenuButton.swift in Sources */,
 				D3EB34C21D4D01E4007ECDBB /* SegmentControl.swift in Sources */,
 				D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */,

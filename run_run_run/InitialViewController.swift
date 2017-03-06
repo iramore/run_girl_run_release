@@ -64,6 +64,8 @@ class InitialViewController: UIViewController {
     var transition = ElasticTransition()
     var userData: UserData?
     let shareData = ShareData.sharedInstance
+    let lgr = UIScreenEdgePanGestureRecognizer()
+    let rgr = UIScreenEdgePanGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +79,14 @@ class InitialViewController: UIViewController {
         transition.showShadow = true
         transition.panThreshold = 0.3
         transition.transformType = .translateMid
+        transition.stiffness = 0.9
+        
+        lgr.addTarget(self, action: #selector(InitialViewController.handlePan(_:)))
+        rgr.addTarget(self, action: #selector(InitialViewController.handleRightPan(_:)))
+        lgr.edges = .left
+        rgr.edges = .right
+        view.addGestureRecognizer(lgr)
+        view.addGestureRecognizer(rgr)
         
         
         let image1  = UIImage(named: "plan3") as UIImage?
@@ -111,6 +121,25 @@ class InitialViewController: UIViewController {
         
     }
     
+    func handlePan(_ pan:UIPanGestureRecognizer){
+        if pan.state == .began{
+            transition.edge = .left
+            transition.startInteractiveTransition(self, segueIdentifier: "plan", gestureRecognizer: pan)
+        }else{
+            _ = transition.updateInteractiveTransition(gestureRecognizer: pan)
+        }
+    }
+    
+    func handleRightPan(_ pan:UIPanGestureRecognizer){
+        if pan.state == .began{
+            transition.edge = .right
+            transition.startInteractiveTransition(self, segueIdentifier: "run", gestureRecognizer: pan)
+        }else{
+            _ = transition.updateInteractiveTransition(gestureRecognizer: pan)
+        }
+    }
+
+    
     
     
     
@@ -132,12 +161,12 @@ class InitialViewController: UIViewController {
     }
     
     func didPressTriangle(_ sender: AnyObject?) {
-        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "planModal") as! PlanViewController
-        modalViewController.modalTransition.edge = .left
-        present(modalViewController, animated: true, completion: nil)
-//        transition.edge = .left
-//        transition.startingPoint = sender!.center
-//        performSegue(withIdentifier: "plan", sender: self)
+//        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "planModal") as! PlanViewController
+//        modalViewController.modalTransition.edge = .left
+//        present(modalViewController, animated: true, completion: nil)
+        transition.edge = .left
+        transition.startingPoint = sender!.center
+        performSegue(withIdentifier: "plan", sender: self)
     }
     
     func didPressSquare(_ sender: AnyObject?) {

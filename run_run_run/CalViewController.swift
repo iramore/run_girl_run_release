@@ -30,11 +30,19 @@ class CalViewController: UIViewController {
     var trainDays = 0
     var endDate: Date?
     var convertedToday: Date?
+    var currentCalendar: Calendar?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        monthLabel.text = CVDate(date: Date()).globalDescription
+        let timeZoneBias = 180 // (UTC+08:00)
+        currentCalendar = Calendar.init(identifier: .gregorian)
+        if let timeZone = TimeZone.init(secondsFromGMT: -timeZoneBias * 60) {
+            currentCalendar?.timeZone = timeZone
+        }
+        if let currentCalendar = currentCalendar {
+            monthLabel.text = CVDate(date: Date(), calendar: currentCalendar).globalDescription
+        }
         transition.sticky = true
         transition.showShadow = true
         transition.panThreshold = 0.3
@@ -53,6 +61,11 @@ class CalViewController: UIViewController {
         
        setEndDate()
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -133,7 +146,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
             var ringLayer: CAShapeLayer!
             let ringLineWidth: CGFloat = 4.0
             var ringLineColour : UIColor
-            if(dayView.date.convertedDate()! > Date() || (dayView.date.convertedDate()! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!) ){
+            if(dayView.date.convertedDate(calendar: currentCalendar!)! > Date() || (dayView.date.convertedDate(calendar: currentCalendar!)! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!) ){
                 ringLineColour = UIColor(hex: "#657ECA") //blue
             } else{
                 ringLineColour =  UIColor(hex: "#FF7B7B") //brick
@@ -171,7 +184,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
        
         if let _ = (shareData.userData)!.completedTrainsDates {
             if let _ = dayView.date{
-                if(shareData.userData)!.completedTrainsDates!.contains(dayView.date.convertedDate()!){
+                if(shareData.userData)!.completedTrainsDates!.contains(dayView.date.convertedDate(calendar: currentCalendar!)!){
                     return true
                 }
             }
@@ -180,7 +193,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         if ((shareData.userData)!.daysOfWeek.contains(dayView.weekdayIndex-1))
         {
             if  let _ = dayView.date{
-                if(dayView.date.convertedDate()! > Date() && dayView.date.convertedDate()! < endDate! || (dayView.date.convertedDate()! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!)){
+                if(dayView.date.convertedDate(calendar: currentCalendar!)! > Date() && dayView.date.convertedDate(calendar: currentCalendar!)! < endDate! || (dayView.date.convertedDate(calendar: currentCalendar!)! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!)){
                     return true
                 }
             

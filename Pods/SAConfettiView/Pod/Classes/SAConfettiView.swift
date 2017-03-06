@@ -9,21 +9,21 @@
 import UIKit
 import QuartzCore
 
-open class SAConfettiView: UIView {
+public class SAConfettiView: UIView {
 
     public enum ConfettiType {
-        case confetti
-        case triangle
-        case star
-        case diamond
-        case image(UIImage)
+        case Confetti
+        case Triangle
+        case Star
+        case Diamond
+        case Image(UIImage)
     }
 
     var emitter: CAEmitterLayer!
-    open var colors: [UIColor]!
-    open var intensity: Float!
-    open var type: ConfettiType!
-    fileprivate var active :Bool!
+    public var colors: [UIColor]!
+    public var intensity: Float!
+    public var type: ConfettiType!
+    private var active :Bool!
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -42,11 +42,11 @@ open class SAConfettiView: UIView {
             UIColor(red:0.30, green:0.76, blue:0.85, alpha:1.0),
             UIColor(red:0.58, green:0.39, blue:0.55, alpha:1.0)]
         intensity = 0.5
-        type = .confetti
+        type = .Confetti
         active = false
     }
 
-    open func startConfetti() {
+    public func startConfetti() {
         emitter = CAEmitterLayer()
 
         emitter.emitterPosition = CGPoint(x: frame.size.width / 2.0, y: 0)
@@ -55,7 +55,7 @@ open class SAConfettiView: UIView {
 
         var cells = [CAEmitterCell]()
         for color in colors {
-            cells.append(confettiWithColor(color))
+            cells.append(confettiWithColor(color: color))
         }
 
         emitter.emitterCells = cells
@@ -63,40 +63,40 @@ open class SAConfettiView: UIView {
         active = true
     }
 
-    open func stopConfetti() {
+    public func stopConfetti() {
         emitter?.birthRate = 0
         active = false
     }
 
-    func imageForType(_ type: ConfettiType) -> UIImage? {
+    func imageForType(type: ConfettiType) -> UIImage? {
 
         var fileName: String!
 
         switch type {
-        case .confetti:
+        case .Confetti:
             fileName = "confetti"
-        case .triangle:
+        case .Triangle:
             fileName = "triangle"
-        case .star:
+        case .Star:
             fileName = "star"
-        case .diamond:
+        case .Diamond:
             fileName = "diamond"
-        case let .image(customImage):
+        case let .Image(customImage):
             return customImage
         }
 
         let path = Bundle(for: SAConfettiView.self).path(forResource: "SAConfettiView", ofType: "bundle")
         let bundle = Bundle(path: path!)
         let imagePath = bundle?.path(forResource: fileName, ofType: "png")
-        let url = URL(fileURLWithPath: imagePath!)
-        let data = try? Data(contentsOf: url)
+        let url = NSURL(fileURLWithPath: imagePath!)
+        let data = NSData(contentsOf: url as URL)
         if let data = data {
-            return UIImage(data: data)!
+            return UIImage(data: data as Data)!
         }
         return nil
     }
 
-    func confettiWithColor(_ color: UIColor) -> CAEmitterCell {
+    func confettiWithColor(color: UIColor) -> CAEmitterCell {
         let confetti = CAEmitterCell()
         confetti.birthRate = 6.0 * intensity
         confetti.lifetime = 14.0 * intensity
@@ -110,11 +110,11 @@ open class SAConfettiView: UIView {
         confetti.spinRange = CGFloat(4.0 * intensity)
         confetti.scaleRange = CGFloat(intensity)
         confetti.scaleSpeed = CGFloat(-0.1 * intensity)
-        confetti.contents = imageForType(type)!.cgImage
+        confetti.contents = imageForType(type: type)!.cgImage
         return confetti
     }
 
-    open func isActive() -> Bool {
+    public func isActive() -> Bool {
     		return self.active
     }
 }

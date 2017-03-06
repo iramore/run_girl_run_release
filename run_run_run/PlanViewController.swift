@@ -63,8 +63,8 @@ class PlanViewController: ElasticModalViewController, UITableViewDataSource, UIT
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 27
-        
     }
+    
     @IBAction func dismissButtonPressed(_ sender: AnyObject) {
         dismiss(animated: true, completion: nil)
     }
@@ -108,7 +108,7 @@ class PlanViewController: ElasticModalViewController, UITableViewDataSource, UIT
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        customTableView.customizeCell(cell)
+        customTableView.customizeCell(cell: cell)
         
     }
     
