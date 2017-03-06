@@ -2,9 +2,9 @@
 
 import UIKit
 import SAConfettiView
-import ElasticTransition
 
-class RunController: UIViewController, ElasticMenuTransitionDelegate {
+
+class RunController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     var smallTimer: UILabel?
     var bigTimer: UILabel?

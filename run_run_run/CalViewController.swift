@@ -19,8 +19,7 @@ class CalViewController: UIViewController {
     
     @IBOutlet weak var runner: UIImageView!
     @IBOutlet weak var progressLabel: UILabel!
-    var transition:ElasticTransition!
-    
+    var transition = ElasticTransition()
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var menuView: CVCalendarMenuView!

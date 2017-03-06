@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import ElasticTransition
 
-class InfoModalViewController: ElasticModalViewController {
+class InfoModalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

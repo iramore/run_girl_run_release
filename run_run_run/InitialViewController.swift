@@ -1,5 +1,4 @@
 import UIKit
-import ElasticTransition
 
 class ShareData {
     
@@ -59,13 +58,9 @@ extension Date
 
 class InitialViewController: UIViewController {
     @IBOutlet weak var infoButton: UIButton!
-    
-    
-    var transition = ElasticTransition()
+
     var userData: UserData?
     let shareData = ShareData.sharedInstance
-    let lgr = UIScreenEdgePanGestureRecognizer()
-    let rgr = UIScreenEdgePanGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,18 +70,8 @@ class InitialViewController: UIViewController {
         
         shareData.userData = UserData(daysOfWeek: [1,3,5], completedTrainsDates: [Date(dateString:"2016-08-06")])
         shareData.saveUserData()
-        transition.sticky = true
-        transition.showShadow = true
-        transition.panThreshold = 0.3
-        transition.transformType = .translateMid
-        transition.stiffness = 0.9
+       
         
-        lgr.addTarget(self, action: #selector(InitialViewController.handlePan(_:)))
-        rgr.addTarget(self, action: #selector(InitialViewController.handleRightPan(_:)))
-        lgr.edges = .left
-        rgr.edges = .right
-        view.addGestureRecognizer(lgr)
-        view.addGestureRecognizer(rgr)
         
         
         let image1  = UIImage(named: "plan3") as UIImage?
@@ -113,7 +98,7 @@ class InitialViewController: UIViewController {
         let trackButton = MenuButton(path: thirdButtonBezier(), frame: frame3, image: "cal-but")
         trackButton.addTarget(self, action: #selector(didPressPentagon), for: UIControlEvents.touchUpInside)
         
-        infoButton.addTarget(self, action: #selector(didPressInfo), for: UIControlEvents.touchUpInside)
+     
         
         self.view.addSubview(planButton)
         self.view.addSubview(runButton)
@@ -121,23 +106,7 @@ class InitialViewController: UIViewController {
         
     }
     
-    func handlePan(_ pan:UIPanGestureRecognizer){
-        if pan.state == .began{
-            transition.edge = .left
-            transition.startInteractiveTransition(self, segueIdentifier: "plan", gestureRecognizer: pan)
-        }else{
-            _ = transition.updateInteractiveTransition(gestureRecognizer: pan)
-        }
-    }
-    
-    func handleRightPan(_ pan:UIPanGestureRecognizer){
-        if pan.state == .began{
-            transition.edge = .right
-            transition.startInteractiveTransition(self, segueIdentifier: "run", gestureRecognizer: pan)
-        }else{
-            _ = transition.updateInteractiveTransition(gestureRecognizer: pan)
-        }
-    }
+   
 
     
     
@@ -145,39 +114,26 @@ class InitialViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-            let vc = segue.destination
-            vc.transitioningDelegate = transition
-            vc.modalPresentationStyle = .custom
-            if let vc = vc as? CalViewController{
-                vc.transition = transition
-            }
         
     }
     
-    func didPressInfo(_ sender: AnyObject?){
-        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "modalInfo") as! InfoModalViewController
-        modalViewController.modalTransition.edge = .top
-        present(modalViewController, animated: true, completion: nil)
-    }
+  
     
     func didPressTriangle(_ sender: AnyObject?) {
 //        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "planModal") as! PlanViewController
 //        modalViewController.modalTransition.edge = .left
 //        present(modalViewController, animated: true, completion: nil)
-        transition.edge = .left
-        transition.startingPoint = sender!.center
+        
         performSegue(withIdentifier: "plan", sender: self)
     }
     
     func didPressSquare(_ sender: AnyObject?) {
-        transition.edge = .right
-        transition.startingPoint = sender!.center
+        
         performSegue(withIdentifier: "run", sender: self)
     }
     
     func didPressPentagon(_ sender: AnyObject?) {
-        transition.edge = .bottom
-        transition.startingPoint = sender!.center
+       
         performSegue(withIdentifier: "option", sender: self)
         //        transition.edge = .Bottom
         //        transition.startingPoint = sender!.center
@@ -205,7 +161,6 @@ class InitialViewController: UIViewController {
         bezierPath.close()
         bezierPath.miterLimit = 4
         bezierPath.fill()
-        
         return bezierPath
     }
     

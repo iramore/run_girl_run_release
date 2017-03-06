@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ElasticTransition
 import BMCustomTableView
 
 class CustomTableViewCell: UITableViewCell {
@@ -31,7 +30,7 @@ class CustomTableViewCell: UITableViewCell {
 }
 
 
-class PlanViewController: ElasticModalViewController, UITableViewDataSource, UITableViewDelegate {
+class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let shareData = ShareData.sharedInstance
     var lastDateForTraining: Date?
