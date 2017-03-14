@@ -1,5 +1,6 @@
 PODS:
   - BMCustomTableView (0.1.0)
+  - BubbleTransition (2.0.1)
   - CVCalendar (1.4.1)
   - ElasticTransition (3.1.1):
     - MotionAnimation (~> 0.1.2)
@@ -8,6 +9,7 @@ PODS:
 
 DEPENDENCIES:
   - BMCustomTableView
+  - BubbleTransition (~> 2.0.0)
   - CVCalendar (~> 1.4.0)
   - ElasticTransition
   - MotionAnimation
@@ -15,11 +17,12 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   BMCustomTableView: 263be7eae28e521a1f76f235e1ddf124e8d98b81
+  BubbleTransition: bb24ed389ab672eecf3c87170d0a73f959a8e696
   CVCalendar: 61912eb5dc39c3bcfe22a731147a559a696fbc15
   ElasticTransition: 6c4e4739e32480c864217db912100f3657f6447a
   MotionAnimation: ff5c8fc2e429d7e10d46ae86819ba9759846c343
   SAConfettiView: c87031a2280659261b730fce3669fb10e73636ee
 
-PODFILE CHECKSUM: 8a91ebe083eac542f8b221eef23465fd29c122e5
+PODFILE CHECKSUM: c3d651cd4695acaf186456027a051ebf18595c11
 
 COCOAPODS: 1.0.1

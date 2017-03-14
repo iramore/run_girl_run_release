@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/BMCustomTableView/BMCustomTableView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BubbleTransition/BubbleTransition.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CVCalendar/CVCalendar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ElasticTransition/ElasticTransition.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MotionAnimation/MotionAnimation.framework"
@@ -92,6 +93,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/BMCustomTableView/BMCustomTableView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BubbleTransition/BubbleTransition.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CVCalendar/CVCalendar.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ElasticTransition/ElasticTransition.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MotionAnimation/MotionAnimation.framework"

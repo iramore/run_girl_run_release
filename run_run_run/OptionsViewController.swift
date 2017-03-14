@@ -22,9 +22,9 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, Se
     var dismissByBackgroundDrag = true
     var dismissByForegroundDrag = true
   
-  var menu:[LeftMenuType] = []
+    var menu:[LeftMenuType] = []
   
-  override func viewDidLoad() {
+    override func viewDidLoad() {
     super.viewDidLoad()
     var calendar = Calendar.current
     var days: [String]

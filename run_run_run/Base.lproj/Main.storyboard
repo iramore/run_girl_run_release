@@ -24,13 +24,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="January, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIH-5x-13C">
-                                <rect key="frame" x="119.5" y="28" width="136" height="24"/>
+                                <rect key="frame" x="120" y="28" width="136" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="0.32941176470588235" green="0.31372549019607843" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x68-qj-xvb" customClass="CVCalendarView" customModule="CVCalendar">
-                                <rect key="frame" x="13.5" y="115" width="348" height="399"/>
+                                <rect key="frame" x="14" y="115" width="348" height="399"/>
                                 <connections>
                                     <outlet property="calendarAppearanceDelegate" destination="etY-z9-AdL" id="G8O-Pw-kdz"/>
                                     <outlet property="calendarDelegate" destination="etY-z9-AdL" id="asA-Fk-Dso"/>
@@ -43,7 +43,7 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbN-YA-dHf">
-                                <rect key="frame" x="89.5" y="601" width="197" height="46"/>
+                                <rect key="frame" x="90" y="601" width="197" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="197" id="5et-SK-gGO"/>
                                 </constraints>
@@ -220,6 +220,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0h-KF-m7d">
                                 <rect key="frame" x="312" y="36" width="32" height="32"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="info"/>
                                 <connections>
                                     <segue destination="lHe-mR-dXC" kind="presentation" identifier="info" modalPresentationStyle="overCurrentContext" id="3TE-HB-hEL"/>
@@ -482,7 +483,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="CL8-lo-5QT"/>
+                                <exclude reference="wdU-Yr-sBp"/>
                                 <exclude reference="0Pn-iR-v2G"/>
                                 <exclude reference="0eS-El-zbI"/>
                                 <exclude reference="AdL-oQ-4Gr"/>
@@ -491,16 +492,16 @@
                                 <exclude reference="JEO-td-rmU"/>
                                 <exclude reference="hw9-vO-FdB"/>
                                 <exclude reference="x3I-kc-fMu"/>
-                                <exclude reference="wdU-Yr-sBp"/>
-                                <exclude reference="hlJ-bu-oEf"/>
-                                <exclude reference="Pmk-gY-iwN"/>
-                                <exclude reference="XSD-Da-S1F"/>
-                                <exclude reference="h6c-GK-2qL"/>
+                                <exclude reference="CL8-lo-5QT"/>
                                 <exclude reference="98g-rz-SMd"/>
                                 <exclude reference="GKS-9r-dq1"/>
                                 <exclude reference="Qw6-ov-uXM"/>
                                 <exclude reference="iVK-LB-ck8"/>
                                 <exclude reference="k0a-iZ-6gC"/>
+                                <exclude reference="XSD-Da-S1F"/>
+                                <exclude reference="h6c-GK-2qL"/>
+                                <exclude reference="hlJ-bu-oEf"/>
+                                <exclude reference="Pmk-gY-iwN"/>
                             </mask>
                         </variation>
                     </view>
@@ -586,7 +587,7 @@
                                                     </connections>
                                                 </segmentedControl>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slider" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjc-73-Dgp">
-                                                    <rect key="frame" x="16" y="54" width="343" height="21"/>
+                                                    <rect key="frame" x="16" y="53" width="343" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.57088900840000001" green="0.66208174850000001" blue="0.76511205810000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

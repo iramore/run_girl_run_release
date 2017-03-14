@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BubbleTransition.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CVCalendar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,22 +62,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>406B7829131F74BC7D54D5B3B3072D0F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>697BC9A5360F516EEB56663091F617E8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>7031ED9D7E985343BFF4CFFEA25D2EB0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B42CA89822BFFDA7E5940240035795A7</key>
+		<key>7372CA79CE92E7AC032175441663EBE4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8CA7223791F09E3CFCA00E764E52EE78</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>906A00FAA2FF90CEC8A8964A29A17D1B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A63FC8F2C38C953153F792CDABDC610D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

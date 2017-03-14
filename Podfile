@@ -5,6 +5,7 @@ platform :ios, ‘9.3’
  use_frameworks!
 
 target 'run_run_run' do
+pod 'BubbleTransition', '~> 2.0.0'
 pod 'CVCalendar', '~> 1.4.0’
 pod 'MotionAnimation'
 pod 'ElasticTransition'

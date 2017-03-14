@@ -1,4 +1,5 @@
 import UIKit
+import BubbleTransition
 
 class ShareData {
     
@@ -56,11 +57,15 @@ extension Date
     }
 }
 
-class InitialViewController: UIViewController {
+class InitialViewController: UIViewController, UIViewControllerTransitioningDelegate {
     @IBOutlet weak var infoButton: UIButton!
 
     var userData: UserData?
     let shareData = ShareData.sharedInstance
+    let transition = BubbleTransition()
+    var planButton: UIButton?
+    var runButton: UIButton?
+    var trackButton: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,42 +84,90 @@ class InitialViewController: UIViewController {
         let frame1 = CGRect(x: self.view.bounds.width/2 - (image1?.size.width)! - 5,y: self.view.bounds.height*2/3 - (image1?.size.height)!, width: (image1?.size.width)! , height: (image1?.size.height)!)
         
         
-        let planButton = MenuButton(path: firstButtonBezier(), frame: frame1, image: "plan3")
-        planButton.addTarget(self, action: #selector(didPressTriangle) , for: UIControlEvents.touchUpInside)
+        planButton = MenuButton(path: firstButtonBezier(), frame: frame1, image: "plan3")
+        planButton?.addTarget(self, action: #selector(didPressTriangle) , for: UIControlEvents.touchUpInside)
+        planButton?.backgroundColor = UIColor.white
         
         let image2  = UIImage(named: "run-bb") as UIImage?
         
         let frame2 = CGRect(x: self.view.bounds.width/2 + 5,y: self.view.bounds.height*2/3 - (image2?.size.height)!, width: (image2?.size.width)! , height: (image2?.size.height)!)
         
         
-        let runButton = MenuButton(path: secondButtonBezier(), frame: frame2, image: "run-bb")
-        runButton.addTarget(self, action: #selector(didPressSquare), for: UIControlEvents.touchUpInside)
+        runButton = MenuButton(path: secondButtonBezier(), frame: frame2, image: "run-bb")
+        runButton?.addTarget(self, action: #selector(didPressSquare), for: UIControlEvents.touchUpInside)
+        runButton?.backgroundColor = UIColor.white
         
         let image3  = UIImage(named: "cal-but") as UIImage?
         
         let frame3 = CGRect(x: self.view.bounds.width/2 - (image3?.size.width)!/2 ,y: self.view.bounds.height*2/3 - (image3?.size.height)!/2 + 7, width: (image3?.size.width)! , height: (image3?.size.height)!)
         
         
-        let trackButton = MenuButton(path: thirdButtonBezier(), frame: frame3, image: "cal-but")
-        trackButton.addTarget(self, action: #selector(didPressPentagon), for: UIControlEvents.touchUpInside)
-        
+        trackButton = MenuButton(path: thirdButtonBezier(), frame: frame3, image: "cal-but")
+        trackButton?.addTarget(self, action: #selector(didPressPentagon), for: UIControlEvents.touchUpInside)
+        trackButton?.backgroundColor = UIColor.white
      
         
-        self.view.addSubview(planButton)
-        self.view.addSubview(runButton)
-        self.view.addSubview(trackButton)
+        self.view.addSubview(planButton!)
+        self.view.addSubview(runButton!)
+        self.view.addSubview(trackButton!)
         
     }
     
    
 
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        if presented is PlanViewController {
+            transition.startingPoint = (planButton?.center)!
+            transition.bubbleColor = (planButton?.backgroundColor!)!
+        }
+        if presented is RunController {
+            transition.startingPoint = (runButton?.center)!
+            transition.bubbleColor = (runButton?.backgroundColor!)!
+        }
+
+        if presented is CalViewController {
+            transition.startingPoint = (trackButton?.center)!
+            transition.bubbleColor = (trackButton?.backgroundColor!)!
+        }
+        if presented is InfoModalViewController {
+            transition.startingPoint = (infoButton?.center)!
+            transition.bubbleColor = (infoButton?.backgroundColor!)!
+        }
+
+        return transition
+    }
     
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        if dismissed is PlanViewController {
+            transition.startingPoint = (planButton?.center)!
+            transition.bubbleColor = (planButton?.backgroundColor!)!
+        }
+        if dismissed is RunController {
+            transition.startingPoint = (runButton?.center)!
+            transition.bubbleColor = (runButton?.backgroundColor!)!
+        }
+        
+        if dismissed is CalViewController {
+            transition.startingPoint = (trackButton?.center)!
+            transition.bubbleColor = (trackButton?.backgroundColor!)!
+        }
+        if dismissed is InfoModalViewController {
+            transition.startingPoint = (infoButton?.center)!
+            transition.bubbleColor = (infoButton?.backgroundColor!)!
+        }
+        
+        return transition
+    }
+
     
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
+        let controller = segue.destination
+        controller.transitioningDelegate = self
+        controller.modalPresentationStyle = .custom
     }
     
   
@@ -148,8 +201,6 @@ class InitialViewController: UIViewController {
     
     func firstButtonBezier() -> UIBezierPath {
         let ovalPath = UIBezierPath(ovalIn: CGRect(x: 71, y: 38, width: 45, height: 41))
-        UIColor.gray.setFill()
-        ovalPath.fill()
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 126.84, y: 126.82))
         bezierPath.addLine(to: CGPoint(x: 16.76, y: 189.82))
@@ -160,14 +211,11 @@ class InitialViewController: UIViewController {
         bezierPath.addLine(to: CGPoint(x: 126.84, y: 126.82))
         bezierPath.close()
         bezierPath.miterLimit = 4
-        bezierPath.fill()
         return bezierPath
     }
     
     
     func secondButtonBezier() -> UIBezierPath {
-        
-        let fillColor = UIColor(red: 0.939, green: 0.847, blue: 0.502, alpha: 1.000)
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 0, y: 126.82))
         bezierPath.addLine(to: CGPoint(x: 0, y: -0.02))
@@ -178,19 +226,11 @@ class InitialViewController: UIViewController {
         bezierPath.addLine(to: CGPoint(x: 0, y: 126.82))
         bezierPath.close()
         bezierPath.miterLimit = 4;
-        
-        fillColor.setFill()
-        bezierPath.fill()
-        
         return bezierPath
     }
     
     
     func thirdButtonBezier() -> UIBezierPath {
-        
-        
-        let fillColor = UIColor(red: 0.708, green: 0.826, blue: 0.887, alpha: 1.000)
-        
         //// Bezier Drawing
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 108.67, y: 0))
@@ -202,10 +242,6 @@ class InitialViewController: UIViewController {
         bezierPath.addLine(to: CGPoint(x: 108.67, y: 0))
         bezierPath.close()
         bezierPath.miterLimit = 4;
-        
-        fillColor.setFill()
-        bezierPath.fill()
-        
         return bezierPath
     }
     

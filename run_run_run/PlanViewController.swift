@@ -51,6 +51,14 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //customTableView.frame = self.view.frame;
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.setStatusBarStyle(.lightContent, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        UIApplication.shared.setStatusBarStyle(.default, animated: true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
