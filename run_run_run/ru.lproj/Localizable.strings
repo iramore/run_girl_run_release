@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  run_run_run
+
+  Created by infuntis on 15/03/17.
+  Copyright © 2017 gala. All rights reserved.
+*/
+options.days.mn = "Пн";
+options.days.tu = "Вт";
+options.days.wd = "Ср";
+options.days.th = "Чт";
+options.days.fr = "Пт";
+options.days.sa = "Сб";
+options.days.su = "Вс";
+calendar.completed = "Завершенные тренировки: ";
+run.runWord = "run";
+run.walkWord = "walk";
+notification.Title = "notification title";
+notification.Body = "notification body";
+modalWindow.NotificationAdvice = "Приложению нужно разрешение для отправки Вам аудио-подсказок во время тренировки. Пожалуйста, одобрите это в следующем всплывающем меню.";

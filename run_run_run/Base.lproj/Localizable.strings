@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  run_run_run
+
+  Created by infuntis on 15/03/17.
+  Copyright © 2017 gala. All rights reserved.
+*/
+options.days.mn = "M";
+options.days.tu = "Tu";
+options.days.wd = "W";
+options.days.th = "Th";
+options.days.fr = "F";
+options.days.sa = "Sa";
+options.days.su = "Su";
+calendar.completed = "Completed trainings: ";
+run.runWord = "run";
+run.walkWord = "run";
+notification.Title = "notification title";
+notification.Body = "notification body";
+modalWindow.NotificationAdvice = "In order for this app to work, this app needs permission to send you Next Stage notifications. Please allow this in the next popup.";

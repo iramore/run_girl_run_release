@@ -2,6 +2,9 @@
 /* Class = "UILabel"; text = "Week days"; ObjectID = "64T-jX-9J5"; */
 "64T-jX-9J5.text" = "Week days";
 
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "77R-bM-U87"; */
+"77R-bM-U87.normalTitle" = "OK";
+
 /* Class = "UISegmentedControl"; R9a-fr-WdD.segmentTitles[0] = "First"; ObjectID = "R9a-fr-WdD"; */
 "R9a-fr-WdD.segmentTitles[0]" = "First";
 

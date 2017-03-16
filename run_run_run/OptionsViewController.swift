@@ -30,9 +30,9 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, Se
     var days: [String]
     calendar.locale = Locale(identifier: Locale.current.languageCode!)
     if calendar.firstWeekday==2{
-        days = ["M", "Tu", "W", "Th", "F", "Sa","Su"]
+        days = [NSLocalizedString("options.days.mn", comment: ""), NSLocalizedString("options.days.tu", comment: ""), NSLocalizedString("options.days.wd", comment: ""), NSLocalizedString("options.days.th", comment: ""), NSLocalizedString("options.days.fr", comment: ""), NSLocalizedString("options.days.sa", comment: ""),NSLocalizedString("options.days.su", comment: "")]
     } else{
-        days = ["Su","M", "Tu", "W", "Th", "F", "Sa"]
+        days = [NSLocalizedString("options.days.su", comment: ""),NSLocalizedString("options.days.mn", comment: ""), NSLocalizedString("options.days.tu", comment: ""), NSLocalizedString("options.days.wd", comment: ""), NSLocalizedString("options.days.th", comment: ""), NSLocalizedString("options.days.fr", comment: ""), NSLocalizedString("options.days.sa", comment: "")]
     }
     menu.append(.mySegment(values: ["1", "2", "3", "4", "5"],selected: [(self.shareData.loadUserData()?.daysOfWeek.count)!-1], name: "Number"))
     menu.append(.mySegment(values: days,selected: (self.shareData.loadUserData()?.daysOfWeek)!,  name: "Days"))
@@ -63,7 +63,7 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, Se
                 var selIndexes = control.selectedIndexes
                 if (selIndexes.contains(value) && selIndexes.count>1){
                     selIndexes.remove(at: selIndexes.index(of: value)!)
-                } else if(selIndexes.count<5){
+                } else if(!selIndexes.contains(value) && selIndexes.count<5){
                     selIndexes += [value]
                 }
                 control.selectedIndexes = selIndexes

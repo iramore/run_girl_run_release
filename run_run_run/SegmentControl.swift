@@ -21,7 +21,7 @@ class SegmentControl: UIView{
     //var borderColor = UIColor(hex: "#F26F7A")
     var textColor = UIColor(hex: "#54504C")
     var name: String = ""
-    var font = UIFont(name: "Avenir", size: 24)
+    var font = UIFont(name: "Avenir Next", size: 24)
     var selectedIndexes = [Int](){
         didSet {
             setNeedsDisplay()

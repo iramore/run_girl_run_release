@@ -10,7 +10,7 @@ PODS:
 DEPENDENCIES:
   - BMCustomTableView
   - BubbleTransition (~> 2.0.0)
-  - CVCalendar (~> 1.4.0)
+  - CVCalendar (~> 1.4.1)
   - ElasticTransition
   - MotionAnimation
   - SAConfettiView
@@ -23,6 +23,6 @@ SPEC CHECKSUMS:
   MotionAnimation: ff5c8fc2e429d7e10d46ae86819ba9759846c343
   SAConfettiView: c87031a2280659261b730fce3669fb10e73636ee
 
-PODFILE CHECKSUM: c3d651cd4695acaf186456027a051ebf18595c11
+PODFILE CHECKSUM: 81036be9060e0ecc923adbee409d50aa2eb8e28c
 
 COCOAPODS: 1.0.1

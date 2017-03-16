@@ -69,16 +69,8 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let locale = Locale.current
-        let language = locale.languageCode
-        //let currencyCode = locale.currencyCode
-        
-        shareData.userData = UserData(daysOfWeek: [1,3,5], completedTrainsDates: [Date(dateString:"2016-08-06")])
+        shareData.userData = UserData(daysOfWeek: [0,2,4], completedTrainsDates: [Date(dateString:"2017-03-16")])
         shareData.saveUserData()
-       
-        
-        
-        
         let image1  = UIImage(named: "plan3") as UIImage?
         
         let frame1 = CGRect(x: self.view.bounds.width/2 - (image1?.size.width)! - 5,y: self.view.bounds.height*2/3 - (image1?.size.height)!, width: (image1?.size.width)! , height: (image1?.size.height)!)

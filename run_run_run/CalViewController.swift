@@ -34,11 +34,7 @@ class CalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let timeZoneBias = 180 // (UTC+08:00)
-        currentCalendar = Calendar.init(identifier: .gregorian)
-        if let timeZone = TimeZone.init(secondsFromGMT: -timeZoneBias * 60) {
-            currentCalendar?.timeZone = timeZone
-        }
+        currentCalendar = Calendar.current
         if let currentCalendar = currentCalendar {
             monthLabel.text = CVDate(date: Date(), calendar: currentCalendar).globalDescription
         }
@@ -46,6 +42,7 @@ class CalViewController: UIViewController {
         transition.showShadow = true
         transition.panThreshold = 0.3
         transition.transformType = .rotate
+        transition.stiffness = 0.9
         
         let progressPercent = CGFloat(((shareData.userData)!.completedTrainsDates?.count)!) / CGFloat(Train_data.numberOfTrains)
         let image = getMixedImg(runner.frame.width * progressPercent)
@@ -56,9 +53,9 @@ class CalViewController: UIViewController {
         runner.layer.borderColor = UIColor(hex: "#FF7B7B").cgColor
         runner.layer.masksToBounds = true
         
-        progressLabel.text = "Completed trainings: \(((shareData.userData)!.completedTrainsDates?.count)!) / 27"
+        progressLabel.text = "\(NSLocalizedString("calendar.completed", comment: "")) \(((shareData.userData)!.completedTrainsDates?.count)!) / 27"
         
-       setEndDate()
+        setEndDate()
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -81,7 +78,6 @@ class CalViewController: UIViewController {
     @IBAction func settingsTouched(_ sender: AnyObject) {
         transition.edge = .bottom
         transition.startingPoint = sender.center
-        performSegue(withIdentifier: "settings", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination
@@ -135,107 +131,92 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
     }
     
     func supplementaryView(viewOnDayView dayView: DayView) -> UIView {
-
+        dayView.setNeedsLayout()
+        dayView.layoutIfNeeded()
         
-            let π = M_PI
-            
-            let ringSpacing: CGFloat = 3.0
-            let ringInsetWidth: CGFloat = 1.0
-            let ringVerticalOffset: CGFloat = 1.0
-            var ringLayer: CAShapeLayer!
-            let ringLineWidth: CGFloat = 4.0
-            var ringLineColour : UIColor
-            if(dayView.date.convertedDate(calendar: currentCalendar!)! > Date() || (dayView.date.convertedDate(calendar: currentCalendar!)! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!) ){
-                ringLineColour = UIColor(hex: "#657ECA") //blue
-            } else{
-                ringLineColour =  UIColor(hex: "#FF7B7B") //brick
-
-            }
+        let π = M_PI
         
-            let newView = UIView(frame: dayView.bounds)
-            
-            let diameter: CGFloat = (newView.bounds.width) - ringSpacing
-            let radius: CGFloat = diameter / 2.0
-            
-            let rect = CGRect(x: newView.frame.midX-radius, y: newView.frame.midY-radius-ringVerticalOffset, width: diameter, height: diameter)
-            
-            ringLayer = CAShapeLayer()
-            newView.layer.addSublayer(ringLayer)
-            
-            ringLayer.fillColor = nil
-            ringLayer.lineWidth = ringLineWidth
-            ringLayer.strokeColor = ringLineColour.cgColor
-            
-            let ringLineWidthInset: CGFloat = CGFloat(ringLineWidth/2.0) + ringInsetWidth
-            let ringRect: CGRect = rect.insetBy(dx: ringLineWidthInset, dy: ringLineWidthInset)
-            let centrePoint: CGPoint = CGPoint(x: ringRect.midX, y: ringRect.midY)
-            let startAngle: CGFloat = CGFloat(-π/2.0)
-            let endAngle: CGFloat = CGFloat(π * 2.0) + startAngle
-            let ringPath: UIBezierPath = UIBezierPath(arcCenter: centrePoint, radius: ringRect.width/2.0, startAngle: startAngle, endAngle: endAngle, clockwise: true)
-            
-            ringLayer.path = ringPath.cgPath
-            ringLayer.frame = newView.layer.bounds
-            
-            return newView
+        let ringLayer = CAShapeLayer()
+        let ringLineWidth: CGFloat = 4.0
+        var ringLineColour : UIColor
+        if(dayView.date.convertedDate(calendar: currentCalendar!)! > Date() || (dayView.date.convertedDate(calendar: currentCalendar!)! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!) ){
+            ringLineColour = UIColor(hex: "#657ECA")
+        } else{
+            ringLineColour =  UIColor(hex: "#FF7B7B")
+        }
+        
+        let newView = UIView(frame: dayView.frame)
+        
+        let diameter = (min(newView.bounds.width, newView.bounds.height))
+        let radius = diameter / 2.0 - ringLineWidth
+        
+        newView.layer.addSublayer(ringLayer)
+        
+        ringLayer.fillColor = nil
+        ringLayer.lineWidth = ringLineWidth
+        ringLayer.strokeColor = ringLineColour.cgColor
+        
+        let centrePoint = CGPoint(x: newView.bounds.width/2.0, y: newView.bounds.height/2.0)
+        let startAngle = CGFloat(-π/2.0)
+        let endAngle = CGFloat(π * 2.0) + startAngle
+        let ringPath = UIBezierPath(arcCenter: centrePoint,
+                                    radius: radius,
+                                    startAngle: startAngle,
+                                    endAngle: endAngle,
+                                    clockwise: true)
+        
+        ringLayer.path = ringPath.cgPath
+        ringLayer.frame = newView.layer.bounds
+        
+        return newView
+        
     }
     
     func supplementaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
-       
+        
+        
+        guard let currentCalendar = currentCalendar else {
+            return false
+        }
+        var components = Manager.componentsForDate(Foundation.Date(), calendar: currentCalendar)
+        
         if let _ = (shareData.userData)!.completedTrainsDates {
             if let _ = dayView.date{
-                if(shareData.userData)!.completedTrainsDates!.contains(dayView.date.convertedDate(calendar: currentCalendar!)!){
+                if(shareData.userData)!.completedTrainsDates!.contains(dayView.date.convertedDate(calendar: currentCalendar)!){
                     return true
                 }
             }
         }
         
-        if ((shareData.userData)!.daysOfWeek.contains(dayView.weekdayIndex-1))
+        if (shareData.userData)!.daysOfWeek.contains(dayView.weekdayIndex-1)
         {
+            
             if  let _ = dayView.date{
-                if(dayView.date.convertedDate(calendar: currentCalendar!)! > Date() && dayView.date.convertedDate(calendar: currentCalendar!)! < endDate! || (dayView.date.convertedDate(calendar: currentCalendar!)! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!)){
+                if(dayView.date.convertedDate(calendar: currentCalendar)! > Date() && dayView.date.convertedDate(calendar: currentCalendar)! < endDate! || (dayView.date.convertedDate(calendar: currentCalendar)! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!)){
                     return true
                 }
-            
             }
         }
         return false
     }
     
-    func toMondayWeekStart(_ weekDaySun: Int) -> Int{
-        if(weekDaySun>=2){
-            return weekDaySun - 1
-        } else{
-            return 7
-        }
-    }
+//    func toMondayWeekStart(_ weekDaySun: Int) -> Int{
+//        if(weekDaySun>=2){
+//            return weekDaySun - 1
+//        } else{
+//            return 7
+//        }
+//    }
     
     
-    func getDayOfWeek(_ date: Date)->Int{
-            let myCalendar = Calendar(identifier: .gregorian)
-            let weekDay = myCalendar.component(.weekday, from: date)
-            return weekDay
-        
-    }
-    
+//    func getDayOfWeek(_ date: Date)->Int{
+//        let myCalendar = Calendar(identifier: .gregorian)
+//        let weekDay = myCalendar.component(.weekday, from: date)
+//        return weekDay
+//    }
+//    
     func setEndDate() {
-       
-        
-        let date = Date()
-        var calendar = Calendar.current
-        calendar.locale = Locale(identifier: Locale.current.languageCode!)
-        
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        
-        
-        var components = DateComponents()
-        components.setValue(month, for: .month)
-        components.setValue(year, for: .year)
-        components.setValue(day, for: .day)
-        convertedToday = Calendar.current.date(from: components)
-        
-        
+        convertedToday = DateUtil.getConvertedToday()
         let today = Date()
         let val = 27 - ((shareData.userData)!.completedTrainsDates?.count)!
         let weeks = val/(shareData.userData)!.daysOfWeek.count
@@ -245,11 +226,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
             ){
             tail -= 1
         }
-        
-        
         let endWeek  =  Calendar.current.date(byAdding: .weekOfMonth, value: weeks, to: today)
-        
-        
         var dayCurrent : Date = endWeek!
         while(tail > 0){
             dayCurrent = Calendar.current.date(byAdding: .day, value: 1, to: dayCurrent)!
@@ -270,14 +247,12 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
             im.draw(in: CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
             widthVid+=im.size.width
         }
-        
-        
         let finalImage2 = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return finalImage2!
     }
-
-
+    
+    
     
     func presentedDateUpdated(_ date: CVDate) {
         if monthLabel.text != date.globalDescription && self.animationFinished {
@@ -316,6 +291,6 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
             self.view.insertSubview(updatedMonthLabel, aboveSubview: self.monthLabel)
         }
     }
-
+    
     
 }

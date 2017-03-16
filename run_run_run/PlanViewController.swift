@@ -33,7 +33,7 @@ class CustomTableViewCell: UITableViewCell {
 class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let shareData = ShareData.sharedInstance
-    var lastDateForTraining: Date?
+    var lastTrainingDate = DateUtil.getConvertedToday()
     
     
     //MARK: Variables
@@ -84,26 +84,31 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if(ind < (ShareData.sharedInstance.userData?.completedTrainsDates?.count)!){
             result = UIImage(named: "run-run-\(ind+1)wt")!
             data = (ShareData.sharedInstance.userData?.completedTrainsDates?[ind])!
-        } else if ind == (ShareData.sharedInstance.userData?.completedTrainsDates?.count)! {
-            lastDateForTraining = Date()
-            var dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: lastDateForTraining!)
-            while(!(ShareData.sharedInstance.userData?.daysOfWeek.contains(dayOfWeek))!){
-                lastDateForTraining = Calendar.current.date(byAdding: .day, value: 1, to: lastDateForTraining!)!
-                dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: lastDateForTraining!)
+        }
+        else if ind == (ShareData.sharedInstance.userData?.completedTrainsDates?.count)! {
+            if  !(ShareData.sharedInstance.userData?.completedTrainsDates?.contains(lastTrainingDate))! {
+                var dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: lastTrainingDate)
+                while(!(ShareData.sharedInstance.userData?.daysOfWeek.contains(dayOfWeek-1))!){
+                    lastTrainingDate = Calendar.current.date(byAdding: .day, value: 1, to: lastTrainingDate)!
+                    dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: lastTrainingDate)
+                }
+                data = lastTrainingDate
+                result = UIImage(named: "run-run-\(ind+1)")!
+            } else{
+                lastTrainingDate = Calendar.current.date(byAdding: .day, value: 1, to: lastTrainingDate)!
+                lastTrainingDate = findNextTrainDate(prevTrain: lastTrainingDate)
+                print(lastTrainingDate)
+                data = lastTrainingDate
+                result = UIImage(named: "run-run-\(ind+1)")!
             }
-            data = lastDateForTraining!
-            result = UIImage(named: "run-run-\(ind+1)")!
             
-        }else {
-            //result = UIImage(named: "Image")!
-            lastDateForTraining = Calendar.current.date(byAdding: .day, value: 1, to: lastDateForTraining!)!
-            var dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: lastDateForTraining!)
-            while(!(ShareData.sharedInstance.userData?.daysOfWeek.contains(dayOfWeek))!){
-                lastDateForTraining = Calendar.current.date(byAdding: .day, value: 1, to: lastDateForTraining!)!
-                dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: lastDateForTraining!)
-            }
-            data = lastDateForTraining!
+        }
+        else {
+            lastTrainingDate = Calendar.current.date(byAdding: .day, value: 1, to: lastTrainingDate)!
+            lastTrainingDate = findNextTrainDate(prevTrain: lastTrainingDate)
+            data = lastTrainingDate
             result = UIImage(named: "run-run-\(ind+1)")!
+           
         }
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: Locale.current.languageCode!)
@@ -111,6 +116,17 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.date.text = formatter.string(from: data)
         cell.planImage.image = result
         return cell
+    }
+    
+    func findNextTrainDate(prevTrain: Date) -> Date{
+        var nextDate = prevTrain
+        var dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: nextDate)
+        while(!(ShareData.sharedInstance.userData?.daysOfWeek.contains(dayOfWeek-1))!){
+            nextDate = Calendar.current.date(byAdding: .day, value: 1, to: nextDate)!
+            dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: nextDate)
+        }
+        return nextDate
+       
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
