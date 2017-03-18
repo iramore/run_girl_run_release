@@ -239,7 +239,7 @@
 				TargetAttributes = {
 					D35F1CC71C7105390084A902 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 35LC74S563;
+						DevelopmentTeam = 83H63AD9J8;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -497,7 +497,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 35LC74S563;
+				DEVELOPMENT_TEAM = 83H63AD9J8;
 				INFOPLIST_FILE = run_run_run/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gala.run-run-run";
@@ -514,7 +514,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 35LC74S563;
+				DEVELOPMENT_TEAM = 83H63AD9J8;
 				INFOPLIST_FILE = run_run_run/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gala.run-run-run";

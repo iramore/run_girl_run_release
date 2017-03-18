@@ -16,9 +16,7 @@ protocol modalAdviceDelegate: class {
 class modalAdvice: UIViewController {
     var delegate:modalAdviceDelegate?
     
-    
     @IBOutlet weak var adviceLabel: UILabel!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +40,5 @@ class modalAdvice: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
-    
 }
 

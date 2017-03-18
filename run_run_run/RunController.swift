@@ -91,7 +91,7 @@ class RunController: UIViewController {
     
     
     func startButtonPressed() {
-        SKTAudio.sharedInstance().playSoundEffect("run1.mp3")
+        //SKTAudio.sharedInstance().playSoundEffect("run1.mp3")
         if(!isStarted){
             if(firstStart){
                 firstStart = false
@@ -197,8 +197,7 @@ class RunController: UIViewController {
 //        
 //        let y = self.view.bounds.height-110
 //        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
-        
-        //self.view.addSubview(sticker!)
+//        self.view.addSubview(sticker!)
         NotificationCenter.default.addObserver(self, selector: #selector(RunController.applicationWillResignActive),name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(RunController.applicationDidBecomeActive),name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
@@ -462,8 +461,9 @@ extension RunController{
         var id = 1
         for i in index+1...train.index-2{
             let mp3name = "\(getNextMoveWord(currentIsRunning: running))\(getTimeString(time: train.temp[i])).mp3"
+            let body = "\(getNextMoveWord(currentIsRunning: running))  \(getTimeString(time: train.temp[i]))"
             //print("time \(time) sound name \(mp3name)")
-            scheduleNotification(identifier: "run-girl-\(id)", title: NSLocalizedString("notification.Title", comment: ""), subtitle: "", body: NSLocalizedString("notification.Body", comment: ""),timeInterval: TimeInterval(time), soundName: mp3name )
+            scheduleNotification(identifier: "run-girl-\(id)", title: NSLocalizedString("notification.Title", comment: ""), subtitle: "", body: NSLocalizedString(body, comment: ""), timeInterval: TimeInterval(time), soundName: mp3name )
             time += train.temp[i]
             running = !running
             id += 1
@@ -500,6 +500,7 @@ extension RunController{
         let userDefault = UserDefaults.standard
         userDefault.set(counter, forKey: PropertyKey.counterKey)
         userDefault.set(Date().timeIntervalSince1970, forKey: PropertyKey.counterMeasurementKey)
+        userDefault.set(index, forKey: PropertyKey.stageKey)
         userDefault.synchronize()
     }
     
@@ -528,19 +529,31 @@ extension RunController{
     
     private func loadDefaults() {
         let userDefault = UserDefaults.standard
-        let restoredCounter = userDefault.object(forKey: PropertyKey.counterKey) as! Int
+        var restoredCounter = userDefault.object(forKey: PropertyKey.counterKey) as! Int
+        let stageIndex = userDefault.object(forKey: PropertyKey.stageKey) as! Int
         let restoredTimeMeasurement = userDefault.object(forKey: PropertyKey.counterMeasurementKey) as! Double
         deleteNotification()
         let timeDelta = Date().timeIntervalSince1970 - restoredTimeMeasurement
+        
+        if Int(timeDelta) < (restoredCounter/100) {
+            restoredCounter -= Int(timeDelta * 100)
+            counter = restoredCounter
+        }else{
+            
+        }
+        
         print(timeDelta)
+        
         
     }
     
     struct PropertyKey {
-        static let counterKey = "EggTimerViewController_timeCount"
-        static let counterMeasurementKey = "EggTimerViewController_timeMeasurement"
+        static let counterKey = "RunLikeAGirlRunController_timeCount"
+        static let counterMeasurementKey = "RunLikeAGirlRunController_timeMeasurement"
+        static let stageKey = "RunLikeAGirlRunController_stageIndex"
     }
 }
+
 //rate me
 extension RunController{
     
