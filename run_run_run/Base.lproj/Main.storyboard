@@ -962,13 +962,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cal-but" width="229" height="132"/>
+        <image name="cal-but" width="234" height="144"/>
         <image name="close" width="32" height="32"/>
         <image name="current_stage_background" width="144" height="54"/>
         <image name="info" width="32" height="32"/>
         <image name="plan3" width="134" height="200"/>
         <image name="restart" width="32" height="32"/>
-        <image name="run-bb" width="132" height="198"/>
+        <image name="run-bb" width="134" height="200"/>
         <image name="settings" width="191" height="46"/>
         <image name="start" width="191" height="46"/>
     </resources>

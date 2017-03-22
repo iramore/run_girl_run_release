@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "plan3.png",
+      "filename" : "rest.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "кнопка _р.jpg",
       "scale" : "2x"
     },
     {
