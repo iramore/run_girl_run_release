@@ -139,7 +139,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         let ringLayer = CAShapeLayer()
         let ringLineWidth: CGFloat = 4.0
         var ringLineColour : UIColor
-        if(dayView.date.convertedDate(calendar: currentCalendar!)! > Date() || (dayView.date.convertedDate(calendar: currentCalendar!)! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!) ){
+        if(dayView.date.convertedDate(calendar: currentCalendar!)! > Date() || (dayView.date.convertedDate(calendar: currentCalendar!)! == DateUtil.getConvertedToday() && !((shareData.userData)!.completedTrainsDates?.contains(DateUtil.getConvertedToday()))!) ){
             ringLineColour = UIColor(hex: "#657ECA")
         } else{
             ringLineColour =  UIColor(hex: "#FF7B7B")
@@ -192,7 +192,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         {
             
             if  let _ = dayView.date{
-                if(dayView.date.convertedDate(calendar: currentCalendar)! > Date() && dayView.date.convertedDate(calendar: currentCalendar)! < endDate! || (dayView.date.convertedDate(calendar: currentCalendar)! == convertedToday! && !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!)){
+                if(dayView.date.convertedDate(calendar: currentCalendar)! > DateUtil.getConvertedToday() && dayView.date.convertedDate(calendar: currentCalendar)! < endDate! || (dayView.date.convertedDate(calendar: currentCalendar)! == DateUtil.getConvertedToday() && !((shareData.userData)!.completedTrainsDates?.contains(DateUtil.getConvertedToday()))!)){
                     return true
                 }
             }
@@ -200,41 +200,63 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         return false
     }
     
-//    func toMondayWeekStart(_ weekDaySun: Int) -> Int{
-//        if(weekDaySun>=2){
-//            return weekDaySun - 1
-//        } else{
-//            return 7
-//        }
-//    }
+    //    func toMondayWeekStart(_ weekDaySun: Int) -> Int{
+    //        if(weekDaySun>=2){
+    //            return weekDaySun - 1
+    //        } else{
+    //            return 7
+    //        }
+    //    }
     
     
-//    func getDayOfWeek(_ date: Date)->Int{
-//        let myCalendar = Calendar(identifier: .gregorian)
-//        let weekDay = myCalendar.component(.weekday, from: date)
-//        return weekDay
-//    }
-//    
+    //    func getDayOfWeek(_ date: Date)->Int{
+    //        let myCalendar = Calendar(identifier: .gregorian)
+    //        let weekDay = myCalendar.component(.weekday, from: date)
+    //        return weekDay
+    //    }
+    //
     func setEndDate() {
-        convertedToday = DateUtil.getConvertedToday()
-        let today = Date()
+        //convertedToday = DateUtil.getConvertedToday()
+        //let today = Date()
         let val = 27 - ((shareData.userData)!.completedTrainsDates?.count)!
-        let weeks = val/(shareData.userData)!.daysOfWeek.count
-        var tail = val%(shareData.userData)!.daysOfWeek.count
-        if( !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!
-            && (shareData.userData)!.daysOfWeek.contains(DateUtil.dayOfWeekToCurrentLocale(date: today))
-            ){
-            tail -= 1
+        var endDateTemp = DateUtil.getConvertedToday()
+        if(ShareData.sharedInstance.userData?.completedTrainsDates?.contains(DateUtil.getConvertedToday()))!
+        {
+            endDateTemp = Calendar.current.date(byAdding: .day, value: 1, to: endDateTemp)!
         }
-        let endWeek  =  Calendar.current.date(byAdding: .weekOfMonth, value: weeks, to: today)
-        var dayCurrent : Date = endWeek!
-        while(tail > 0){
-            dayCurrent = Calendar.current.date(byAdding: .day, value: 1, to: dayCurrent)!
-            if((shareData.userData)!.daysOfWeek.contains(DateUtil.dayOfWeekToCurrentLocale(date: dayCurrent))){
-                tail -= 1
+        var ind = 0
+        var dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: endDateTemp)
+        if (ShareData.sharedInstance.userData?.daysOfWeek.contains(dayOfWeek-1))! {
+            ind += 1
+        }
+        while(ind != val){
+            endDateTemp = Calendar.current.date(byAdding: .day, value: 1, to: endDateTemp)!
+            dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: endDateTemp)
+            if (ShareData.sharedInstance.userData?.daysOfWeek.contains(dayOfWeek-1))! {
+                ind += 1
             }
         }
-        endDate = dayCurrent
+        endDate = endDateTemp
+        
+        //return today
+        
+        
+        /* let weeks = val/(shareData.userData)!.daysOfWeek.count
+         var tail = val%(shareData.userData)!.daysOfWeek.count
+         if( !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!
+         && (shareData.userData)!.daysOfWeek.contains(DateUtil.dayOfWeekToCurrentLocale(date: today))
+         ){
+         tail -= 1
+         }
+         let endWeek  =  Calendar.current.date(byAdding: .weekOfMonth, value: weeks, to: today)
+         var dayCurrent : Date = endWeek!
+         while(tail > 0){
+         dayCurrent = Calendar.current.date(byAdding: .day, value: 1, to: dayCurrent)!
+         if((shareData.userData)!.daysOfWeek.contains(DateUtil.dayOfWeekToCurrentLocale(date: dayCurrent))){
+         tail -= 1
+         }
+         }
+         endDate = dayCurrent */
     }
     
     func getMixedImg(_ width: CGFloat) -> UIImage {

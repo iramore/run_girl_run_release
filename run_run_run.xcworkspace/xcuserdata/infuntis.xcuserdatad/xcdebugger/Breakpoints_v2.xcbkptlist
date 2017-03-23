@@ -390,11 +390,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "run_run_run/CalViewController.swift"
-            timestampString = "511273470.956953"
+            timestampString = "511879595.729966"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "presentedDateUpdated(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -661,13 +661,77 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "run_run_run/PlanViewController.swift"
-            timestampString = "511872197.896068"
+            filePath = "run_run_run/DateUtil.swift"
+            timestampString = "511875573.790082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "getConvertedToday()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "run_run_run/CalViewController.swift"
+            timestampString = "511879042.570366"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "setEndDate()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "run_run_run.CalViewController.setEndDate () -&gt; ()"
+                  moduleName = "run_run_run"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/infuntis/Documents/xcode_repo/run_run_run/run_run_run/CalViewController.swift"
+                  timestampString = "511879150.01545"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "run_run_run.CalViewController.setEndDate () -&gt; ()"
+                  moduleName = "run_run_run"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/infuntis/Documents/xcode_repo/run_run_run/run_run_run/CalViewController.swift"
+                  timestampString = "511879150.018906"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "2787">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "run_run_run/CalViewController.swift"
+            timestampString = "511879595.729966"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "setEndDate()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
