@@ -542,9 +542,6 @@ extension RunController{
             
         }
         
-        print(timeDelta)
-        
-        
     }
     
     struct PropertyKey {

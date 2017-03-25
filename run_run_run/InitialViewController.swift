@@ -69,18 +69,27 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shareData.userData = UserData(daysOfWeek: [0,2,4], completedTrainsDates: [Date(dateString:"2017-03-16"),Date(dateString:"2017-03-22")])
+        shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16")])
         shareData.saveUserData()
-        let image1  = UIImage(named: "plan3") as UIImage?
-        let frame1 = CGRect(x: self.view.bounds.width/2 - (image1?.size.width)! - 4,y: self.view.bounds.height*2/3 - (image1?.size.height)!, width: (image1?.size.width)! , height: (image1?.size.height)!)
         
+        
+        let image = UIImage(named: "circle")
+        let imageView = UIImageView(image: image!)
+        
+        
+        
+        let imageLogo = UIImage(named: "logo")
+        let imageViewLogo = UIImageView(image: imageLogo!)
+        
+        
+        let image1  = UIImage(named: "plan3") as UIImage?
+        let frame1 = CGRect(x: self.view.bounds.width/2 - (image1?.size.width)! - 5,y: self.view.bounds.height*2/3 - (image1?.size.height)!, width: (image1?.size.width)! , height: (image1?.size.height)!)
         
         planButton = MenuButton(path: newButton(), frame: frame1, image: "plan3")
         planButton?.addTarget(self, action: #selector(didPressTriangle) , for: UIControlEvents.touchUpInside)
         planButton?.backgroundColor = UIColor.white
         
         let image2  = UIImage(named: "run-bb") as UIImage?
-        
         let frame2 = CGRect(x: self.view.bounds.width/2 + 5,y: self.view.bounds.height*2/3 - (image2?.size.height)!, width: (image2?.size.width)! , height: (image2?.size.height)!)
         
         
@@ -96,6 +105,13 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         trackButton?.backgroundColor = UIColor.white
         
         
+        imageView.frame = CGRect(x: self.view.bounds.width/2 - (image1?.size.width)! - 15, y: self.view.bounds.height*2/3 - (image1?.size.height)! - 14, width: (image?.size.width)!, height: (image?.size.height)!)
+        imageViewLogo.frame = CGRect(x: 20, y: 50, width: self.view.bounds.width - 40, height: self.view.bounds.height/5 )
+        //print(imageLogo?.size)
+        
+        self.view.addSubview(imageView)
+        self.view.addSubview(imageViewLogo)
+
         self.view.addSubview(planButton!)
         self.view.addSubview(runButton!)
         self.view.addSubview(trackButton!)
@@ -162,9 +178,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     
     
     func didPressTriangle(_ sender: AnyObject?) {
-        //        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "planModal") as! PlanViewController
-        //        modalViewController.modalTransition.edge = .left
-        //        present(modalViewController, animated: true, completion: nil)
+        
         
         performSegue(withIdentifier: "plan", sender: self)
     }
@@ -177,18 +191,13 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     func didPressPentagon(_ sender: AnyObject?) {
         
         performSegue(withIdentifier: "option", sender: self)
-        //        transition.edge = .Bottom
-        //        transition.startingPoint = sender!.center
-        //        let modalViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("calendarControl") as! CalViewController
-        //        modalViewController.transition = transition
-        //        presentViewController(modalViewController, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func firstButtonBezier() -> UIBezierPath {
+    /*func firstButtonBezier() -> UIBezierPath {
         let ovalPath = UIBezierPath(ovalIn: CGRect(x: 71, y: 38, width: 45, height: 41))
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 126.84, y: 126.82))
@@ -232,7 +241,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         bezierPath.close()
         bezierPath.miterLimit = 4;
         return bezierPath
-    }
+    }*/
     
     
     func trackButtonBezier() -> UIBezierPath{

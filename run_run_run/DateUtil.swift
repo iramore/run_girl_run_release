@@ -32,5 +32,20 @@ class DateUtil: NSObject {
         return Calendar.current.date(from: components)!
     }
     
-    
+    static func getDateToLocale(date: Date)-> Date{
+        var calendar = Calendar.current
+        calendar.locale = Locale(identifier: Locale.current.languageCode!)
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        let hour = calendar.component(.hour, from: date)
+        let min = calendar.component(.minute, from: date)
+        var components = DateComponents()
+        components.setValue(month, for: .month)
+        components.setValue(year, for: .year)
+        components.setValue(day, for: .day)
+        components.setValue(hour, for: .hour)
+        components.setValue(min, for: .minute)
+        return Calendar.current.date(from: components)!
+    }
 }

@@ -23,3 +23,4 @@ rate.Info.message = "Оцените нас в AppStore";
 rate.OK = "Оценить";
 rate.maybe = "Может позже";
 rate.no = "Нет, спасибо";
+plan.today = "Сегодня";

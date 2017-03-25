@@ -308,6 +308,9 @@
                                 <state key="normal" title="Today">
                                     <color key="titleColor" red="1" green="0.4823529412" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="todayButtonPressed:" destination="99m-eB-PQc" eventType="touchUpInside" id="9iu-9o-Jcr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Rh-kd-hvX">
                                 <rect key="frame" x="16" y="20" width="30" height="30"/>
@@ -962,7 +965,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cal-but" width="234" height="144"/>
+        <image name="cal-but" width="234" height="135"/>
         <image name="close" width="32" height="32"/>
         <image name="current_stage_background" width="144" height="54"/>
         <image name="info" width="32" height="32"/>

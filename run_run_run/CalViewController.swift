@@ -192,7 +192,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         {
             
             if  let _ = dayView.date{
-                if(dayView.date.convertedDate(calendar: currentCalendar)! > DateUtil.getConvertedToday() && dayView.date.convertedDate(calendar: currentCalendar)! < endDate! || (dayView.date.convertedDate(calendar: currentCalendar)! == DateUtil.getConvertedToday() && !((shareData.userData)!.completedTrainsDates?.contains(DateUtil.getConvertedToday()))!)){
+                if(dayView.date.convertedDate(calendar: currentCalendar)! > DateUtil.getConvertedToday() && dayView.date.convertedDate(calendar: currentCalendar)! <= endDate! || (dayView.date.convertedDate(calendar: currentCalendar)! == DateUtil.getConvertedToday() && !((shareData.userData)!.completedTrainsDates?.contains(DateUtil.getConvertedToday()))!)){
                     return true
                 }
             }
@@ -219,6 +219,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         //convertedToday = DateUtil.getConvertedToday()
         //let today = Date()
         let val = 27 - ((shareData.userData)!.completedTrainsDates?.count)!
+        print(val)
         var endDateTemp = DateUtil.getConvertedToday()
         if(ShareData.sharedInstance.userData?.completedTrainsDates?.contains(DateUtil.getConvertedToday()))!
         {
@@ -236,10 +237,8 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
                 ind += 1
             }
         }
-        endDate = endDateTemp
-        
-        //return today
-        
+        endDate = DateUtil.getDateToLocale(date: endDateTemp)
+               
         
         /* let weeks = val/(shareData.userData)!.daysOfWeek.count
          var tail = val%(shareData.userData)!.daysOfWeek.count
