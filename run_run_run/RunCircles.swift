@@ -8,6 +8,8 @@ import Foundation
     @IBInspectable var smallCircleColor: UIColor = UIColor.orange
     @IBInspectable var outlineColorSmall: UIColor = UIColor.blue
     @IBInspectable var outlineColorBig: UIColor = UIColor.blue
+    var outlineColorBigFake = UIColor(hex: "#00ACBC")
+    var outlineColorSmallFake = UIColor(hex: "#FE005A")
     var arcWidthSmall: CGFloat = 27.0
     var maxValueSmall:Int = 0
     var counterSmall: Int = 0 {
@@ -46,6 +48,17 @@ import Foundation
         
         let outlineEndAngleBig = arcLengthPerGlassBig * CGFloat(counterBig) + startAngle
         
+        
+        let outlinePathBigFake = UIBezierPath(arcCenter: centerBig,
+                                          radius: bounds.width*5/12 - 7.5,
+                                          startAngle: 0,
+                                          endAngle: 2*π,
+                                          clockwise: true)
+        
+        outlineColorBigFake.setStroke()
+        outlinePathBigFake.lineWidth = 15.0
+        outlinePathBigFake.stroke()
+        
         let outlinePathBig = UIBezierPath(arcCenter: centerBig,
                                           radius: bounds.width*5/12 - 7.5,
                                           startAngle: startAngle,
@@ -61,8 +74,20 @@ import Foundation
         let trColor = smallCircleColor.withAlphaComponent(0.7)
         trColor.setFill()
         circlePath2.fill()
-        
         let center = CGPoint(x:bounds.width/4, y: bounds.height*3/4)
+        
+        
+        let outlinePathSmallFake = UIBezierPath(arcCenter: center,
+                                              radius: bounds.width/4 - 5,
+                                              startAngle: 0,
+                                              endAngle: 2*π,
+                                              clockwise: true)
+        
+        outlineColorSmallFake.setStroke()
+        outlinePathSmallFake.lineWidth = 10.0
+        outlinePathSmallFake.stroke()
+        
+        
         let arcLengthPerGlass = angleDifference / CGFloat(maxValueSmall)
         let outlineEndAngle = arcLengthPerGlass * CGFloat(counterSmall) + startAngle
         let outlinePath = UIBezierPath(arcCenter: center,

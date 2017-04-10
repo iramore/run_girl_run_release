@@ -128,7 +128,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         }
         if presented is RunController {
             transition.startingPoint = (runButton?.center)!
-            transition.bubbleColor = (runButton?.backgroundColor!)!
+            transition.bubbleColor = UIColor(hex: "#6900BD")
         }
         
         if presented is CalViewController {
@@ -151,7 +151,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         }
         if dismissed is RunController {
             transition.startingPoint = (runButton?.center)!
-            transition.bubbleColor = (runButton?.backgroundColor!)!
+            transition.bubbleColor = UIColor(hex: "#6900BD")
         }
         
         if dismissed is CalViewController {
