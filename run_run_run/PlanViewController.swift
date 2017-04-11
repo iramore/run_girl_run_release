@@ -116,7 +116,7 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         if ind < completedTrains {
-            result = UIImage(named: "run-run-\(ind+1)wt")!
+            result = UIImage(named: "completed")!
             data = (ShareData.sharedInstance.userData?.completedTrainsDates?[ind])!
         }
         else

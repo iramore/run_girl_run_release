@@ -14,42 +14,7 @@ class RunController: UIViewController {
     var iTryAgainSessions = 6
     
     @IBOutlet weak var muteLabel: UILabel!
-    @IBAction func restartButtonPressed(_ sender: AnyObject) {
-        loadTrain()
-        firstStart = true
-        isRunning = true
-        counterBig = 0
-        index = 0
-        isStarted = false
-        runCircles.counterBig = counterBig
-        runCircles.counterSmall = 0
-        //runCircles.outlineColorSmall = UIColor(hex: "#E45875")
-        //runCircles.smallCircleColor = UIColor(hex: "#FF7B7B")
-        let screenSize: CGRect = UIScreen.main.bounds
-        self.image.image = self.getMixedImg(screenSize.width)
-        var minWord: String
-        if(Float(train.temp[0])/60 == 1){
-            minWord = "minute"
-        } else{
-            minWord = "minutes"
-        }
-        var timeStr: NSString
-        if(Float(train.temp[0]).truncatingRemainder(dividingBy: 60) == 0){
-            timeStr = NSString(format:"%0.1d", (train.temp[0])/60)
-        } else{
-            timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
-        }
-       
-        stageLabel.text = "run \(timeStr) \(minWord)"
-        self.runner.stopAnimating()
-        self.runner.image = UIImage(named: "rrrr1")!
-        let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
-        smallTimer!.text = str as String
-        let str2 = NSString(format:"%0.2d:%0.2d", counterBig/60,counterBig%60)
-        bigTimer!.text = str2 as String
-        timerSmall.invalidate()
-        startButton.setTitle("RUN!", for: UIControlState())
-    }
+   
     @IBOutlet weak var stageLabel: UILabel!
     @IBOutlet weak var runner: UIImageView!
     
@@ -90,13 +55,13 @@ class RunController: UIViewController {
         runCircles.maxValueSmall = counter
         let value = train.temp.reduce(0, +)
         runCircles.maxValueBig = value
+        counterBig = value
         let firstImage: CGSize = train.trainMenu[0].size
         imagePos = firstImage.width
     }
     
     
     func startButtonPressed() {
-        //SKTAudio.sharedInstance().playSoundEffect("run1.mp3")
         if(!isStarted){
             if(firstStart){
                 firstStart = false
@@ -107,7 +72,6 @@ class RunController: UIViewController {
                     timeStr = NSString(format:"%.1f", (Float(train.temp[index]))/60)
                 }
                 let audio = "run\(timeStr).mp3"
-                print(audio)
                 SKTAudio.sharedInstance().playSoundEffect(audio)
             }
             timerSmall.invalidate()
@@ -137,6 +101,43 @@ class RunController: UIViewController {
                 self.runner.image = UIImage(named: "rrrr3")!
             }
         }
+    }
+    
+    @IBAction func restartButtonPressed(_ sender: AnyObject) {
+        loadTrain()
+        firstStart = true
+        isRunning = true
+        counterBig = train.temp.reduce(0, +)
+        index = 0
+        isStarted = false
+        runCircles.counterBig = 0
+        runCircles.counterSmall = 0
+        //runCircles.outlineColorSmall = UIColor(hex: "#E45875")
+        //runCircles.smallCircleColor = UIColor(hex: "#FF7B7B")
+        let screenSize: CGRect = UIScreen.main.bounds
+        self.image.image = self.getMixedImg(screenSize.width)
+        var minWord: String
+        if(Float(train.temp[0])/60 == 1){
+            minWord = "minute"
+        } else{
+            minWord = "minutes"
+        }
+        var timeStr: NSString
+        if(Float(train.temp[0]).truncatingRemainder(dividingBy: 60) == 0){
+            timeStr = NSString(format:"%0.1d", (train.temp[0])/60)
+        } else{
+            timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
+        }
+        
+        stageLabel.text = "run \(timeStr) \(minWord)"
+        self.runner.stopAnimating()
+        self.runner.image = UIImage(named: "rrrr1")!
+        let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
+        smallTimer!.text = str as String
+        let str2 = NSString(format:"%0.2d:%0.2d", counterBig/60,counterBig%60)
+        bigTimer!.text = str2 as String
+        timerSmall.invalidate()
+        startButton.setTitle("RUN!", for: UIControlState())
     }
     
     override func viewWillDisappear(_ animated: Bool){
@@ -244,8 +245,8 @@ class RunController: UIViewController {
         }
 
         if counter%100 == 0{
-            counterBig+=1
-            runCircles.counterBig = counterBig
+            counterBig-=1
+            runCircles.counterBig += 1
             let str = NSString(format:"%0.2d:%0.2d", counterBig/60, counterBig%60)
             bigTimer!.text = str as String
             updateTrainControlImage()
@@ -316,77 +317,7 @@ class RunController: UIViewController {
         confettiView.removeFromSuperview()
     }
     
-    func updateTrainControlImage(){
-        let size = CGSize(width: screenWidth, height: 50)
-        let scale = UIScreen.main.scale
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        var widthVid: CGFloat = 0
-        let percent: CGFloat = (CGFloat((train.temp[index])*100-counter))/CGFloat((train.temp[index]*100))
-        
-        if(percent < 1)
-        {
-            let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train.trainMenu[index]), percent: percent)
-            if(croppedImage.size.width > 40){
-                croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
-                widthVid+=croppedImage.size.width
-            } else{
-                let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train.trainMenu[index]), percent: CGFloat(40/train.trainMenu[index].size.width))
-                croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
-                widthVid+=40
-            }
-        }
-        if(index == train.index-1){
-            #imageLiteral(resourceName: "finish").draw(in: CGRect(x: widthVid, y: 9, width: #imageLiteral(resourceName: "finish").size.width, height: #imageLiteral(resourceName: "finish").size.height))
-            
-        }
-        //let startedPositonForStiker = widthVid
-        for i in self.index+1 ..< train.index {
-            train.trainMenu[i].draw(in: CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
-            widthVid+=train.trainMenu[i].size.width
-            if(i == train.index-1){
-                #imageLiteral(resourceName: "finish").draw(in: CGRect(x: widthVid, y: 9, width: #imageLiteral(resourceName: "finish").size.width, height: #imageLiteral(resourceName: "finish").size.height))
-                
-            }
-            if(widthVid > screenWidth){
-                break
-            }
-        }
-        
-        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        //if(index == (train.index)-1){
-        //    self.sticker!.image = UIImage(named: "white")!
-        //}
-        //else{
-        //    if(isRunning){
-        //        self.sticker!.image = UIImage(named: "1.5walk")!
-        //    } else{
-        //        self.sticker!.image = UIImage(named: "1run")!
-        //    }
-        //}
-        self.image.image = finalImage
-        //var frame:CGRect = self.sticker!.frame
-        //frame.origin.x = startedPositonForStiker
-    }
-    func getMixedImg(_ width: CGFloat) -> UIImage {
-        let size = CGSize(width: width, height: 50)
-        let scale = UIScreen.main.scale
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        var widthVid: CGFloat = 0
-        for im in train.trainMenu {
-            if(widthVid + im.size.width < width){
-                im.draw(in: CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
-                widthVid+=im.size.width
-            } else{
-                im.draw(in: CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
-                break
-            }
-        }
-        
-        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return finalImage!
-    }
+    
     
     
     
@@ -395,54 +326,7 @@ class RunController: UIViewController {
     }
     
 }
-//ask for notification
 
-extension RunController: modalAdviceDelegate{
-    func notificationAlloweded() {
-        registerForNotifications(types:  [.alert, .badge, .sound])
-        startButtonPressed()
-        
-    }
-    
-    func notificationNotAlloweded() {
-        startButtonPressed()
-        
-    }
-    func firstLaunch(){
-        UserDefaults.standard.set(true, forKey: "Walkthrough")
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? modalAdvice{
-            destination.delegate = self
-        }
-        
-    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "modalAdvice" && !isNotificationsAvailable()  && !isStarted {
-            return true
-        } else{
-            startButtonPressed()
-        }
-        return false
-    }
-    
-    func registerForNotifications(types: UIUserNotificationType) {
-        if #available(iOS 10.0, *) {
-            let options = types.authorizationOptions()
-            UNUserNotificationCenter.current().requestAuthorization(options: options) { (granted, error) in
-                if granted {
-                    
-                }
-            }
-        } else {
-            let settings = UIUserNotificationSettings(types: types, categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(settings)
-        }
-    }
-
-}
 //notifications
 extension RunController{
     
@@ -515,7 +399,7 @@ extension RunController{
         return UIApplication.shared.currentUserNotificationSettings?.types.contains(UIUserNotificationType.alert) ?? false
     }
     
-    private func saveDefaults() {
+    func saveDefaults() {
         deleteNotification()
         sendAllNotifications()
         let userDefault = UserDefaults.standard
@@ -535,7 +419,7 @@ extension RunController{
         })
     }
     
-    private func clearDefaults() {
+    func clearDefaults() {
         let userDefault = UserDefaults.standard
         userDefault.removeObject(forKey: PropertyKey.counterKey)
         userDefault.removeObject(forKey: PropertyKey.counterMeasurementKey)
@@ -559,7 +443,6 @@ extension RunController{
     }
     
     dynamic func application​Will​Terminate(){
-        print("terminate")
         deleteNotification()
     }
     
@@ -567,18 +450,27 @@ extension RunController{
          deleteNotification()
         let userDefault = UserDefaults.standard
         var restoredCounter = userDefault.object(forKey: PropertyKey.counterKey) as! Int
-        let stageIndex = userDefault.object(forKey: PropertyKey.stageKey) as! Int
+        var stageIndex = userDefault.object(forKey: PropertyKey.stageKey) as! Int
         let restoredTimeMeasurement = userDefault.object(forKey: PropertyKey.counterMeasurementKey) as! Double
        
-        let timeDelta = Date().timeIntervalSince1970 - restoredTimeMeasurement
+        var timeDelta = Int(Date().timeIntervalSince1970 - restoredTimeMeasurement)
         
-        if Int(timeDelta) < (restoredCounter/100) {
+        if timeDelta < (restoredCounter/100) {
             restoredCounter -= Int(timeDelta * 100)
             counter = restoredCounter
             
         }else{
-            
-            print("index \(index) counter \(counter/100) ")
+            timeDelta -= (restoredCounter/100)
+            stageIndex += 1
+            while(timeDelta >  train.temp[stageIndex]){
+                timeDelta -= train.temp[stageIndex]
+                stageIndex += 1
+            }
+            counter = (train.temp[stageIndex] - timeDelta)*100
+            index = stageIndex
+            counterBig = counter/100 + train.temp.reduce(index+1, +)
+            print(index)
+            print(counterBig)
         }
         
     }
@@ -587,6 +479,7 @@ extension RunController{
         static let counterKey = "RunLikeAGirlRunController_timeCount"
         static let counterMeasurementKey = "RunLikeAGirlRunController_timeMeasurement"
         static let stageKey = "RunLikeAGirlRunController_stageIndex"
+        static let isRunningKey = "RunLikeAGirlRunController_isRunning"
     }
 }
 
@@ -622,6 +515,130 @@ extension RunController{
         self.present(alert, animated: true, completion: nil)
     }
 
+}
+
+
+//ask for notification
+
+extension RunController: modalAdviceDelegate{
+    func notificationAlloweded() {
+        registerForNotifications(types:  [.alert, .badge, .sound])
+        startButtonPressed()
+        
+    }
+    
+    func notificationNotAlloweded() {
+        startButtonPressed()
+        
+    }
+    func firstLaunch(){
+        UserDefaults.standard.set(true, forKey: "Walkthrough")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? modalAdvice{
+            destination.delegate = self
+        }
+        
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "modalAdvice" && !isNotificationsAvailable()  && !isStarted {
+            return true
+        } else{
+            startButtonPressed()
+        }
+        return false
+    }
+    
+    func registerForNotifications(types: UIUserNotificationType) {
+        if #available(iOS 10.0, *) {
+            let options = types.authorizationOptions()
+            UNUserNotificationCenter.current().requestAuthorization(options: options) { (granted, error) in
+                if granted {
+                    
+                }
+            }
+        } else {
+            let settings = UIUserNotificationSettings(types: types, categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
+        }
+    }
+    
+}
+//images
+extension RunController{
+    func updateTrainControlImage(){
+        let size = CGSize(width: screenWidth, height: 50)
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        var widthVid: CGFloat = 0
+        let percent: CGFloat = (CGFloat((train.temp[index])*100-counter))/CGFloat((train.temp[index]*100))
+        
+        if(percent < 1)
+        {
+            let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train.trainMenu[index]), percent: percent)
+            if(croppedImage.size.width > 40){
+                croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
+                widthVid+=croppedImage.size.width
+            } else{
+                let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train.trainMenu[index]), percent: CGFloat(40/train.trainMenu[index].size.width))
+                croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
+                widthVid+=40
+            }
+        }
+        if(index == train.index-1){
+            #imageLiteral(resourceName: "finish").draw(in: CGRect(x: widthVid, y: 9, width: #imageLiteral(resourceName: "finish").size.width, height: #imageLiteral(resourceName: "finish").size.height))
+            
+        }
+        //let startedPositonForStiker = widthVid
+        for i in self.index+1 ..< train.index {
+            train.trainMenu[i].draw(in: CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
+            widthVid+=train.trainMenu[i].size.width
+            if(i == train.index-1){
+                #imageLiteral(resourceName: "finish").draw(in: CGRect(x: widthVid, y: 9, width: #imageLiteral(resourceName: "finish").size.width, height: #imageLiteral(resourceName: "finish").size.height))
+                
+            }
+            if(widthVid > screenWidth){
+                break
+            }
+        }
+        
+        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        //if(index == (train.index)-1){
+        //    self.sticker!.image = UIImage(named: "white")!
+        //}
+        //else{
+        //    if(isRunning){
+        //        self.sticker!.image = UIImage(named: "1.5walk")!
+        //    } else{
+        //        self.sticker!.image = UIImage(named: "1run")!
+        //    }
+        //}
+        self.image.image = finalImage
+        //var frame:CGRect = self.sticker!.frame
+        //frame.origin.x = startedPositonForStiker
+    }
+    func getMixedImg(_ width: CGFloat) -> UIImage {
+        let size = CGSize(width: width, height: 50)
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        var widthVid: CGFloat = 0
+        for im in train.trainMenu {
+            if(widthVid + im.size.width < width){
+                im.draw(in: CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
+                widthVid+=im.size.width
+            } else{
+                im.draw(in: CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
+                break
+            }
+        }
+        
+        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return finalImage!
+    }
 }
 
 
