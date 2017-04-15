@@ -26,3 +26,6 @@ rate.maybe = "Maybe later";
 rate.no = "No Thanks";
 plan.today = "Today";
 runPage.muteLabel = "Timer is started. Please check that your phone is not muted.";
+runPage.trainEnded = "Training is ended";
+runPage.progressLabel = "Training";
+runPage.progressLabelFrom = "from";

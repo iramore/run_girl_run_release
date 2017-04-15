@@ -9,12 +9,15 @@ class RunController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     var smallTimer: UILabel?
     var bigTimer: UILabel?
+    var smallTimerStage: UILabel?
+    var bigTimerStage: UILabel?
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     var iMinSessions = 3
     var iTryAgainSessions = 6
     
+    @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var muteLabel: UILabel!
-   
+    
     @IBOutlet weak var stageLabel: UILabel!
     @IBOutlet weak var runner: UIImageView!
     
@@ -40,9 +43,10 @@ class RunController: UIViewController {
     var isStarted: Bool = false
     var imagePos: CGFloat = 0
     var isRunning: Bool = true
+    var trainingCompeleted = false
     var sticker: UIImageView?
     var firstStart: Bool = true
-   // var confTimer: Int = 0
+    // var confTimer: Int = 0
     var cropRunnerCounter = 1
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -62,6 +66,10 @@ class RunController: UIViewController {
     
     
     func startButtonPressed() {
+        if trainingCompeleted
+        {
+            dismiss(animated: true, completion: nil)
+        }
         if(!isStarted){
             if(firstStart){
                 firstStart = false
@@ -104,7 +112,12 @@ class RunController: UIViewController {
     }
     
     @IBAction func restartButtonPressed(_ sender: AnyObject) {
+       setTrain()
+    }
+    
+    func setTrain(){
         loadTrain()
+        progressLabel.text = "\(NSLocalizedString("runPage.progressLabel", comment: "")): \((ShareData.sharedInstance.userData?.completedTrainsDates?.count)!+1)/27"
         firstStart = true
         isRunning = true
         counterBig = train.temp.reduce(0, +)
@@ -112,24 +125,15 @@ class RunController: UIViewController {
         isStarted = false
         runCircles.counterBig = 0
         runCircles.counterSmall = 0
-        //runCircles.outlineColorSmall = UIColor(hex: "#E45875")
-        //runCircles.smallCircleColor = UIColor(hex: "#FF7B7B")
         let screenSize: CGRect = UIScreen.main.bounds
         self.image.image = self.getMixedImg(screenSize.width)
-        var minWord: String
-        if(Float(train.temp[0])/60 == 1){
-            minWord = "minute"
-        } else{
-            minWord = "minutes"
-        }
         var timeStr: NSString
         if(Float(train.temp[0]).truncatingRemainder(dividingBy: 60) == 0){
             timeStr = NSString(format:"%0.1d", (train.temp[0])/60)
         } else{
             timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
         }
-        
-        stageLabel.text = "run \(timeStr) \(minWord)"
+         stageLabel.text = "\(NSLocalizedString("run.runWord", comment: "")) \(timeStr)\(NSLocalizedString("run.minWord", comment: ""))"
         self.runner.stopAnimating()
         self.runner.image = UIImage(named: "rrrr1")!
         let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
@@ -138,10 +142,7 @@ class RunController: UIViewController {
         bigTimer!.text = str2 as String
         timerSmall.invalidate()
         startButton.setTitle("RUN!", for: UIControlState())
-    }
-    
-    override func viewWillDisappear(_ animated: Bool){
-        print("Disappear")
+
     }
     
     
@@ -149,10 +150,11 @@ class RunController: UIViewController {
     override func viewDidLoad() {
         print("load")
         super.viewDidLoad()
-       
+        
         confettiView = SAConfettiView(frame: self.view.bounds)
         confettiView.colors = [UIColor(hex: "#FF7B7B"), UIColor(hex: "#657ECA"), UIColor(hex: "#FFEC7B")]
-
+        progressLabel.text = "\(NSLocalizedString("runPage.progressLabel", comment: "")): \((ShareData.sharedInstance.userData?.completedTrainsDates?.count)!+1)/27"
+        
         super.view.autoresizingMask = .flexibleBottomMargin
         //self.view.backgroundColor = UIColor(hex: "#FFF8D7")
         let screenSize: CGRect = UIScreen.main.bounds
@@ -177,14 +179,14 @@ class RunController: UIViewController {
         
         smallTimer!.textAlignment = NSTextAlignment.center
         smallTimer!.text = str as String
-//        for family: String in UIFont.familyNames
-//        {
-//            print("\(family)")
-//            for names: String in UIFont.fontNames(forFamilyName: family)
-//            {
-//                print("== \(names)")
-//            }
-//        }
+        //        for family: String in UIFont.familyNames
+        //        {
+        //            print("\(family)")
+        //            for names: String in UIFont.fontNames(forFamilyName: family)
+        //            {
+        //                print("== \(names)")
+        //            }
+        //        }
         //UIFont.familyNames.sorted().forEach({print($0)})
         smallTimer!.font = UIFont(name: "Arial-Black", size: 18.0)
         smallTimer!.textColor = UIColor(hex: "#FFFFFF")
@@ -212,16 +214,16 @@ class RunController: UIViewController {
         view.addConstraint(verticalConstraint2)
         startButton.titleLabel?.font = UIFont(name: "Arial-Black", size: 35.0)
         startButton.setTitle("RUN!", for: UIControlState())
-         muteLabel.text = NSLocalizedString("runPage.muteLabel", comment: "")
+        muteLabel.text = NSLocalizedString("runPage.muteLabel", comment: "")
         
-//        
-//        let imageName = "1.5walk"
-//        let image = UIImage(named: imageName)
-//        sticker = UIImageView(image: image!)
-//        
-//        let y = self.view.bounds.height-110
-//        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
-//        self.view.addSubview(sticker!)
+        //
+        //        let imageName = "1.5walk"
+        //        let image = UIImage(named: imageName)
+        //        sticker = UIImageView(image: image!)
+        //
+        //        let y = self.view.bounds.height-110
+        //        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
+        //        self.view.addSubview(sticker!)
         NotificationCenter.default.addObserver(self, selector: #selector(RunController.applicationWillResignActive),name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(RunController.applicationDidBecomeActive),name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
@@ -235,7 +237,7 @@ class RunController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-   
+    
     
     func timerActionSmall() {
         if counter%5 == 0{
@@ -243,7 +245,7 @@ class RunController: UIViewController {
         } else{
             counter-=counter%5
         }
-
+        
         if counter%100 == 0{
             counterBig-=1
             runCircles.counterBig += 1
@@ -291,15 +293,7 @@ class RunController: UIViewController {
                 return
             }
             if(index == (train.index)-1){
-                timerSmall.invalidate()
-                ShareData.sharedInstance.increseNumberOfTrains()
-                self.view.addSubview(confettiView)
-                confettiView.startConfetti()
-                runner.stopAnimating()
-                runner.animationImages = [#imageLiteral(resourceName: "rrrr_finish1"),#imageLiteral(resourceName: "rrrr_finish2")]
-                runner.startAnimating()
-                confTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(RunController.confTimerAction), userInfo:nil ,   repeats: true)
-                
+                trainingComplete()
                 return
             }
         }
@@ -309,26 +303,63 @@ class RunController: UIViewController {
         
     }
     
-    
+    func trainingComplete(){
+        trainingCompeleted = true
+        timerSmall.invalidate()
+        startButton.setTitle("DONE", for: UIControlState())
+        ShareData.sharedInstance.increseNumberOfTrains()
+        self.view.addSubview(confettiView)
+        confettiView.startConfetti()
+        runner.stopAnimating()
+        runner.animationImages = [#imageLiteral(resourceName: "rrrr_finish1"),#imageLiteral(resourceName: "rrrr_finish2")]
+        runner.startAnimating()
+        stageLabel.font = UIFont(name: "Arial-Black", size: 10.0)
+        stageLabel.text = NSLocalizedString("runPage.trainEnded", comment: "")
+        confTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(RunController.confTimerAction), userInfo:nil ,   repeats: true)
+    }
     
     func confTimerAction(){
         confTimer.invalidate()
         confettiView.stopConfetti()
         confettiView.removeFromSuperview()
     }
-    
-    
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
 }
 
 //notifications
 extension RunController{
+    
+    private func loadDefaults() {
+        deleteNotification()
+        let userDefault = UserDefaults.standard
+        var restoredCounter = userDefault.object(forKey: PropertyKey.counterKey) as! Int
+        var stageIndex = userDefault.object(forKey: PropertyKey.stageKey) as! Int
+        let restoredTimeMeasurement = userDefault.object(forKey: PropertyKey.counterMeasurementKey) as! Double
+        
+        var timeDelta = Int(Date().timeIntervalSince1970 - restoredTimeMeasurement)
+        
+        if timeDelta < (restoredCounter/100) {
+            restoredCounter -= Int(timeDelta * 100)
+            counter = restoredCounter
+        }else{
+            timeDelta -= (restoredCounter/100)
+            stageIndex += 1
+            while(timeDelta >  train.temp[stageIndex] && stageIndex < train.index){
+                timeDelta -= train.temp[stageIndex]
+                stageIndex += 1
+            }
+            if stageIndex < train.index && timeDelta < train.temp[stageIndex] {
+                counter = (train.temp[stageIndex] - timeDelta)*100
+                index = stageIndex
+                counterBig = counter/100
+                for i in index+1...train.index-1 {
+                    counterBig += train.temp[i]
+                }
+            } else{
+                trainingComplete()
+            }
+        }
+        
+    }
     
     func scheduleNotification(identifier: String, title: String, subtitle: String, body: String, timeInterval: TimeInterval, repeats: Bool = false, soundName: String) {
         if #available(iOS 10, *) {
@@ -433,7 +464,7 @@ extension RunController{
         } else {
             saveDefaults()
         }
-
+        
     }
     
     dynamic func applicationDidBecomeActive() {
@@ -446,34 +477,7 @@ extension RunController{
         deleteNotification()
     }
     
-    private func loadDefaults() {
-         deleteNotification()
-        let userDefault = UserDefaults.standard
-        var restoredCounter = userDefault.object(forKey: PropertyKey.counterKey) as! Int
-        var stageIndex = userDefault.object(forKey: PropertyKey.stageKey) as! Int
-        let restoredTimeMeasurement = userDefault.object(forKey: PropertyKey.counterMeasurementKey) as! Double
-       
-        var timeDelta = Int(Date().timeIntervalSince1970 - restoredTimeMeasurement)
-        
-        if timeDelta < (restoredCounter/100) {
-            restoredCounter -= Int(timeDelta * 100)
-            counter = restoredCounter
-            
-        }else{
-            timeDelta -= (restoredCounter/100)
-            stageIndex += 1
-            while(timeDelta >  train.temp[stageIndex]){
-                timeDelta -= train.temp[stageIndex]
-                stageIndex += 1
-            }
-            counter = (train.temp[stageIndex] - timeDelta)*100
-            index = stageIndex
-            counterBig = counter/100 + train.temp.reduce(index+1, +)
-            print(index)
-            print(counterBig)
-        }
-        
-    }
+    
     
     struct PropertyKey {
         static let counterKey = "RunLikeAGirlRunController_timeCount"
@@ -514,7 +518,7 @@ extension RunController{
         }))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
 }
 
 

@@ -48,9 +48,12 @@ class CalViewController: UIViewController {
         let image = getMixedImg(runner.frame.width * progressPercent)
         runner.contentMode = .left
         runner.image = image
-        runner.layer.cornerRadius = 9
-        runner.layer.borderWidth = 3
-        runner.layer.borderColor = UIColor(hex: "#FF7B7B").cgColor
+        runner.layer.cornerRadius = 12
+        runner.layer.borderWidth = 5
+        runner.layer.shadowOpacity = 0.7
+        runner.layer.shadowOffset = CGSize(width: 25.0,height: 25.0)
+        runner.layer.shadowRadius = 10
+        runner.layer.borderColor = UIColor(hex: "#FFC200").cgColor
         runner.layer.masksToBounds = true
         
         progressLabel.text = "\(NSLocalizedString("calendar.completed", comment: "")) \(((shareData.userData)!.completedTrainsDates?.count)!) / 27"

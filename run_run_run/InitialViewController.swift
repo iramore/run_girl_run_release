@@ -35,9 +35,11 @@ class ShareData {
     }
     
     func increseNumberOfTrains(){
+        var completedTrainDates = (userData?.completedTrainsDates)!
+        completedTrainDates += [DateUtil.getConvertedToday()]
         if let _ = userData?.completedTrainsDates {
             userData = UserData(daysOfWeek: (userData?.daysOfWeek)!,
-                                completedTrainsDates: (userData?.completedTrainsDates)!)
+                                completedTrainsDates: completedTrainDates)
         } else {
             userData = UserData(daysOfWeek: (userData?.daysOfWeek)!)
         }
