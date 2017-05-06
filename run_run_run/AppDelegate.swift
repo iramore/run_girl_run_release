@@ -27,10 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func initializeSdk(withAdType adType:AppodealAdType, testMode:Bool, locationTracking:Bool, autoCache:Bool, userData:Bool, toastMode toast:Bool){
+    func initializeSdk(withAdType adType:AppodealAdType, testMode:Bool, autoCache:Bool, userData:Bool, toastMode toast:Bool){
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "AppodealAppKey") as! String
         Appodeal.setTestingEnabled(testMode)
-        Appodeal.setLocationTracking(!locationTracking)
+        Appodeal.setLocationTracking(false)
         
         if userData {
             Appodeal.setUserId("user_id")

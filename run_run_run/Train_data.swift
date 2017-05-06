@@ -12,7 +12,8 @@ class Train_data: NSObject {
     static var numberOfTrains : Int = 27
     
     
-    static var train2: Train = Train(index: 2, trainMenu: [UIImage(named: "run")!, UIImage(named: "walk")!], temp: [60,90])
+    //static var train2: Train = Train(index: 2, trainMenu: [UIImage(named: "run")!, UIImage(named: "walk")!], temp: [60,90])
+    static var train2: Train = Train(index: 1, trainMenu: [UIImage(named: "run")!], temp: [60])
 
     
     static var train1: Train = Train(index: 16, trainMenu: [UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!, UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!, UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!], temp: [60,90,60,90,60,90,60,90,60,90,60,90,60,90,60,90])

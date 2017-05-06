@@ -132,7 +132,7 @@ class RunController: UIViewController {
     func setTrain(){
         loadTrain()
         progressLabel.text = "\(NSLocalizedString("runPage.progressLabel", comment: "")): \((ShareData.sharedInstance.userData?.completedTrainsDates?.count)!+1)/27"
-        stageLabel.font = UIFont(name: "Arial-Black", size: 13.0)
+        stageLabel.font = UIFont(name: "Arial-Black", size: 12.0)
         firstStart = true
         isRunning = true
         trainingCompeleted = false
@@ -489,7 +489,7 @@ extension RunController{
     func showRateMe() {
         let alert = UIAlertController(title: NSLocalizedString("rate.Info.title", comment: ""), message: NSLocalizedString("rate.Info.message", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("rate.OK", comment: ""), style: UIAlertActionStyle.default, handler: { alertAction in
-            UIApplication.shared.openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1178891322") as! URL)
+            UIApplication.shared.openURL(NSURL(string : "itms-apps://itunes.apple.com/app/id1231934309") as! URL)
             alert.dismiss(animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: NSLocalizedString("rate.no", comment: ""), style: UIAlertActionStyle.default, handler: { alertAction in
@@ -706,15 +706,6 @@ extension RunController{
         
         startButton.titleLabel?.font = UIFont(name: "Arial-Black", size: 35.0)
         muteLabel.text = NSLocalizedString("runPage.muteLabel", comment: "")
-        
-        //
-        //        let imageName = "1.5walk"
-        //        let image = UIImage(named: imageName)
-        //        sticker = UIImageView(image: image!)
-        //
-        //        let y = self.view.bounds.height-110
-        //        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
-        //        self.view.addSubview(sticker!)
     }
 }
 

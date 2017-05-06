@@ -74,7 +74,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     override func viewDidLoad() {
         super.viewDidLoad()
         //shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16")])
-        shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16")])
+        shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16")])
         shareData.saveUserData()
         
         
@@ -110,7 +110,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         trackButton?.backgroundColor = UIColor.white
         
         
-        imageView.frame = CGRect(x: self.view.bounds.width/2 - (image1?.size.width)! - 15, y: self.view.bounds.height*2/3 - (image1?.size.height)! - 14, width: (image?.size.width)!, height: (image?.size.height)!)
+        imageView.frame = CGRect(x: self.view.bounds.width/2 - (image1?.size.width)! - 15, y: self.view.bounds.height*2/3 - (image1?.size.height)! - 12, width: (image?.size.width)!, height: (image?.size.height)!)
         imageViewLogo.frame = CGRect(x: 20, y: 50, width: self.view.bounds.width - 40, height: self.view.bounds.height/5 )
         //print(imageLogo?.size)
         
@@ -120,7 +120,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         self.view.addSubview(planButton!)
         self.view.addSubview(runButton!)
         self.view.addSubview(trackButton!)
-        (UIApplication.shared.delegate as! AppDelegate).initializeSdk(withAdType: AppodealAdType.banner, testMode: true, locationTracking: false, autoCache: false, userData: false, toastMode: false)
+        (UIApplication.shared.delegate as! AppDelegate).initializeSdk(withAdType: AppodealAdType.banner, testMode: true, autoCache: false, userData: false, toastMode: false)
         //APDSdk.shared().setLogLevel(APDLogLevel.info)
         //Appodeal.setTestingEnabled(true)
         Appodeal.showAd(AppodealShowStyle.bannerBottom, rootViewController: self)
@@ -133,7 +133,8 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         transition.transitionMode = .present
         if presented is PlanViewController {
             transition.startingPoint = (planButton?.center)!
-            transition.bubbleColor = (planButton?.backgroundColor!)!
+            transition.bubbleColor = UIColor(hex: "#E81BE1")
+            
         }
         if presented is RunController {
             transition.startingPoint = (runButton?.center)!
@@ -142,13 +143,10 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         
         if presented is CalViewController {
             transition.startingPoint = (trackButton?.center)!
-            transition.bubbleColor = (trackButton?.backgroundColor!)!
+            transition.bubbleColor =
+                UIColor(hex: "#FEC209")
         }
-//        if presented is InfoModalViewController {
-//            transition.startingPoint = (infoButton?.center)!
-//            transition.bubbleColor = UIColor(hex: "#FFFFFF")
-//        }
-//        
+
         return transition
     }
     
@@ -156,7 +154,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         transition.transitionMode = .dismiss
         if dismissed is PlanViewController {
             transition.startingPoint = (planButton?.center)!
-            transition.bubbleColor = (planButton?.backgroundColor!)!
+            transition.bubbleColor = UIColor(hex: "#E81BE1")
         }
         if dismissed is RunController {
             transition.startingPoint = (runButton?.center)!
@@ -165,13 +163,9 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         
         if dismissed is CalViewController {
             transition.startingPoint = (trackButton?.center)!
-            transition.bubbleColor = (trackButton?.backgroundColor!)!
+            transition.bubbleColor =  UIColor(hex: "#FEC209")
         }
-//        if dismissed is InfoModalViewController {
-//            transition.startingPoint = (infoButton?.center)!
-//            transition.bubbleColor = UIColor(hex: "#FFFFFF")
-//        }
-//        
+    
         return transition
     }
     

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "кнопка_зеленая.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "кнопка_зеленая-3.png",
       "scale" : "2x"
     },
     {

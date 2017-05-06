@@ -9,6 +9,7 @@ enum LeftMenuType{
 class MySegmentCell: UITableViewCell {
 
     @IBOutlet weak var segmentControl: SegmentControl!
+    @IBOutlet weak var label: UILabel!
 }
 class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, SegmentControlDelegate {
   
@@ -34,8 +35,8 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, Se
     } else{
         days = [NSLocalizedString("options.days.su", comment: ""),NSLocalizedString("options.days.mn", comment: ""), NSLocalizedString("options.days.tu", comment: ""), NSLocalizedString("options.days.wd", comment: ""), NSLocalizedString("options.days.th", comment: ""), NSLocalizedString("options.days.fr", comment: ""), NSLocalizedString("options.days.sa", comment: "")]
     }
-    menu.append(.mySegment(values: ["1", "2", "3", "4", "5"],selected: [(self.shareData.loadUserData()?.daysOfWeek.count)!-1], name: "Number"))
-    menu.append(.mySegment(values: days,selected: (self.shareData.loadUserData()?.daysOfWeek)!,  name: "Days"))
+    menu.append(.mySegment(values: ["1", "2", "3", "4", "5"],selected: [(self.shareData.loadUserData()?.daysOfWeek.count)!-1], name: NSLocalizedString("optionsPage.trainingsPerWeek", comment: "")))
+    menu.append(.mySegment(values: days,selected: (self.shareData.loadUserData()?.daysOfWeek)!,  name: NSLocalizedString("optionsPage.daysOfTheWeek", comment: "")))
     
     
     for i in 0..<menu.count{
@@ -91,6 +92,7 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
         mySegment.segmentControl.delegate = self
         mySegment.segmentControl.selectedIndexes = selected
         mySegment.segmentControl.name = name
+        mySegment.label.text = name
         cell = mySegment
     }
     return cell

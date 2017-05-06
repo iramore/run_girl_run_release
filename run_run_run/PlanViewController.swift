@@ -93,14 +93,14 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if isRestCell(index: ind){
             restCellNeeded = true
             print(ind)
-            cell.planImage.image = UIImage(named: "rest1")!
+            cell.planImage.image = UIImage(named: NSLocalizedString("planPage.rest", comment: ""))!
             todayRow = ind
             cell.date.text = "\(NSLocalizedString("plan.today", comment: "")): \(formatter.string(from: DateUtil.getConvertedToday()))"
             return cell
         }
         
         if ind < completedTrains {
-            result = UIImage(named: "completed")!
+            result = UIImage(named: NSLocalizedString("planPage.completed", comment: ""))!
             data = (ShareData.sharedInstance.userData?.completedTrainsDates?[ind])!
         }
         else

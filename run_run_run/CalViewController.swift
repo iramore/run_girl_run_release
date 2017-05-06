@@ -52,22 +52,19 @@ class CalViewController: UIViewController {
         runner.image = image
         runner.layer.cornerRadius = 12
         runner.layer.borderWidth = 5
-        runner.layer.shadowOpacity = 0.7
-        runner.layer.shadowOffset = CGSize(width: 25.0,height: 25.0)
-        runner.layer.shadowRadius = 10
+        //runner.layer.shadowOpacity = 1.0
+        //runner.layer.shadowOffset = CGSize(width: 25.0,height: 25.0)
+        //runner.layer.shadowRadius = 5
         runner.layer.borderColor = UIColor(hex: "#FFC200").cgColor
+        //runner.layer.backgroundColor = UIColor.blue.cgColor
         runner.layer.masksToBounds = true
         
         progressLabel.text = "\(NSLocalizedString("calendar.completed", comment: "")) \(((shareData.userData)!.completedTrainsDates?.count)!) / 27"
-        settingsBtn.titleLabel?.font = UIFont(name: "Arial-Black", size: 30.0)
+        settingsBtn.titleLabel?.font = UIFont(name: "Arial-Black", size: 25.0)
         settingsBtn.titleLabel?.textColor = UIColor(hex: "#FFFFFF")
         settingsBtn.setTitle(NSLocalizedString("calPage.settingsButton", comment: ""),for: UIControlState())
         
         setEndDate()
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
     }
     
     
@@ -208,25 +205,8 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         }
         return false
     }
-    
-    //    func toMondayWeekStart(_ weekDaySun: Int) -> Int{
-    //        if(weekDaySun>=2){
-    //            return weekDaySun - 1
-    //        } else{
-    //            return 7
-    //        }
-    //    }
-    
-    
-    //    func getDayOfWeek(_ date: Date)->Int{
-    //        let myCalendar = Calendar(identifier: .gregorian)
-    //        let weekDay = myCalendar.component(.weekday, from: date)
-    //        return weekDay
-    //    }
-    //
     func setEndDate() {
-        //convertedToday = DateUtil.getConvertedToday()
-        //let today = Date()
+
         let val = 27 - ((shareData.userData)!.completedTrainsDates?.count)!
         var endDateTemp = DateUtil.getConvertedToday()
         if(ShareData.sharedInstance.userData?.completedTrainsDates?.contains(DateUtil.getConvertedToday()))!
@@ -246,24 +226,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
             }
         }
         endDate = DateUtil.getDateToLocale(date: endDateTemp)
-               
         
-        /* let weeks = val/(shareData.userData)!.daysOfWeek.count
-         var tail = val%(shareData.userData)!.daysOfWeek.count
-         if( !((shareData.userData)!.completedTrainsDates?.contains(convertedToday!))!
-         && (shareData.userData)!.daysOfWeek.contains(DateUtil.dayOfWeekToCurrentLocale(date: today))
-         ){
-         tail -= 1
-         }
-         let endWeek  =  Calendar.current.date(byAdding: .weekOfMonth, value: weeks, to: today)
-         var dayCurrent : Date = endWeek!
-         while(tail > 0){
-         dayCurrent = Calendar.current.date(byAdding: .day, value: 1, to: dayCurrent)!
-         if((shareData.userData)!.daysOfWeek.contains(DateUtil.dayOfWeekToCurrentLocale(date: dayCurrent))){
-         tail -= 1
-         }
-         }
-         endDate = dayCurrent */
     }
     
     func getMixedImg(_ width: CGFloat) -> UIImage {
@@ -271,10 +234,18 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         var widthVid: CGFloat = 0
-        let im: UIImage = UIImage(named: "calMenuRunner")!
+        var im = UIImage(named: "cal_image_1")!
+        var imN = 1
         while(widthVid < width){
             im.draw(in: CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
             widthVid+=im.size.width
+            if imN == 1 {
+            im = UIImage(named: "cal_image_2")!
+                imN = 2
+            } else{
+                im = UIImage(named: "cal_image_1")!
+                imN = 1
+            }
         }
         let finalImage2 = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
