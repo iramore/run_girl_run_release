@@ -11,6 +11,7 @@ pod 'MotionAnimation'
 pod 'ElasticTransition'
 pod 'BMCustomTableView'
 pod 'SAConfettiView'
+pod 'Appodeal/Banner', '1.3.9'
 
 end
 

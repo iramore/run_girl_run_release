@@ -23,6 +23,7 @@ class CalViewController: UIViewController {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var menuView: CVCalendarMenuView!
+    @IBOutlet weak var settingsBtn: UIButton!
     
     var animationFinished = true
     let shareData = ShareData.sharedInstance
@@ -34,6 +35,7 @@ class CalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         currentCalendar = Calendar.current
         if let currentCalendar = currentCalendar {
             monthLabel.text = CVDate(date: Date(), calendar: currentCalendar).globalDescription
@@ -57,6 +59,9 @@ class CalViewController: UIViewController {
         runner.layer.masksToBounds = true
         
         progressLabel.text = "\(NSLocalizedString("calendar.completed", comment: "")) \(((shareData.userData)!.completedTrainsDates?.count)!) / 27"
+        settingsBtn.titleLabel?.font = UIFont(name: "Arial-Black", size: 30.0)
+        settingsBtn.titleLabel?.textColor = UIColor(hex: "#FFFFFF")
+        settingsBtn.setTitle(NSLocalizedString("calPage.settingsButton", comment: ""),for: UIControlState())
         
         setEndDate()
     }
@@ -89,6 +94,7 @@ class CalViewController: UIViewController {
     }
     
     @IBAction func closeButtonPressed(_ sender: AnyObject) {
+        SKTAudio.sharedInstance().playSoundEffect("pop.wav")
         dismiss(animated: true, completion: nil)
     }
 }
@@ -222,7 +228,6 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         //convertedToday = DateUtil.getConvertedToday()
         //let today = Date()
         let val = 27 - ((shareData.userData)!.completedTrainsDates?.count)!
-        print(val)
         var endDateTemp = DateUtil.getConvertedToday()
         if(ShareData.sharedInstance.userData?.completedTrainsDates?.contains(DateUtil.getConvertedToday()))!
         {

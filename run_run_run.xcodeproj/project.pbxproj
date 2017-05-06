@@ -19,6 +19,24 @@
 		D35F1CCE1C7105390084A902 /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35F1CCD1C7105390084A902 /* PlanViewController.swift */; };
 		D35F1CD31C7105390084A902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD21C7105390084A902 /* Assets.xcassets */; };
 		D35F1CD61C7105390084A902 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35F1CD41C7105390084A902 /* LaunchScreen.storyboard */; };
+		D36044041EB0D42600B3D05F /* бегите3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36043F81EB0D42600B3D05F /* бегите3.mp3 */; };
+		D36044051EB0D42600B3D05F /* бегите5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36043F91EB0D42600B3D05F /* бегите5.mp3 */; };
+		D36044061EB0D42600B3D05F /* бегите8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36043FA1EB0D42600B3D05F /* бегите8.mp3 */; };
+		D36044071EB0D42600B3D05F /* бегите10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36043FB1EB0D42600B3D05F /* бегите10.mp3 */; };
+		D36044081EB0D42600B3D05F /* бегите21.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36043FC1EB0D42600B3D05F /* бегите21.mp3 */; };
+		D36044091EB0D42600B3D05F /* бегите25.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36043FD1EB0D42600B3D05F /* бегите25.mp3 */; };
+		D360440A1EB0D42600B3D05F /* бегите28.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36043FE1EB0D42600B3D05F /* бегите28.mp3 */; };
+		D360440B1EB0D42600B3D05F /* бегите30.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36043FF1EB0D42600B3D05F /* бегите30.mp3 */; };
+		D360440C1EB0D42600B3D05F /* идите1.5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36044001EB0D42600B3D05F /* идите1.5.mp3 */; };
+		D360440D1EB0D42600B3D05F /* идите2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36044011EB0D42600B3D05F /* идите2.mp3 */; };
+		D360440E1EB0D42600B3D05F /* идите3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36044021EB0D42600B3D05F /* идите3.mp3 */; };
+		D360440F1EB0D42600B3D05F /* идите5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36044031EB0D42600B3D05F /* идите5.mp3 */; };
+		D36044111EB0E7B900B3D05F /* конец.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36044101EB0E7B900B3D05F /* конец.mp3 */; };
+		D36044141EB0E89400B3D05F /* бегите1.5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36044121EB0E89400B3D05F /* бегите1.5.mp3 */; };
+		D36044151EB0E89400B3D05F /* бегите1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36044131EB0E89400B3D05F /* бегите1.mp3 */; };
+		D36044171EB0E8DE00B3D05F /* идите2.5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36044161EB0E8DE00B3D05F /* идите2.5.mp3 */; };
+		D36044191EB0F15600B3D05F /* end.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D36044181EB0F15600B3D05F /* end.mp3 */; };
+		D360441B1EB0F97000B3D05F /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = D360441A1EB0F97000B3D05F /* pop.wav */; };
 		D3669D531C84933A00250225 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3669D521C84933A00250225 /* InitialViewController.swift */; };
 		D36A75BB1E86A52E003A4689 /* ariblk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D36A75BA1E86A33C003A4689 /* ariblk.ttf */; };
 		D36EEFC21D3C0138009A772E /* RunController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36EEFC11D3C0138009A772E /* RunController.swift */; };
@@ -67,6 +85,24 @@
 		D35F1CD21C7105390084A902 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D35F1CD51C7105390084A902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D35F1CD71C7105390084A902 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D36043F81EB0D42600B3D05F /* бегите3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "бегите3.mp3"; sourceTree = "<group>"; };
+		D36043F91EB0D42600B3D05F /* бегите5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "бегите5.mp3"; sourceTree = "<group>"; };
+		D36043FA1EB0D42600B3D05F /* бегите8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "бегите8.mp3"; sourceTree = "<group>"; };
+		D36043FB1EB0D42600B3D05F /* бегите10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "бегите10.mp3"; sourceTree = "<group>"; };
+		D36043FC1EB0D42600B3D05F /* бегите21.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "бегите21.mp3"; sourceTree = "<group>"; };
+		D36043FD1EB0D42600B3D05F /* бегите25.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "бегите25.mp3"; sourceTree = "<group>"; };
+		D36043FE1EB0D42600B3D05F /* бегите28.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "бегите28.mp3"; sourceTree = "<group>"; };
+		D36043FF1EB0D42600B3D05F /* бегите30.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "бегите30.mp3"; sourceTree = "<group>"; };
+		D36044001EB0D42600B3D05F /* идите1.5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "идите1.5.mp3"; sourceTree = "<group>"; };
+		D36044011EB0D42600B3D05F /* идите2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "идите2.mp3"; sourceTree = "<group>"; };
+		D36044021EB0D42600B3D05F /* идите3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "идите3.mp3"; sourceTree = "<group>"; };
+		D36044031EB0D42600B3D05F /* идите5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "идите5.mp3"; sourceTree = "<group>"; };
+		D36044101EB0E7B900B3D05F /* конец.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "конец.mp3"; sourceTree = "<group>"; };
+		D36044121EB0E89400B3D05F /* бегите1.5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "бегите1.5.mp3"; sourceTree = "<group>"; };
+		D36044131EB0E89400B3D05F /* бегите1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "бегите1.mp3"; sourceTree = "<group>"; };
+		D36044161EB0E8DE00B3D05F /* идите2.5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "идите2.5.mp3"; sourceTree = "<group>"; };
+		D36044181EB0F15600B3D05F /* end.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = end.mp3; sourceTree = "<group>"; };
+		D360441A1EB0F97000B3D05F /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop.wav; sourceTree = "<group>"; };
 		D3669D521C84933A00250225 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		D36A75BA1E86A33C003A4689 /* ariblk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ariblk.ttf; sourceTree = "<group>"; };
 		D36EEFC11D3C0138009A772E /* RunController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunController.swift; sourceTree = "<group>"; };
@@ -176,7 +212,7 @@
 			path = run_run_run;
 			sourceTree = "<group>";
 		};
-		D3E368531D856D4B00ABAD1F /* sounds */ = {
+		D36043F61EB0D3FD00B3D05F /* end */ = {
 			isa = PBXGroup;
 			children = (
 				D3E368561D856FCF00ABAD1F /* walk1.5.mp3 */,
@@ -191,9 +227,43 @@
 				D3E368651D85852600ABAD1F /* run25.mp3 */,
 				D3E368661D85852600ABAD1F /* run28.mp3 */,
 				D3E368671D85852600ABAD1F /* run30.mp3 */,
+				D36044181EB0F15600B3D05F /* end.mp3 */,
 				D3E3685E1D85730800ABAD1F /* walk2.5.mp3 */,
 				D3E368581D85703B00ABAD1F /* run1.mp3 */,
 				D3E368541D856F5000ABAD1F /* run1.5.mp3 */,
+			);
+			name = end;
+			sourceTree = "<group>";
+		};
+		D36043F71EB0D40E00B3D05F /* rus */ = {
+			isa = PBXGroup;
+			children = (
+				D36043F81EB0D42600B3D05F /* бегите3.mp3 */,
+				D36043F91EB0D42600B3D05F /* бегите5.mp3 */,
+				D36043FA1EB0D42600B3D05F /* бегите8.mp3 */,
+				D36043FB1EB0D42600B3D05F /* бегите10.mp3 */,
+				D36043FC1EB0D42600B3D05F /* бегите21.mp3 */,
+				D36043FD1EB0D42600B3D05F /* бегите25.mp3 */,
+				D36043FE1EB0D42600B3D05F /* бегите28.mp3 */,
+				D36044121EB0E89400B3D05F /* бегите1.5.mp3 */,
+				D36044161EB0E8DE00B3D05F /* идите2.5.mp3 */,
+				D36044131EB0E89400B3D05F /* бегите1.mp3 */,
+				D36043FF1EB0D42600B3D05F /* бегите30.mp3 */,
+				D36044001EB0D42600B3D05F /* идите1.5.mp3 */,
+				D36044101EB0E7B900B3D05F /* конец.mp3 */,
+				D36044011EB0D42600B3D05F /* идите2.mp3 */,
+				D36044021EB0D42600B3D05F /* идите3.mp3 */,
+				D36044031EB0D42600B3D05F /* идите5.mp3 */,
+			);
+			name = rus;
+			sourceTree = "<group>";
+		};
+		D3E368531D856D4B00ABAD1F /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				D360441A1EB0F97000B3D05F /* pop.wav */,
+				D36043F71EB0D40E00B3D05F /* rus */,
+				D36043F61EB0D3FD00B3D05F /* end */,
 			);
 			name = sounds;
 			sourceTree = "<group>";
@@ -242,7 +312,7 @@
 				TargetAttributes = {
 					D35F1CC71C7105390084A902 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 35LC74S563;
+						DevelopmentTeam = 83H63AD9J8;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -271,26 +341,44 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D36044091EB0D42600B3D05F /* бегите25.mp3 in Resources */,
+				D36044111EB0E7B900B3D05F /* конец.mp3 in Resources */,
 				D36A75BB1E86A52E003A4689 /* ariblk.ttf in Resources */,
+				D36044061EB0D42600B3D05F /* бегите8.mp3 in Resources */,
 				D3E3685D1D85724B00ABAD1F /* walk2.mp3 in Resources */,
 				D3E368691D85852600ABAD1F /* run5.mp3 in Resources */,
+				D36044141EB0E89400B3D05F /* бегите1.5.mp3 in Resources */,
 				D3E368571D856FCF00ABAD1F /* walk1.5.mp3 in Resources */,
 				D3E3685F1D85730800ABAD1F /* walk2.5.mp3 in Resources */,
 				D36EEFC41D475C62009A772E /* 04B_19__.TTF in Resources */,
+				D36044151EB0E89400B3D05F /* бегите1.mp3 in Resources */,
 				D38926071E7982580023A6F9 /* Localizable.strings in Resources */,
 				D3E3686E1D85852600ABAD1F /* run28.mp3 in Resources */,
 				D3E3686D1D85852600ABAD1F /* run25.mp3 in Resources */,
 				D3E3686B1D85852600ABAD1F /* run10.mp3 in Resources */,
+				D36044171EB0E8DE00B3D05F /* идите2.5.mp3 in Resources */,
+				D36044191EB0F15600B3D05F /* end.mp3 in Resources */,
+				D36044041EB0D42600B3D05F /* бегите3.mp3 in Resources */,
 				D35F1CD61C7105390084A902 /* LaunchScreen.storyboard in Resources */,
 				D3E368681D85852600ABAD1F /* run3.mp3 in Resources */,
 				D3E368721D85853600ABAD1F /* walk3.mp3 in Resources */,
+				D360441B1EB0F97000B3D05F /* pop.wav in Resources */,
+				D36044071EB0D42600B3D05F /* бегите10.mp3 in Resources */,
+				D360440D1EB0D42600B3D05F /* идите2.mp3 in Resources */,
 				D3E3686C1D85852600ABAD1F /* run21.mp3 in Resources */,
 				D3E368731D85853600ABAD1F /* walk5.mp3 in Resources */,
 				D35F1CD31C7105390084A902 /* Assets.xcassets in Resources */,
+				D36044081EB0D42600B3D05F /* бегите21.mp3 in Resources */,
+				D360440E1EB0D42600B3D05F /* идите3.mp3 in Resources */,
+				D360440F1EB0D42600B3D05F /* идите5.mp3 in Resources */,
 				D3E368551D856F5000ABAD1F /* run1.5.mp3 in Resources */,
 				D3E368591D85703B00ABAD1F /* run1.mp3 in Resources */,
+				D360440C1EB0D42600B3D05F /* идите1.5.mp3 in Resources */,
 				D3E3686F1D85852600ABAD1F /* run30.mp3 in Resources */,
+				D360440A1EB0D42600B3D05F /* бегите28.mp3 in Resources */,
 				D30442981DBE5B1D00E4887B /* Main.storyboard in Resources */,
+				D360440B1EB0D42600B3D05F /* бегите30.mp3 in Resources */,
+				D36044051EB0D42600B3D05F /* бегите5.mp3 in Resources */,
 				D3E3686A1D85852600ABAD1F /* run8.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,6 +515,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -443,9 +532,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -475,6 +565,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -485,8 +576,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -501,10 +593,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 35LC74S563;
+				DEVELOPMENT_TEAM = 83H63AD9J8;
 				INFOPLIST_FILE = run_run_run/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.gala.run-run-run";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gala.runrun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -518,10 +611,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 35LC74S563;
+				DEVELOPMENT_TEAM = 83H63AD9J8;
 				INFOPLIST_FILE = run_run_run/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.gala.run-run-run";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gala.runrun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

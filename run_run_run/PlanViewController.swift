@@ -35,22 +35,13 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let shareData = ShareData.sharedInstance
     var todayRow: Int?
     var restCellNeeded = false
-    //var lastTrainingDate = DateUtil.getConvertedToday()
     
-    
-    //MARK: Variables
-    //var colors: [UIColor]!
-    
-    //MARK: Outlets
     @IBOutlet weak var customTableView: BMCustomTableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //colors = randomColorsCount(27, hue: .Pink, luminosity: .Light)
         self.customTableView.contentInset = UIEdgeInsetsMake(0, 0, 25, 0)
-        //customTableView.frame = self.view.frame;
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +54,6 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -81,19 +71,12 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func todayButtonPressed(_ sender: Any) {
-        /* let compTrainsDates = ShareData.sharedInstance.userData?.completedTrainsDates!
-         var ind: Int
-         if (compTrainsDates?.contains(DateUtil.getConvertedToday()))!{
-         ind = (compTrainsDates?.index(of: DateUtil.getConvertedToday()))!
-         print(ind)
-         } else{
-         ind = 12
-         } */
         let indexPath = NSIndexPath(row: todayRow!, section: 0)
         self.customTableView.scrollToRow(at: indexPath as IndexPath,
                                          at: UITableViewScrollPosition.middle, animated: true)
     }
     @IBAction func dismissButtonPressed(_ sender: AnyObject) {
+        SKTAudio.sharedInstance().playSoundEffect("pop.wav")
         dismiss(animated: true, completion: nil)
     }
     
@@ -109,7 +92,8 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         formatter.dateStyle = .long
         if isRestCell(index: ind){
             restCellNeeded = true
-            cell.planImage.image = UIImage(named: "rest")!
+            print(ind)
+            cell.planImage.image = UIImage(named: "rest1")!
             todayRow = ind
             cell.date.text = "\(NSLocalizedString("plan.today", comment: "")): \(formatter.string(from: DateUtil.getConvertedToday()))"
             return cell
@@ -126,10 +110,11 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             
             if restCellNeeded {
-                result = UIImage(named: "run-run-\(ind)")!
+                result = UIImage(named: "\(NSLocalizedString("planPage.runrun", comment: ""))\(ind)")!
                 data = nextTrainDate(prevDate: data, index: ind - completedTrains)
             } else{
-                result = UIImage(named: "run-run-\(ind+1)")!
+                print("run-\(ind+1)")
+                result = UIImage(named: "\(NSLocalizedString("planPage.runrun", comment: ""))\(ind+1)")!
                 data = nextTrainDate(prevDate: data, index: ind - completedTrains + 1)
             }
         }

@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import Appodeal
 
 
 @UIApplicationMain
@@ -18,8 +19,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        if let bundle = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundle)
+        }
+        deleteNotification()
+        
         return true
     }
+    
+    func initializeSdk(withAdType adType:AppodealAdType, testMode:Bool, locationTracking:Bool, autoCache:Bool, userData:Bool, toastMode toast:Bool){
+        let apiKey = Bundle.main.object(forInfoDictionaryKey: "AppodealAppKey") as! String
+        Appodeal.setTestingEnabled(testMode)
+        Appodeal.setLocationTracking(!locationTracking)
+        
+        if userData {
+            Appodeal.setUserId("user_id")
+            Appodeal.setUserEmail("dt@email.net")
+            Appodeal.setUserBirthday(Date() as Date!)
+            Appodeal.setUserAge(25)
+            Appodeal.setUserGender(AppodealUserGender.male)
+            Appodeal.setUserOccupation(AppodealUserOccupation.work)
+            Appodeal.setUserRelationship(AppodealUserRelationship.other)
+            Appodeal.setUserSmokingAttitude(AppodealUserSmokingAttitude.neutral)
+            Appodeal.setUserAlcoholAttitude(AppodealUserAlcoholAttitude.neutral)
+            Appodeal.setUserInterests("other")
+        }
+        
+        Appodeal.setAutocache(autoCache, types: adType)
+        Appodeal.initialize(withApiKey: apiKey, types: adType)
+        
+//        let rootViewVontroller : APDAppodealHUB = APDAppodealHUB()
+//        rootViewVontroller.isAutoCache = autoCache
+//        self.window?.rootViewController = UINavigationController.init(rootViewController: rootViewVontroller)
+    }
+    
+    func setAppearance (){
+        UINavigationBar.appearance().tintColor = UIColor.init(red: 0.9, green: 0.0, blue: 0.0, alpha: 0.95)
+        UINavigationBar.appearance().isTranslucent = true
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

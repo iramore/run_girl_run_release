@@ -10,8 +10,15 @@ import UIKit
 
 class InfoModalViewController: UIViewController {
 
+    @IBOutlet weak var planLabel: UILabel!
+    @IBOutlet weak var runLabel: UILabel!
+    @IBOutlet weak var calLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        planLabel.text = NSLocalizedString("infoPage.planLabel", comment: "")
+        runLabel.text = NSLocalizedString("infoPage.runLabel", comment: "")
+        calLabel.text = NSLocalizedString("infoPage.calLabel", comment: "")
+
 
         // Do any additional setup after loading the view.
     }

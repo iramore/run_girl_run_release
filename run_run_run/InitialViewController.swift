@@ -1,5 +1,6 @@
 import UIKit
 import BubbleTransition
+import Appodeal
 
 class ShareData {
     
@@ -68,10 +69,12 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     var planButton: UIButton?
     var runButton: UIButton?
     var trackButton: UIButton?
+    var runController: RunController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16")])
+        //shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16")])
+        shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16")])
         shareData.saveUserData()
         
         
@@ -117,6 +120,10 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         self.view.addSubview(planButton!)
         self.view.addSubview(runButton!)
         self.view.addSubview(trackButton!)
+        (UIApplication.shared.delegate as! AppDelegate).initializeSdk(withAdType: AppodealAdType.banner, testMode: true, locationTracking: false, autoCache: false, userData: false, toastMode: false)
+        //APDSdk.shared().setLogLevel(APDLogLevel.info)
+        //Appodeal.setTestingEnabled(true)
+        Appodeal.showAd(AppodealShowStyle.bannerBottom, rootViewController: self)
         
     }
     
@@ -137,11 +144,11 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
             transition.startingPoint = (trackButton?.center)!
             transition.bubbleColor = (trackButton?.backgroundColor!)!
         }
-        if presented is InfoModalViewController {
-            transition.startingPoint = (infoButton?.center)!
-            transition.bubbleColor = (infoButton?.backgroundColor!)!
-        }
-        
+//        if presented is InfoModalViewController {
+//            transition.startingPoint = (infoButton?.center)!
+//            transition.bubbleColor = UIColor(hex: "#FFFFFF")
+//        }
+//        
         return transition
     }
     
@@ -160,11 +167,11 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
             transition.startingPoint = (trackButton?.center)!
             transition.bubbleColor = (trackButton?.backgroundColor!)!
         }
-        if dismissed is InfoModalViewController {
-            transition.startingPoint = (infoButton?.center)!
-            transition.bubbleColor = (infoButton?.backgroundColor!)!
-        }
-        
+//        if dismissed is InfoModalViewController {
+//            transition.startingPoint = (infoButton?.center)!
+//            transition.bubbleColor = UIColor(hex: "#FFFFFF")
+//        }
+//        
         return transition
     }
     
@@ -172,26 +179,36 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier != "info"{
         let controller = segue.destination
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .custom
+        }
     }
     
     
     
     func didPressTriangle(_ sender: AnyObject?) {
         
-        
+        SKTAudio.sharedInstance().playSoundEffect("pop.wav")
         performSegue(withIdentifier: "plan", sender: self)
     }
     
     func didPressSquare(_ sender: AnyObject?) {
+        if runController == nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            runController = storyboard.instantiateViewController(withIdentifier: "RunController") as! RunController
+        }
+        runController!.transitioningDelegate = self
+        runController!.modalPresentationStyle = .custom
+        SKTAudio.sharedInstance().playSoundEffect("pop.wav")
+        self.present(runController!, animated: true, completion: nil)
         
-        performSegue(withIdentifier: "run", sender: self)
+        //performSegue(withIdentifier: "run", sender: self)
     }
     
     func didPressPentagon(_ sender: AnyObject?) {
-        
+        SKTAudio.sharedInstance().playSoundEffect("pop.wav")
         performSegue(withIdentifier: "option", sender: self)
     }
     
@@ -199,53 +216,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         super.didReceiveMemoryWarning()
     }
     
-    /*func firstButtonBezier() -> UIBezierPath {
-        let ovalPath = UIBezierPath(ovalIn: CGRect(x: 71, y: 38, width: 45, height: 41))
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: CGPoint(x: 126.84, y: 126.82))
-        bezierPath.addLine(to: CGPoint(x: 16.76, y: 189.82))
-        bezierPath.addLine(to: CGPoint(x: 17.04, y: 190.3))
-        bezierPath.addCurve(to: CGPoint(x: 63.46, y: 17.06), controlPoint1: CGPoint(x: -17.98, y: 129.65), controlPoint2: CGPoint(x: 2.8, y: 52.08))
-        bezierPath.addLine(to: CGPoint(x: 63.05, y: 17.31))
-        bezierPath.addCurve(to: CGPoint(x: 125.5, y: -0), controlPoint1: CGPoint(x: 81.91, y: 5.98), controlPoint2: CGPoint(x: 103.5, y: -0))
-        bezierPath.addLine(to: CGPoint(x: 126.84, y: 126.82))
-        bezierPath.close()
-        bezierPath.miterLimit = 4
-        return bezierPath
-    }
-    
-    
-    func secondButtonBezier() -> UIBezierPath {
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: CGPoint(x: 0, y: 126.82))
-        bezierPath.addLine(to: CGPoint(x: 0, y: -0.02))
-        bezierPath.addLine(to: CGPoint(x: 0, y: -0.02))
-        bezierPath.addCurve(to: CGPoint(x: 126.82, y: 126.8), controlPoint1: CGPoint(x: 70.04, y: -0.02), controlPoint2: CGPoint(x: 126.82, y: 56.76))
-        bezierPath.addLine(to: CGPoint(x: 126.81, y: 126.18))
-        bezierPath.addCurve(to: CGPoint(x: 110.58, y: 188.92), controlPoint1: CGPoint(x: 127.19, y: 148.18), controlPoint2: CGPoint(x: 121.59, y: 169.87))
-        bezierPath.addLine(to: CGPoint(x: 0, y: 126.82))
-        bezierPath.close()
-        bezierPath.miterLimit = 4;
-        return bezierPath
-    }
-    
-    
-    func thirdButtonBezier() -> UIBezierPath {
-        //// Bezier Drawing
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: CGPoint(x: 108.67, y: 0))
-        bezierPath.addLine(to: CGPoint(x: 218.67, y: 63.14))
-        bezierPath.addLine(to: CGPoint(x: 218.52, y: 63.41))
-        bezierPath.addCurve(to: CGPoint(x: 45.28, y: 109.83), controlPoint1: CGPoint(x: 183.49, y: 124.07), controlPoint2: CGPoint(x: 105.93, y: 144.85))
-        bezierPath.addLine(to: CGPoint(x: 45.83, y: 110.14))
-        bezierPath.addCurve(to: CGPoint(x: -0.39, y: 64.72), controlPoint1: CGPoint(x: 26.59, y: 99.48), controlPoint2: CGPoint(x: 10.61, y: 83.77))
-        bezierPath.addLine(to: CGPoint(x: 108.67, y: 0))
-        bezierPath.close()
-        bezierPath.miterLimit = 4;
-        return bezierPath
-    }*/
-    
-    
+       
     func trackButtonBezier() -> UIBezierPath{
                 let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 117, y: 0))

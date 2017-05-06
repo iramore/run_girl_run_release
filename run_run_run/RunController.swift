@@ -9,8 +9,8 @@ class RunController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     var smallTimer: UILabel?
     var bigTimer: UILabel?
-    var smallTimerStage: UILabel?
-    var bigTimerStage: UILabel?
+    var smallTimerLabel: UILabel?
+    var bigTimerLabel: UILabel?
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     var iMinSessions = 3
     var iTryAgainSessions = 6
@@ -32,60 +32,76 @@ class RunController: UIViewController {
     
     var timerSmall = Timer()
     var confTimer = Timer()
-    var train: Train = Train_data.trains[((ShareData.sharedInstance.userData?.completedTrainsDates?.count)!+1)]!
-    var currentStage = 0
+    var train: Train?
     var counter: Int = 0
     var counterBig: Int = 0
     var index:Int = 0
     var screenWidth:CGFloat = 0
     var runningMan:[UIImage] = [UIImage(named: "rrrr1")!, UIImage(named: "rrrr2")!]
     var walkingMan:[UIImage] = [UIImage(named: "rrrr3")!, UIImage(named: "rrrr4")!]
-    var isStarted: Bool = false
-    var imagePos: CGFloat = 0
-    var isRunning: Bool = true
-    var trainingCompeleted = false
+    
     var sticker: UIImageView?
-    var firstStart: Bool = true
-    // var confTimer: Int = 0
-    var cropRunnerCounter = 1
+    
+    //BOOLEANS
+    var isStarted = false
+    var isRunning = true
+    var trainingCompeleted = false
+    var firstStart = true
+    
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
+    override func viewDidLoad() {
+        print("view did load")
+        super.viewDidLoad()
+        setUI()
+        setTrain()
+        NotificationCenter.default.addObserver(self, selector: #selector(RunController.applicationWillResignActive),name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RunController.applicationDidBecomeActive),name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("appear")
+    }
+    
+    @IBAction func restartButtonPressed(_ sender: AnyObject) {
+        setTrain()
+    }
     
     func loadTrain() {
-        counter = train.temp[0]
+        train = Train_data.trains[((ShareData.sharedInstance.userData?.completedTrainsDates?.count)!+1)]!
+        counter = train!.temp[0]
         counter *= 100
         runCircles.maxValueSmall = counter
-        let value = train.temp.reduce(0, +)
+        let value = train!.temp.reduce(0, +)
         runCircles.maxValueBig = value
         counterBig = value
-        let firstImage: CGSize = train.trainMenu[0].size
-        imagePos = firstImage.width
+        //let firstImage: CGSize = train.trainMenu[0].size
+        //imagePos = firstImage.width
     }
     
     
     func startButtonPressed() {
         if trainingCompeleted
         {
+            clearDefaults()
+            setTrain()
             dismiss(animated: true, completion: nil)
+            return
+            
         }
         if(!isStarted){
             if(firstStart){
                 firstStart = false
-                var timeStr: NSString
-                if(Float(train.temp[0]).truncatingRemainder(dividingBy: 60) == 0){
-                    timeStr = NSString(format:"%.1d", (train.temp[index])/60)
-                } else{
-                    timeStr = NSString(format:"%.1f", (Float(train.temp[index]))/60)
-                }
-                let audio = "run\(timeStr).mp3"
+                let audio = "\(NSLocalizedString("runPage.audio.runword", comment: ""))\(getTimeStr()).mp3"
                 SKTAudio.sharedInstance().playSoundEffect(audio)
             }
             timerSmall.invalidate()
             timerSmall = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(RunController.timerActionSmall), userInfo:nil ,   repeats: true)
             startButton.setTitle("PAUSE", for: UIControlState())
-            //self.startButton.setImage(UIImage(named: "pause"), for: UIControlState())
             if(isRunning){
                 self.runner.animationImages = runningMan
             } else{
@@ -111,129 +127,49 @@ class RunController: UIViewController {
         }
     }
     
-    @IBAction func restartButtonPressed(_ sender: AnyObject) {
-       setTrain()
-    }
+    
     
     func setTrain(){
         loadTrain()
         progressLabel.text = "\(NSLocalizedString("runPage.progressLabel", comment: "")): \((ShareData.sharedInstance.userData?.completedTrainsDates?.count)!+1)/27"
+        stageLabel.font = UIFont(name: "Arial-Black", size: 13.0)
         firstStart = true
         isRunning = true
-        counterBig = train.temp.reduce(0, +)
+        trainingCompeleted = false
+        counterBig = train!.temp.reduce(0, +)
         index = 0
         isStarted = false
         runCircles.counterBig = 0
         runCircles.counterSmall = 0
         let screenSize: CGRect = UIScreen.main.bounds
         self.image.image = self.getMixedImg(screenSize.width)
-        var timeStr: NSString
-        if(Float(train.temp[0]).truncatingRemainder(dividingBy: 60) == 0){
-            timeStr = NSString(format:"%0.1d", (train.temp[0])/60)
-        } else{
-            timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
-        }
-         stageLabel.text = "\(NSLocalizedString("run.runWord", comment: "")) \(timeStr)\(NSLocalizedString("run.minWord", comment: ""))"
         self.runner.stopAnimating()
         self.runner.image = UIImage(named: "rrrr1")!
-        let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
-        smallTimer!.text = str as String
-        let str2 = NSString(format:"%0.2d:%0.2d", counterBig/60,counterBig%60)
-        bigTimer!.text = str2 as String
+        setSmallTimer()
+        setBigTimer()
         timerSmall.invalidate()
         startButton.setTitle("RUN!", for: UIControlState())
+        changeAnimAndLabels()
+
+        
+    }
+    
+    func setSmallTimer(){
+        let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
+        smallTimer!.text = str as String
+    }
+    
+    func setBigTimer(){
+        let str2 = NSString(format:"%0.2d:%0.2d", counterBig/60,counterBig%60)
+        bigTimer!.text = str2 as String
 
     }
     
     
     
-    override func viewDidLoad() {
-        print("load")
-        super.viewDidLoad()
-        
-        confettiView = SAConfettiView(frame: self.view.bounds)
-        confettiView.colors = [UIColor(hex: "#FF7B7B"), UIColor(hex: "#657ECA"), UIColor(hex: "#FFEC7B")]
-        progressLabel.text = "\(NSLocalizedString("runPage.progressLabel", comment: "")): \((ShareData.sharedInstance.userData?.completedTrainsDates?.count)!+1)/27"
-        
-        super.view.autoresizingMask = .flexibleBottomMargin
-        //self.view.backgroundColor = UIColor(hex: "#FFF8D7")
-        let screenSize: CGRect = UIScreen.main.bounds
-        screenWidth = screenSize.width
-        loadTrain()
-        self.image.image = self.getMixedImg(screenSize.width)
-        var timeStr: NSString
-        if(Float(train.temp[0]).truncatingRemainder(dividingBy: 60) == 0){
-            timeStr = NSString(format:"%0.1d", (train.temp[0])/60)
-        } else{
-            timeStr = NSString(format:"%.1f", (Float(train.temp[0]))/60)
-        }
-        stageLabel.font = UIFont(name: "Arial-Black", size: 13.0)
-        stageLabel.textColor = UIColor(hex: "#FFFFFF")
-        stageLabel.text = "\(NSLocalizedString("run.runWord", comment: "")) \(timeStr)\(NSLocalizedString("run.minWord", comment: ""))"
-        self.runner.contentMode = .scaleAspectFit
-        self.runner.image = UIImage(named: "rrrr1")!
-        let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000,(counter/100)%60, counter%100)
-        
-        smallTimer = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 10))
-        smallTimer!.translatesAutoresizingMaskIntoConstraints = false
-        
-        smallTimer!.textAlignment = NSTextAlignment.center
-        smallTimer!.text = str as String
-        //        for family: String in UIFont.familyNames
-        //        {
-        //            print("\(family)")
-        //            for names: String in UIFont.fontNames(forFamilyName: family)
-        //            {
-        //                print("== \(names)")
-        //            }
-        //        }
-        //UIFont.familyNames.sorted().forEach({print($0)})
-        smallTimer!.font = UIFont(name: "Arial-Black", size: 18.0)
-        smallTimer!.textColor = UIColor(hex: "#FFFFFF")
-        self.runCircles.addSubview(smallTimer!)
-        let str2 = NSString(format:"%0.2d:%0.2d", counterBig/60,counterBig%60)
-        bigTimer = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 10))
-        bigTimer!.translatesAutoresizingMaskIntoConstraints = false
-        bigTimer!.textAlignment = NSTextAlignment.center
-        bigTimer!.text = str2 as String
-        
-        bigTimer!.font = UIFont(name: "Arial-Black", size: 32.0)
-        bigTimer!.textColor = UIColor(hex: "#FFFFFF")
-        self.runCircles.addSubview(bigTimer!)
-        
-        let horizontalConstraint = NSLayoutConstraint(item: smallTimer!, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerX, multiplier: 0.5, constant: 0)
-        runCircles.addConstraint(horizontalConstraint)
-        
-        let verticalConstraint = NSLayoutConstraint(item: smallTimer!, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerY, multiplier: 1.5, constant: 0)
-        runCircles.addConstraint(verticalConstraint)
-        
-        let horizontalConstraint2 = NSLayoutConstraint(item: bigTimer!, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerX, multiplier: 7/6, constant: 0)
-        view.addConstraint(horizontalConstraint2)
-        
-        let verticalConstraint2 = NSLayoutConstraint(item: bigTimer!, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerY, multiplier: 5/6, constant: 0)
-        view.addConstraint(verticalConstraint2)
-        startButton.titleLabel?.font = UIFont(name: "Arial-Black", size: 35.0)
-        startButton.setTitle("RUN!", for: UIControlState())
-        muteLabel.text = NSLocalizedString("runPage.muteLabel", comment: "")
-        
-        //
-        //        let imageName = "1.5walk"
-        //        let image = UIImage(named: imageName)
-        //        sticker = UIImageView(image: image!)
-        //
-        //        let y = self.view.bounds.height-110
-        //        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
-        //        self.view.addSubview(sticker!)
-        NotificationCenter.default.addObserver(self, selector: #selector(RunController.applicationWillResignActive),name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(RunController.applicationDidBecomeActive),name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        
-    }
+    
     @IBAction func cancelButtonPressed(_ sender: AnyObject) {
-        if !timerSmall.isValid {
-            clearDefaults()
-        } else {
-            saveDefaults()
-        }
+        SKTAudio.sharedInstance().playSoundEffect("pop.wav")
         dismiss(animated: true, completion: nil)
     }
     
@@ -249,61 +185,56 @@ class RunController: UIViewController {
         if counter%100 == 0{
             counterBig-=1
             runCircles.counterBig += 1
-            let str = NSString(format:"%0.2d:%0.2d", counterBig/60, counterBig%60)
-            bigTimer!.text = str as String
+            setBigTimer()
             updateTrainControlImage()
         }
         if counter < 0 {
-            if(index < (train.index)-1){
+            if(index < (train!.index)-1){
                 isRunning = !isRunning
                 index+=1
                 let move: String
-                let moveEng: String
-                if(isRunning){
-                    move = NSLocalizedString("run.runWord", comment: "")
-                    moveEng = "run"
-                    self.runner.animationImages = runningMan
-                    runCircles.outlineColorSmall = UIColor(hex: "#E45875")
-                    runCircles.smallCircleColor = UIColor(hex: "#FF7B7B")
-                } else {
-                    move = NSLocalizedString("run.walkWord", comment: "")
-                    moveEng = "walk"
-                    self.runner.animationImages = walkingMan
-                    runCircles.outlineColorSmall = UIColor(hex: "#FFAC66")
-                    runCircles.smallCircleColor = UIColor(hex: "#FFD88A")
-                    
-                }
+                changeAnimAndLabels()
                 self.runner.animationDuration = 0.5
                 self.runner.startAnimating()
-                var timeStr: NSString
-                if Float(train.temp[index]).truncatingRemainder(dividingBy: 60) == 0 {
-                    timeStr = NSString(format:"%.1d", (train.temp[index])/60)
-                } else{
-                    timeStr = NSString(format:"%.1f", (Float(train.temp[index]))/60)
+                if(isRunning){
+                    move = NSLocalizedString("runPage.audio.runword", comment: "")
+                } else {
+                    move = NSLocalizedString("runPage.audio.walkword", comment: "")
                 }
-                
-                stageLabel.text = "\(move) \(timeStr) \(NSLocalizedString("run.minWord", comment: ""))"
-                counter =  train.temp[index]*100
-                let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000, (counter/100)%60, counter%100)
-                smallTimer!.text = str as String
+                counter =  train!.temp[index]*100
+                setSmallTimer()
                 runCircles.counterSmall = counter
                 runCircles.maxValueSmall = counter
-                let audio = "\(moveEng)\(timeStr).mp3"
+                let audio = "\(move)\(getTimeStr()).mp3"
                 SKTAudio.sharedInstance().playSoundEffect(audio)
                 return
             }
-            if(index == (train.index)-1){
+            if(index == (train!.index)-1){
+                let audio = "\(NSLocalizedString("runPage.audio.end", comment: "")).mp3"
+                SKTAudio.sharedInstance().playSoundEffect(audio)
+                print("complete in counter smal action")
                 trainingComplete()
+                rateMe()
                 return
             }
         }
-        let str = NSString(format:"%0.2d:%0.2d:%0.2d", counter/6000, (counter/100)%60, counter%100)
-        smallTimer!.text = str as String
-        runCircles.counterSmall = train.temp[index]*100-counter
+        setSmallTimer()
+        runCircles.counterSmall = train!.temp[index]*100-counter
         
     }
     
     func trainingComplete(){
+        clearDefaults()
+        counter = 0
+        counterBig = 0
+        index = train!.index-1
+        isRunning = index%2==0
+        changeAnimAndLabels()
+        runCircles.counterSmall = runCircles.maxValueSmall
+        runCircles.counterBig = runCircles.maxValueBig
+        setSmallTimer()
+        setBigTimer()
+        changeAnimAndLabels()
         trainingCompeleted = true
         timerSmall.invalidate()
         startButton.setTitle("DONE", for: UIControlState())
@@ -323,42 +254,95 @@ class RunController: UIViewController {
         confettiView.stopConfetti()
         confettiView.removeFromSuperview()
     }
+    
+    func getTimeStr() -> NSString{
+        
+        var timeStr: NSString
+        if Float(train!.temp[index]).truncatingRemainder(dividingBy: 60) == 0 {
+            timeStr = NSString(format:"%.1d", (train!.temp[index])/60)
+        } else{
+            timeStr = NSString(format:"%.1f", (Float(train!.temp[index]))/60)
+        }
+        return timeStr
+    }
+    
+    func changeAnimAndLabels(){
+        let move: String
+        if(isRunning){
+            smallTimerLabel?.text = NSLocalizedString("runPage.smallTimerLabelRun", comment: "")
+            self.runner.animationImages = runningMan
+            runCircles.outlineColorSmall = UIColor(hex: "#E45875")
+            runCircles.smallCircleColor = UIColor(hex: "#FF7B7B")
+            move = NSLocalizedString("run.runWord", comment: "")
+            self.runner.image = UIImage(named: "rrrr1")!
+        } else {
+            smallTimerLabel?.text = NSLocalizedString("runPage.smallTimerLabelWalk", comment: "")
+            self.runner.animationImages = walkingMan
+            runCircles.outlineColorSmall = UIColor(hex: "#FFAC66")
+            runCircles.smallCircleColor = UIColor(hex: "#FFD88A")
+            move = NSLocalizedString("run.walkWord", comment: "")
+            self.runner.image = UIImage(named: "rrrr3")!
+        }
+        stageLabel.text = "\(move) \(getTimeStr()) \(NSLocalizedString("run.minWord", comment: ""))"
+    }
 }
 
 //notifications
 extension RunController{
     
-    private func loadDefaults() {
+    
+    
+    
+    func loadDefaults() {
+        print("load def")
         deleteNotification()
         let userDefault = UserDefaults.standard
         var restoredCounter = userDefault.object(forKey: PropertyKey.counterKey) as! Int
-        var stageIndex = userDefault.object(forKey: PropertyKey.stageKey) as! Int
+        let restoredCounterBig = userDefault.object(forKey: PropertyKey.counterBigKey) as! Int
+        let stageIndex = userDefault.object(forKey: PropertyKey.stageKey) as! Int
         let restoredTimeMeasurement = userDefault.object(forKey: PropertyKey.counterMeasurementKey) as! Double
         
-        var timeDelta = Int(Date().timeIntervalSince1970 - restoredTimeMeasurement)
+        let timeDelta = Int(Date().timeIntervalSince1970 - restoredTimeMeasurement)
         
-        if timeDelta < (restoredCounter/100) {
+        if timeDelta*100 < restoredCounter {
+            counterBig = restoredCounterBig - timeDelta
             restoredCounter -= Int(timeDelta * 100)
             counter = restoredCounter
+            index = stageIndex
+            runCircles.counterBig = train!.temp.reduce(0, +) - counterBig
+            runCircles.counterSmall = train!.temp[index]*100-counter
         }else{
-            timeDelta -= (restoredCounter/100)
-            stageIndex += 1
-            while(timeDelta >  train.temp[stageIndex] && stageIndex < train.index){
-                timeDelta -= train.temp[stageIndex]
-                stageIndex += 1
-            }
-            if stageIndex < train.index && timeDelta < train.temp[stageIndex] {
-                counter = (train.temp[stageIndex] - timeDelta)*100
-                index = stageIndex
-                counterBig = counter/100
-                for i in index+1...train.index-1 {
-                    counterBig += train.temp[i]
+            if restoredCounterBig > timeDelta{
+                counterBig = restoredCounterBig - timeDelta
+                var tempCounter = 0
+                var indexTemp = 0
+                for i in stride(from: train!.index-1, through: 0, by: -1){
+                    if tempCounter+train!.temp[i] < counterBig {
+                        tempCounter += train!.temp[i]
+                    } else {
+                        indexTemp = i
+                        break
+                    }
                 }
-            } else{
+//                timeDelta -= (restoredCounter/100)
+//                stageIndex += 1
+//                while(timeDelta >  train!.temp[stageIndex] && stageIndex < train!.index){
+//                    stageIndex += 1
+//                }
+                index = indexTemp
+                isRunning = index%2 == 0
+                counter = (counterBig - tempCounter)*100
+                runCircles.counterBig = train!.temp.reduce(0, +) - counterBig
+                runCircles.maxValueSmall = train!.temp[index]*100
+                runCircles.counterSmall = train!.temp[index]*100-counter
+                changeAnimAndLabels()
+                self.runner.animationDuration = 0.5
+                self.runner.startAnimating()
+            }else{
+                print("complete in load def")
                 trainingComplete()
             }
         }
-        
     }
     
     func scheduleNotification(identifier: String, title: String, subtitle: String, body: String, timeInterval: TimeInterval, repeats: Bool = false, soundName: String) {
@@ -382,7 +366,6 @@ extension RunController{
     
     func deleteNotification() {
         if #available(iOS 10, *) {
-            
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         } else {
             
@@ -391,24 +374,28 @@ extension RunController{
     }
     
     func sendAllNotifications(){
-        var running = isRunning
-        var time = counter/100
-        var id = 1
-        for i in index+1...train.index-1{
-            let mp3name = "\(getNextMoveWord(currentIsRunning: running))\(getTimeString(time: train.temp[i])).mp3"
-            let body = "\(getNextMoveWord(currentIsRunning: running))  \(getTimeString(time: train.temp[i]))  \(NSLocalizedString("run.minWord", comment: "")) "
-            print("id \(id) time \(time) sound name \(mp3name)")
-            scheduleNotification(identifier: "run-girl-\(id)", title: body , subtitle: "", body: body, timeInterval: TimeInterval(time), soundName: mp3name )
-            time += train.temp[i]
-            running = !running
-            id += 1
+            var running = isRunning
+            var time = counter/100
+            var id = 1
+         if index+1 <= train!.index-1 {
+            for i in index+1...train!.index-1{
+                let mp3name = "\(getNextMoveWord(currentIsRunning: running))\(getTimeString(time: train!.temp[i])).mp3"
+                let body = "\(getNextMoveWord(currentIsRunning: running))  \(getTimeString(time: train!.temp[i]))  \(NSLocalizedString("run.minWord", comment: "")) "
+                print("id \(id) time \(time) sound name \(mp3name)")
+                scheduleNotification(identifier: "run-girl-\(id)", title: body , subtitle: "", body: body, timeInterval: TimeInterval(time), soundName: mp3name )
+                time += train!.temp[i]
+                running = !running
+                id += 1
+            }
         }
-        
+            let mp3name = "\(NSLocalizedString("runPage.audio.end", comment: "")).mp3"
+            let body = "\(NSLocalizedString("runPage.audio.endDescription", comment: "")) "
+
+            scheduleNotification(identifier: "run-girl-\(id)", title: body , subtitle: "", body: body, timeInterval: TimeInterval(time), soundName: mp3name )
     }
     
     func getTimeString(time:Int) -> NSString{
         var timeStr: NSString
-        //print(time)
         if Float(time).truncatingRemainder(dividingBy: 60) == 0 {
             timeStr = NSString(format:"%.1d", time/60)
         } else{
@@ -420,9 +407,9 @@ extension RunController{
     
     func getNextMoveWord(currentIsRunning:Bool)->String{
         if currentIsRunning {
-            return "walk"
+            return NSLocalizedString("runPage.audio.walkword", comment: "")
         } else {
-            return "run"
+            return NSLocalizedString("runPage.audio.runword", comment: "")
         }
     }
     
@@ -434,27 +421,21 @@ extension RunController{
         deleteNotification()
         sendAllNotifications()
         let userDefault = UserDefaults.standard
-        print("save defaults")
-        print("counter \(counter)")
-        print("index \(index)")
+        userDefault.set(counterBig, forKey: PropertyKey.counterBigKey)
         userDefault.set(counter, forKey: PropertyKey.counterKey)
         userDefault.set(Date().timeIntervalSince1970, forKey: PropertyKey.counterMeasurementKey)
         userDefault.set(index, forKey: PropertyKey.stageKey)
         userDefault.synchronize()
         
-        let center = UNUserNotificationCenter.current()
-        center.getPendingNotificationRequests(completionHandler: { requests in
-            for request in requests {
-                print(request)
-            }
-        })
     }
     
     func clearDefaults() {
         let userDefault = UserDefaults.standard
         userDefault.removeObject(forKey: PropertyKey.counterKey)
         userDefault.removeObject(forKey: PropertyKey.counterMeasurementKey)
-        deleteNotification()
+        userDefault.removeObject(forKey: PropertyKey.counterBigKey)
+        userDefault.removeObject(forKey: PropertyKey.stageKey)
+        
         userDefault.synchronize()
     }
     
@@ -462,6 +443,7 @@ extension RunController{
         if !timerSmall.isValid {
             clearDefaults()
         } else {
+            
             saveDefaults()
         }
         
@@ -481,9 +463,10 @@ extension RunController{
     
     struct PropertyKey {
         static let counterKey = "RunLikeAGirlRunController_timeCount"
+        static let counterBigKey = "RunLikeAGirlRunController_timeBigCount"
         static let counterMeasurementKey = "RunLikeAGirlRunController_timeMeasurement"
         static let stageKey = "RunLikeAGirlRunController_stageIndex"
-        static let isRunningKey = "RunLikeAGirlRunController_isRunning"
+        static let isStateSaved = "RunLikeAGirlRunController_isStateSaved"
     }
 }
 
@@ -577,29 +560,29 @@ extension RunController{
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         var widthVid: CGFloat = 0
-        let percent: CGFloat = (CGFloat((train.temp[index])*100-counter))/CGFloat((train.temp[index]*100))
+        let percent: CGFloat = (CGFloat((train!.temp[index])*100-counter))/CGFloat((train!.temp[index]*100))
         
         if(percent < 1)
         {
-            let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train.trainMenu[index]), percent: percent)
+            let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train!.trainMenu[index]), percent: percent)
             if(croppedImage.size.width > 40){
                 croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
                 widthVid+=croppedImage.size.width
             } else{
-                let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train.trainMenu[index]), percent: CGFloat(40/train.trainMenu[index].size.width))
+                let croppedImage: UIImage = ImageUtil.cropFromLeft(image: (train!.trainMenu[index]), percent: CGFloat(40/train!.trainMenu[index].size.width))
                 croppedImage.draw(in: CGRect(x: widthVid, y: 0, width: croppedImage.size.width, height: croppedImage.size.height))
                 widthVid+=40
             }
         }
-        if(index == train.index-1){
+        if(index == train!.index-1){
             #imageLiteral(resourceName: "finish").draw(in: CGRect(x: widthVid, y: 9, width: #imageLiteral(resourceName: "finish").size.width, height: #imageLiteral(resourceName: "finish").size.height))
             
         }
         //let startedPositonForStiker = widthVid
-        for i in self.index+1 ..< train.index {
-            train.trainMenu[i].draw(in: CGRect(x: widthVid, y: 0, width: train.trainMenu[i].size.width, height: train.trainMenu[i].size.height))
-            widthVid+=train.trainMenu[i].size.width
-            if(i == train.index-1){
+        for i in self.index+1 ..< train!.index {
+            train!.trainMenu[i].draw(in: CGRect(x: widthVid, y: 0, width: train!.trainMenu[i].size.width, height: train!.trainMenu[i].size.height))
+            widthVid+=train!.trainMenu[i].size.width
+            if(i == train!.index-1){
                 #imageLiteral(resourceName: "finish").draw(in: CGRect(x: widthVid, y: 9, width: #imageLiteral(resourceName: "finish").size.width, height: #imageLiteral(resourceName: "finish").size.height))
                 
             }
@@ -629,7 +612,7 @@ extension RunController{
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         var widthVid: CGFloat = 0
-        for im in train.trainMenu {
+        for im in train!.trainMenu {
             if(widthVid + im.size.width < width){
                 im.draw(in: CGRect(x: widthVid, y: 0, width: im.size.width, height: im.size.height))
                 widthVid+=im.size.width
@@ -642,6 +625,96 @@ extension RunController{
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return finalImage!
+    }
+}
+//setint ui
+extension RunController{
+    func setUI(){
+        super.view.autoresizingMask = .flexibleBottomMargin
+        let screenSize: CGRect = UIScreen.main.bounds
+        screenWidth = screenSize.width
+        
+        confettiView = SAConfettiView(frame: self.view.bounds)
+        confettiView.colors = [UIColor(hex: "#FF7B7B"), UIColor(hex: "#657ECA"), UIColor(hex: "#FFEC7B")]
+        
+        stageLabel.font = UIFont(name: "Arial-Black", size: 13.0)
+        stageLabel.textColor = UIColor(hex: "#FFFFFF")
+        
+        self.runner.contentMode = .scaleAspectFit
+        self.runner.image = UIImage(named: "rrrr1")
+        
+        smallTimer = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 10))
+        smallTimer!.translatesAutoresizingMaskIntoConstraints = false
+        
+        smallTimer!.textAlignment = NSTextAlignment.center
+        
+        smallTimer!.font = UIFont(name: "Arial-Black", size: 18.0)
+        smallTimer!.textColor = UIColor(hex: "#FFFFFF")
+        self.runCircles.addSubview(smallTimer!)
+        
+        bigTimer = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 10))
+        bigTimer!.translatesAutoresizingMaskIntoConstraints = false
+        bigTimer!.textAlignment = NSTextAlignment.center
+        
+        
+        bigTimer!.font = UIFont(name: "Arial-Black", size: 32.0)
+        bigTimer!.textColor = UIColor(hex: "#FFFFFF")
+        self.runCircles.addSubview(bigTimer!)
+        
+        
+        bigTimerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 10))
+        bigTimerLabel!.translatesAutoresizingMaskIntoConstraints = false
+        bigTimerLabel!.textAlignment = NSTextAlignment.center
+        bigTimerLabel?.font = UIFont(name: "Arial-Black", size: 12.0)
+        bigTimerLabel?.textColor = UIColor(hex: "#FFFFFF")
+        bigTimerLabel?.text = NSLocalizedString("runPage.bigTimerLabel", comment: "")
+        self.runCircles.addSubview(bigTimerLabel!)
+        
+        
+        smallTimerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 10))
+        smallTimerLabel!.translatesAutoresizingMaskIntoConstraints = false
+        smallTimerLabel!.textAlignment = NSTextAlignment.center
+        smallTimerLabel?.font = UIFont(name: "Arial-Black", size: 12.0)
+        smallTimerLabel?.textColor = UIColor(hex: "#FFFFFF")
+        
+        self.runCircles.addSubview(smallTimerLabel!)
+        
+        let horizontalConstraint = NSLayoutConstraint(item: smallTimer!, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerX, multiplier: 0.5, constant: 0)
+        runCircles.addConstraint(horizontalConstraint)
+        
+        let verticalConstraint = NSLayoutConstraint(item: smallTimer!, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerY, multiplier: 1.5, constant: 0)
+        runCircles.addConstraint(verticalConstraint)
+        
+        let horizontalConstraint4 = NSLayoutConstraint(item: smallTimerLabel!, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerX, multiplier: 0.5, constant: 0)
+        runCircles.addConstraint(horizontalConstraint4)
+        
+        let verticalConstraint4 = NSLayoutConstraint(item: smallTimerLabel!, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerY, multiplier: 1.5, constant: -20)
+        runCircles.addConstraint(verticalConstraint4)
+        
+        let horizontalConstraint2 = NSLayoutConstraint(item: bigTimer!, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerX, multiplier: 7/6, constant: 0)
+        view.addConstraint(horizontalConstraint2)
+        
+        let verticalConstraint2 = NSLayoutConstraint(item: bigTimer!, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerY, multiplier: 5/6, constant: 0)
+        view.addConstraint(verticalConstraint2)
+        
+        
+        let horizontalConstraint3 = NSLayoutConstraint(item: bigTimerLabel!, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerX, multiplier: 7/6, constant: 0)
+        view.addConstraint(horizontalConstraint3)
+        
+        let verticalConstraint3 = NSLayoutConstraint(item: bigTimerLabel!, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: runCircles, attribute: NSLayoutAttribute.centerY, multiplier: 5/6, constant: -30)
+        view.addConstraint(verticalConstraint3)
+        
+        startButton.titleLabel?.font = UIFont(name: "Arial-Black", size: 35.0)
+        muteLabel.text = NSLocalizedString("runPage.muteLabel", comment: "")
+        
+        //
+        //        let imageName = "1.5walk"
+        //        let image = UIImage(named: imageName)
+        //        sticker = UIImageView(image: image!)
+        //
+        //        let y = self.view.bounds.height-110
+        //        sticker!.frame = CGRect(x: imagePos, y: y, width: 50, height: 50)
+        //        self.view.addSubview(sticker!)
     }
 }
 
