@@ -61,7 +61,6 @@ import Foundation
         outlineColorBigFake.setStroke()
         outlinePathBigFake.lineWidth = strokeBig
         outlinePathBigFake.stroke()
-        print("big \(outlinePathBigFake.lineWidth)")
         
         let outlinePathBig = UIBezierPath(arcCenter: centerBig,
                                           radius: radiusBig - strokeBig/2,

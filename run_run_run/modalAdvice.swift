@@ -16,12 +16,16 @@ protocol modalAdviceDelegate: class {
 class modalAdvice: UIViewController {
     var delegate:modalAdviceDelegate?
     
+    @IBOutlet weak var notOkButton: UIButton!
     @IBOutlet weak var adviceLabel: UILabel!
+    @IBOutlet weak var okButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         adviceLabel.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
         adviceLabel.text = NSLocalizedString("modalWindow.NotificationAdvice", comment: "")
+        okButton.setTitle(NSLocalizedString("askNotifPage.ok", comment: ""), for: UIControlState())
+        notOkButton.setTitle(NSLocalizedString("askNotifPage.notOk", comment: ""), for: UIControlState())
         
         // Do any additional setup after loading the view.
     }

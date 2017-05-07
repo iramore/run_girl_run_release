@@ -6,6 +6,8 @@
 	<string>5f911971ce88c597ddadb21910cced6796e4f763607944d3</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Run Girl Run</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

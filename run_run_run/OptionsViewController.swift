@@ -2,7 +2,7 @@ import UIKit
 import ElasticTransition
 
 enum LeftMenuType{
-    case mySegment(values: [String], selected: [Int], name: String)
+    case mySegment(values: [String], selected: [Int], name: String, label: String)
 }
 
 
@@ -35,8 +35,8 @@ class OptionsViewController: UIViewController, ElasticMenuTransitionDelegate, Se
     } else{
         days = [NSLocalizedString("options.days.su", comment: ""),NSLocalizedString("options.days.mn", comment: ""), NSLocalizedString("options.days.tu", comment: ""), NSLocalizedString("options.days.wd", comment: ""), NSLocalizedString("options.days.th", comment: ""), NSLocalizedString("options.days.fr", comment: ""), NSLocalizedString("options.days.sa", comment: "")]
     }
-    menu.append(.mySegment(values: ["1", "2", "3", "4", "5"],selected: [(self.shareData.loadUserData()?.daysOfWeek.count)!-1], name: NSLocalizedString("optionsPage.trainingsPerWeek", comment: "")))
-    menu.append(.mySegment(values: days,selected: (self.shareData.loadUserData()?.daysOfWeek)!,  name: NSLocalizedString("optionsPage.daysOfTheWeek", comment: "")))
+        menu.append(.mySegment(values: ["1", "2", "3", "4", "5"],selected: [(self.shareData.loadUserData()?.daysOfWeek.count)!-1], name: "Number", label: NSLocalizedString("optionsPage.trainingsPerWeek", comment: "")))
+        menu.append(.mySegment(values: days,selected: (self.shareData.loadUserData()?.daysOfWeek)!,  name: "Days", label: NSLocalizedString("optionsPage.daysOfTheWeek", comment: "")))
     
     
     for i in 0..<menu.count{
@@ -86,13 +86,13 @@ extension OptionsViewController: UITableViewDelegate, UITableViewDataSource{
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell:UITableViewCell
     switch menu[(indexPath as NSIndexPath).item]{
-    case .mySegment(let values, let selected, let name):
+    case .mySegment(let values, let selected, let name ,let label):
         let mySegment = tableView.dequeueReusableCell(withIdentifier: "my_segment", for: indexPath) as! MySegmentCell
         mySegment.segmentControl.buttonTitles = values
         mySegment.segmentControl.delegate = self
         mySegment.segmentControl.selectedIndexes = selected
         mySegment.segmentControl.name = name
-        mySegment.label.text = name
+        mySegment.label.text = label
         cell = mySegment
     }
     return cell

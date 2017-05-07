@@ -74,8 +74,16 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     override func viewDidLoad() {
         super.viewDidLoad()
         //shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16")])
-        shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16")])
-        shareData.saveUserData()
+        //shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16")])
+        //shareData.saveUserData()
+        
+        
+        if let userData = shareData.loadUserData() {
+            shareData.userData = userData
+        } else{
+            shareData.userData = UserData(daysOfWeek: [0,2,4], completedTrainsDates:[Date]())
+            shareData.saveUserData()
+        }
         
         
         let image = UIImage(named: "circle")
@@ -115,8 +123,12 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         //print(imageLogo?.size)
         
         self.view.addSubview(imageView)
-        self.view.addSubview(imageViewLogo)
-
+        let screenSize = UIScreen.main.bounds
+        
+        if screenSize.height != 480 {
+            self.view.addSubview(imageViewLogo)
+        }
+        
         self.view.addSubview(planButton!)
         self.view.addSubview(runButton!)
         self.view.addSubview(trackButton!)
@@ -133,7 +145,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         transition.transitionMode = .present
         if presented is PlanViewController {
             transition.startingPoint = (planButton?.center)!
-            transition.bubbleColor = UIColor(hex: "#E81BE1")
+            transition.bubbleColor = UIColor(hex: "#0080FF")
             
         }
         if presented is RunController {
@@ -146,7 +158,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
             transition.bubbleColor =
                 UIColor(hex: "#FEC209")
         }
-
+        
         return transition
     }
     
@@ -154,7 +166,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         transition.transitionMode = .dismiss
         if dismissed is PlanViewController {
             transition.startingPoint = (planButton?.center)!
-            transition.bubbleColor = UIColor(hex: "#E81BE1")
+            transition.bubbleColor = UIColor(hex: "#0080FF")
         }
         if dismissed is RunController {
             transition.startingPoint = (runButton?.center)!
@@ -165,7 +177,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
             transition.startingPoint = (trackButton?.center)!
             transition.bubbleColor =  UIColor(hex: "#FEC209")
         }
-    
+        
         return transition
     }
     
@@ -174,9 +186,9 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier != "info"{
-        let controller = segue.destination
-        controller.transitioningDelegate = self
-        controller.modalPresentationStyle = .custom
+            let controller = segue.destination
+            controller.transitioningDelegate = self
+            controller.modalPresentationStyle = .custom
         }
     }
     
@@ -210,9 +222,9 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         super.didReceiveMemoryWarning()
     }
     
-       
+    
     func trackButtonBezier() -> UIBezierPath{
-                let bezierPath = UIBezierPath()
+        let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 117, y: 0))
         bezierPath.addLine(to: CGPoint(x: 0, y: 63.75))
         bezierPath.addLine(to: CGPoint(x: 0, y: 70.89))

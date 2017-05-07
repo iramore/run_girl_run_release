@@ -324,11 +324,6 @@ extension RunController{
                         break
                     }
                 }
-//                timeDelta -= (restoredCounter/100)
-//                stageIndex += 1
-//                while(timeDelta >  train!.temp[stageIndex] && stageIndex < train!.index){
-//                    stageIndex += 1
-//                }
                 index = indexTemp
                 isRunning = index%2 == 0
                 counter = (counterBig - tempCounter)*100

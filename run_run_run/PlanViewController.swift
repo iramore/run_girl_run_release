@@ -92,7 +92,6 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
         formatter.dateStyle = .long
         if isRestCell(index: ind){
             restCellNeeded = true
-            print(ind)
             cell.planImage.image = UIImage(named: NSLocalizedString("planPage.rest", comment: ""))!
             todayRow = ind
             cell.date.text = "\(NSLocalizedString("plan.today", comment: "")): \(formatter.string(from: DateUtil.getConvertedToday()))"
@@ -113,7 +112,6 @@ class PlanViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 result = UIImage(named: "\(NSLocalizedString("planPage.runrun", comment: ""))\(ind)")!
                 data = nextTrainDate(prevDate: data, index: ind - completedTrains)
             } else{
-                print("run-\(ind+1)")
                 result = UIImage(named: "\(NSLocalizedString("planPage.runrun", comment: ""))\(ind+1)")!
                 data = nextTrainDate(prevDate: data, index: ind - completedTrains + 1)
             }

@@ -47,9 +47,12 @@ class CalViewController: UIViewController {
         transition.stiffness = 0.9
         
         let progressPercent = CGFloat(((shareData.userData)!.completedTrainsDates?.count)!) / CGFloat(Train_data.numberOfTrains)
-        let image = getMixedImg(runner.frame.width * progressPercent)
+        if progressPercent > 0 {
+            let image = getMixedImg(runner.frame.width * progressPercent)
+            runner.image = image
+        }
         runner.contentMode = .left
-        runner.image = image
+        
         runner.layer.cornerRadius = 12
         runner.layer.borderWidth = 5
         //runner.layer.shadowOpacity = 1.0
