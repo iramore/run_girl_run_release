@@ -47,4 +47,9 @@ optionsPage.daysOfTheWeek = "Дни недели для тренировок";
 optionsPage.trainingsPerWeek = "Количество тренировок в неделю";
 askNotifPage.ok = "Разрешить";
 askNotifPage.notOk = "Отмена";
-
+nextTrNotif.Info.title = "Уведомления о следующей тренировке";
+nextTrNotif.Info.message = "Хотите получать уведомления о следующей тренировке?";
+nextTrNotif.OK = "Да";
+nextTrNotif.no = "Нет";
+newTrainNotif.title = "Сегодня беговая тренировка!";
+newTrainNotif.body = "Не пропустите тренировку сегодня";

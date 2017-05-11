@@ -73,10 +73,6 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16"),Date(dateString:"2017-03-16")])
-        //shareData.userData = UserData(daysOfWeek: [0,3,4], completedTrainsDates: [Date(dateString:"2017-03-16")])
-        //shareData.saveUserData()
-        
         
         if let userData = shareData.loadUserData() {
             shareData.userData = userData
@@ -132,9 +128,7 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         self.view.addSubview(planButton!)
         self.view.addSubview(runButton!)
         self.view.addSubview(trackButton!)
-        (UIApplication.shared.delegate as! AppDelegate).initializeSdk(withAdType: AppodealAdType.banner, testMode: true, autoCache: false, userData: false, toastMode: false)
-        //APDSdk.shared().setLogLevel(APDLogLevel.info)
-        //Appodeal.setTestingEnabled(true)
+        (UIApplication.shared.delegate as! AppDelegate).initializeSdk(withAdType: AppodealAdType.banner, testMode: true, autoCache: true, userData: false, toastMode: true)
         Appodeal.showAd(AppodealShowStyle.bannerBottom, rootViewController: self)
         
     }
@@ -195,7 +189,6 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
     
     
     func didPressTriangle(_ sender: AnyObject?) {
-        
         SKTAudio.sharedInstance().playSoundEffect("pop.wav")
         performSegue(withIdentifier: "plan", sender: self)
     }

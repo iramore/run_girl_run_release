@@ -19,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        if let bundle = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundle)
-        }
+//        if let bundle = Bundle.main.bundleIdentifier {
+//            UserDefaults.standard.removePersistentDomain(forName: bundle)
+//        }
         deleteNotification()
         
         return true
@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "AppodealAppKey") as! String
         Appodeal.setTestingEnabled(testMode)
         Appodeal.setLocationTracking(false)
-        
         if userData {
             Appodeal.setUserId("user_id")
             Appodeal.setUserEmail("dt@email.net")
@@ -46,11 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         Appodeal.setAutocache(autoCache, types: adType)
+        //        let adTypes: AppodealAdType = [.banner, .interstitial] //
         Appodeal.initialize(withApiKey: apiKey, types: adType)
-        
-//        let rootViewVontroller : APDAppodealHUB = APDAppodealHUB()
-//        rootViewVontroller.isAutoCache = autoCache
-//        self.window?.rootViewController = UINavigationController.init(rootViewController: rootViewVontroller)
     }
     
     func setAppearance (){
@@ -79,19 +75,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        print("terminate")
         deleteNotification()
     }
     
     
     func deleteNotification() {
-        if #available(iOS 10, *) {
+        let notificationArr:NSArray?  =  UIApplication.shared.scheduledLocalNotifications as NSArray?
+        notificationArr!.enumerateObjects({ object, index, stop in
             
-            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        } else {
+            let notification = object as! UILocalNotification;
+            let userInfo = notification.userInfo! as NSDictionary
+            let notificationID = userInfo["notificationID"] as! String
             
-            UIApplication.shared.cancelAllLocalNotifications()
-        }
+            if(notificationID.hasPrefix("run-girl-")){
+                
+                
+                UIApplication.shared.cancelLocalNotification(notification)
+                
+            }
+        })
     }
 
 

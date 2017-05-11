@@ -10,14 +10,8 @@ import UIKit
 
 class Train_data: NSObject {
     static var numberOfTrains : Int = 27
-    
-    
-    //static var train2: Train = Train(index: 2, trainMenu: [UIImage(named: "run")!, UIImage(named: "walk")!], temp: [60,90])
-    static var train2: Train = Train(index: 1, trainMenu: [UIImage(named: "run")!], temp: [60])
-
-    
     static var train1: Train = Train(index: 16, trainMenu: [UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!, UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!, UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!], temp: [60,90,60,90,60,90,60,90,60,90,60,90,60,90,60,90])
-    //static var train2: Train = Train(index: 16, trainMenu: [UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!, UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!, UIImage(named: "1run")!, UIImage(named: "1.5walk")!,UIImage(named: "1run")!, UIImage(named: "1.5walk")!], temp: [60,90,60,90,60,90,60,90,60,90,60,90,60,90,60,90])
+    static var train2: Train = Train(index: 16, trainMenu: [UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!, UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!, UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!], temp: [60,90,60,90,60,90,60,90,60,90,60,90,60,90,60,90])
     static var train3: Train = Train(index: 16, trainMenu: [UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!, UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!, UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!], temp: [60,90,60,90,60,90,60,90,60,90,60,90,60,90,60,90])
     
     static var train4: Train = Train(index: 12, trainMenu: [UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!, UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!,UIImage(named: "run")!, UIImage(named: "walk")!], temp: [90,120,90,120,90,120,90,120,90,120,90,120])

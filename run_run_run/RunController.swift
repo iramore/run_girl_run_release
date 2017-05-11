@@ -54,7 +54,6 @@ class RunController: UIViewController {
     }
     
     override func viewDidLoad() {
-        print("view did load")
         super.viewDidLoad()
         setUI()
         setTrain()
@@ -79,8 +78,6 @@ class RunController: UIViewController {
         let value = train!.temp.reduce(0, +)
         runCircles.maxValueBig = value
         counterBig = value
-        //let firstImage: CGSize = train.trainMenu[0].size
-        //imagePos = firstImage.width
     }
     
     
@@ -294,7 +291,6 @@ extension RunController{
     
     
     func loadDefaults() {
-        print("load def")
         deleteNotification()
         let userDefault = UserDefaults.standard
         var restoredCounter = userDefault.object(forKey: PropertyKey.counterKey) as! Int
@@ -334,38 +330,35 @@ extension RunController{
                 self.runner.animationDuration = 0.5
                 self.runner.startAnimating()
             }else{
-                print("complete in load def")
                 trainingComplete()
             }
         }
     }
     
     func scheduleNotification(identifier: String, title: String, subtitle: String, body: String, timeInterval: TimeInterval, repeats: Bool = false, soundName: String) {
-        if #available(iOS 10, *) {
-            let content = UNMutableNotificationContent()
-            content.title = title
-            content.body = body
-            content.sound = UNNotificationSound(named:soundName)
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats)
-            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        } else {
             let notification = UILocalNotification()
             notification.alertBody = "\(title)\n\(subtitle)\n\(body)"
             notification.fireDate = Date(timeIntervalSinceNow: timeInterval)
             notification.soundName = soundName
-            
+            notification.userInfo = ["notificationID" : identifier]
             UIApplication.shared.scheduleLocalNotification(notification)
-        }
     }
     
     func deleteNotification() {
-        if #available(iOS 10, *) {
-            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        } else {
+        let notificationArr:NSArray?  =  UIApplication.shared.scheduledLocalNotifications as NSArray?
+        notificationArr!.enumerateObjects({ object, index, stop in
             
-            UIApplication.shared.cancelAllLocalNotifications()
-        }
+            let notification = object as! UILocalNotification;
+            let userInfo = notification.userInfo! as NSDictionary
+            let notificationID = userInfo["notificationID"] as! String
+            
+            if(notificationID.hasPrefix("run-girl-")){
+
+                
+                   UIApplication.shared.cancelLocalNotification(notification)
+                
+            }
+        })
     }
     
     func sendAllNotifications(){
@@ -376,7 +369,6 @@ extension RunController{
             for i in index+1...train!.index-1{
                 let mp3name = "\(getNextMoveWord(currentIsRunning: running))\(getTimeString(time: train!.temp[i])).mp3"
                 let body = "\(getNextMoveWord(currentIsRunning: running))  \(getTimeString(time: train!.temp[i]))  \(NSLocalizedString("run.minWord", comment: "")) "
-                print("id \(id) time \(time) sound name \(mp3name)")
                 scheduleNotification(identifier: "run-girl-\(id)", title: body , subtitle: "", body: body, timeInterval: TimeInterval(time), soundName: mp3name )
                 time += train!.temp[i]
                 running = !running
@@ -461,7 +453,6 @@ extension RunController{
         static let counterBigKey = "RunLikeAGirlRunController_timeBigCount"
         static let counterMeasurementKey = "RunLikeAGirlRunController_timeMeasurement"
         static let stageKey = "RunLikeAGirlRunController_stageIndex"
-        static let isStateSaved = "RunLikeAGirlRunController_isStateSaved"
     }
 }
 
@@ -534,17 +525,9 @@ extension RunController: modalAdviceDelegate{
     }
     
     func registerForNotifications(types: UIUserNotificationType) {
-        if #available(iOS 10.0, *) {
-            let options = types.authorizationOptions()
-            UNUserNotificationCenter.current().requestAuthorization(options: options) { (granted, error) in
-                if granted {
-                    
-                }
-            }
-        } else {
             let settings = UIUserNotificationSettings(types: types, categories: nil)
             UIApplication.shared.registerUserNotificationSettings(settings)
-        }
+
     }
     
 }
@@ -705,25 +688,6 @@ extension RunController{
 }
 
 
-// MARK: - <#Description#>
-extension UIUserNotificationType {
-    
-    @available(iOS 10.0, *)
-    func authorizationOptions() -> UNAuthorizationOptions {
-        var options: UNAuthorizationOptions = []
-        if contains(.alert) {
-            options.formUnion(.alert)
-        }
-        if contains(.sound) {
-            options.formUnion(.sound)
-        }
-        if contains(.badge) {
-            options.formUnion(.badge)
-        }
-        return options
-    }
-    
-}
 
 
 

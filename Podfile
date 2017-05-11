@@ -1,6 +1,6 @@
 # Uncomment this line to define a global platform for your project
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, ‘10.2’
+platform :ios, ‘8.2’
 # Uncomment this line if you're using Swift
  use_frameworks!
 
