@@ -258,73 +258,7 @@ extension CalViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate 
         UIGraphicsEndImageContext()
         return finalImage2!
     }
-    
-    func showAllNotif(){
-       
-    }
-    
-    func showNotifyMe() {
-        let alert = UIAlertController(title: NSLocalizedString("nextTrNotif.Info.title", comment: ""), message: NSLocalizedString("nextTrNotif.Info.message", comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("nextTrNotif.OK", comment: ""), style: UIAlertActionStyle.default, handler: { alertAction in
-            self.sendNextTrainNotifications()
-            UserDefaults.standard.set(true, forKey: "askedAboutNotif")
-            UserDefaults.standard.set(true, forKey: "notifyMe")
-            alert.dismiss(animated: true, completion: nil)
-            self.dismiss(animated: true, completion: nil)
-        }))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("nextTrNotif.no", comment: ""), style: UIAlertActionStyle.default, handler: { alertAction in
-            UserDefaults.standard.set(true, forKey: "askedAboutNotif")
-            UserDefaults.standard.synchronize()
-            alert.dismiss(animated: true, completion: nil)
-            self.dismiss(animated: true, completion: nil)
-        }))
-    
-        self.present(alert, animated: true, completion: nil)
-    }
-    func sendNextTrainNotifications(){
-        
-        var today = Date()
-        var dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: today)
-        var ind = (ShareData.sharedInstance.userData?.completedTrainsDates?.count)!
-        while(ind != 27){
-            today = Calendar.current.date(byAdding: .day, value: 1, to: today)!
-            dayOfWeek = DateUtil.dayOfWeekToCurrentLocale(date: today)
-            if (ShareData.sharedInstance.userData?.daysOfWeek.contains(dayOfWeek-1))! {
-               let elapsed = today.timeIntervalSince(Date())
-                scheduleNotification(identifier: "run-new-train-\(ind)", title: NSLocalizedString("newTrainNotif.title", comment: "") ,body: NSLocalizedString("newTrainNotif.body", comment: ""), timeInterval: TimeInterval(elapsed))
-                ind += 1
-            }
-        }
-    }
-    
-    func deleteNextTrainNotifications(){
-        let notificationArr:NSArray?  =  UIApplication.shared.scheduledLocalNotifications as NSArray?
-        notificationArr!.enumerateObjects({ object, index, stop in
-            
-            let notification = object as! UILocalNotification;
-            let userInfo = notification.userInfo! as NSDictionary
-            let notificationID = userInfo["notificationID"] as! String
-            
-            if(notificationID.hasPrefix("run-new-train-")){
-                
-                
-                UIApplication.shared.cancelLocalNotification(notification)
-                
-            }
-        })
-    }
-    
-    func scheduleNotification(identifier: String, title: String, body: String, timeInterval: TimeInterval, repeats: Bool = false) {
 
-            let notification = UILocalNotification()
-            notification.alertBody = "\(title)\n\(body)"
-            notification.fireDate = Date(timeIntervalSinceNow: timeInterval)
-            notification.userInfo = ["notificationID" : identifier]
-            
-            UIApplication.shared.scheduleLocalNotification(notification)
-    }
-    
-    
     func presentedDateUpdated(_ date: CVDate) {
         if monthLabel.text != date.globalDescription && self.animationFinished {
             let updatedMonthLabel = UILabel()

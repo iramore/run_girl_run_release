@@ -53,3 +53,7 @@ nextTrNotif.OK = "Да";
 nextTrNotif.no = "Нет";
 newTrainNotif.title = "Сегодня беговая тренировка!";
 newTrainNotif.body = "Не пропустите тренировку сегодня";
+optionsPage.notificationSwitch.label = "Оповещения в день тренировки";
+optionsPage.notificationNotAlloweded.title = "Оповещения не разрешены";
+optionsPage.notificationNotAlloweded.message = "Пожалуйста, разрешите оповещения в настройках iPhone";
+optionsPage.notificationNotAlloweded.ok = "OK";

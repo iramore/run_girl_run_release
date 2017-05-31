@@ -1,7 +1,6 @@
 import UIKit
 import BubbleTransition
-import Appodeal
-
+import GoogleMobileAds
 class ShareData {
     
     class var sharedInstance: ShareData {
@@ -63,6 +62,7 @@ extension Date
 class InitialViewController: UIViewController, UIViewControllerTransitioningDelegate {
     @IBOutlet weak var infoButton: UIButton!
     
+    @IBOutlet weak var banner: GADBannerView!
     var userData: UserData?
     let shareData = ShareData.sharedInstance
     let transition = BubbleTransition()
@@ -128,9 +128,14 @@ class InitialViewController: UIViewController, UIViewControllerTransitioningDele
         self.view.addSubview(planButton!)
         self.view.addSubview(runButton!)
         self.view.addSubview(trackButton!)
-        (UIApplication.shared.delegate as! AppDelegate).initializeSdk(withAdType: AppodealAdType.banner, testMode: true, autoCache: true, userData: false, toastMode: true)
-        Appodeal.showAd(AppodealShowStyle.bannerBottom, rootViewController: self)
         
+        banner.adUnitID = "ca-app-pub-9858470929286208/5765738370"
+        banner.rootViewController = self
+        let request = GADRequest()
+       // request.testDevices = [ kGADSimulatorID ]
+        banner.load(request)
+        
+                
     }
     
     

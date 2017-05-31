@@ -8,7 +8,7 @@
 
 import UIKit
 import UserNotifications
-import Appodeal
+import GoogleMobileAds
 
 
 @UIApplicationMain
@@ -23,30 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            UserDefaults.standard.removePersistentDomain(forName: bundle)
 //        }
         deleteNotification()
+         GADMobileAds.configure(withApplicationID: "ca-app-pub-9858470929286208~7206202770")
         
         return true
-    }
-    
-    func initializeSdk(withAdType adType:AppodealAdType, testMode:Bool, autoCache:Bool, userData:Bool, toastMode toast:Bool){
-        let apiKey = Bundle.main.object(forInfoDictionaryKey: "AppodealAppKey") as! String
-        Appodeal.setTestingEnabled(testMode)
-        Appodeal.setLocationTracking(false)
-        if userData {
-            Appodeal.setUserId("user_id")
-            Appodeal.setUserEmail("dt@email.net")
-            Appodeal.setUserBirthday(Date() as Date!)
-            Appodeal.setUserAge(25)
-            Appodeal.setUserGender(AppodealUserGender.male)
-            Appodeal.setUserOccupation(AppodealUserOccupation.work)
-            Appodeal.setUserRelationship(AppodealUserRelationship.other)
-            Appodeal.setUserSmokingAttitude(AppodealUserSmokingAttitude.neutral)
-            Appodeal.setUserAlcoholAttitude(AppodealUserAlcoholAttitude.neutral)
-            Appodeal.setUserInterests("other")
-        }
-        
-        Appodeal.setAutocache(autoCache, types: adType)
-        //        let adTypes: AppodealAdType = [.banner, .interstitial] //
-        Appodeal.initialize(withApiKey: apiKey, types: adType)
     }
     
     func setAppearance (){

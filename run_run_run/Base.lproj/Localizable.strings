@@ -53,3 +53,7 @@ nextTrNotif.OK = "Yes";
 nextTrNotif.no = "No";
 newTrainNotif.title = "Hey, Girl, Hey!";
 newTrainNotif.body = "Do not miss training today";
+optionsPage.notificationSwitch.label = "Notifications at training's day";
+optionsPage.notificationNotAlloweded.title = "Notifications are not allowed";
+optionsPage.notificationNotAlloweded.message = "Please enable notifications in iPhone settings";
+optionsPage.notificationNotAlloweded.ok = "OK";
